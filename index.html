@@ -20,101 +20,157 @@ background:black;
 cursor:crosshair;
 }
 
-/* background image */
 body::before{
 content:"";
 position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
+inset:0;
 background-image:url("Kimi.jpeg");
 background-size:cover;
 background-position:center;
-opacity:0.55;
-z-index:-4;
+opacity:0.48;
+z-index:-5;
 }
 
-/* cyber overlay */
 body::after{
 content:"";
 position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
+inset:0;
 background:
-radial-gradient(circle at center, rgba(0,255,204,0.15), transparent 40%),
-rgba(0,0,0,0.45);
+radial-gradient(circle at 50% 45%, rgba(0,255,204,0.20), transparent 35%),
+radial-gradient(circle at 20% 20%, rgba(140,0,255,0.18), transparent 35%),
+rgba(0,0,0,0.55);
+z-index:-4;
+}
+
+/* realistic space layer */
+.space{
+position:fixed;
+inset:0;
 z-index:-3;
+background:
+radial-gradient(circle at 15% 25%, white 0px, transparent 2px),
+radial-gradient(circle at 35% 60%, white 0px, transparent 1.5px),
+radial-gradient(circle at 55% 35%, white 0px, transparent 2px),
+radial-gradient(circle at 75% 70%, white 0px, transparent 1.5px),
+radial-gradient(circle at 90% 30%, white 0px, transparent 2px),
+radial-gradient(circle at 45% 85%, white 0px, transparent 1.5px),
+radial-gradient(circle at 65% 15%, white 0px, transparent 1px);
+background-size:260px 260px;
+animation:spaceDrift 35s linear infinite;
+opacity:0.85;
 }
 
-/* animated grid */
-.grid{
+/* soft nebula */
+.nebula{
 position:fixed;
-width:100%;
-height:100%;
-background-image:
-linear-gradient(rgba(0,255,204,0.12) 1px, transparent 1px),
-linear-gradient(90deg, rgba(0,255,204,0.12) 1px, transparent 1px);
-background-size:50px 50px;
-animation:gridMove 12s linear infinite;
+inset:-20%;
 z-index:-2;
+background:
+radial-gradient(circle at 30% 40%, rgba(0,255,204,0.18), transparent 28%),
+radial-gradient(circle at 70% 55%, rgba(140,80,255,0.20), transparent 30%),
+radial-gradient(circle at 50% 80%, rgba(255,255,255,0.08), transparent 25%);
+filter:blur(35px);
+animation:nebulaMove 18s ease-in-out infinite alternate;
 }
 
-/* stars */
-.star{
+/* tidy futuristic top bar */
+nav{
 position:fixed;
-width:3px;
-height:3px;
-background:#ffffff;
-border-radius:50%;
-box-shadow:0 0 12px white;
-animation:starFloat 8s linear infinite;
-z-index:-1;
+top:22px;
+left:50%;
+transform:translateX(-50%);
+z-index:10;
+padding:14px 28px;
+border:1px solid rgba(0,255,204,0.35);
+border-radius:999px;
+background:rgba(0,0,0,0.35);
+backdrop-filter:blur(14px);
+box-shadow:0 0 30px rgba(0,255,204,0.25);
 }
 
-.star:nth-child(1){left:8%; animation-delay:0s;}
-.star:nth-child(2){left:18%; animation-delay:1s;}
-.star:nth-child(3){left:28%; animation-delay:2s;}
-.star:nth-child(4){left:38%; animation-delay:3s;}
-.star:nth-child(5){left:48%; animation-delay:4s;}
-.star:nth-child(6){left:58%; animation-delay:5s;}
-.star:nth-child(7){left:68%; animation-delay:1.5s;}
-.star:nth-child(8){left:78%; animation-delay:2.5s;}
-.star:nth-child(9){left:88%; animation-delay:3.5s;}
-.star:nth-child(10){left:96%; animation-delay:4.5s;}
+nav span{
+margin:0 16px;
+font-size:13px;
+letter-spacing:2px;
+color:white;
+opacity:0.9;
+}
 
-/* center text */
-.center{
+/* centre hero */
+.hero{
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-width:100%;
-padding:20px;
+width:min(900px,90%);
+padding:55px 30px;
+border-radius:34px;
+background:linear-gradient(
+135deg,
+rgba(255,255,255,0.08),
+rgba(255,255,255,0.02)
+);
+border:1px solid rgba(255,255,255,0.18);
+backdrop-filter:blur(8px);
+box-shadow:
+0 0 60px rgba(0,255,204,0.18),
+inset 0 0 40px rgba(255,255,255,0.04);
 }
 
-.title{
-font-size:22px;
-letter-spacing:6px;
+.brand{
+font-size:16px;
+letter-spacing:8px;
 color:white;
 opacity:0.9;
-margin-bottom:25px;
-text-shadow:0 0 15px #00ffcc;
+margin-bottom:28px;
 }
 
 .flip{
-font-size:95px;
+position:relative;
+font-size:92px;
 font-weight:800;
-color:#00ffcc;
-height:120px;
+height:118px;
 overflow:hidden;
+color:#00ffcc;
 text-shadow:
 0 0 10px #00ffcc,
-0 0 25px #00ffcc,
-0 0 55px #00ffcc;
-animation:pulseGlow 1.8s infinite alternate;
+0 0 30px #00ffcc,
+0 0 70px rgba(0,255,204,0.8);
+animation:pulseGlow 2s infinite alternate;
+}
+
+/* magnifying glass sweep */
+.flip::after{
+content:"";
+position:absolute;
+top:6px;
+left:-140px;
+width:115px;
+height:115px;
+border-radius:50%;
+border:3px solid rgba(255,255,255,0.9);
+background:
+radial-gradient(circle, rgba(255,255,255,0.22), rgba(0,255,204,0.08) 45%, transparent 70%);
+box-shadow:
+0 0 25px rgba(255,255,255,0.8),
+0 0 45px rgba(0,255,204,0.8);
+animation:magnifySweep 4s ease-in-out infinite;
+pointer-events:none;
+}
+
+.flip::before{
+content:"";
+position:absolute;
+top:95px;
+left:-42px;
+width:58px;
+height:7px;
+background:rgba(255,255,255,0.9);
+border-radius:999px;
+transform:rotate(45deg);
+box-shadow:0 0 18px white;
+animation:handleSweep 4s ease-in-out infinite;
+pointer-events:none;
 }
 
 .words{
@@ -122,59 +178,38 @@ animation:flipWords 6s infinite;
 }
 
 .words div{
-height:120px;
+height:118px;
 }
 
 .subtitle{
-font-size:20px;
-margin-top:25px;
+margin-top:24px;
+font-size:18px;
 letter-spacing:3px;
-color:white;
-text-shadow:0 0 12px #00ffcc;
+opacity:0.95;
+text-shadow:0 0 14px #00ffcc;
 }
 
 button{
-margin-top:35px;
-padding:16px 36px;
-font-size:18px;
+margin-top:32px;
+padding:15px 36px;
+font-size:16px;
 font-family:'Orbitron', sans-serif;
-background:transparent;
+background:rgba(0,255,204,0.12);
 color:#00ffcc;
-border:2px solid #00ffcc;
-border-radius:40px;
+border:1px solid #00ffcc;
+border-radius:999px;
 cursor:pointer;
-box-shadow:0 0 18px #00ffcc;
+box-shadow:0 0 24px rgba(0,255,204,0.5);
 transition:0.3s;
 }
 
 button:hover{
 background:#00ffcc;
 color:black;
-transform:scale(1.08);
+transform:translateY(-3px) scale(1.05);
 box-shadow:0 0 45px #00ffcc;
 }
 
-/* sparkles */
-.sparkle{
-position:fixed;
-width:7px;
-height:7px;
-background:#00ffcc;
-border-radius:50%;
-box-shadow:0 0 14px #00ffcc;
-animation:sparkleMove 5s linear infinite;
-z-index:2;
-}
-
-.sparkle:nth-child(1){left:12%; animation-delay:0s;}
-.sparkle:nth-child(2){left:22%; animation-delay:1s;}
-.sparkle:nth-child(3){left:35%; animation-delay:2s;}
-.sparkle:nth-child(4){left:50%; animation-delay:3s;}
-.sparkle:nth-child(5){left:66%; animation-delay:4s;}
-.sparkle:nth-child(6){left:82%; animation-delay:1.5s;}
-.sparkle:nth-child(7){left:92%; animation-delay:2.5s;}
-
-/* cursor trail */
 .trail{
 position:fixed;
 width:12px;
@@ -182,113 +217,104 @@ height:12px;
 background:#00ffcc;
 border-radius:50%;
 pointer-events:none;
-box-shadow:0 0 20px #00ffcc;
-animation:trailFade 0.7s linear forwards;
+box-shadow:0 0 22px #00ffcc;
+animation:trailFade 0.6s linear forwards;
 z-index:99;
 }
 
 @keyframes flipWords{
 0%{transform:translateY(0);}
 25%{transform:translateY(0);}
-35%{transform:translateY(-120px);}
-58%{transform:translateY(-120px);}
-68%{transform:translateY(-240px);}
-90%{transform:translateY(-240px);}
+35%{transform:translateY(-118px);}
+58%{transform:translateY(-118px);}
+68%{transform:translateY(-236px);}
+90%{transform:translateY(-236px);}
 100%{transform:translateY(0);}
+}
+
+@keyframes magnifySweep{
+0%{left:-140px; transform:scale(0.9);}
+45%{left:50%; transform:translateX(-50%) scale(1.15);}
+100%{left:105%; transform:scale(0.9);}
+}
+
+@keyframes handleSweep{
+0%{left:-42px;}
+45%{left:calc(50% + 45px);}
+100%{left:calc(105% + 45px);}
+}
+
+@keyframes spaceDrift{
+from{background-position:0 0;}
+to{background-position:520px -520px;}
+}
+
+@keyframes nebulaMove{
+from{transform:translate(-2%, -2%) scale(1);}
+to{transform:translate(2%, 2%) scale(1.08);}
 }
 
 @keyframes pulseGlow{
 from{
-text-shadow:
-0 0 10px #00ffcc,
-0 0 25px #00ffcc,
-0 0 50px #00ffcc;
+text-shadow:0 0 12px #00ffcc,0 0 30px #00ffcc;
 }
 to{
-text-shadow:
-0 0 20px #00ffcc,
-0 0 45px #00ffcc,
-0 0 90px #00ffcc;
-}
-}
-
-@keyframes sparkleMove{
-0%{
-top:100%;
-transform:scale(0.5) rotate(0deg);
-opacity:0;
-}
-50%{
-opacity:1;
-}
-100%{
-top:-10%;
-transform:scale(1.4) rotate(360deg);
-opacity:0;
-}
-}
-
-@keyframes starFloat{
-0%{
-top:100%;
-opacity:0;
-}
-50%{
-opacity:1;
-}
-100%{
-top:-10%;
-opacity:0;
-}
-}
-
-@keyframes gridMove{
-from{
-background-position:0 0;
-}
-to{
-background-position:50px 50px;
+text-shadow:0 0 24px #00ffcc,0 0 60px #00ffcc,0 0 100px #00ffcc;
 }
 }
 
 @keyframes trailFade{
-from{
-opacity:1;
-transform:scale(1);
-}
-to{
-opacity:0;
-transform:scale(0);
-}
+from{opacity:1;transform:scale(1);}
+to{opacity:0;transform:scale(0);}
 }
 
 @media(max-width:700px){
+nav{
+width:90%;
+padding:12px;
+}
+
+nav span{
+display:block;
+margin:8px 0;
+}
+
+.hero{
+padding:42px 22px;
+}
+
 .flip{
-font-size:52px;
-height:75px;
+font-size:48px;
+height:70px;
 }
 
 .words div{
-height:75px;
+height:70px;
 }
 
 @keyframes flipWords{
 0%{transform:translateY(0);}
 25%{transform:translateY(0);}
-35%{transform:translateY(-75px);}
-58%{transform:translateY(-75px);}
-68%{transform:translateY(-150px);}
-90%{transform:translateY(-150px);}
+35%{transform:translateY(-70px);}
+58%{transform:translateY(-70px);}
+68%{transform:translateY(-140px);}
+90%{transform:translateY(-140px);}
 100%{transform:translateY(0);}
 }
 
-.title{
-font-size:14px;
-letter-spacing:3px;
+.flip::after{
+width:70px;
+height:70px;
 }
 
-.subtitle{
-font-size:14px;
+.flip::before{
+top:60px;
+width:38px;
+}
+
+.brand{
+font-size:12px;
+letter-spacing:4px;
 }
 }
 </style>
@@ -296,29 +322,17 @@ font-size:14px;
 
 <body>
 
-<div class="grid"></div>
+<div class="space"></div>
+<div class="nebula"></div>
 
-<div class="star"></div>
-<div class="star"></div>
-<div class="star"></div>
-<div class="star"></div>
-<div class="star"></div>
-<div class="star"></div>
-<div class="star"></div>
-<div class="star"></div>
-<div class="star"></div>
-<div class="star"></div>
+<nav>
+<span>JAMIES BRUSHES</span>
+<span>FUTURE STYLE</span>
+<span>SMOOTH ENERGY</span>
+</nav>
 
-<div class="sparkle"></div>
-<div class="sparkle"></div>
-<div class="sparkle"></div>
-<div class="sparkle"></div>
-<div class="sparkle"></div>
-<div class="sparkle"></div>
-<div class="sparkle"></div>
-
-<div class="center">
-<div class="title">JAMIES BRUSHES</div>
+<div class="hero">
+<div class="brand">SMART BRUSH COLLECTION</div>
 
 <div class="flip">
 <div class="words">
@@ -328,9 +342,9 @@ font-size:14px;
 </div>
 </div>
 
-<div class="subtitle">Modern brushes. Smooth style. Big energy.</div>
+<div class="subtitle">futuristic • tidy • sweet • glowing</div>
 
-<button onclick="playSound()">Make Magic ✨</button>
+<button onclick="makeMagic()">Make Magic ✨</button>
 </div>
 
 <audio id="magicSound">
@@ -338,7 +352,7 @@ font-size:14px;
 </audio>
 
 <script>
-function playSound(){
+function makeMagic(){
 const sound = document.getElementById("magicSound");
 sound.currentTime = 0;
 sound.play();
@@ -353,7 +367,7 @@ document.body.appendChild(trail);
 
 setTimeout(function(){
 trail.remove();
-}, 700);
+}, 600);
 });
 </script>
 
