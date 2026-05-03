@@ -8,15 +8,25 @@
 <style>
 *{box-sizing:border-box}
 
+:root{
+--a:#ff7ad9;
+--b:#8b5cff;
+--c:#42d9ff;
+--d:#ffe86b;
+--text:#ffffff;
+--purple:#6b24a8;
+}
+
 body{
 margin:0;
 height:100vh;
 overflow:hidden;
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-color:white;
-background:linear-gradient(135deg,#ff7ad9,#8b5cff,#42d9ff,#ffe86b);
+color:var(--text);
+background:linear-gradient(135deg,var(--a),var(--b),var(--c),var(--d));
 background-size:400% 400%;
 animation:rainbowBg 12s ease infinite;
+cursor:crosshair;
 }
 
 @keyframes rainbowBg{
@@ -30,7 +40,7 @@ content:"";
 position:fixed;
 inset:0;
 background:url("Kimi.jpeg") center/cover no-repeat;
-opacity:.22;
+opacity:.2;
 z-index:-2;
 animation:bgFloat 16s ease-in-out infinite alternate;
 }
@@ -39,7 +49,7 @@ body::after{
 content:"";
 position:fixed;
 inset:0;
-background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.35),transparent 35%);
+background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.38),transparent 38%);
 z-index:-1;
 }
 
@@ -50,19 +60,19 @@ to{transform:scale(1.08)}
 
 .topbar{
 position:fixed;
-top:18px;
+top:16px;
 left:50%;
 transform:translateX(-50%);
-width:min(94vw,1080px);
-z-index:20;
+width:min(94vw,1150px);
+z-index:30;
 display:flex;
 align-items:center;
 justify-content:space-between;
-gap:16px;
+gap:14px;
 padding:12px;
 border-radius:999px;
 background:rgba(255,255,255,.28);
-border:2px solid rgba(255,255,255,.45);
+border:2px solid rgba(255,255,255,.48);
 backdrop-filter:blur(22px);
 box-shadow:0 20px 60px rgba(80,0,120,.25);
 }
@@ -70,20 +80,29 @@ box-shadow:0 20px 60px rgba(80,0,120,.25);
 .logo{
 padding-left:14px;
 font-size:17px;
-font-weight:900;
+font-weight:1000;
 letter-spacing:2px;
+white-space:nowrap;
 }
 
 .navlinks{
 display:flex;
 gap:8px;
+flex-wrap:wrap;
+justify-content:center;
 }
 
-.navlinks button{
+button, select, input{
+font-family:inherit;
+}
+
+.navlinks button,
+.theme-picker,
+.colour-picker{
 border:0;
 border-radius:999px;
-padding:13px 18px;
-font-weight:900;
+padding:12px 16px;
+font-weight:1000;
 cursor:pointer;
 color:#5b247a;
 background:white;
@@ -91,13 +110,14 @@ box-shadow:0 8px 0 rgba(91,36,122,.18);
 transition:.25s ease;
 }
 
-.navlinks button:hover{
+.navlinks button:hover,
+.theme-picker:hover{
 transform:translateY(-5px) rotate(-2deg);
 box-shadow:0 14px 18px rgba(91,36,122,.22);
 }
 
-.navlinks .magic{
-background:#fff35c;
+.magic{
+background:#fff35c !important;
 }
 
 .hero{
@@ -108,7 +128,7 @@ align-items:center;
 justify-content:center;
 flex-direction:column;
 text-align:center;
-padding:120px 24px 40px;
+padding:135px 24px 190px;
 z-index:2;
 }
 
@@ -117,13 +137,13 @@ margin:0 0 14px;
 font-size:15px;
 letter-spacing:3px;
 text-transform:uppercase;
-font-weight:900;
+font-weight:1000;
 }
 
 h1{
 margin:0;
 max-width:1000px;
-font-size:clamp(56px,9vw,130px);
+font-size:clamp(52px,9vw,128px);
 line-height:.9;
 letter-spacing:-4px;
 font-weight:1000;
@@ -132,21 +152,21 @@ text-shadow:0 8px 0 rgba(88,37,130,.22),0 0 35px rgba(255,255,255,.7);
 
 .sub{
 max-width:700px;
-margin:26px 0 0;
+margin:24px 0 0;
 font-size:clamp(20px,2.4vw,30px);
 line-height:1.35;
-font-weight:800;
+font-weight:900;
 text-shadow:0 3px 12px rgba(0,0,0,.2);
 }
 
 .try{
-margin-top:32px;
+margin-top:30px;
 border:0;
 border-radius:999px;
 padding:20px 34px;
 font-size:20px;
 font-weight:1000;
-color:#6b24a8;
+color:var(--purple);
 background:white;
 cursor:pointer;
 box-shadow:0 12px 0 rgba(91,36,122,.22),0 0 38px rgba(255,255,255,.75);
@@ -158,34 +178,104 @@ transform:translateY(-7px) scale(1.05);
 box-shadow:0 18px 18px rgba(91,36,122,.25),0 0 55px white;
 }
 
+.controls{
+position:fixed;
+left:50%;
+bottom:18px;
+transform:translateX(-50%);
+z-index:25;
+width:min(94vw,1150px);
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:12px;
+}
+
+.panel{
+border-radius:28px;
+padding:16px;
+background:rgba(255,255,255,.26);
+border:2px solid rgba(255,255,255,.42);
+backdrop-filter:blur(18px);
+box-shadow:0 16px 50px rgba(80,0,120,.2);
+}
+
+.panel h3{
+margin:0 0 10px;
+font-size:16px;
+}
+
+.hair-preview{
+height:18px;
+border-radius:999px;
+background:#ff7ad9;
+box-shadow:0 0 22px currentColor;
+margin-top:10px;
+}
+
+.meter{
+height:20px;
+background:rgba(255,255,255,.38);
+border-radius:999px;
+overflow:hidden;
+border:2px solid rgba(255,255,255,.55);
+}
+
+.meter-fill{
+height:100%;
+width:0%;
+border-radius:999px;
+background:linear-gradient(90deg,#fff35c,#ff7ad9,#42d9ff);
+transition:.35s ease;
+}
+
+.badges{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+}
+
+.badge{
+padding:8px 10px;
+border-radius:999px;
+background:rgba(255,255,255,.45);
+color:rgba(91,36,122,.55);
+font-size:12px;
+font-weight:1000;
+}
+
+.badge.unlocked{
+background:#fff35c;
+color:#6b24a8;
+box-shadow:0 0 18px rgba(255,255,255,.8);
+}
+
 .mascot{
 position:fixed;
-right:6vw;
-bottom:8vh;
+right:5vw;
+top:33vh;
 width:150px;
 height:150px;
-z-index:4;
+z-index:12;
 border-radius:50%;
 background:#fff35c;
 box-shadow:0 14px 0 rgba(91,36,122,.22),0 0 45px rgba(255,255,255,.8);
 animation:bounce 2.4s ease-in-out infinite;
-}
-
-.mascot::before{
-content:"✨";
-position:absolute;
-font-size:70px;
-left:38px;
-top:30px;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:72px;
+user-select:none;
 }
 
 .mascot::after{
-content:"Hi!";
+content:"Click me!";
 position:absolute;
-right:-16px;
-top:-18px;
+right:-22px;
+top:-22px;
 background:white;
 color:#7b2fc9;
+font-size:14px;
 font-weight:1000;
 padding:10px 14px;
 border-radius:999px;
@@ -225,15 +315,12 @@ border-radius:50%;
 background:white;
 box-shadow:0 0 18px white;
 pointer-events:none;
-z-index:50;
+z-index:60;
 animation:spark .7s ease forwards;
 }
 
 @keyframes spark{
-to{
-transform:translateY(-35px) scale(0);
-opacity:0;
-}
+to{transform:translateY(-35px) scale(0);opacity:0}
 }
 
 .stamp{
@@ -269,38 +356,75 @@ animation:stampOnce .9s ease-out forwards;
 100%{opacity:.95;transform:translate(-50%,-50%) rotate(-9deg) scale(1)}
 }
 
-@media(max-width:760px){
+.game-area{
+position:fixed;
+inset:0;
+z-index:10;
+pointer-events:none;
+}
+
+.tangle{
+position:absolute;
+font-size:42px;
+cursor:pointer;
+pointer-events:auto;
+animation:wobble 1s ease-in-out infinite;
+filter:drop-shadow(0 8px 8px rgba(0,0,0,.25));
+}
+
+@keyframes wobble{
+0%,100%{transform:rotate(-8deg) scale(1)}
+50%{transform:rotate(8deg) scale(1.1)}
+}
+
+.score{
+position:fixed;
+left:24px;
+top:105px;
+z-index:26;
+font-weight:1000;
+background:rgba(255,255,255,.32);
+border:2px solid rgba(255,255,255,.5);
+border-radius:999px;
+padding:12px 18px;
+backdrop-filter:blur(16px);
+}
+
+@media(max-width:900px){
 .topbar{
+border-radius:30px;
 flex-direction:column;
-border-radius:28px;
 }
 
-.navlinks{
-flex-wrap:wrap;
-justify-content:center;
+.hero{
+padding-top:180px;
+padding-bottom:250px;
 }
 
-.navlinks button{
-padding:10px 12px;
-font-size:12px;
-}
-
-h1{
-letter-spacing:-2px;
+.controls{
+grid-template-columns:1fr;
 }
 
 .mascot{
-width:105px;
-height:105px;
-right:20px;
-bottom:25px;
+width:100px;
+height:100px;
+font-size:50px;
+right:18px;
+top:auto;
+bottom:230px;
 }
 
-.mascot::before{
-font-size:48px;
-left:28px;
-top:22px;
+.mascot::after{
+font-size:11px;
+right:-8px;
 }
+
+.navlinks button,.theme-picker{
+padding:9px 11px;
+font-size:12px;
+}
+
+h1{letter-spacing:-2px}
 }
 </style>
 </head>
@@ -309,23 +433,59 @@ top:22px;
 
 <nav class="topbar">
 <div class="logo">KIMIBRUSH ✨</div>
+
 <div class="navlinks">
-<button onclick="popSound()">Design</button>
-<button onclick="popSound()">Brush Tech</button>
+<button onclick="startGame()">Mini Brush Game</button>
 <button onclick="showComingSoon()">Privacy</button>
+<button onclick="changeMascot()">Mascot Face</button>
 <button class="magic" onclick="magicBurst()">Try the Magic</button>
+
+<select class="theme-picker" onchange="changeTheme(this.value)">
+<option value="rainbow">Rainbow</option>
+<option value="space">Space</option>
+<option value="princess">Princess</option>
+<option value="ocean">Ocean</option>
+</select>
 </div>
 </nav>
+
+<div class="score" id="score">Tangly bits: 0</div>
 
 <section class="hero">
 <p class="eyebrow">Meet KimiBrush</p>
 <h1>Brush smarter. Shine brighter.</h1>
-<p class="sub">A magical interactive hairbrush made for happy hair days.</p>
+<p class="sub">Pick a hair colour, collect sparkles, brush the tangles, and unlock badges!</p>
 <button class="try" onclick="magicBurst()">Try the magic ✨</button>
 <div class="stamp" id="stamp">COMING SOON</div>
 </section>
 
-<div class="mascot"></div>
+<div class="mascot" id="mascot" onclick="changeMascot()">✨</div>
+
+<div class="controls">
+<div class="panel">
+<h3>Hair colour picker 🎨</h3>
+<input class="colour-picker" type="color" value="#ff7ad9" oninput="changeHair(this.value)" />
+<div class="hair-preview" id="hairPreview"></div>
+</div>
+
+<div class="panel">
+<h3>Sparkle meter ✨</h3>
+<div class="meter">
+<div class="meter-fill" id="meterFill"></div>
+</div>
+</div>
+
+<div class="panel">
+<h3>Unlock badges 🏆</h3>
+<div class="badges">
+<div class="badge" id="badge1">Tangle Tamer</div>
+<div class="badge" id="badge2">Sparkle Star</div>
+<div class="badge" id="badge3">Magic Brusher</div>
+</div>
+</div>
+</div>
+
+<div class="game-area" id="gameArea"></div>
 
 <div class="floaty">⭐</div>
 <div class="floaty">💖</div>
@@ -335,6 +495,17 @@ top:22px;
 
 <script>
 const stamp = document.getElementById("stamp");
+const mascot = document.getElementById("mascot");
+const meterFill = document.getElementById("meterFill");
+const hairPreview = document.getElementById("hairPreview");
+const gameArea = document.getElementById("gameArea");
+const scoreBox = document.getElementById("score");
+
+let sparklePower = 0;
+let tangleScore = 0;
+let mascotIndex = 0;
+
+const faces = ["✨","😄","😎","🦄","🌈","💖","🤩"];
 
 function showComingSoon(){
 stamp.classList.remove("show");
@@ -350,7 +521,7 @@ const gain = audio.createGain();
 osc.connect(gain);
 gain.connect(audio.destination);
 
-osc.frequency.value = 650;
+osc.frequency.value = 650 + Math.random() * 350;
 gain.gain.setValueAtTime(0.08, audio.currentTime);
 gain.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + 0.14);
 
@@ -358,37 +529,130 @@ osc.start();
 osc.stop(audio.currentTime + 0.14);
 }
 
+function addSparklePower(amount){
+sparklePower = Math.min(100, sparklePower + amount);
+meterFill.style.width = sparklePower + "%";
+
+if(sparklePower >= 35){
+document.getElementById("badge2").classList.add("unlocked");
+}
+
+if(sparklePower >= 75){
+document.getElementById("badge3").classList.add("unlocked");
+}
+}
+
 function magicBurst(){
 popSound();
 showComingSoon();
+addSparklePower(15);
 
-for(let i = 0; i < 35; i++){
+for(let i = 0; i < 40; i++){
+createSparkle(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+}
+}
+
+function createSparkle(x,y){
 const s = document.createElement("div");
 s.className = "sparkle";
-s.style.left = Math.random() * window.innerWidth + "px";
-s.style.top = Math.random() * window.innerHeight + "px";
+s.style.left = x + "px";
+s.style.top = y + "px";
 document.body.appendChild(s);
 
-setTimeout(() => {
-s.remove();
-}, 700);
+setTimeout(() => s.remove(), 700);
 }
+
+function changeHair(colour){
+hairPreview.style.background = colour;
+hairPreview.style.color = colour;
+document.documentElement.style.setProperty("--a", colour);
+addSparklePower(5);
+popSound();
+}
+
+function changeMascot(){
+mascotIndex = (mascotIndex + 1) % faces.length;
+mascot.textContent = faces[mascotIndex];
+addSparklePower(6);
+popSound();
+}
+
+function changeTheme(theme){
+const root = document.documentElement;
+
+if(theme === "rainbow"){
+root.style.setProperty("--a","#ff7ad9");
+root.style.setProperty("--b","#8b5cff");
+root.style.setProperty("--c","#42d9ff");
+root.style.setProperty("--d","#ffe86b");
+}
+
+if(theme === "space"){
+root.style.setProperty("--a","#12002f");
+root.style.setProperty("--b","#3d1c91");
+root.style.setProperty("--c","#00d4ff");
+root.style.setProperty("--d","#fff35c");
+}
+
+if(theme === "princess"){
+root.style.setProperty("--a","#ff8ad8");
+root.style.setProperty("--b","#ffc2f0");
+root.style.setProperty("--c","#b985ff");
+root.style.setProperty("--d","#fff1a8");
+}
+
+if(theme === "ocean"){
+root.style.setProperty("--a","#00b4d8");
+root.style.setProperty("--b","#0077b6");
+root.style.setProperty("--c","#90e0ef");
+root.style.setProperty("--d","#caf0f8");
+}
+
+magicBurst();
+}
+
+function startGame(){
+popSound();
+addSparklePower(10);
+
+for(let i = 0; i < 6; i++){
+spawnTangle();
+}
+}
+
+function spawnTangle(){
+const t = document.createElement("div");
+t.className = "tangle";
+t.textContent = "🪮";
+t.style.left = Math.random() * 82 + 6 + "vw";
+t.style.top = Math.random() * 58 + 22 + "vh";
+
+t.onclick = function(){
+popSound();
+createSparkle(t.offsetLeft, t.offsetTop);
+t.remove();
+tangleScore++;
+scoreBox.textContent = "Tangly bits: " + tangleScore;
+addSparklePower(12);
+
+if(tangleScore >= 3){
+document.getElementById("badge1").classList.add("unlocked");
+}
+
+if(tangleScore % 6 === 0){
+setTimeout(startGame, 500);
+}
+};
+
+gameArea.appendChild(t);
+
+setTimeout(() => {
+if(document.body.contains(t)) t.remove();
+}, 7000);
 }
 
 document.addEventListener("mousemove", e => {
-const s = document.createElement("div");
-s.className = "sparkle";
-s.style.left = e.clientX + "px";
-s.style.top = e.clientY + "px";
-document.body.appendChild(s);
-
-setTimeout(() => {
-s.remove();
-}, 700);
-});
-
-window.addEventListener("load", () => {
-setTimeout(showComingSoon, 4000);
+createSparkle(e.clientX, e.clientY);
 });
 </script>
 
