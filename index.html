@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>KimiBrush</title>
+<title>KimiBrush Magic</title>
 
 <style>
 *{box-sizing:border-box}
@@ -12,9 +12,17 @@ body{
 margin:0;
 height:100vh;
 overflow:hidden;
-background:#050505;
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
 color:white;
+background:linear-gradient(135deg,#ff7ad9,#8b5cff,#42d9ff,#ffe86b);
+background-size:400% 400%;
+animation:rainbowBg 12s ease infinite;
+}
+
+@keyframes rainbowBg{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
 
 body::before{
@@ -22,24 +30,22 @@ content:"";
 position:fixed;
 inset:0;
 background:url("Kimi.jpeg") center/cover no-repeat;
-opacity:.35;
-z-index:-5;
-animation:bgMove 18s ease-in-out infinite alternate;
+opacity:.22;
+z-index:-2;
+animation:bgFloat 16s ease-in-out infinite alternate;
 }
 
 body::after{
 content:"";
 position:fixed;
 inset:0;
-background:
-radial-gradient(circle at 50% 35%,rgba(255,255,255,.18),transparent 32%),
-linear-gradient(to bottom,rgba(0,0,0,.08),rgba(0,0,0,.92));
-z-index:-4;
+background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.35),transparent 35%);
+z-index:-1;
 }
 
-@keyframes bgMove{
+@keyframes bgFloat{
 from{transform:scale(1)}
-to{transform:scale(1.08);filter:blur(2px)}
+to{transform:scale(1.08)}
 }
 
 .topbar{
@@ -52,21 +58,20 @@ z-index:20;
 display:flex;
 align-items:center;
 justify-content:space-between;
-gap:18px;
+gap:16px;
 padding:12px;
 border-radius:999px;
-border:1px solid rgba(255,255,255,.18);
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(28px);
-box-shadow:0 25px 80px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.28);
-animation:menuDrop 1s ease both;
+background:rgba(255,255,255,.28);
+border:2px solid rgba(255,255,255,.45);
+backdrop-filter:blur(22px);
+box-shadow:0 20px 60px rgba(80,0,120,.25);
 }
 
 .logo{
 padding-left:14px;
-font-size:16px;
-font-weight:800;
-letter-spacing:3px;
+font-size:17px;
+font-weight:900;
+letter-spacing:2px;
 }
 
 .navlinks{
@@ -75,34 +80,24 @@ gap:8px;
 }
 
 .navlinks button{
-position:relative;
-overflow:hidden;
-border:1px solid rgba(255,255,255,.12);
+border:0;
 border-radius:999px;
 padding:13px 18px;
-background:rgba(255,255,255,.055);
-color:rgba(255,255,255,.78);
-font-size:13px;
-font-weight:650;
+font-weight:900;
 cursor:pointer;
-transition:.35s ease;
+color:#5b247a;
+background:white;
+box-shadow:0 8px 0 rgba(91,36,122,.18);
+transition:.25s ease;
 }
 
 .navlinks button:hover{
-color:white;
-transform:translateY(-3px) scale(1.04);
-border-color:rgba(255,255,255,.35);
-box-shadow:0 12px 34px rgba(255,255,255,.12);
+transform:translateY(-5px) rotate(-2deg);
+box-shadow:0 14px 18px rgba(91,36,122,.22);
 }
 
-.navlinks .explore{
-background:white;
-color:black;
-}
-
-@keyframes menuDrop{
-from{opacity:0;transform:translateX(-50%) translateY(-28px) scale(.96)}
-to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+.navlinks .magic{
+background:#fff35c;
 }
 
 .hero{
@@ -119,104 +114,193 @@ z-index:2;
 
 .eyebrow{
 margin:0 0 14px;
-font-size:14px;
-letter-spacing:4px;
+font-size:15px;
+letter-spacing:3px;
 text-transform:uppercase;
-color:rgba(255,255,255,.7);
-animation:fadeUp 1s ease both;
+font-weight:900;
 }
 
 h1{
 margin:0;
-max-width:1050px;
-font-size:clamp(54px,9vw,132px);
-line-height:.88;
-letter-spacing:-6px;
-font-weight:900;
-animation:heroGlow 4s ease-in-out infinite alternate;
+max-width:1000px;
+font-size:clamp(56px,9vw,130px);
+line-height:.9;
+letter-spacing:-4px;
+font-weight:1000;
+text-shadow:0 8px 0 rgba(88,37,130,.22),0 0 35px rgba(255,255,255,.7);
 }
 
 .sub{
-max-width:660px;
-margin:28px 0 0;
-font-size:clamp(17px,2vw,24px);
-line-height:1.4;
-color:rgba(255,255,255,.72);
-animation:fadeUp 1s ease .3s both;
+max-width:700px;
+margin:26px 0 0;
+font-size:clamp(20px,2.4vw,30px);
+line-height:1.35;
+font-weight:800;
+text-shadow:0 3px 12px rgba(0,0,0,.2);
 }
 
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(26px)}
-to{opacity:1;transform:translateY(0)}
+.try{
+margin-top:32px;
+border:0;
+border-radius:999px;
+padding:20px 34px;
+font-size:20px;
+font-weight:1000;
+color:#6b24a8;
+background:white;
+cursor:pointer;
+box-shadow:0 12px 0 rgba(91,36,122,.22),0 0 38px rgba(255,255,255,.75);
+transition:.25s ease;
 }
 
-@keyframes heroGlow{
-from{text-shadow:0 0 22px rgba(255,255,255,.16)}
-to{text-shadow:0 0 32px rgba(255,255,255,.38),0 0 85px rgba(255,0,150,.25)}
+.try:hover{
+transform:translateY(-7px) scale(1.05);
+box-shadow:0 18px 18px rgba(91,36,122,.25),0 0 55px white;
 }
 
-.product{
+.mascot{
 position:fixed;
-left:50%;
+right:6vw;
 bottom:8vh;
-width:clamp(170px,25vw,330px);
-height:clamp(170px,25vw,330px);
-transform:translateX(-50%);
+width:150px;
+height:150px;
+z-index:4;
 border-radius:50%;
-z-index:1;
-background:
-radial-gradient(circle at 35% 25%,rgba(255,255,255,.95),rgba(255,255,255,.18) 26%,rgba(255,0,140,.15) 50%,rgba(0,0,0,.15) 72%);
-box-shadow:inset 0 0 50px rgba(255,255,255,.18),0 0 120px rgba(255,0,130,.22);
-animation:floatOrb 5s ease-in-out infinite;
+background:#fff35c;
+box-shadow:0 14px 0 rgba(91,36,122,.22),0 0 45px rgba(255,255,255,.8);
+animation:bounce 2.4s ease-in-out infinite;
 }
 
-@keyframes floatOrb{
-0%,100%{transform:translateX(-50%) translateY(0)}
-50%{transform:translateX(-50%) translateY(-18px)}
+.mascot::before{
+content:"✨";
+position:absolute;
+font-size:70px;
+left:38px;
+top:30px;
+}
+
+.mascot::after{
+content:"Hi!";
+position:absolute;
+right:-16px;
+top:-18px;
+background:white;
+color:#7b2fc9;
+font-weight:1000;
+padding:10px 14px;
+border-radius:999px;
+box-shadow:0 8px 20px rgba(0,0,0,.18);
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0) rotate(0)}
+50%{transform:translateY(-18px) rotate(6deg)}
+}
+
+.floaty{
+position:fixed;
+font-size:34px;
+z-index:1;
+opacity:.85;
+animation:floatUp 8s linear infinite;
+}
+
+.floaty:nth-child(1){left:8%;bottom:-10%;animation-delay:0s}
+.floaty:nth-child(2){left:22%;bottom:-10%;animation-delay:1.4s}
+.floaty:nth-child(3){left:42%;bottom:-10%;animation-delay:2.5s}
+.floaty:nth-child(4){left:66%;bottom:-10%;animation-delay:3.6s}
+.floaty:nth-child(5){left:84%;bottom:-10%;animation-delay:4.8s}
+
+@keyframes floatUp{
+from{transform:translateY(0) rotate(0);opacity:0}
+20%{opacity:.95}
+to{transform:translateY(-120vh) rotate(360deg);opacity:0}
+}
+
+.sparkle{
+position:fixed;
+width:10px;
+height:10px;
+border-radius:50%;
+background:white;
+box-shadow:0 0 18px white;
+pointer-events:none;
+z-index:50;
+animation:spark .7s ease forwards;
+}
+
+@keyframes spark{
+to{
+transform:translateY(-35px) scale(0);
+opacity:0;
+}
 }
 
 .stamp{
 position:absolute;
 top:50%;
 left:50%;
-width:min(90vw,920px);
-padding:34px 20px;
+width:min(88vw,850px);
+padding:30px 18px;
 z-index:40;
 font-family:"Impact","Arial Black",sans-serif;
-font-size:clamp(54px,10vw,140px);
-letter-spacing:6px;
-line-height:1;
+font-size:clamp(52px,10vw,132px);
+letter-spacing:5px;
 text-align:center;
-text-transform:uppercase;
-color:#ff1f1f;
-border:13px solid #ff1f1f;
-border-radius:20px;
-text-shadow:2px 2px 0 rgba(0,0,0,.45),0 0 18px rgba(255,0,0,.6);
-box-shadow:0 0 0 6px rgba(255,31,31,.28),0 0 48px rgba(255,0,0,.45);
+color:#ff2b2b;
+border:12px solid #ff2b2b;
+border-radius:22px;
+background:rgba(255,255,255,.08);
+text-shadow:2px 2px 0 rgba(0,0,0,.28),0 0 18px rgba(255,255,255,.75);
+box-shadow:0 0 0 6px rgba(255,43,43,.25),0 0 55px rgba(255,43,43,.5);
 opacity:0;
 pointer-events:none;
-mix-blend-mode:screen;
-transform:translate(-50%,-50%) rotate(-11deg) scale(2.2);
+transform:translate(-50%,-50%) rotate(-9deg) scale(2.2);
 }
 
 .stamp.show{
 animation:stampOnce .9s ease-out forwards;
 }
 
-.stamp::before{
-content:"";
-position:absolute;
-inset:13px;
-border:5px solid #ff1f1f;
-border-radius:9px;
-opacity:.8;
+@keyframes stampOnce{
+0%{opacity:0;transform:translate(-50%,-50%) rotate(-9deg) scale(2.35);filter:blur(8px)}
+55%{opacity:1;transform:translate(-50%,-50%) rotate(-9deg) scale(.9);filter:blur(0)}
+75%{transform:translate(-50%,-50%) rotate(-9deg) scale(1.04)}
+100%{opacity:.95;transform:translate(-50%,-50%) rotate(-9deg) scale(1)}
 }
 
-@keyframes stampOnce{
-0%{opacity:0;transform:translate(-50%,-50%) rotate(-11deg) scale(2.35);filter:blur(9px)}
-55%{opacity:1;transform:translate(-50%,-50%) rotate(-11deg) scale(.9);filter:blur(0)}
-75%{transform:translate(-50%,-50%) rotate(-11deg) scale(1.04)}
-100%{opacity:.95;transform:translate(-50%,-50%) rotate(-11deg) scale(1)}
+@media(max-width:760px){
+.topbar{
+flex-direction:column;
+border-radius:28px;
+}
+
+.navlinks{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.navlinks button{
+padding:10px 12px;
+font-size:12px;
+}
+
+h1{
+letter-spacing:-2px;
+}
+
+.mascot{
+width:105px;
+height:105px;
+right:20px;
+bottom:25px;
+}
+
+.mascot::before{
+font-size:48px;
+left:28px;
+top:22px;
+}
 }
 </style>
 </head>
@@ -224,23 +308,30 @@ opacity:.8;
 <body>
 
 <nav class="topbar">
-<div class="logo">KIMIBRUSH</div>
+<div class="logo">KIMIBRUSH ✨</div>
 <div class="navlinks">
-<button>Design</button>
-<button>Brush Tech</button>
-<button>Privacy</button>
-<button class="explore" onclick="showComingSoon()">Explore</button>
+<button onclick="popSound()">Design</button>
+<button onclick="popSound()">Brush Tech</button>
+<button onclick="showComingSoon()">Privacy</button>
+<button class="magic" onclick="magicBurst()">Try the Magic</button>
 </div>
 </nav>
 
 <section class="hero">
-<p class="eyebrow">Introducing KimiBrush</p>
-<h1>The interactive hairbrush that knows your hair.</h1>
-<p class="sub">Smart feedback. Gentle guidance. A private beauty ritual, redesigned.</p>
+<p class="eyebrow">Meet KimiBrush</p>
+<h1>Brush smarter. Shine brighter.</h1>
+<p class="sub">A magical interactive hairbrush made for happy hair days.</p>
+<button class="try" onclick="magicBurst()">Try the magic ✨</button>
 <div class="stamp" id="stamp">COMING SOON</div>
 </section>
 
-<div class="product"></div>
+<div class="mascot"></div>
+
+<div class="floaty">⭐</div>
+<div class="floaty">💖</div>
+<div class="floaty">✨</div>
+<div class="floaty">🌈</div>
+<div class="floaty">💫</div>
 
 <script>
 const stamp = document.getElementById("stamp");
@@ -250,6 +341,51 @@ stamp.classList.remove("show");
 void stamp.offsetWidth;
 stamp.classList.add("show");
 }
+
+function popSound(){
+const audio = new AudioContext();
+const osc = audio.createOscillator();
+const gain = audio.createGain();
+
+osc.connect(gain);
+gain.connect(audio.destination);
+
+osc.frequency.value = 650;
+gain.gain.setValueAtTime(0.08, audio.currentTime);
+gain.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + 0.14);
+
+osc.start();
+osc.stop(audio.currentTime + 0.14);
+}
+
+function magicBurst(){
+popSound();
+showComingSoon();
+
+for(let i = 0; i < 35; i++){
+const s = document.createElement("div");
+s.className = "sparkle";
+s.style.left = Math.random() * window.innerWidth + "px";
+s.style.top = Math.random() * window.innerHeight + "px";
+document.body.appendChild(s);
+
+setTimeout(() => {
+s.remove();
+}, 700);
+}
+}
+
+document.addEventListener("mousemove", e => {
+const s = document.createElement("div");
+s.className = "sparkle";
+s.style.left = e.clientX + "px";
+s.style.top = e.clientY + "px";
+document.body.appendChild(s);
+
+setTimeout(() => {
+s.remove();
+}, 700);
+});
 
 window.addEventListener("load", () => {
 setTimeout(showComingSoon, 4000);
