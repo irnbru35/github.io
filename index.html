@@ -13,20 +13,18 @@
 --b:#8b5cff;
 --c:#42d9ff;
 --d:#ffe86b;
---text:#ffffff;
 --purple:#6b24a8;
 }
 
 body{
 margin:0;
-height:100vh;
+min-height:100vh;
 overflow:hidden;
 font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-color:var(--text);
+color:white;
 background:linear-gradient(135deg,var(--a),var(--b),var(--c),var(--d));
 background-size:400% 400%;
 animation:rainbowBg 12s ease infinite;
-cursor:crosshair;
 }
 
 @keyframes rainbowBg{
@@ -35,6 +33,838 @@ cursor:crosshair;
 100%{background-position:0% 50%}
 }
 
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:url("Kimi.jpeg") center/cover no-repeat;
+opacity:.18;
+z-index:-2;
+animation:bgFloat 16s ease-in-out infinite alternate;
+}
+
+body::after{
+content:"";
+position:fixed;
+inset:0;
+background:radial-gradient(circle at 50% 35%,rgba(255,255,255,.38),transparent 42%);
+z-index:-1;
+}
+
+@keyframes bgFloat{
+from{transform:scale(1)}
+to{transform:scale(1.08)}
+}
+
+.topbar{
+position:fixed;
+top:14px;
+left:50%;
+transform:translateX(-50%);
+width:min(94vw,1100px);
+z-index:40;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:12px;
+padding:12px;
+border-radius:999px;
+background:rgba(255,255,255,.28);
+border:2px solid rgba(255,255,255,.48);
+backdrop-filter:blur(20px);
+box-shadow:0 20px 60px rgba(80,0,120,.25);
+}
+
+.logo{
+padding-left:12px;
+font-size:17px;
+font-weight:1000;
+letter-spacing:2px;
+white-space:nowrap;
+}
+
+.navlinks{
+display:flex;
+gap:8px;
+align-items:center;
+}
+
+button, select, input{
+font-family:inherit;
+}
+
+.navlinks button,
+.theme-picker{
+border:0;
+border-radius:999px;
+padding:12px 15px;
+font-weight:1000;
+cursor:pointer;
+color:#5b247a;
+background:white;
+box-shadow:0 7px 0 rgba(91,36,122,.18);
+transition:.25s ease;
+}
+
+.navlinks button:hover,
+.theme-picker:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 18px rgba(91,36,122,.22);
+}
+
+.magic{
+background:#fff35c !important;
+}
+
+.hero{
+position:fixed;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+text-align:center;
+padding:120px 24px 150px;
+z-index:5;
+}
+
+.eyebrow{
+margin:0 0 12px;
+font-size:15px;
+letter-spacing:3px;
+text-transform:uppercase;
+font-weight:1000;
+}
+
+h1{
+margin:0;
+max-width:980px;
+font-size:clamp(48px,9vw,122px);
+line-height:.9;
+letter-spacing:-4px;
+font-weight:1000;
+text-shadow:0 8px 0 rgba(88,37,130,.22),0 0 35px rgba(255,255,255,.75);
+}
+
+.sub{
+max-width:720px;
+margin:22px 0 0;
+font-size:clamp(20px,2.4vw,30px);
+line-height:1.35;
+font-weight:900;
+text-shadow:0 3px 12px rgba(0,0,0,.2);
+}
+
+.big-button{
+margin-top:28px;
+border:0;
+border-radius:999px;
+padding:22px 36px;
+font-size:22px;
+font-weight:1000;
+color:var(--purple);
+background:white;
+cursor:pointer;
+box-shadow:0 12px 0 rgba(91,36,122,.22),0 0 38px rgba(255,255,255,.75);
+transition:.25s ease;
+}
+
+.big-button:hover{
+transform:translateY(-7px) scale(1.04);
+box-shadow:0 18px 18px rgba(91,36,122,.25),0 0 55px white;
+}
+
+.hud{
+position:fixed;
+left:50%;
+bottom:18px;
+transform:translateX(-50%);
+z-index:35;
+width:min(94vw,920px);
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:12px;
+}
+
+.panel{
+border-radius:28px;
+padding:15px;
+background:rgba(255,255,255,.28);
+border:2px solid rgba(255,255,255,.45);
+backdrop-filter:blur(18px);
+box-shadow:0 16px 50px rgba(80,0,120,.18);
+}
+
+.panel h3{
+margin:0 0 10px;
+font-size:15px;
+}
+
+.colour-picker{
+width:100%;
+height:42px;
+border:0;
+border-radius:999px;
+padding:4px;
+background:white;
+cursor:pointer;
+}
+
+.meter{
+height:22px;
+background:rgba(255,255,255,.45);
+border-radius:999px;
+overflow:hidden;
+border:2px solid rgba(255,255,255,.6);
+}
+
+.meter-fill{
+height:100%;
+width:0%;
+border-radius:999px;
+background:linear-gradient(90deg,#fff35c,#ff7ad9,#42d9ff);
+transition:.35s ease;
+}
+
+.badge{
+display:inline-block;
+padding:9px 12px;
+border-radius:999px;
+background:rgba(255,255,255,.45);
+color:rgba(91,36,122,.6);
+font-size:13px;
+font-weight:1000;
+}
+
+.badge.unlocked{
+background:#fff35c;
+color:#6b24a8;
+box-shadow:0 0 18px rgba(255,255,255,.85);
+}
+
+.mascot{
+position:fixed;
+right:5vw;
+top:34vh;
+width:140px;
+height:140px;
+z-index:20;
+border-radius:50%;
+background:#fff35c;
+box-shadow:0 14px 0 rgba(91,36,122,.22),0 0 45px rgba(255,255,255,.85);
+animation:bounce 2.4s ease-in-out infinite;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:68px;
+user-select:none;
+}
+
+.mascot::after{
+content:"Tap me!";
+position:absolute;
+right:-18px;
+top:-22px;
+background:white;
+color:#7b2fc9;
+font-size:14px;
+font-weight:1000;
+padding:10px 14px;
+border-radius:999px;
+box-shadow:0 8px 20px rgba(0,0,0,.18);
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0) rotate(0)}
+50%{transform:translateY(-18px) rotate(6deg)}
+}
+
+/* Game */
+.game{
+position:fixed;
+inset:0;
+z-index:30;
+display:none;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+text-align:center;
+padding:110px 20px 30px;
+background:rgba(64,0,110,.18);
+backdrop-filter:blur(4px);
+}
+
+.game.active{
+display:flex;
+}
+
+.game-card{
+width:min(92vw,760px);
+padding:24px;
+border-radius:36px;
+background:rgba(255,255,255,.32);
+border:2px solid rgba(255,255,255,.5);
+box-shadow:0 22px 70px rgba(80,0,120,.25);
+}
+
+.game h2{
+margin:0;
+font-size:clamp(34px,6vw,64px);
+line-height:1;
+text-shadow:0 6px 0 rgba(91,36,122,.2);
+}
+
+.game p{
+margin:12px 0;
+font-size:clamp(18px,2.3vw,26px);
+font-weight:900;
+}
+
+.game-stats{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+margin:14px 0;
+}
+
+.stat{
+background:white;
+color:#6b24a8;
+font-weight:1000;
+border-radius:999px;
+padding:12px 18px;
+box-shadow:0 8px 0 rgba(91,36,122,.18);
+}
+
+.play-zone{
+position:relative;
+width:min(90vw,620px);
+height:min(48vh,360px);
+margin:16px auto 0;
+border-radius:34px;
+background:rgba(255,255,255,.25);
+border:3px dashed rgba(255,255,255,.75);
+overflow:hidden;
+}
+
+.tangle{
+position:absolute;
+font-size:76px;
+cursor:pointer;
+user-select:none;
+animation:tanglePop .9s ease-in-out infinite;
+filter:drop-shadow(0 10px 8px rgba(0,0,0,.25));
+}
+
+@keyframes tanglePop{
+0%,100%{transform:scale(1) rotate(-7deg)}
+50%{transform:scale(1.16) rotate(8deg)}
+}
+
+.message{
+min-height:36px;
+font-size:24px;
+font-weight:1000;
+color:#fff35c;
+text-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+.sparkle{
+position:fixed;
+width:10px;
+height:10px;
+border-radius:50%;
+background:white;
+box-shadow:0 0 18px white;
+pointer-events:none;
+z-index:80;
+animation:spark .7s ease forwards;
+}
+
+@keyframes spark{
+to{transform:translateY(-35px) scale(0);opacity:0}
+}
+
+.floaty{
+position:fixed;
+font-size:34px;
+z-index:1;
+opacity:.85;
+animation:floatUp 8s linear infinite;
+}
+
+.floaty:nth-child(1){left:8%;bottom:-10%;animation-delay:0s}
+.floaty:nth-child(2){left:22%;bottom:-10%;animation-delay:1.4s}
+.floaty:nth-child(3){left:42%;bottom:-10%;animation-delay:2.5s}
+.floaty:nth-child(4){left:66%;bottom:-10%;animation-delay:3.6s}
+.floaty:nth-child(5){left:84%;bottom:-10%;animation-delay:4.8s}
+
+@keyframes floatUp{
+from{transform:translateY(0) rotate(0);opacity:0}
+20%{opacity:.95}
+to{transform:translateY(-120vh) rotate(360deg);opacity:0}
+}
+
+/* Coming soon stamp */
+.stamp{
+position:absolute;
+top:50%;
+left:50%;
+width:min(88vw,850px);
+padding:30px 18px;
+z-index:90;
+font-family:"Impact","Arial Black",sans-serif;
+font-size:clamp(52px,10vw,132px);
+letter-spacing:5px;
+text-align:center;
+color:#ff2b2b;
+border:12px solid #ff2b2b;
+border-radius:22px;
+background:rgba(255,255,255,.08);
+text-shadow:2px 2px 0 rgba(0,0,0,.28),0 0 18px rgba(255,255,255,.75);
+box-shadow:0 0 0 6px rgba(255,43,43,.25),0 0 55px rgba(255,43,43,.5);
+opacity:0;
+pointer-events:none;
+transform:translate(-50%,-50%) rotate(-9deg) scale(2.2);
+}
+
+.stamp.show{
+animation:stampOnce .9s ease-out forwards;
+}
+
+@keyframes stampOnce{
+0%{opacity:0;transform:translate(-50%,-50%) rotate(-9deg) scale(2.35);filter:blur(8px)}
+55%{opacity:1;transform:translate(-50%,-50%) rotate(-9deg) scale(.9);filter:blur(0)}
+75%{transform:translate(-50%,-50%) rotate(-9deg) scale(1.04)}
+100%{opacity:.95;transform:translate(-50%,-50%) rotate(-9deg) scale(1)}
+}
+
+/* Mobile layout */
+@media(max-width:760px){
+body{
+overflow:hidden;
+}
+
+.topbar{
+top:10px;
+width:94vw;
+border-radius:28px;
+flex-direction:column;
+gap:8px;
+padding:10px;
+}
+
+.logo{
+padding-left:0;
+font-size:16px;
+}
+
+.navlinks{
+width:100%;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.navlinks button,
+.theme-picker{
+width:100%;
+padding:11px 8px;
+font-size:12px;
+}
+
+.hero{
+justify-content:flex-start;
+padding:185px 18px 220px;
+}
+
+.eyebrow{
+font-size:12px;
+margin-bottom:8px;
+}
+
+h1{
+font-size:clamp(42px,13vw,68px);
+letter-spacing:-2px;
+}
+
+.sub{
+font-size:18px;
+margin-top:16px;
+}
+
+.big-button{
+margin-top:20px;
+padding:18px 26px;
+font-size:19px;
+}
+
+.hud{
+bottom:10px;
+grid-template-columns:1fr;
+gap:8px;
+}
+
+.panel{
+padding:10px 14px;
+border-radius:22px;
+}
+
+.panel h3{
+font-size:13px;
+margin-bottom:6px;
+}
+
+.mascot{
+width:82px;
+height:82px;
+font-size:42px;
+right:14px;
+top:auto;
+bottom:210px;
+}
+
+.mascot::after{
+content:"Tap!";
+font-size:10px;
+padding:7px 9px;
+right:-8px;
+top:-14px;
+}
+
+.game{
+padding:150px 12px 18px;
+}
+
+.game-card{
+padding:16px;
+border-radius:26px;
+}
+
+.game h2{
+font-size:34px;
+}
+
+.game p{
+font-size:17px;
+}
+
+.play-zone{
+width:92vw;
+height:38vh;
+border-radius:24px;
+}
+
+.tangle{
+font-size:70px;
+}
+
+.stat{
+padding:10px 12px;
+font-size:14px;
+}
+
+.message{
+font-size:20px;
+}
+
+.stamp{
+border-width:8px;
+letter-spacing:2px;
+padding:24px 12px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="topbar">
+<div class="logo">KIMIBRUSH ✨</div>
+
+<div class="navlinks">
+<button onclick="startGame()">Start Game 🪮</button>
+<button onclick="changeMascot()">Mascot 😄</button>
+<button onclick="showComingSoon()">Coming Soon</button>
+
+<select class="theme-picker" onchange="changeTheme(this.value)">
+<option value="rainbow">Rainbow</option>
+<option value="space">Space</option>
+<option value="princess">Princess</option>
+<option value="ocean">Ocean</option>
+</select>
+</div>
+</nav>
+
+<section class="hero">
+<p class="eyebrow">Meet KimiBrush</p>
+<h1>Brush smarter. Shine brighter.</h1>
+<p class="sub">Tap 10 tangles, fill the sparkle meter, and unlock your badge!</p>
+<button class="big-button" onclick="startGame()">Start Brush Game 🪮</button>
+<div class="stamp" id="stamp">COMING SOON</div>
+</section>
+
+<div class="mascot" id="mascot" onclick="changeMascot()">✨</div>
+
+<div class="hud">
+<div class="panel">
+<h3>Hair colour 🎨</h3>
+<input class="colour-picker" type="color" value="#ff7ad9" oninput="changeHair(this.value)" />
+</div>
+
+<div class="panel">
+<h3>Sparkle meter ✨</h3>
+<div class="meter">
+<div class="meter-fill" id="meterFill"></div>
+</div>
+</div>
+
+<div class="panel">
+<h3>Badge 🏆</h3>
+<span class="badge" id="badge">Tangle Tamer</span>
+</div>
+</div>
+
+<div class="game" id="game">
+<div class="game-card">
+<h2>Tap the Tangles!</h2>
+<p>Tap 10 tangles before they vanish.</p>
+
+<div class="game-stats">
+<div class="stat" id="score">Score: 0 / 10</div>
+<div class="stat" id="timer">Time: 30</div>
+</div>
+
+<div class="message" id="message">Ready?</div>
+
+<div class="play-zone" id="playZone"></div>
+
+<button class="big-button" onclick="endGame()">Back Home</button>
+</div>
+</div>
+
+<div class="floaty">⭐</div>
+<div class="floaty">💖</div>
+<div class="floaty">✨</div>
+<div class="floaty">🌈</div>
+<div class="floaty">💫</div>
+
+<script>
+const stamp = document.getElementById("stamp");
+const mascot = document.getElementById("mascot");
+const meterFill = document.getElementById("meterFill");
+const badge = document.getElementById("badge");
+const game = document.getElementById("game");
+const playZone = document.getElementById("playZone");
+const score = document.getElementById("score");
+const timer = document.getElementById("timer");
+const message = document.getElementById("message");
+
+let sparklePower = 0;
+let points = 0;
+let timeLeft = 30;
+let gameRunning = false;
+let gameTimer;
+let tangleTimer;
+let mascotIndex = 0;
+
+const faces = ["✨","😄","😎","🦄","🌈","💖","🤩"];
+
+function showComingSoon(){
+stamp.classList.remove("show");
+void stamp.offsetWidth;
+stamp.classList.add("show");
+}
+
+function popSound(){
+const audio = new AudioContext();
+const osc = audio.createOscillator();
+const gain = audio.createGain();
+
+osc.connect(gain);
+gain.connect(audio.destination);
+
+osc.frequency.value = 650 + Math.random() * 350;
+gain.gain.setValueAtTime(0.08, audio.currentTime);
+gain.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + 0.14);
+
+osc.start();
+osc.stop(audio.currentTime + 0.14);
+}
+
+function createSparkle(x,y){
+const s = document.createElement("div");
+s.className = "sparkle";
+s.style.left = x + "px";
+s.style.top = y + "px";
+document.body.appendChild(s);
+setTimeout(() => s.remove(), 700);
+}
+
+function addSparkles(amount){
+sparklePower = Math.min(100, sparklePower + amount);
+meterFill.style.width = sparklePower + "%";
+}
+
+function changeHair(colour){
+document.documentElement.style.setProperty("--a", colour);
+addSparkles(5);
+popSound();
+}
+
+function changeMascot(){
+mascotIndex = (mascotIndex + 1) % faces.length;
+mascot.textContent = faces[mascotIndex];
+addSparkles(6);
+popSound();
+}
+
+function changeTheme(theme){
+const root = document.documentElement;
+
+if(theme === "rainbow"){
+root.style.setProperty("--a","#ff7ad9");
+root.style.setProperty("--b","#8b5cff");
+root.style.setProperty("--c","#42d9ff");
+root.style.setProperty("--d","#ffe86b");
+}
+
+if(theme === "space"){
+root.style.setProperty("--a","#12002f");
+root.style.setProperty("--b","#3d1c91");
+root.style.setProperty("--c","#00d4ff");
+root.style.setProperty("--d","#fff35c");
+}
+
+if(theme === "princess"){
+root.style.setProperty("--a","#ff8ad8");
+root.style.setProperty("--b","#ffc2f0");
+root.style.setProperty("--c","#b985ff");
+root.style.setProperty("--d","#fff1a8");
+}
+
+if(theme === "ocean"){
+root.style.setProperty("--a","#00b4d8");
+root.style.setProperty("--b","#0077b6");
+root.style.setProperty("--c","#90e0ef");
+root.style.setProperty("--d","#caf0f8");
+}
+
+popSound();
+addSparkles(10);
+}
+
+function startGame(){
+gameRunning = true;
+points = 0;
+timeLeft = 30;
+playZone.innerHTML = "";
+score.textContent = "Score: 0 / 10";
+timer.textContent = "Time: 30";
+message.textContent = "Tap the tangle!";
+game.classList.add("active");
+popSound();
+
+spawnTangle();
+
+clearInterval(gameTimer);
+clearInterval(tangleTimer);
+
+gameTimer = setInterval(() => {
+timeLeft--;
+timer.textContent = "Time: " + timeLeft;
+
+if(timeLeft <= 0){
+finishGame(false);
+}
+}, 1000);
+
+tangleTimer = setInterval(() => {
+if(gameRunning){
+spawnTangle();
+}
+}, 1300);
+}
+
+function spawnTangle(){
+playZone.innerHTML = "";
+
+const tangle = document.createElement("div");
+tangle.className = "tangle";
+tangle.textContent = "🌀";
+
+const maxX = playZone.clientWidth - 90;
+const maxY = playZone.clientHeight - 90;
+
+tangle.style.left = Math.max(10, Math.random() * maxX) + "px";
+tangle.style.top = Math.max(10, Math.random() * maxY) + "px";
+
+tangle.onclick = function(){
+if(!gameRunning) return;
+
+points++;
+score.textContent = "Score: " + points + " / 10";
+message.textContent = points < 10 ? "Nice brushing!" : "You did it!";
+popSound();
+addSparkles(10);
+
+const rect = tangle.getBoundingClientRect();
+for(let i = 0; i < 12; i++){
+createSparkle(rect.left + 35, rect.top + 35);
+}
+
+if(points >= 10){
+finishGame(true);
+} else {
+spawnTangle();
+}
+};
+
+playZone.appendChild(tangle);
+}
+
+function finishGame(won){
+gameRunning = false;
+clearInterval(gameTimer);
+clearInterval(tangleTimer);
+playZone.innerHTML = "";
+
+if(won){
+message.textContent = "You unlocked Tangle Tamer!";
+badge.classList.add("unlocked");
+addSparkles(100);
+setTimeout(showComingSoon, 900);
+} else {
+message.textContent = "Time up! Try again!";
+}
+}
+
+function endGame(){
+gameRunning = false;
+clearInterval(gameTimer);
+clearInterval(tangleTimer);
+playZone.innerHTML = "";
+game.classList.remove("active");
+}
+
+document.addEventListener("mousemove", e => {
+if(window.innerWidth > 760){
+createSparkle(e.clientX, e.clientY);
+}
+});
+
+document.addEventListener("touchmove", e => {
+const touch = e.touches[0];
+if(touch){
+createSparkle(touch.clientX, touch.clientY);
+}
+});
+</script>
+
+</body>
+</html>
 body::before{
 content:"";
 position:fixed;
