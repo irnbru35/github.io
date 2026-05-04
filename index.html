@@ -14,10 +14,11 @@
   --c:#42d9ff;
   --d:#ffe86b;
   --ink:#5b247a;
-  --card:rgba(255,255,255,.88);
+  --card:rgba(255,255,255,.76);
 }
 
 body{
+  position:relative;
   margin:0;
   min-height:100vh;
   overflow:hidden;
@@ -28,29 +29,43 @@ body{
   animation:bgMove 12s ease infinite;
 }
 
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("Kimi.jpeg") center/cover no-repeat;
+  opacity:.18;
+  z-index:-2;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.35),transparent 42%);
+  z-index:-1;
+}
+
 @keyframes bgMove{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
 
-button,select,input{
-  font-family:inherit;
-}
+button{font-family:inherit}
 
 .logo{
   position:fixed;
-  top:12px;
+  top:10px;
   left:50%;
   transform:translateX(-50%);
-  z-index:50;
+  z-index:90;
   padding:10px 18px;
   border-radius:999px;
   background:rgba(255,255,255,.35);
   border:2px solid rgba(255,255,255,.6);
   backdrop-filter:blur(14px);
   font-weight:1000;
-  color:white;
   box-shadow:0 12px 35px rgba(80,0,120,.2);
 }
 
@@ -58,11 +73,8 @@ button,select,input{
 .home{
   position:fixed;
   inset:0;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
   overflow-y:auto;
-  padding:82px 18px 28px;
+  padding:74px 16px 28px;
   text-align:center;
 }
 
@@ -72,72 +84,119 @@ body.playing .home{
 
 h1{
   margin:0;
-  font-size:clamp(40px,10vw,90px);
-  line-height:.95;
+  font-size:clamp(38px,10vw,86px);
+  line-height:.92;
   font-weight:1000;
-  text-shadow:0 8px 0 rgba(88,37,130,.18);
+  text-shadow:0 8px 0 rgba(88,37,130,.18),0 0 20px rgba(255,255,255,.4);
 }
 
 .sub{
   max-width:680px;
-  margin:14px 0 22px;
-  font-size:clamp(18px,3vw,26px);
+  margin:12px auto 14px;
+  font-size:clamp(17px,3vw,24px);
   font-weight:900;
-  line-height:1.35;
+  line-height:1.3;
 }
 
-.section-title{
-  margin:18px 0 10px;
-  font-size:24px;
+.kimi-box{
+  width:min(760px,100%);
+  margin:0 auto 12px;
+  padding:12px 14px;
+  border-radius:24px;
+  background:rgba(255,255,255,.32);
+  border:2px solid rgba(255,255,255,.55);
+  font-size:17px;
   font-weight:1000;
 }
 
+.safe-note{
+  width:min(760px,100%);
+  margin:0 auto 14px;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.9);
+  color:var(--ink);
+  font-weight:1000;
+  font-size:14px;
+}
+
+.section-title{
+  margin:14px 0 10px;
+  font-size:23px;
+  font-weight:1000;
+}
+
+/* SMALL FLOATING GAME BUBBLES */
 .game-menu{
-  width:min(940px,100%);
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
+  width:min(760px,100%);
+  margin:auto;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:16px;
 }
 
 .game-card{
   border:0;
-  border-radius:28px;
-  background:var(--card);
+  border-radius:50%;
+  background:rgba(255,255,255,.74);
   color:var(--ink);
-  padding:20px;
-  min-height:170px;
-  box-shadow:0 12px 0 rgba(91,36,122,.18);
+  padding:15px;
+  width:168px;
+  height:168px;
+  box-shadow:0 10px 0 rgba(91,36,122,.16),0 0 28px rgba(255,255,255,.5);
   cursor:pointer;
-  text-align:left;
+  text-align:center;
+  backdrop-filter:blur(10px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
 }
 
 .game-card:active{
   transform:translateY(4px);
-  box-shadow:0 8px 0 rgba(91,36,122,.18);
+  box-shadow:0 6px 0 rgba(91,36,122,.16);
 }
 
 .game-emoji{
-  font-size:46px;
+  font-size:38px;
+  line-height:1;
+}
+
+.afro-comb{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  background:#5b247a;
+  color:white;
+  font-size:12px;
+  font-weight:1000;
+  line-height:1.05;
+  box-shadow:inset 0 -6px 0 rgba(0,0,0,.18);
 }
 
 .game-card h2{
-  margin:8px 0 6px;
-  font-size:25px;
+  margin:8px 0 4px;
+  font-size:16px;
+  line-height:1;
 }
 
 .game-card p{
   margin:0;
-  font-size:16px;
-  font-weight:800;
-  line-height:1.3;
+  font-size:11px;
+  font-weight:900;
+  line-height:1.12;
 }
 
-/* THEME AREA */
-.theme-panel{
-  margin-top:16px;
-  width:min(940px,100%);
-  padding:14px;
-  border-radius:28px;
+.theme-panel,.stickers-panel{
+  margin:14px auto 0;
+  width:min(760px,100%);
+  padding:12px;
+  border-radius:26px;
   background:rgba(255,255,255,.22);
   border:2px solid rgba(255,255,255,.45);
 }
@@ -148,10 +207,10 @@ h1{
   gap:10px;
 }
 
-.theme-btn{
+.theme-btn,.tool{
   border:0;
   border-radius:20px;
-  padding:15px 10px;
+  padding:14px 10px;
   font-weight:1000;
   color:var(--ink);
   background:white;
@@ -167,20 +226,36 @@ h1{
   flex-wrap:wrap;
 }
 
-.tool{
-  border:0;
-  border-radius:999px;
-  padding:13px 16px;
-  font-weight:1000;
-  color:var(--ink);
+.stickers{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  font-size:34px;
+}
+
+.sticker{
+  width:54px;
+  height:54px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(255,255,255,.35);
+  filter:grayscale(1);
+  opacity:.45;
+}
+
+.sticker.unlocked{
   background:white;
-  cursor:pointer;
+  filter:none;
+  opacity:1;
   box-shadow:0 7px 0 rgba(91,36,122,.16);
 }
 
 .meter-wrap{
-  width:min(90vw,500px);
-  margin-top:16px;
+  width:min(90vw,460px);
+  margin:14px auto 0;
   padding:12px;
   border-radius:24px;
   background:rgba(255,255,255,.25);
@@ -213,7 +288,7 @@ h1{
   display:inline-block;
   padding:10px 14px;
   border-radius:999px;
-  background:rgba(255,255,255,.55);
+  background:white;
   color:var(--ink);
   font-size:14px;
   font-weight:1000;
@@ -223,11 +298,11 @@ h1{
 .game{
   position:fixed;
   inset:0;
-  z-index:40;
+  z-index:50;
   display:none;
   flex-direction:column;
   align-items:center;
-  padding:70px 14px 18px;
+  padding:66px 14px 18px;
   text-align:center;
   background:linear-gradient(135deg,var(--a),var(--b),var(--c),var(--d));
   background-size:400% 400%;
@@ -243,7 +318,6 @@ body.playing .game{
   font-size:clamp(34px,8vw,68px);
   line-height:.95;
   font-weight:1000;
-  text-shadow:0 7px 0 rgba(91,36,122,.18);
 }
 
 .instruction{
@@ -287,19 +361,32 @@ body.playing .game{
   border-radius:34px;
   background:rgba(255,255,255,.25);
   border:4px dashed rgba(255,255,255,.75);
-  box-shadow:inset 0 0 35px rgba(255,255,255,.25),0 18px 60px rgba(80,0,120,.22);
   overflow:hidden;
   touch-action:manipulation;
 }
 
 .target{
   position:absolute;
-  font-size:82px;
+  width:86px;
+  height:86px;
   cursor:pointer;
   user-select:none;
   touch-action:manipulation;
-  filter:drop-shadow(0 10px 8px rgba(0,0,0,.25));
   animation:pop .8s ease-in-out infinite;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:62px;
+}
+
+.comb-target{
+  border-radius:22px;
+  background:#5b247a;
+  color:white;
+  font-size:13px;
+  line-height:1.05;
+  font-weight:1000;
+  box-shadow:0 9px 0 rgba(0,0,0,.18),0 0 18px rgba(255,255,255,.6);
 }
 
 @keyframes pop{
@@ -335,9 +422,9 @@ body.playing .game{
 }
 
 @keyframes xPop{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.4) rotate(-10deg)}
-  40%{opacity:1;transform:translate(-50%,-50%) scale(1.25) rotate(8deg)}
-  100%{opacity:0;transform:translate(-50%,-50%) scale(.9) rotate(0)}
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}
+  40%{opacity:1;transform:translate(-50%,-50%) scale(1.25)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(.9)}
 }
 
 .back{
@@ -352,7 +439,7 @@ body.playing .game{
   cursor:pointer;
 }
 
-/* PRIZE POPUP */
+/* PRIZE */
 .prize{
   position:fixed;
   inset:0;
@@ -376,7 +463,7 @@ body.playing .game{
   color:var(--ink);
   padding:30px 18px;
   text-align:center;
-  box-shadow:0 18px 0 rgba(91,36,122,.25),0 0 60px rgba(255,255,255,.9);
+  box-shadow:0 18px 0 rgba(91,36,122,.25);
   animation:prizePop .6s ease;
 }
 
@@ -419,14 +506,12 @@ body.playing .game{
   cursor:pointer;
 }
 
-/* SPARKLES */
 .sparkle{
   position:fixed;
   width:10px;
   height:10px;
   border-radius:50%;
   background:white;
-  box-shadow:0 0 18px white;
   pointer-events:none;
   z-index:250;
   animation:spark .7s ease forwards;
@@ -436,27 +521,35 @@ body.playing .game{
   to{transform:translateY(-35px) scale(0);opacity:0}
 }
 
-/* MOBILE */
 @media(max-width:760px){
   .home{
-    padding-top:74px;
+    padding-top:70px;
   }
 
-  .game-menu{
-    grid-template-columns:1fr;
+  h1{
+    font-size:clamp(36px,11vw,56px);
+  }
+
+  .sub{
+    font-size:17px;
   }
 
   .game-card{
-    min-height:145px;
-    padding:18px;
+    width:145px;
+    height:145px;
+    padding:12px;
+  }
+
+  .game-card h2{
+    font-size:14px;
+  }
+
+  .game-card p{
+    font-size:10px;
   }
 
   .theme-buttons{
     grid-template-columns:repeat(2,1fr);
-  }
-
-  .game{
-    padding-top:66px;
   }
 
   .play-zone{
@@ -465,20 +558,17 @@ body.playing .game{
   }
 
   .target{
-    font-size:76px;
+    width:78px;
+    height:78px;
+    font-size:56px;
+  }
+
+  .comb-target{
+    font-size:12px;
   }
 
   .hair-area{
     font-size:78px;
-  }
-
-  .instruction{
-    font-size:18px;
-  }
-
-  .stat{
-    font-size:15px;
-    padding:10px 12px;
   }
 }
 </style>
@@ -490,21 +580,29 @@ body.playing .game{
 
 <div class="home">
   <h1>Brush smarter. Shine brighter.</h1>
-  <p class="sub">Choose a mini game, collect sparkle points, and become a Tangle Tamer!</p>
+  <p class="sub">Choose a bubble game, collect stickers, and become the Ultimate Tangle Master!</p>
+
+  <div class="kimi-box" id="kimiBox">
+    Kimi says: Pick a floating bubble game below. Win games to level up!
+  </div>
+
+  <div class="safe-note">
+    Child-safe play area: no adverts, no chat, just brushing games.
+  </div>
 
   <div class="section-title">Pick a Game 🎮</div>
 
   <div class="game-menu">
     <button class="game-card" onclick="startTapGame()">
-      <div class="game-emoji">🪮</div>
-      <h2>Tap the Hair Brush</h2>
-      <p>Tap the hair brush emoji only. Be careful! If you tap the wrong emoji, a big red X appears.</p>
+      <div class="afro-comb">AFRO<br>COMB</div>
+      <h2>Tap the Afro Comb</h2>
+      <p>Tap only the afro comb. Wrong tap = big red X!</p>
     </button>
 
     <button class="game-card" onclick="startStraightGame()">
       <div class="game-emoji">💇‍♀️</div>
       <h2>Brush Hair Straight</h2>
-      <p>Tap and brush the curly hair until it becomes smooth and straight.</p>
+      <p>Brush curly hair until it is smooth and shiny.</p>
     </button>
   </div>
 
@@ -519,12 +617,16 @@ body.playing .game{
     </div>
 
     <div class="small-tools">
+      <button class="tool" onclick="startDailyChallenge()">🌟 Daily Challenge</button>
+      <button class="tool" onclick="showKimiTip()">💬 Kimi Help</button>
+      <button class="tool" onclick="toggleSound()" id="soundButton">Sound: On 🔊</button>
       <button class="tool" onclick="changeMascot()">Change Mascot ✨</button>
-      <label class="tool">
-        Pick Colour
-        <input type="color" value="#ff7ad9" oninput="changeHair(this.value)" />
-      </label>
     </div>
+  </div>
+
+  <div class="stickers-panel">
+    <div class="section-title">Sticker Collection 🏅</div>
+    <div class="stickers" id="stickers"></div>
   </div>
 
   <div class="meter-wrap">
@@ -566,9 +668,9 @@ body.playing .game{
 </div>
 
 <script>
-/* EASY SETTINGS TO CHANGE */
 const targetScoreTapGame = 10;
 const targetBrushesStraightGame = 12;
+const dailyChallengeScore = 6;
 const startingTime = 30;
 
 const prizes = [
@@ -578,6 +680,8 @@ const prizes = [
   "KimiBrush Champion",
   "Ultimate Tangle Master"
 ];
+
+const stickerList = ["🪮","✨","🎀","👑","🌈","🏆","💖","🌟"];
 
 const themes = {
   rainbow:["#ff7ad9","#8b5cff","#42d9ff","#ffe86b"],
@@ -589,9 +693,16 @@ const themes = {
 const wrongEmojis = ["🧸","🍭","⭐","🎀","🦄"];
 const faces = ["✨","😄","😎","🦄","🌈","💖","🤩"];
 
+const kimiTips = [
+  "Kimi says: In Tap the Afro Comb, only tap the purple AFRO COMB!",
+  "Kimi says: If you see a red X, try again and look carefully.",
+  "Kimi says: In Brush Hair Straight, tap the hair until it turns smooth.",
+  "Kimi says: Win games to level up and collect stickers!",
+  "Kimi says: Try the Daily Challenge for a bonus prize!"
+];
+
 const meterFill = document.getElementById("meterFill");
 const badge = document.getElementById("badge");
-const game = document.getElementById("game");
 const playZone = document.getElementById("playZone");
 const score = document.getElementById("score");
 const timer = document.getElementById("timer");
@@ -602,6 +713,9 @@ const instruction = document.getElementById("instruction");
 const prize = document.getElementById("prize");
 const prizeTitle = document.getElementById("prizeTitle");
 const prizeText = document.getElementById("prizeText");
+const stickers = document.getElementById("stickers");
+const kimiBox = document.getElementById("kimiBox");
+const soundButton = document.getElementById("soundButton");
 
 let sparklePower = 0;
 let points = 0;
@@ -613,20 +727,45 @@ let gameTimer;
 let spawnTimer;
 let brushProgress = 0;
 let mascotIndex = 0;
+let soundOn = true;
+let unlockedStickers = 0;
+
+function buildStickers(){
+  stickers.innerHTML = "";
+
+  stickerList.forEach((sticker,index) => {
+    const div = document.createElement("div");
+    div.className = "sticker" + (index < unlockedStickers ? " unlocked" : "");
+    div.textContent = sticker;
+    stickers.appendChild(div);
+  });
+}
+
+buildStickers();
 
 function popSound(){
+  if(!soundOn) return;
+
   try{
     const audio = new AudioContext();
     const osc = audio.createOscillator();
     const gain = audio.createGain();
+
     osc.connect(gain);
     gain.connect(audio.destination);
+
     osc.frequency.value = 650 + Math.random() * 350;
     gain.gain.setValueAtTime(0.08, audio.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + 0.14);
+
     osc.start();
     osc.stop(audio.currentTime + 0.14);
   }catch(e){}
+}
+
+function toggleSound(){
+  soundOn = !soundOn;
+  soundButton.textContent = soundOn ? "Sound: On 🔊" : "Sound: Off 🔇";
 }
 
 function addSparkles(amount){
@@ -656,24 +795,28 @@ function showWrongX(x,y){
 function changeTheme(name){
   const root = document.documentElement;
   const colours = themes[name];
+
   root.style.setProperty("--a", colours[0]);
   root.style.setProperty("--b", colours[1]);
   root.style.setProperty("--c", colours[2]);
   root.style.setProperty("--d", colours[3]);
-  addSparkles(6);
-  popSound();
-}
 
-function changeHair(colour){
-  document.documentElement.style.setProperty("--a", colour);
-  addSparkles(5);
+  kimiBox.textContent = "Kimi says: Nice theme choice!";
+  addSparkles(6);
   popSound();
 }
 
 function changeMascot(){
   mascotIndex = (mascotIndex + 1) % faces.length;
-  badge.textContent = "Mascot: " + faces[mascotIndex];
+  kimiBox.textContent = "Kimi mascot: " + faces[mascotIndex] + " Hello!";
   addSparkles(5);
+  popSound();
+}
+
+function showKimiTip(){
+  const tip = kimiTips[Math.floor(Math.random() * kimiTips.length)];
+  kimiBox.textContent = tip;
+  addSparkles(4);
   popSound();
 }
 
@@ -681,10 +824,12 @@ function resetGame(){
   document.body.classList.add("playing");
   prize.classList.remove("show");
   playZone.innerHTML = "";
+
   points = 0;
   brushProgress = 0;
   timeLeft = startingTime;
   gameRunning = true;
+
   score.textContent = "Score: 0";
   timer.textContent = "Time: " + timeLeft;
   levelBox.textContent = "Level: " + playerLevel;
@@ -706,9 +851,10 @@ function startTapGame(){
   currentGame = "tap";
   resetGame();
 
-  gameTitle.textContent = "Tap the Hair Brush!";
-  instruction.textContent = "Tap ONLY the hair brush 🪮. Do not tap the other emojis, or you will get a big red X!";
-  message.textContent = "Find the hair brush!";
+  gameTitle.textContent = "Tap the Afro Comb!";
+  instruction.textContent = "Tap ONLY the purple AFRO COMB. Do not tap the other emojis, or you will get a big red X!";
+  message.textContent = "Find the afro comb!";
+  score.textContent = "Score: 0 / " + targetScoreTapGame;
 
   spawnTapRound();
 
@@ -719,20 +865,47 @@ function startTapGame(){
   }, 1400);
 }
 
+function startDailyChallenge(){
+  currentGame = "daily";
+  resetGame();
+
+  gameTitle.textContent = "Daily Brush Challenge!";
+  instruction.textContent = "Quick challenge! Tap 6 afro combs before the timer runs out.";
+  message.textContent = "Daily sparkle time!";
+  score.textContent = "Score: 0 / " + dailyChallengeScore;
+
+  spawnTapRound();
+
+  spawnTimer = setInterval(() => {
+    if(gameRunning){
+      spawnTapRound();
+    }
+  }, 1200);
+}
+
 function spawnTapRound(){
   playZone.innerHTML = "";
 
-  const emojis = ["🪮"];
-  while(emojis.length < 4){
-    emojis.push(wrongEmojis[Math.floor(Math.random() * wrongEmojis.length)]);
+  const targetNeeded = currentGame === "daily" ? dailyChallengeScore : targetScoreTapGame;
+
+  const items = ["COMB"];
+
+  while(items.length < 4){
+    items.push(wrongEmojis[Math.floor(Math.random() * wrongEmojis.length)]);
   }
 
-  emojis.sort(() => Math.random() - .5);
+  items.sort(() => Math.random() - .5);
 
-  emojis.forEach(emoji => {
+  items.forEach(itemValue => {
     const item = document.createElement("div");
     item.className = "target";
-    item.textContent = emoji;
+
+    if(itemValue === "COMB"){
+      item.classList.add("comb-target");
+      item.innerHTML = "AFRO<br>COMB";
+    } else {
+      item.textContent = itemValue;
+    }
 
     const maxX = playZone.clientWidth - 90;
     const maxY = playZone.clientHeight - 90;
@@ -743,9 +916,9 @@ function spawnTapRound(){
     item.onclick = function(e){
       if(!gameRunning) return;
 
-      if(emoji === "🪮"){
+      if(itemValue === "COMB"){
         points++;
-        score.textContent = "Score: " + points + " / " + targetScoreTapGame;
+        score.textContent = "Score: " + points + " / " + targetNeeded;
         message.textContent = "Great brushing!";
         popSound();
         addSparkles(8);
@@ -754,13 +927,13 @@ function spawnTapRound(){
           createSparkle(e.clientX,e.clientY);
         }
 
-        if(points >= targetScoreTapGame){
+        if(points >= targetNeeded){
           winGame();
         } else {
           spawnTapRound();
         }
       } else {
-        message.textContent = "Oops! Only tap the hair brush 🪮";
+        message.textContent = "Oops! Only tap the afro comb!";
         showWrongX(e.clientX,e.clientY);
       }
     };
@@ -836,8 +1009,13 @@ function winGame(){
 
   const prizeName = prizes[Math.min(playerLevel - 1, prizes.length - 1)];
 
+  if(unlockedStickers < stickerList.length){
+    unlockedStickers++;
+    buildStickers();
+  }
+
   prizeTitle.textContent = prizeName;
-  prizeText.textContent = "Amazing! You reached Level " + playerLevel + ". Play again to level up!";
+  prizeText.textContent = "Amazing! You reached Level " + playerLevel + " and unlocked a new sticker!";
   badge.textContent = "Current Level: " + prizeName;
 
   playerLevel++;
@@ -860,6 +1038,8 @@ function loseGame(){
 function playAgain(){
   if(currentGame === "tap"){
     startTapGame();
+  } else if(currentGame === "daily"){
+    startDailyChallenge();
   } else {
     startStraightGame();
   }
