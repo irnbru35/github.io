@@ -4,651 +4,876 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>KimiBrush Magic</title>
+
 <style>
 *{box-sizing:border-box}
+
 :root{
---a:#ff7ad9;
---b:#8b5cff;
---c:#42d9ff;
---d:#ffe86b;
---purple:#6b24a8;
+  --a:#ff7ad9;
+  --b:#8b5cff;
+  --c:#42d9ff;
+  --d:#ffe86b;
+  --ink:#5b247a;
+  --card:rgba(255,255,255,.88);
 }
+
 body{
-margin:0;
-height:100vh;
-overflow:hidden;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-color:white;
-background:linear-gradient(135deg,var(--a),var(--b),var(--c),var(--d));
-background-size:400% 400%;
-animation:bgMove 12s ease infinite;
+  margin:0;
+  min-height:100vh;
+  overflow:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  color:white;
+  background:linear-gradient(135deg,var(--a),var(--b),var(--c),var(--d));
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
 }
+
 @keyframes bgMove{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:url("Kimi.jpeg") center/cover no-repeat;
-opacity:.16;
-z-index:-2;
-}
-body::after{
-content:"";
-position:fixed;
-inset:0;
-background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.38),transparent 42%);
-z-index:-1;
-}
+
 button,select,input{
-font-family:inherit;
+  font-family:inherit;
 }
-/* HOME SCREEN */
-.home{
-position:fixed;
-inset:0;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:28px;
-z-index:5;
-}
-body.playing .home{
-display:none;
-}
+
 .logo{
-position:fixed;
-top:18px;
-left:50%;
-transform:translateX(-50%);
-z-index:20;
-padding:12px 22px;
-border-radius:999px;
-background:rgba(255,255,255,.28);
-border:2px solid rgba(255,255,255,.45);
-backdrop-filter:blur(18px);
-font-weight:1000;
-letter-spacing:2px;
-box-shadow:0 16px 45px rgba(80,0,120,.2);
+  position:fixed;
+  top:12px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:50;
+  padding:10px 18px;
+  border-radius:999px;
+  background:rgba(255,255,255,.35);
+  border:2px solid rgba(255,255,255,.6);
+  backdrop-filter:blur(14px);
+  font-weight:1000;
+  color:white;
+  box-shadow:0 12px 35px rgba(80,0,120,.2);
 }
-.eyebrow{
-margin:0 0 10px;
-font-size:15px;
-letter-spacing:3px;
-text-transform:uppercase;
-font-weight:1000;
+
+/* HOME */
+.home{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  overflow-y:auto;
+  padding:82px 18px 28px;
+  text-align:center;
 }
+
+body.playing .home{
+  display:none;
+}
+
 h1{
-margin:0;
-max-width:950px;
-font-size:clamp(46px,9vw,118px);
-line-height:.9;
-letter-spacing:-4px;
-font-weight:1000;
-text-shadow:0 8px 0 rgba(88,37,130,.22),0 0 35px rgba(255,255,255,.75);
+  margin:0;
+  font-size:clamp(40px,10vw,90px);
+  line-height:.95;
+  font-weight:1000;
+  text-shadow:0 8px 0 rgba(88,37,130,.18);
 }
+
 .sub{
-max-width:720px;
-margin:22px 0 0;
-font-size:clamp(20px,2.4vw,30px);
-line-height:1.35;
-font-weight:900;
-text-shadow:0 3px 12px rgba(0,0,0,.22);
+  max-width:680px;
+  margin:14px 0 22px;
+  font-size:clamp(18px,3vw,26px);
+  font-weight:900;
+  line-height:1.35;
 }
-.big-button{
-margin-top:30px;
-border:0;
-border-radius:999px;
-padding:22px 38px;
-font-size:22px;
-font-weight:1000;
-color:var(--purple);
-background:white;
-cursor:pointer;
-box-shadow:0 12px 0 rgba(91,36,122,.22),0 0 38px rgba(255,255,255,.75);
-transition:.2s ease;
+
+.section-title{
+  margin:18px 0 10px;
+  font-size:24px;
+  font-weight:1000;
 }
-.big-button:hover{
-transform:translateY(-6px) scale(1.04);
+
+.game-menu{
+  width:min(940px,100%);
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
 }
-.home-tools{
-margin-top:22px;
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-justify-content:center;
+
+.game-card{
+  border:0;
+  border-radius:28px;
+  background:var(--card);
+  color:var(--ink);
+  padding:20px;
+  min-height:170px;
+  box-shadow:0 12px 0 rgba(91,36,122,.18);
+  cursor:pointer;
+  text-align:left;
 }
+
+.game-card:active{
+  transform:translateY(4px);
+  box-shadow:0 8px 0 rgba(91,36,122,.18);
+}
+
+.game-emoji{
+  font-size:46px;
+}
+
+.game-card h2{
+  margin:8px 0 6px;
+  font-size:25px;
+}
+
+.game-card p{
+  margin:0;
+  font-size:16px;
+  font-weight:800;
+  line-height:1.3;
+}
+
+/* THEME AREA */
+.theme-panel{
+  margin-top:16px;
+  width:min(940px,100%);
+  padding:14px;
+  border-radius:28px;
+  background:rgba(255,255,255,.22);
+  border:2px solid rgba(255,255,255,.45);
+}
+
+.theme-buttons{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+}
+
+.theme-btn{
+  border:0;
+  border-radius:20px;
+  padding:15px 10px;
+  font-weight:1000;
+  color:var(--ink);
+  background:white;
+  cursor:pointer;
+  box-shadow:0 7px 0 rgba(91,36,122,.16);
+}
+
+.small-tools{
+  margin-top:12px;
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
 .tool{
-border:0;
-border-radius:999px;
-padding:13px 16px;
-font-weight:1000;
-color:#5b247a;
-background:rgba(255,255,255,.9);
-box-shadow:0 7px 0 rgba(91,36,122,.16);
-cursor:pointer;
+  border:0;
+  border-radius:999px;
+  padding:13px 16px;
+  font-weight:1000;
+  color:var(--ink);
+  background:white;
+  cursor:pointer;
+  box-shadow:0 7px 0 rgba(91,36,122,.16);
 }
-.theme-picker{
-border:0;
-border-radius:999px;
-padding:13px 16px;
-font-weight:1000;
-color:#5b247a;
-background:rgba(255,255,255,.9);
-box-shadow:0 7px 0 rgba(91,36,122,.16);
-}
+
 .meter-wrap{
-width:min(86vw,440px);
-margin-top:20px;
-padding:12px;
-border-radius:24px;
-background:rgba(255,255,255,.25);
-border:2px solid rgba(255,255,255,.45);
-backdrop-filter:blur(16px);
+  width:min(90vw,500px);
+  margin-top:16px;
+  padding:12px;
+  border-radius:24px;
+  background:rgba(255,255,255,.25);
+  border:2px solid rgba(255,255,255,.45);
 }
+
 .meter-title{
-font-weight:1000;
-margin-bottom:8px;
+  font-weight:1000;
+  margin-bottom:8px;
 }
+
 .meter{
-height:24px;
-background:rgba(255,255,255,.45);
-border-radius:999px;
-overflow:hidden;
-border:2px solid rgba(255,255,255,.65);
+  height:24px;
+  background:rgba(255,255,255,.45);
+  border-radius:999px;
+  overflow:hidden;
+  border:2px solid rgba(255,255,255,.65);
 }
+
 .meter-fill{
-height:100%;
-width:0%;
-background:linear-gradient(90deg,#fff35c,#ff7ad9,#42d9ff);
-border-radius:999px;
-transition:.3s ease;
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#fff35c,#ff7ad9,#42d9ff);
+  border-radius:999px;
+  transition:.3s ease;
 }
+
 .badge{
-margin-top:12px;
-display:inline-block;
-padding:10px 14px;
-border-radius:999px;
-background:rgba(255,255,255,.45);
-color:rgba(91,36,122,.65);
-font-size:14px;
-font-weight:1000;
+  margin-top:10px;
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.55);
+  color:var(--ink);
+  font-size:14px;
+  font-weight:1000;
 }
-.badge.unlocked{
-background:#fff35c;
-color:#6b24a8;
-box-shadow:0 0 20px rgba(255,255,255,.9);
-}
-.mascot{
-position:fixed;
-right:5vw;
-bottom:7vh;
-width:125px;
-height:125px;
-z-index:10;
-border-radius:50%;
-background:#fff35c;
-box-shadow:0 14px 0 rgba(91,36,122,.22),0 0 45px rgba(255,255,255,.85);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:62px;
-animation:bounce 2.4s ease-in-out infinite;
-cursor:pointer;
-}
-body.playing .mascot{
-display:none;
-}
-@keyframes bounce{
-0%,100%{transform:translateY(0) rotate(0)}
-50%{transform:translateY(-16px) rotate(5deg)}
-}
+
 /* GAME SCREEN */
 .game{
-position:fixed;
-inset:0;
-z-index:40;
-display:none;
-flex-direction:column;
-align-items:center;
-justify-content:flex-start;
-text-align:center;
-padding:24px;
-background:linear-gradient(135deg,var(--a),var(--b),var(--c),var(--d));
-background-size:400% 400%;
-animation:bgMove 12s ease infinite;
+  position:fixed;
+  inset:0;
+  z-index:40;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  padding:70px 14px 18px;
+  text-align:center;
+  background:linear-gradient(135deg,var(--a),var(--b),var(--c),var(--d));
+  background-size:400% 400%;
+  animation:bgMove 12s ease infinite;
 }
+
 body.playing .game{
-display:flex;
+  display:flex;
 }
+
 .game h2{
-margin:16px 0 6px;
-font-size:clamp(38px,8vw,72px);
-line-height:.95;
-font-weight:1000;
-text-shadow:0 7px 0 rgba(91,36,122,.18);
+  margin:0 0 8px;
+  font-size:clamp(34px,8vw,68px);
+  line-height:.95;
+  font-weight:1000;
+  text-shadow:0 7px 0 rgba(91,36,122,.18);
 }
+
 .instruction{
-margin:4px 0 16px;
-font-size:clamp(19px,3vw,28px);
-font-weight:1000;
+  max-width:720px;
+  margin:0 0 12px;
+  font-size:clamp(18px,3vw,25px);
+  font-weight:1000;
+  line-height:1.25;
 }
+
 .stats{
-display:flex;
-gap:12px;
-flex-wrap:wrap;
-justify-content:center;
-margin-bottom:12px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:10px;
 }
+
 .stat{
-background:white;
-color:#6b24a8;
-font-weight:1000;
-border-radius:999px;
-padding:12px 18px;
-box-shadow:0 8px 0 rgba(91,36,122,.18);
+  background:white;
+  color:var(--ink);
+  font-weight:1000;
+  border-radius:999px;
+  padding:11px 15px;
+  box-shadow:0 8px 0 rgba(91,36,122,.18);
 }
+
 .message{
-min-height:32px;
-font-size:24px;
-font-weight:1000;
-color:#fff35c;
-text-shadow:0 3px 10px rgba(0,0,0,.25);
-margin-bottom:10px;
+  min-height:32px;
+  font-size:23px;
+  font-weight:1000;
+  color:#fff35c;
+  text-shadow:0 3px 10px rgba(0,0,0,.25);
+  margin-bottom:10px;
 }
+
 .play-zone{
-position:relative;
-width:min(92vw,720px);
-height:min(54vh,410px);
-border-radius:34px;
-background:rgba(255,255,255,.25);
-border:4px dashed rgba(255,255,255,.75);
-box-shadow:inset 0 0 35px rgba(255,255,255,.25),0 18px 60px rgba(80,0,120,.22);
-overflow:hidden;
+  position:relative;
+  width:min(94vw,760px);
+  height:min(50vh,410px);
+  border-radius:34px;
+  background:rgba(255,255,255,.25);
+  border:4px dashed rgba(255,255,255,.75);
+  box-shadow:inset 0 0 35px rgba(255,255,255,.25),0 18px 60px rgba(80,0,120,.22);
+  overflow:hidden;
+  touch-action:manipulation;
 }
-.tangle{
-position:absolute;
-font-size:86px;
-cursor:pointer;
-user-select:none;
-touch-action:manipulation;
-animation:tanglePop .9s ease-in-out infinite;
-filter:drop-shadow(0 10px 8px rgba(0,0,0,.25));
+
+.target{
+  position:absolute;
+  font-size:82px;
+  cursor:pointer;
+  user-select:none;
+  touch-action:manipulation;
+  filter:drop-shadow(0 10px 8px rgba(0,0,0,.25));
+  animation:pop .8s ease-in-out infinite;
 }
-@keyframes tanglePop{
-0%,100%{transform:scale(1) rotate(-7deg)}
-50%{transform:scale(1.16) rotate(8deg)}
+
+@keyframes pop{
+  0%,100%{transform:scale(1) rotate(-6deg)}
+  50%{transform:scale(1.15) rotate(8deg)}
 }
+
+.hair-area{
+  position:absolute;
+  inset:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  font-size:88px;
+  user-select:none;
+}
+
+.hair-status{
+  font-size:26px;
+  font-weight:1000;
+  margin-top:10px;
+}
+
+.wrong-x{
+  position:fixed;
+  z-index:200;
+  font-size:92px;
+  color:#ff2b2b;
+  font-weight:1000;
+  pointer-events:none;
+  animation:xPop .55s ease forwards;
+}
+
+@keyframes xPop{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.4) rotate(-10deg)}
+  40%{opacity:1;transform:translate(-50%,-50%) scale(1.25) rotate(8deg)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(.9) rotate(0)}
+}
+
 .back{
-margin-top:14px;
-border:0;
-border-radius:999px;
-padding:14px 22px;
-font-weight:1000;
-color:#5b247a;
-background:white;
-box-shadow:0 7px 0 rgba(91,36,122,.16);
-cursor:pointer;
+  margin-top:14px;
+  border:0;
+  border-radius:999px;
+  padding:14px 22px;
+  font-weight:1000;
+  color:var(--ink);
+  background:white;
+  box-shadow:0 7px 0 rgba(91,36,122,.16);
+  cursor:pointer;
 }
-/* STAMP */
-.stamp{
-position:fixed;
-top:50%;
-left:50%;
-width:min(88vw,850px);
-padding:30px 18px;
-z-index:100;
-font-family:"Impact","Arial Black",sans-serif;
-font-size:clamp(52px,10vw,132px);
-letter-spacing:5px;
-text-align:center;
-color:#ff2b2b;
-border:12px solid #ff2b2b;
-border-radius:22px;
-background:rgba(255,255,255,.12);
-text-shadow:2px 2px 0 rgba(0,0,0,.28),0 0 18px rgba(255,255,255,.75);
-box-shadow:0 0 0 6px rgba(255,43,43,.25),0 0 55px rgba(255,43,43,.5);
-opacity:0;
-pointer-events:none;
-transform:translate(-50%,-50%) rotate(-9deg) scale(2.2);
+
+/* PRIZE POPUP */
+.prize{
+  position:fixed;
+  inset:0;
+  z-index:300;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(60,0,90,.45);
+  backdrop-filter:blur(8px);
 }
-.stamp.show{
-animation:stampOnce .9s ease-out forwards;
+
+.prize.show{
+  display:flex;
 }
-@keyframes stampOnce{
-0%{opacity:0;transform:translate(-50%,-50%) rotate(-9deg) scale(2.35);filter:blur(8px)}
-55%{opacity:1;transform:translate(-50%,-50%) rotate(-9deg) scale(.9);filter:blur(0)}
-75%{transform:translate(-50%,-50%) rotate(-9deg) scale(1.04)}
-100%{opacity:.95;transform:translate(-50%,-50%) rotate(-9deg) scale(1)}
+
+.prize-card{
+  width:min(92vw,760px);
+  border-radius:36px;
+  background:white;
+  color:var(--ink);
+  padding:30px 18px;
+  text-align:center;
+  box-shadow:0 18px 0 rgba(91,36,122,.25),0 0 60px rgba(255,255,255,.9);
+  animation:prizePop .6s ease;
 }
+
+@keyframes prizePop{
+  from{transform:scale(.5) rotate(-8deg);opacity:0}
+  to{transform:scale(1) rotate(0);opacity:1}
+}
+
+.prize-emoji{
+  font-size:76px;
+}
+
+.prize-card h2{
+  margin:8px 0;
+  font-size:clamp(40px,9vw,86px);
+  line-height:.9;
+}
+
+.prize-card p{
+  margin:8px 0 18px;
+  font-size:22px;
+  font-weight:1000;
+}
+
+.prize-actions{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.prize-actions button{
+  border:0;
+  border-radius:999px;
+  padding:15px 22px;
+  font-size:18px;
+  font-weight:1000;
+  color:white;
+  background:var(--ink);
+  cursor:pointer;
+}
+
+/* SPARKLES */
 .sparkle{
-position:fixed;
-width:10px;
-height:10px;
-border-radius:50%;
-background:white;
-box-shadow:0 0 18px white;
-pointer-events:none;
-z-index:120;
-animation:spark .7s ease forwards;
+  position:fixed;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:white;
+  box-shadow:0 0 18px white;
+  pointer-events:none;
+  z-index:250;
+  animation:spark .7s ease forwards;
 }
+
 @keyframes spark{
-to{transform:translateY(-35px) scale(0);opacity:0}
+  to{transform:translateY(-35px) scale(0);opacity:0}
 }
+
 /* MOBILE */
 @media(max-width:760px){
-.home{
-justify-content:flex-start;
-padding:92px 18px 18px;
-}
-.logo{
-top:10px;
-font-size:14px;
-padding:10px 18px;
-}
-h1{
-font-size:clamp(40px,13vw,64px);
-letter-spacing:-2px;
-}
-.sub{
-font-size:18px;
-margin-top:14px;
-}
-.big-button{
-width:100%;
-max-width:360px;
-font-size:20px;
-padding:19px 24px;
-}
-.home-tools{
-width:100%;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:8px;
-}
-.tool,
-.theme-picker{
-width:100%;
-font-size:13px;
-padding:12px 8px;
-}
-.meter-wrap{
-margin-top:14px;
-padding:10px;
-}
-.mascot{
-width:80px;
-height:80px;
-font-size:40px;
-right:14px;
-bottom:14px;
-}
-.game{
-padding:18px 12px;
-}
-.game h2{
-font-size:38px;
-margin-top:8px;
-}
-.instruction{
-font-size:19px;
-margin-bottom:10px;
-}
-.stat{
-padding:10px 13px;
-font-size:15px;
-}
-.message{
-font-size:21px;
-}
-.play-zone{
-width:94vw;
-height:48vh;
-border-radius:24px;
-}
-.tangle{
-font-size:82px;
-}
-.stamp{
-font-size:clamp(46px,14vw,88px);
-border-width:8px;
-letter-spacing:2px;
-padding:24px 12px;
-}
+  .home{
+    padding-top:74px;
+  }
+
+  .game-menu{
+    grid-template-columns:1fr;
+  }
+
+  .game-card{
+    min-height:145px;
+    padding:18px;
+  }
+
+  .theme-buttons{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .game{
+    padding-top:66px;
+  }
+
+  .play-zone{
+    height:45vh;
+    border-radius:24px;
+  }
+
+  .target{
+    font-size:76px;
+  }
+
+  .hair-area{
+    font-size:78px;
+  }
+
+  .instruction{
+    font-size:18px;
+  }
+
+  .stat{
+    font-size:15px;
+    padding:10px 12px;
+  }
 }
 </style>
 </head>
+
 <body>
-<div class="home">
+
 <div class="logo">KIMIBRUSH ✨</div>
-<p class="eyebrow">Meet KimiBrush</p>
-<h1>Brush smarter. Shine brighter.</h1>
-<p class="sub">Tap 10 tangles before they disappear and unlock your Tangle Tamer badge!</p>
-<button class="big-button" onclick="startGame()">Start Brush Game 🪮</button>
-<div class="home-tools">
-<button class="tool" onclick="showComingSoon()">Coming Soon</button>
-<button class="tool" onclick="changeMascot()">Change Mascot</button>
-<select class="theme-picker" onchange="changeTheme(this.value)">
-<option value="rainbow">Rainbow</option>
-<option value="space">Space</option>
-<option value="princess">Princess</option>
-<option value="ocean">Ocean</option>
-</select>
-<input class="tool" type="color" value="#ff7ad9" oninput="changeHair(this.value)" />
+
+<div class="home">
+  <h1>Brush smarter. Shine brighter.</h1>
+  <p class="sub">Choose a mini game, collect sparkle points, and become a Tangle Tamer!</p>
+
+  <div class="section-title">Pick a Game 🎮</div>
+
+  <div class="game-menu">
+    <button class="game-card" onclick="startTapGame()">
+      <div class="game-emoji">🪮</div>
+      <h2>Tap the Hair Brush</h2>
+      <p>Tap the hair brush emoji only. Be careful! If you tap the wrong emoji, a big red X appears.</p>
+    </button>
+
+    <button class="game-card" onclick="startStraightGame()">
+      <div class="game-emoji">💇‍♀️</div>
+      <h2>Brush Hair Straight</h2>
+      <p>Tap and brush the curly hair until it becomes smooth and straight.</p>
+    </button>
+  </div>
+
+  <div class="theme-panel">
+    <div class="section-title">Change Theme 🎨</div>
+
+    <div class="theme-buttons">
+      <button class="theme-btn" onclick="changeTheme('rainbow')">🌈 Rainbow</button>
+      <button class="theme-btn" onclick="changeTheme('space')">🚀 Space</button>
+      <button class="theme-btn" onclick="changeTheme('princess')">👑 Princess</button>
+      <button class="theme-btn" onclick="changeTheme('ocean')">🌊 Ocean</button>
+    </div>
+
+    <div class="small-tools">
+      <button class="tool" onclick="changeMascot()">Change Mascot ✨</button>
+      <label class="tool">
+        Pick Colour
+        <input type="color" value="#ff7ad9" oninput="changeHair(this.value)" />
+      </label>
+    </div>
+  </div>
+
+  <div class="meter-wrap">
+    <div class="meter-title">Sparkle Meter ✨</div>
+    <div class="meter">
+      <div class="meter-fill" id="meterFill"></div>
+    </div>
+    <div class="badge" id="badge">Current Level: Beginner Brusher</div>
+  </div>
 </div>
-<div class="meter-wrap">
-<div class="meter-title">Sparkle Meter ✨</div>
-<div class="meter">
-<div class="meter-fill" id="meterFill"></div>
-</div>
-<div class="badge" id="badge">Tangle Tamer Badge</div>
-</div>
-</div>
-<div class="mascot" id="mascot" onclick="changeMascot()">✨</div>
+
 <div class="game" id="game">
-<h2>Tap 10 Tangles!</h2>
-<div class="instruction">Tap the tangles before they disappear!</div>
-<div class="stats">
-<div class="stat" id="score">Score: 0 / 10</div>
-<div class="stat" id="timer">Time: 30</div>
+  <h2 id="gameTitle">Game</h2>
+  <div class="instruction" id="instruction"></div>
+
+  <div class="stats">
+    <div class="stat" id="score">Score: 0</div>
+    <div class="stat" id="timer">Time: 30</div>
+    <div class="stat" id="level">Level: 1</div>
+  </div>
+
+  <div class="message" id="message">Ready?</div>
+  <div class="play-zone" id="playZone"></div>
+
+  <button class="back" onclick="endGame()">Back Home</button>
 </div>
-<div class="message" id="message">Ready?</div>
-<div class="play-zone" id="playZone"></div>
-<button class="back" onclick="endGame()">Back Home</button>
+
+<div class="prize" id="prize">
+  <div class="prize-card">
+    <div class="prize-emoji">🏆✨</div>
+    <h2 id="prizeTitle">Tangle Tamer!</h2>
+    <p id="prizeText">You won a prize!</p>
+
+    <div class="prize-actions">
+      <button onclick="playAgain()">Play Again</button>
+      <button onclick="endGame()">Home</button>
+    </div>
+  </div>
 </div>
-<div class="stamp" id="stamp">COMING SOON</div>
+
 <script>
-const stamp = document.getElementById("stamp");
-const mascot = document.getElementById("mascot");
+/* EASY SETTINGS TO CHANGE */
+const targetScoreTapGame = 10;
+const targetBrushesStraightGame = 12;
+const startingTime = 30;
+
+const prizes = [
+  "Tangle Tamer Level 1",
+  "Tangle Tamer Pro",
+  "Super Smooth Stylist",
+  "KimiBrush Champion",
+  "Ultimate Tangle Master"
+];
+
+const themes = {
+  rainbow:["#ff7ad9","#8b5cff","#42d9ff","#ffe86b"],
+  space:["#12002f","#3d1c91","#00d4ff","#fff35c"],
+  princess:["#ff8ad8","#ffc2f0","#b985ff","#fff1a8"],
+  ocean:["#00b4d8","#0077b6","#90e0ef","#caf0f8"]
+};
+
+const wrongEmojis = ["🧸","🍭","⭐","🎀","🦄"];
+const faces = ["✨","😄","😎","🦄","🌈","💖","🤩"];
+
 const meterFill = document.getElementById("meterFill");
 const badge = document.getElementById("badge");
 const game = document.getElementById("game");
 const playZone = document.getElementById("playZone");
 const score = document.getElementById("score");
 const timer = document.getElementById("timer");
+const levelBox = document.getElementById("level");
 const message = document.getElementById("message");
+const gameTitle = document.getElementById("gameTitle");
+const instruction = document.getElementById("instruction");
+const prize = document.getElementById("prize");
+const prizeTitle = document.getElementById("prizeTitle");
+const prizeText = document.getElementById("prizeText");
+
 let sparklePower = 0;
 let points = 0;
-let timeLeft = 30;
+let timeLeft = startingTime;
+let playerLevel = 1;
 let gameRunning = false;
+let currentGame = "";
 let gameTimer;
-let tangleTimer;
+let spawnTimer;
+let brushProgress = 0;
 let mascotIndex = 0;
-const faces = ["✨","😄","😎","🦄","🌈","💖","🤩"];
-const tangles = ["🌀","🪮","💫"];
-function showComingSoon(){
-stamp.classList.remove("show");
-void stamp.offsetWidth;
-stamp.classList.add("show");
-}
+
 function popSound(){
-const audio = new AudioContext();
-const osc = audio.createOscillator();
-const gain = audio.createGain();
-osc.connect(gain);
-gain.connect(audio.destination);
-osc.frequency.value = 650 + Math.random() * 350;
-gain.gain.setValueAtTime(0.08, audio.currentTime);
-gain.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + 0.14);
-osc.start();
-osc.stop(audio.currentTime + 0.14);
+  try{
+    const audio = new AudioContext();
+    const osc = audio.createOscillator();
+    const gain = audio.createGain();
+    osc.connect(gain);
+    gain.connect(audio.destination);
+    osc.frequency.value = 650 + Math.random() * 350;
+    gain.gain.setValueAtTime(0.08, audio.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + 0.14);
+    osc.start();
+    osc.stop(audio.currentTime + 0.14);
+  }catch(e){}
 }
-function createSparkle(x,y){
-const s = document.createElement("div");
-s.className = "sparkle";
-s.style.left = x + "px";
-s.style.top = y + "px";
-document.body.appendChild(s);
-setTimeout(() => s.remove(), 700);
-}
+
 function addSparkles(amount){
-sparklePower = Math.min(100, sparklePower + amount);
-meterFill.style.width = sparklePower + "%";
+  sparklePower = Math.min(100, sparklePower + amount);
+  meterFill.style.width = sparklePower + "%";
 }
+
+function createSparkle(x,y){
+  const s = document.createElement("div");
+  s.className = "sparkle";
+  s.style.left = x + "px";
+  s.style.top = y + "px";
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 700);
+}
+
+function showWrongX(x,y){
+  const xMark = document.createElement("div");
+  xMark.className = "wrong-x";
+  xMark.textContent = "✕";
+  xMark.style.left = x + "px";
+  xMark.style.top = y + "px";
+  document.body.appendChild(xMark);
+  setTimeout(() => xMark.remove(), 550);
+}
+
+function changeTheme(name){
+  const root = document.documentElement;
+  const colours = themes[name];
+  root.style.setProperty("--a", colours[0]);
+  root.style.setProperty("--b", colours[1]);
+  root.style.setProperty("--c", colours[2]);
+  root.style.setProperty("--d", colours[3]);
+  addSparkles(6);
+  popSound();
+}
+
 function changeHair(colour){
-document.documentElement.style.setProperty("--a", colour);
-addSparkles(5);
-popSound();
+  document.documentElement.style.setProperty("--a", colour);
+  addSparkles(5);
+  popSound();
 }
+
 function changeMascot(){
-mascotIndex = (mascotIndex + 1) % faces.length;
-mascot.textContent = faces[mascotIndex];
-addSparkles(6);
-popSound();
+  mascotIndex = (mascotIndex + 1) % faces.length;
+  badge.textContent = "Mascot: " + faces[mascotIndex];
+  addSparkles(5);
+  popSound();
 }
-function changeTheme(theme){
-const root = document.documentElement;
-if(theme === "rainbow"){
-root.style.setProperty("--a","#ff7ad9");
-root.style.setProperty("--b","#8b5cff");
-root.style.setProperty("--c","#42d9ff");
-root.style.setProperty("--d","#ffe86b");
+
+function resetGame(){
+  document.body.classList.add("playing");
+  prize.classList.remove("show");
+  playZone.innerHTML = "";
+  points = 0;
+  brushProgress = 0;
+  timeLeft = startingTime;
+  gameRunning = true;
+  score.textContent = "Score: 0";
+  timer.textContent = "Time: " + timeLeft;
+  levelBox.textContent = "Level: " + playerLevel;
+
+  clearInterval(gameTimer);
+  clearInterval(spawnTimer);
+
+  gameTimer = setInterval(() => {
+    timeLeft--;
+    timer.textContent = "Time: " + timeLeft;
+
+    if(timeLeft <= 0){
+      loseGame();
+    }
+  }, 1000);
 }
-if(theme === "space"){
-root.style.setProperty("--a","#12002f");
-root.style.setProperty("--b","#3d1c91");
-root.style.setProperty("--c","#00d4ff");
-root.style.setProperty("--d","#fff35c");
+
+function startTapGame(){
+  currentGame = "tap";
+  resetGame();
+
+  gameTitle.textContent = "Tap the Hair Brush!";
+  instruction.textContent = "Tap ONLY the hair brush 🪮. Do not tap the other emojis, or you will get a big red X!";
+  message.textContent = "Find the hair brush!";
+
+  spawnTapRound();
+
+  spawnTimer = setInterval(() => {
+    if(gameRunning){
+      spawnTapRound();
+    }
+  }, 1400);
 }
-if(theme === "princess"){
-root.style.setProperty("--a","#ff8ad8");
-root.style.setProperty("--b","#ffc2f0");
-root.style.setProperty("--c","#b985ff");
-root.style.setProperty("--d","#fff1a8");
+
+function spawnTapRound(){
+  playZone.innerHTML = "";
+
+  const emojis = ["🪮"];
+  while(emojis.length < 4){
+    emojis.push(wrongEmojis[Math.floor(Math.random() * wrongEmojis.length)]);
+  }
+
+  emojis.sort(() => Math.random() - .5);
+
+  emojis.forEach(emoji => {
+    const item = document.createElement("div");
+    item.className = "target";
+    item.textContent = emoji;
+
+    const maxX = playZone.clientWidth - 90;
+    const maxY = playZone.clientHeight - 90;
+
+    item.style.left = Math.max(8, Math.random() * maxX) + "px";
+    item.style.top = Math.max(8, Math.random() * maxY) + "px";
+
+    item.onclick = function(e){
+      if(!gameRunning) return;
+
+      if(emoji === "🪮"){
+        points++;
+        score.textContent = "Score: " + points + " / " + targetScoreTapGame;
+        message.textContent = "Great brushing!";
+        popSound();
+        addSparkles(8);
+
+        for(let i=0;i<12;i++){
+          createSparkle(e.clientX,e.clientY);
+        }
+
+        if(points >= targetScoreTapGame){
+          winGame();
+        } else {
+          spawnTapRound();
+        }
+      } else {
+        message.textContent = "Oops! Only tap the hair brush 🪮";
+        showWrongX(e.clientX,e.clientY);
+      }
+    };
+
+    playZone.appendChild(item);
+  });
 }
-if(theme === "ocean"){
-root.style.setProperty("--a","#00b4d8");
-root.style.setProperty("--b","#0077b6");
-root.style.setProperty("--c","#90e0ef");
-root.style.setProperty("--d","#caf0f8");
+
+function startStraightGame(){
+  currentGame = "straight";
+  resetGame();
+
+  gameTitle.textContent = "Brush Hair Straight!";
+  instruction.textContent = "Tap the curly hair again and again until it becomes smooth and straight.";
+  message.textContent = "Start brushing the curls!";
+  score.textContent = "Brushes: 0 / " + targetBrushesStraightGame;
+
+  drawHair();
 }
-popSound();
-addSparkles(8);
+
+function drawHair(){
+  playZone.innerHTML = "";
+
+  const area = document.createElement("div");
+  area.className = "hair-area";
+
+  let hairEmoji = "👩‍🦱";
+  let status = "Very curly!";
+
+  if(brushProgress > 4){
+    hairEmoji = "💇‍♀️";
+    status = "Getting smoother!";
+  }
+
+  if(brushProgress > 8){
+    hairEmoji = "👩";
+    status = "Almost straight!";
+  }
+
+  area.innerHTML = `
+    <div>${hairEmoji}</div>
+    <div class="hair-status">${status}</div>
+  `;
+
+  area.onclick = function(e){
+    if(!gameRunning) return;
+
+    brushProgress++;
+    score.textContent = "Brushes: " + brushProgress + " / " + targetBrushesStraightGame;
+    message.textContent = "Brush, brush, brush!";
+    popSound();
+    addSparkles(7);
+
+    for(let i=0;i<12;i++){
+      createSparkle(e.clientX,e.clientY);
+    }
+
+    if(brushProgress >= targetBrushesStraightGame){
+      winGame();
+    } else {
+      drawHair();
+    }
+  };
+
+  playZone.appendChild(area);
 }
-function startGame(){
-document.body.classList.add("playing");
-gameRunning = true;
-points = 0;
-timeLeft = 30;
-playZone.innerHTML = "";
-score.textContent = "Score: 0 / 10";
-timer.textContent = "Time: 30";
-message.textContent = "Tap the first tangle!";
-popSound();
-spawnTangle();
-clearInterval(gameTimer);
-clearInterval(tangleTimer);
-gameTimer = setInterval(() => {
-timeLeft--;
-timer.textContent = "Time: " + timeLeft;
-if(timeLeft <= 0){
-finishGame(false);
+
+function winGame(){
+  gameRunning = false;
+  clearInterval(gameTimer);
+  clearInterval(spawnTimer);
+  playZone.innerHTML = "";
+
+  const prizeName = prizes[Math.min(playerLevel - 1, prizes.length - 1)];
+
+  prizeTitle.textContent = prizeName;
+  prizeText.textContent = "Amazing! You reached Level " + playerLevel + ". Play again to level up!";
+  badge.textContent = "Current Level: " + prizeName;
+
+  playerLevel++;
+  addSparkles(100);
+
+  setTimeout(() => {
+    prize.classList.add("show");
+  }, 400);
 }
-}, 1000);
-tangleTimer = setInterval(() => {
-if(gameRunning){
-spawnTangle();
+
+function loseGame(){
+  gameRunning = false;
+  clearInterval(gameTimer);
+  clearInterval(spawnTimer);
+  playZone.innerHTML = "";
+  message.textContent = "Time up! Try again!";
+  setTimeout(endGame, 1200);
 }
-}, 1500);
+
+function playAgain(){
+  if(currentGame === "tap"){
+    startTapGame();
+  } else {
+    startStraightGame();
+  }
 }
-function spawnTangle(){
-playZone.innerHTML = "";
-const tangle = document.createElement("div");
-tangle.className = "tangle";
-tangle.textContent = tangles[Math.floor(Math.random() * tangles.length)];
-const maxX = playZone.clientWidth - 100;
-const maxY = playZone.clientHeight - 100;
-tangle.style.left = Math.max(8, Math.random() * maxX) + "px";
-tangle.style.top = Math.max(8, Math.random() * maxY) + "px";
-tangle.onclick = function(){
-if(!gameRunning) return;
-points++;
-score.textContent = "Score: " + points + " / 10";
-message.textContent = points < 10 ? "Nice brushing!" : "You did it!";
-popSound();
-addSparkles(10);
-const rect = tangle.getBoundingClientRect();
-for(let i = 0; i < 14; i++){
-createSparkle(rect.left + 40, rect.top + 40);
-}
-if(points >= 5){
-badge.classList.add("unlocked");
-}
-if(points >= 10){
-finishGame(true);
-} else {
-spawnTangle();
-}
-};
-playZone.appendChild(tangle);
-}
-function finishGame(won){
-gameRunning = false;
-clearInterval(gameTimer);
-clearInterval(tangleTimer);
-playZone.innerHTML = "";
-if(won){
-message.textContent = "You unlocked Tangle Tamer!";
-badge.classList.add("unlocked");
-addSparkles(100);
-setTimeout(() => {
-showComingSoon();
-}, 700);
-setTimeout(() => {
-endGame();
-}, 2600);
-} else {
-message.textContent = "Time up! Try again!";
-setTimeout(() => {
-endGame();
-}, 1800);
-}
-}
+
 function endGame(){
-gameRunning = false;
-clearInterval(gameTimer);
-clearInterval(tangleTimer);
-playZone.innerHTML = "";
-document.body.classList.remove("playing");
+  gameRunning = false;
+  clearInterval(gameTimer);
+  clearInterval(spawnTimer);
+  playZone.innerHTML = "";
+  prize.classList.remove("show");
+  document.body.classList.remove("playing");
 }
-document.addEventListener("mousemove", e => {
-if(window.innerWidth > 760 && !gameRunning){
-createSparkle(e.clientX, e.clientY);
-}
-});
-document.addEventListener("touchmove", e => {
-if(!gameRunning){
-const touch = e.touches[0];
-if(touch){
-createSparkle(touch.clientX, touch.clientY);
-}
-}
-});
 </script>
+
 </body>
 </html>
