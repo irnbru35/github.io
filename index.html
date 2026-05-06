@@ -4,19 +4,15 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>KimiBrush Magic</title>
-
 <style>
 *{box-sizing:border-box}
-
 :root{
   --a:#ff7ad9;
   --b:#8b5cff;
   --c:#42d9ff;
   --d:#ffe86b;
   --ink:#4c1478;
-  --white:rgba(255,255,255,.94);
 }
-
 body{
   margin:0;
   min-height:100vh;
@@ -27,34 +23,27 @@ body{
   background-size:400% 400%;
   animation:bgMove 12s ease infinite;
 }
-
 body::before{
   content:"";
   position:fixed;
   inset:0;
   background:url("Kimi.jpeg") center/cover no-repeat;
-  opacity:.48;
+  opacity:.5;
   z-index:-3;
 }
-
 body::after{
   content:"";
   position:fixed;
   inset:0;
-  background:
-    linear-gradient(rgba(40,0,70,.22),rgba(40,0,70,.18)),
-    radial-gradient(circle at 50% 20%,rgba(255,255,255,.18),transparent 42%);
+  background:linear-gradient(rgba(40,0,70,.24),rgba(40,0,70,.2));
   z-index:-2;
 }
-
 @keyframes bgMove{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
-
 button{font-family:inherit}
-
 .logo{
   position:fixed;
   top:10px;
@@ -63,14 +52,11 @@ button{font-family:inherit}
   z-index:90;
   padding:10px 18px;
   border-radius:999px;
-  background:rgba(255,255,255,.35);
-  border:2px solid rgba(255,255,255,.65);
+  background:rgba(255,255,255,.4);
+  border:2px solid rgba(255,255,255,.7);
   backdrop-filter:blur(14px);
   font-weight:1000;
-  box-shadow:0 12px 35px rgba(80,0,120,.25);
 }
-
-/* HOME */
 .home{
   position:fixed;
   inset:0;
@@ -78,111 +64,57 @@ button{font-family:inherit}
   padding:72px 16px 28px;
   text-align:center;
 }
-
-body.playing .home{
-  display:none;
-}
-
+body.playing .home{display:none}
 h1{
   margin:0;
   font-size:clamp(38px,10vw,84px);
   line-height:.92;
   font-weight:1000;
-  text-shadow:
-    0 5px 0 rgba(76,20,120,.35),
-    0 0 24px rgba(0,0,0,.35);
+  text-shadow:0 5px 0 rgba(76,20,120,.35),0 0 24px rgba(0,0,0,.35);
 }
-
 .sub{
   max-width:680px;
-  margin:12px auto 12px;
+  margin:12px auto;
   font-size:clamp(17px,3vw,24px);
   font-weight:1000;
-  line-height:1.3;
   text-shadow:0 3px 12px rgba(0,0,0,.35);
 }
-
-.kimi-box{
-  width:min(760px,100%);
+.kimi-box,.safe-note{
+  width:min(800px,100%);
   margin:0 auto 12px;
   padding:12px 14px;
   border-radius:24px;
-  background:rgba(255,255,255,.82);
+  background:rgba(255,255,255,.88);
   color:var(--ink);
-  border:2px solid rgba(255,255,255,.9);
-  font-size:17px;
+  font-size:16px;
   font-weight:1000;
-  box-shadow:0 8px 0 rgba(91,36,122,.16);
 }
-
-.safe-note{
-  width:min(760px,100%);
-  margin:0 auto 12px;
-  padding:10px 14px;
-  border-radius:999px;
-  background:rgba(255,255,255,.9);
-  color:var(--ink);
-  font-weight:1000;
-  font-size:14px;
-}
-
-.section-title{
-  margin:14px 0 10px;
-  font-size:23px;
-  font-weight:1000;
-  text-shadow:0 3px 12px rgba(0,0,0,.35);
-}
-
-/* COOL GAME BUTTONS */
 .game-menu{
-  width:min(760px,100%);
+  width:min(880px,100%);
   margin:auto;
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:14px;
 }
-
 .game-card{
   position:relative;
   overflow:hidden;
   border:3px solid rgba(255,255,255,.9);
   border-radius:34px;
-  background:rgba(255,255,255,.88);
+  background:rgba(255,255,255,.9);
   color:var(--ink);
-  padding:18px 12px;
-  min-height:142px;
-  box-shadow:
-    0 12px 0 rgba(91,36,122,.22),
-    0 0 28px rgba(255,255,255,.7);
+  padding:16px 10px;
+  min-height:138px;
+  box-shadow:0 12px 0 rgba(91,36,122,.22),0 0 28px rgba(255,255,255,.7);
   cursor:pointer;
   text-align:center;
-  backdrop-filter:blur(10px);
 }
-
-.game-card::before{
-  content:"";
-  position:absolute;
-  inset:-50%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.7),transparent);
-  transform:rotate(18deg);
-  animation:shine 3s ease-in-out infinite;
-}
-
-@keyframes shine{
-  0%,55%{transform:translateX(-80%) rotate(18deg)}
-  100%{transform:translateX(80%) rotate(18deg)}
-}
-
 .game-card:active{
   transform:translateY(5px) scale(.98);
-  box-shadow:0 7px 0 rgba(91,36,122,.2);
 }
-
 .game-icon{
-  position:relative;
-  z-index:2;
-  width:66px;
-  height:66px;
+  width:62px;
+  height:62px;
   margin:0 auto 8px;
   border-radius:22px;
   display:flex;
@@ -190,8 +122,14 @@ h1{
   justify-content:center;
   background:linear-gradient(135deg,#fff35c,#ff7ad9);
   box-shadow:0 7px 0 rgba(91,36,122,.18);
+  font-size:34px;
 }
-
+.game-card h2{
+  margin:8px 0 0;
+  font-size:18px;
+  line-height:1.05;
+}
+/* CUSTOM HAIRBRUSH */
 .hairbrush{
   width:46px;
   height:18px;
@@ -201,7 +139,6 @@ h1{
   transform:rotate(-24deg);
   box-shadow:inset 0 -4px 0 rgba(0,0,0,.18);
 }
-
 .hairbrush::before{
   content:"";
   position:absolute;
@@ -212,7 +149,6 @@ h1{
   border-radius:999px;
   background:#ffb703;
 }
-
 .hairbrush::after{
   content:"";
   position:absolute;
@@ -220,39 +156,27 @@ h1{
   top:18px;
   width:32px;
   height:22px;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      #ffffff 0 3px,
-      transparent 3px 6px
-    );
+  background:repeating-linear-gradient(90deg,#ffffff 0 3px,transparent 3px 6px);
 }
-
-.game-card h2{
-  position:relative;
-  z-index:2;
-  margin:8px 0 0;
-  font-size:20px;
-  line-height:1.05;
-}
-
-.theme-panel,.stickers-panel{
+.theme-panel,.stickers-panel,.meter-wrap{
   margin:14px auto 0;
-  width:min(760px,100%);
+  width:min(800px,100%);
   padding:12px;
   border-radius:26px;
-  background:rgba(255,255,255,.28);
+  background:rgba(255,255,255,.3);
   border:2px solid rgba(255,255,255,.55);
-  backdrop-filter:blur(8px);
 }
-
+.section-title{
+  margin:6px 0 10px;
+  font-size:22px;
+  font-weight:1000;
+}
 .theme-buttons{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:10px;
 }
-
-.theme-btn,.tool{
+.theme-btn,.tool,.back{
   border:0;
   border-radius:20px;
   padding:14px 10px;
@@ -262,7 +186,6 @@ h1{
   cursor:pointer;
   box-shadow:0 7px 0 rgba(91,36,122,.18);
 }
-
 .small-tools{
   margin-top:12px;
   display:flex;
@@ -270,7 +193,6 @@ h1{
   justify-content:center;
   flex-wrap:wrap;
 }
-
 .stickers{
   display:flex;
   justify-content:center;
@@ -278,7 +200,6 @@ h1{
   gap:10px;
   font-size:34px;
 }
-
 .sticker{
   width:54px;
   height:54px;
@@ -290,29 +211,17 @@ h1{
   filter:grayscale(1);
   opacity:.5;
 }
-
 .sticker.unlocked{
   background:white;
   filter:none;
   opacity:1;
-  box-shadow:0 7px 0 rgba(91,36,122,.16);
+  animation:stickerPop .5s ease;
 }
-
-.meter-wrap{
-  width:min(90vw,460px);
-  margin:14px auto 0;
-  padding:12px;
-  border-radius:24px;
-  background:rgba(255,255,255,.3);
-  border:2px solid rgba(255,255,255,.55);
+@keyframes stickerPop{
+  0%{transform:scale(.4) rotate(-20deg)}
+  70%{transform:scale(1.18) rotate(8deg)}
+  100%{transform:scale(1)}
 }
-
-.meter-title{
-  font-weight:1000;
-  margin-bottom:8px;
-  text-shadow:0 2px 8px rgba(0,0,0,.35);
-}
-
 .meter{
   height:24px;
   background:rgba(255,255,255,.55);
@@ -320,15 +229,12 @@ h1{
   overflow:hidden;
   border:2px solid rgba(255,255,255,.85);
 }
-
 .meter-fill{
   height:100%;
   width:0%;
   background:linear-gradient(90deg,#fff35c,#ff7ad9,#42d9ff);
-  border-radius:999px;
-  transition:.3s ease;
+  transition:.3s;
 }
-
 .badge{
   margin-top:10px;
   display:inline-block;
@@ -339,7 +245,6 @@ h1{
   font-size:14px;
   font-weight:1000;
 }
-
 /* GAME SCREEN */
 .game{
   position:fixed;
@@ -351,40 +256,21 @@ h1{
   padding:66px 14px 18px;
   text-align:center;
   background:linear-gradient(135deg,var(--a),var(--b),var(--c),var(--d));
-  background-size:400% 400%;
-  animation:bgMove 12s ease infinite;
 }
-
-.game::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:url("Kimi.jpeg") center/cover no-repeat;
-  opacity:.18;
-  z-index:-2;
-}
-
-body.playing .game{
-  display:flex;
-}
-
+body.playing .game{display:flex}
 .game h2{
   margin:0 0 8px;
   font-size:clamp(34px,8vw,68px);
-  line-height:.95;
   font-weight:1000;
-  text-shadow:0 5px 0 rgba(76,20,120,.25);
+  text-shadow:0 4px 0 rgba(76,20,120,.25);
 }
-
 .instruction{
   max-width:720px;
   margin:0 0 12px;
   font-size:clamp(18px,3vw,25px);
   font-weight:1000;
-  line-height:1.25;
   text-shadow:0 3px 12px rgba(0,0,0,.35);
 }
-
 .stats{
   display:flex;
   gap:10px;
@@ -392,25 +278,20 @@ body.playing .game{
   justify-content:center;
   margin-bottom:10px;
 }
-
 .stat{
   background:white;
   color:var(--ink);
   font-weight:1000;
   border-radius:999px;
   padding:11px 15px;
-  box-shadow:0 8px 0 rgba(91,36,122,.18);
 }
-
 .message{
   min-height:32px;
   font-size:23px;
   font-weight:1000;
   color:#fff35c;
   text-shadow:0 3px 10px rgba(0,0,0,.35);
-  margin-bottom:10px;
 }
-
 .play-zone{
   position:relative;
   width:min(94vw,760px);
@@ -421,36 +302,29 @@ body.playing .game{
   overflow:hidden;
   touch-action:manipulation;
 }
-
 .target{
   position:absolute;
   width:88px;
   height:88px;
   cursor:pointer;
-  user-select:none;
-  touch-action:manipulation;
-  animation:pop .8s ease-in-out infinite;
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:62px;
+  animation:pop .8s ease-in-out infinite;
 }
-
 .brush-target{
   border-radius:26px;
   background:white;
-  box-shadow:0 9px 0 rgba(91,36,122,.18),0 0 18px rgba(255,255,255,.7);
+  box-shadow:0 9px 0 rgba(91,36,122,.18);
 }
-
 .brush-target .hairbrush{
   transform:rotate(-24deg) scale(1.1);
 }
-
 @keyframes pop{
   0%,100%{transform:scale(1) rotate(-6deg)}
   50%{transform:scale(1.15) rotate(8deg)}
 }
-
 .hair-area{
   position:absolute;
   inset:12px;
@@ -461,14 +335,33 @@ body.playing .game{
   font-size:88px;
   user-select:none;
 }
-
 .hair-status{
   font-size:26px;
   font-weight:1000;
-  margin-top:10px;
-  text-shadow:0 3px 12px rgba(0,0,0,.35);
 }
-
+.character{
+  font-size:92px;
+  animation:wiggle .9s ease-in-out infinite;
+}
+@keyframes wiggle{
+  0%,100%{transform:rotate(-4deg) scale(1)}
+  50%{transform:rotate(5deg) scale(1.08)}
+}
+.progress-bar{
+  width:min(80%,420px);
+  height:26px;
+  border-radius:999px;
+  background:rgba(255,255,255,.55);
+  border:2px solid white;
+  overflow:hidden;
+  margin-top:12px;
+}
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#fff35c,#ff7ad9,#42d9ff);
+  transition:.25s;
+}
 .wrong-x{
   position:fixed;
   z-index:200;
@@ -478,25 +371,11 @@ body.playing .game{
   pointer-events:none;
   animation:xPop .55s ease forwards;
 }
-
 @keyframes xPop{
   0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}
   40%{opacity:1;transform:translate(-50%,-50%) scale(1.25)}
   100%{opacity:0;transform:translate(-50%,-50%) scale(.9)}
 }
-
-.back{
-  margin-top:14px;
-  border:0;
-  border-radius:999px;
-  padding:14px 22px;
-  font-weight:1000;
-  color:var(--ink);
-  background:white;
-  box-shadow:0 7px 0 rgba(91,36,122,.16);
-  cursor:pointer;
-}
-
 /* PRIZE */
 .prize{
   position:fixed;
@@ -506,53 +385,50 @@ body.playing .game{
   align-items:center;
   justify-content:center;
   padding:20px;
-  background:rgba(60,0,90,.48);
+  background:rgba(60,0,90,.55);
   backdrop-filter:blur(8px);
 }
-
-.prize.show{
-  display:flex;
-}
-
+.prize.show{display:flex}
 .prize-card{
   width:min(92vw,760px);
   border-radius:36px;
   background:white;
   color:var(--ink);
-  padding:30px 18px;
+  padding:28px 18px;
   text-align:center;
   box-shadow:0 18px 0 rgba(91,36,122,.25);
-  animation:prizePop .6s ease;
 }
-
-@keyframes prizePop{
-  from{transform:scale(.5) rotate(-8deg);opacity:0}
-  to{transform:scale(1) rotate(0);opacity:1}
+.prize-card h2{
+  font-size:clamp(40px,9vw,82px);
+  margin:8px 0;
+  line-height:.95;
 }
-
 .prize-emoji{
   font-size:76px;
 }
-
-.prize-card h2{
-  margin:8px 0;
-  font-size:clamp(40px,9vw,86px);
-  line-height:.9;
+.dance-party{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  font-size:54px;
+  margin:10px 0;
 }
-
-.prize-card p{
-  margin:8px 0 18px;
-  font-size:22px;
-  font-weight:1000;
+.dancer{
+  animation:dance .5s ease-in-out infinite;
 }
-
+.dancer:nth-child(2){animation-delay:.1s}
+.dancer:nth-child(3){animation-delay:.2s}
+.dancer:nth-child(4){animation-delay:.3s}
+@keyframes dance{
+  0%,100%{transform:translateY(0) rotate(-8deg)}
+  50%{transform:translateY(-16px) rotate(8deg)}
+}
 .prize-actions{
   display:flex;
   justify-content:center;
   gap:10px;
   flex-wrap:wrap;
 }
-
 .prize-actions button{
   border:0;
   border-radius:999px;
@@ -561,9 +437,23 @@ body.playing .game{
   font-weight:1000;
   color:white;
   background:var(--ink);
-  cursor:pointer;
 }
-
+/* CONFETTI */
+.confetti{
+  position:fixed;
+  top:-20px;
+  width:12px;
+  height:18px;
+  z-index:400;
+  pointer-events:none;
+  animation:confettiFall 1.8s linear forwards;
+}
+@keyframes confettiFall{
+  to{
+    transform:translateY(110vh) rotate(720deg);
+    opacity:.2;
+  }
+}
 .sparkle{
   position:fixed;
   width:10px;
@@ -574,190 +464,159 @@ body.playing .game{
   z-index:250;
   animation:spark .7s ease forwards;
 }
-
 @keyframes spark{
   to{transform:translateY(-35px) scale(0);opacity:0}
 }
-
 @media(max-width:760px){
-  .home{
-    padding-top:68px;
-  }
-
-  h1{
-    font-size:clamp(35px,11vw,54px);
-  }
-
-  .sub{
-    font-size:17px;
-  }
-
   .game-menu{
     grid-template-columns:1fr 1fr;
     gap:10px;
   }
-
   .game-card{
-    min-height:132px;
-    padding:12px 8px;
+    min-height:124px;
+    padding:10px 6px;
     border-radius:28px;
   }
-
   .game-icon{
-    width:58px;
-    height:58px;
-    margin-bottom:6px;
+    width:54px;
+    height:54px;
   }
-
   .game-card h2{
-    font-size:16px;
+    font-size:14px;
   }
-
   .theme-buttons{
     grid-template-columns:repeat(2,1fr);
   }
-
   .play-zone{
     height:45vh;
-    border-radius:24px;
   }
-
   .target{
     width:78px;
     height:78px;
-    font-size:56px;
   }
-
   .hair-area{
     font-size:78px;
+  }
+  .character{
+    font-size:82px;
   }
 }
 </style>
 </head>
-
 <body>
-
 <div class="logo">KIMIBRUSH ✨</div>
-
 <div class="home">
   <h1>Brush smarter. Shine brighter.</h1>
   <p class="sub">Play brushing games, collect stickers, and level up!</p>
-
   <div class="kimi-box" id="kimiBox">
     Kimi says: Choose a game and start brushing!
   </div>
-
   <div class="safe-note">
     Child-safe play: no adverts, no chat, just fun.
   </div>
-
   <div class="game-menu">
     <button class="game-card" onclick="startTapGame()">
-      <div class="game-icon">
-        <div class="hairbrush"></div>
-      </div>
-      <h2>Find and click the combs</h2>
+      <div class="game-icon"><div class="hairbrush"></div></div>
+      <h2>Find and click the hairbrush</h2>
     </button>
-
     <button class="game-card" onclick="startStraightGame()">
       <div class="game-icon">💇‍♀️</div>
-      <h2>Click to brush the curly hair straight</h2>
+      <h2>Brush curly hair straight</h2>
+    </button>
+    <button class="game-card" onclick="startDinoGame()">
+      <div class="game-icon">🦖</div>
+      <h2>Dino Hair Salon</h2>
+    </button>
+    <button class="game-card" onclick="startMonsterGame()">
+      <div class="game-icon">👹</div>
+      <h2>Monster Hair Rescue</h2>
     </button>
   </div>
-
   <div class="theme-panel">
     <div class="section-title">Change Theme 🎨</div>
-
     <div class="theme-buttons">
       <button class="theme-btn" onclick="changeTheme('rainbow')">🌈 Rainbow</button>
       <button class="theme-btn" onclick="changeTheme('space')">🚀 Space</button>
       <button class="theme-btn" onclick="changeTheme('princess')">👑 Princess</button>
       <button class="theme-btn" onclick="changeTheme('ocean')">🌊 Ocean</button>
     </div>
-
     <div class="small-tools">
       <button class="tool" onclick="startDailyChallenge()">🌟 Daily Challenge</button>
       <button class="tool" onclick="showKimiTip()">💬 Kimi Help</button>
       <button class="tool" onclick="toggleSound()" id="soundButton">Sound: On 🔊</button>
     </div>
   </div>
-
   <div class="stickers-panel">
     <div class="section-title">Sticker Collection 🏅</div>
     <div class="stickers" id="stickers"></div>
   </div>
-
   <div class="meter-wrap">
-    <div class="meter-title">Sparkle Meter ✨</div>
+    <div class="section-title">Sparkle Meter ✨</div>
     <div class="meter">
       <div class="meter-fill" id="meterFill"></div>
     </div>
     <div class="badge" id="badge">Current Level: Beginner Brusher</div>
   </div>
 </div>
-
 <div class="game" id="game">
   <h2 id="gameTitle">Game</h2>
   <div class="instruction" id="instruction"></div>
-
   <div class="stats">
     <div class="stat" id="score">Score: 0</div>
     <div class="stat" id="timer">Time: 30</div>
     <div class="stat" id="level">Level: 1</div>
   </div>
-
   <div class="message" id="message">Ready?</div>
   <div class="play-zone" id="playZone"></div>
-
   <button class="back" onclick="endGame()">Back Home</button>
 </div>
-
 <div class="prize" id="prize">
   <div class="prize-card">
     <div class="prize-emoji">🏆✨</div>
     <h2 id="prizeTitle">Tangle Tamer!</h2>
     <p id="prizeText">You won a prize!</p>
-
+    <div class="dance-party">
+      <span class="dancer">🦖</span>
+      <span class="dancer">💃</span>
+      <span class="dancer">👹</span>
+      <span class="dancer">🪩</span>
+    </div>
     <div class="prize-actions">
       <button onclick="playAgain()">Play Again</button>
       <button onclick="endGame()">Home</button>
     </div>
   </div>
 </div>
-
 <script>
 const targetScoreTapGame = 10;
 const targetBrushesStraightGame = 12;
 const dailyChallengeScore = 6;
+const salonBrushesNeeded = 14;
+const monsterBrushesNeeded = 16;
 const startingTime = 30;
-
 const prizes = [
   "Tangle Tamer Level 1",
   "Tangle Tamer Pro",
-  "Super Smooth Stylist",
+  "Dino Stylist",
+  "Monster Hair Hero",
   "KimiBrush Champion",
   "Ultimate Tangle Master"
 ];
-
-const stickerList = ["🪮","✨","🎀","👑","🌈","🏆","💖","🌟"];
-
+const stickerList = ["🪮","✨","🎀","👑","🌈","🏆","🦖","👹","💖","🌟"];
 const themes = {
   rainbow:["#ff7ad9","#8b5cff","#42d9ff","#ffe86b"],
   space:["#16002d","#3d1c91","#00d4ff","#fff35c"],
   princess:["#ff7ad9","#ffc2f0","#b985ff","#fff1a8"],
   ocean:["#00b4d8","#0077b6","#90e0ef","#caf0f8"]
 };
-
 const wrongEmojis = ["🧸","🍭","⭐","🎀","🦄"];
-
 const kimiTips = [
   "Kimi says: Look for the hairbrush picture and tap it!",
-  "Kimi says: If you tap the wrong thing, the red X means try again.",
-  "Kimi says: Brush the curls until the hair looks smooth.",
+  "Kimi says: Brush the dino until its hair looks amazing!",
+  "Kimi says: Rescue the monster from messy bed hair!",
   "Kimi says: Win games to unlock stickers!",
   "Kimi says: Try the Daily Challenge for a bonus prize!"
 ];
-
 const meterFill = document.getElementById("meterFill");
 const badge = document.getElementById("badge");
 const playZone = document.getElementById("playZone");
@@ -773,7 +632,6 @@ const prizeText = document.getElementById("prizeText");
 const stickers = document.getElementById("stickers");
 const kimiBox = document.getElementById("kimiBox");
 const soundButton = document.getElementById("soundButton");
-
 let sparklePower = 0;
 let points = 0;
 let timeLeft = startingTime;
@@ -785,10 +643,8 @@ let spawnTimer;
 let brushProgress = 0;
 let soundOn = true;
 let unlockedStickers = 0;
-
 function buildStickers(){
   stickers.innerHTML = "";
-
   stickerList.forEach((sticker,index) => {
     const div = document.createElement("div");
     div.className = "sticker" + (index < unlockedStickers ? " unlocked" : "");
@@ -796,45 +652,35 @@ function buildStickers(){
     stickers.appendChild(div);
   });
 }
-
 buildStickers();
-
 function makeBrush(){
   const brush = document.createElement("div");
   brush.className = "hairbrush";
   return brush;
 }
-
 function popSound(){
   if(!soundOn) return;
-
   try{
     const audio = new AudioContext();
     const osc = audio.createOscillator();
     const gain = audio.createGain();
-
     osc.connect(gain);
     gain.connect(audio.destination);
-
     osc.frequency.value = 650 + Math.random() * 350;
     gain.gain.setValueAtTime(0.08, audio.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + 0.14);
-
     osc.start();
     osc.stop(audio.currentTime + 0.14);
   }catch(e){}
 }
-
 function toggleSound(){
   soundOn = !soundOn;
   soundButton.textContent = soundOn ? "Sound: On 🔊" : "Sound: Off 🔇";
 }
-
 function addSparkles(amount){
   sparklePower = Math.min(100, sparklePower + amount);
   meterFill.style.width = sparklePower + "%";
 }
-
 function createSparkle(x,y){
   const s = document.createElement("div");
   s.className = "sparkle";
@@ -843,7 +689,6 @@ function createSparkle(x,y){
   document.body.appendChild(s);
   setTimeout(() => s.remove(), 700);
 }
-
 function showWrongX(x,y){
   const xMark = document.createElement("div");
   xMark.className = "wrong-x";
@@ -853,135 +698,117 @@ function showWrongX(x,y){
   document.body.appendChild(xMark);
   setTimeout(() => xMark.remove(), 550);
 }
-
+function confettiCannon(){
+  const colors = ["#fff35c","#ff7ad9","#42d9ff","#8b5cff","#ffffff","#00ff99"];
+  for(let i=0;i<90;i++){
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = colors[Math.floor(Math.random() * colors.length)];
+    c.style.animationDelay = Math.random() * .4 + "s";
+    c.style.transform = "rotate(" + Math.random() * 360 + "deg)";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 2400);
+  }
+}
 function changeTheme(name){
   const root = document.documentElement;
   const colours = themes[name];
-
   root.style.setProperty("--a", colours[0]);
   root.style.setProperty("--b", colours[1]);
   root.style.setProperty("--c", colours[2]);
   root.style.setProperty("--d", colours[3]);
-
   kimiBox.textContent = "Kimi says: Nice theme choice!";
   addSparkles(6);
   popSound();
 }
-
 function showKimiTip(){
   const tip = kimiTips[Math.floor(Math.random() * kimiTips.length)];
   kimiBox.textContent = tip;
   addSparkles(4);
   popSound();
 }
-
 function resetGame(){
   document.body.classList.add("playing");
   prize.classList.remove("show");
   playZone.innerHTML = "";
-
   points = 0;
   brushProgress = 0;
   timeLeft = startingTime;
   gameRunning = true;
-
   score.textContent = "Score: 0";
   timer.textContent = "Time: " + timeLeft;
   levelBox.textContent = "Level: " + playerLevel;
-
   clearInterval(gameTimer);
   clearInterval(spawnTimer);
-
   gameTimer = setInterval(() => {
     timeLeft--;
     timer.textContent = "Time: " + timeLeft;
-
     if(timeLeft <= 0){
       loseGame();
     }
   }, 1000);
 }
-
 function startTapGame(){
   currentGame = "tap";
   resetGame();
-
   gameTitle.textContent = "Find the Hairbrush!";
   instruction.textContent = "Tap ONLY the hairbrush. Wrong taps get a big red X!";
   message.textContent = "Find the brush!";
   score.textContent = "Score: 0 / " + targetScoreTapGame;
-
   spawnTapRound();
-
   spawnTimer = setInterval(() => {
     if(gameRunning){
       spawnTapRound();
     }
   }, 1400);
 }
-
 function startDailyChallenge(){
   currentGame = "daily";
   resetGame();
-
   gameTitle.textContent = "Daily Brush Challenge!";
   instruction.textContent = "Quick challenge! Tap 6 hairbrushes before time runs out.";
   message.textContent = "Daily sparkle time!";
   score.textContent = "Score: 0 / " + dailyChallengeScore;
-
   spawnTapRound();
-
   spawnTimer = setInterval(() => {
     if(gameRunning){
       spawnTapRound();
     }
   }, 1200);
 }
-
 function spawnTapRound(){
   playZone.innerHTML = "";
-
   const targetNeeded = currentGame === "daily" ? dailyChallengeScore : targetScoreTapGame;
-
   const items = ["BRUSH"];
-
   while(items.length < 4){
     items.push(wrongEmojis[Math.floor(Math.random() * wrongEmojis.length)]);
   }
-
   items.sort(() => Math.random() - .5);
-
   items.forEach(itemValue => {
     const item = document.createElement("div");
     item.className = "target";
-
     if(itemValue === "BRUSH"){
       item.classList.add("brush-target");
       item.appendChild(makeBrush());
     } else {
       item.textContent = itemValue;
     }
-
     const maxX = playZone.clientWidth - 90;
     const maxY = playZone.clientHeight - 90;
-
     item.style.left = Math.max(8, Math.random() * maxX) + "px";
     item.style.top = Math.max(8, Math.random() * maxY) + "px";
-
     item.onclick = function(e){
       if(!gameRunning) return;
-
       if(itemValue === "BRUSH"){
         points++;
         score.textContent = "Score: " + points + " / " + targetNeeded;
         message.textContent = "Great brushing!";
         popSound();
         addSparkles(8);
-
         for(let i=0;i<12;i++){
           createSparkle(e.clientX,e.clientY);
         }
-
         if(points >= targetNeeded){
           winGame();
         } else {
@@ -992,95 +819,135 @@ function spawnTapRound(){
         showWrongX(e.clientX,e.clientY);
       }
     };
-
     playZone.appendChild(item);
   });
 }
-
 function startStraightGame(){
   currentGame = "straight";
   resetGame();
-
   gameTitle.textContent = "Brush Hair Straight!";
   instruction.textContent = "Tap the curly hair until it becomes smooth and straight.";
   message.textContent = "Start brushing the curls!";
   score.textContent = "Brushes: 0 / " + targetBrushesStraightGame;
-
   drawHair();
 }
-
 function drawHair(){
   playZone.innerHTML = "";
-
   const area = document.createElement("div");
   area.className = "hair-area";
-
   let hairEmoji = "👩‍🦱";
   let status = "Very curly!";
-
   if(brushProgress > 4){
     hairEmoji = "💇‍♀️";
     status = "Getting smoother!";
   }
-
   if(brushProgress > 8){
     hairEmoji = "👩";
     status = "Almost straight!";
   }
-
   area.innerHTML = `
     <div>${hairEmoji}</div>
     <div class="hair-status">${status}</div>
   `;
-
   area.onclick = function(e){
     if(!gameRunning) return;
-
     brushProgress++;
     score.textContent = "Brushes: " + brushProgress + " / " + targetBrushesStraightGame;
     message.textContent = "Brush, brush, brush!";
     popSound();
     addSparkles(7);
-
     for(let i=0;i<12;i++){
       createSparkle(e.clientX,e.clientY);
     }
-
     if(brushProgress >= targetBrushesStraightGame){
       winGame();
     } else {
       drawHair();
     }
   };
-
   playZone.appendChild(area);
 }
-
+function startDinoGame(){
+  currentGame = "dino";
+  resetGame();
+  gameTitle.textContent = "Dino Hair Salon!";
+  instruction.textContent = "Tap the messy dino to brush its wild hair into a superstar style!";
+  message.textContent = "Brush the dino!";
+  score.textContent = "Brushes: 0 / " + salonBrushesNeeded;
+  drawSalonCharacter("dino");
+}
+function startMonsterGame(){
+  currentGame = "monster";
+  resetGame();
+  gameTitle.textContent = "Monster Hair Rescue!";
+  instruction.textContent = "Tap the monster to rescue it from silly messy bed hair!";
+  message.textContent = "Help the monster!";
+  score.textContent = "Brushes: 0 / " + monsterBrushesNeeded;
+  drawSalonCharacter("monster");
+}
+function drawSalonCharacter(type){
+  playZone.innerHTML = "";
+  const area = document.createElement("div");
+  area.className = "hair-area";
+  const needed = type === "dino" ? salonBrushesNeeded : monsterBrushesNeeded;
+  const percent = Math.min(100, Math.round((brushProgress / needed) * 100));
+  let character = type === "dino" ? "🦖" : "👹";
+  let hair = "🌪️ Messy hair!";
+  let extra = "🪮";
+  if(brushProgress > needed * .33){
+    hair = "✨ Getting smoother!";
+    extra = "💫";
+  }
+  if(brushProgress > needed * .66){
+    hair = type === "dino" ? "🌈 Dino style!" : "🎀 Monster style!";
+    extra = type === "dino" ? "👑" : "😎";
+  }
+  area.innerHTML = `
+    <div class="character">${character}</div>
+    <div style="font-size:44px">${extra}</div>
+    <div class="hair-status">${hair}</div>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:${percent}%"></div>
+    </div>
+  `;
+  area.onclick = function(e){
+    if(!gameRunning) return;
+    brushProgress++;
+    score.textContent = "Brushes: " + brushProgress + " / " + needed;
+    message.textContent = type === "dino" ? "Dino is getting stylish!" : "Monster hair rescue!";
+    popSound();
+    addSparkles(7);
+    for(let i=0;i<14;i++){
+      createSparkle(e.clientX,e.clientY);
+    }
+    if(brushProgress >= needed){
+      winGame();
+    } else {
+      drawSalonCharacter(type);
+    }
+  };
+  playZone.appendChild(area);
+}
 function winGame(){
   gameRunning = false;
   clearInterval(gameTimer);
   clearInterval(spawnTimer);
   playZone.innerHTML = "";
-
   const prizeName = prizes[Math.min(playerLevel - 1, prizes.length - 1)];
-
   if(unlockedStickers < stickerList.length){
     unlockedStickers++;
     buildStickers();
   }
-
   prizeTitle.textContent = prizeName;
   prizeText.textContent = "Amazing! You reached Level " + playerLevel + " and unlocked a new sticker!";
   badge.textContent = "Current Level: " + prizeName;
-
   playerLevel++;
   addSparkles(100);
-
+  confettiCannon();
   setTimeout(() => {
     prize.classList.add("show");
-  }, 400);
+  }, 350);
 }
-
 function loseGame(){
   gameRunning = false;
   clearInterval(gameTimer);
@@ -1089,17 +956,19 @@ function loseGame(){
   message.textContent = "Time up! Try again!";
   setTimeout(endGame, 1200);
 }
-
 function playAgain(){
   if(currentGame === "tap"){
     startTapGame();
   } else if(currentGame === "daily"){
     startDailyChallenge();
-  } else {
+  } else if(currentGame === "straight"){
     startStraightGame();
+  } else if(currentGame === "dino"){
+    startDinoGame();
+  } else if(currentGame === "monster"){
+    startMonsterGame();
   }
 }
-
 function endGame(){
   gameRunning = false;
   clearInterval(gameTimer);
@@ -1109,6 +978,5 @@ function endGame(){
   document.body.classList.remove("playing");
 }
 </script>
-
 </body>
 </html>
