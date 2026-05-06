@@ -11,7 +11,7 @@
   --b:#8b5cff;
   --c:#42d9ff;
   --d:#ffe86b;
-  --ink:#4c1478;
+  --ink:#42105f;
 }
 body{
   margin:0;
@@ -35,7 +35,7 @@ body::after{
   content:"";
   position:fixed;
   inset:0;
-  background:linear-gradient(rgba(40,0,70,.24),rgba(40,0,70,.2));
+  background:linear-gradient(rgba(35,0,60,.32),rgba(35,0,60,.25));
   z-index:-2;
 }
 @keyframes bgMove{
@@ -49,7 +49,7 @@ button{font-family:inherit}
   top:10px;
   left:50%;
   transform:translateX(-50%);
-  z-index:90;
+  z-index:100;
   padding:10px 18px;
   border-radius:999px;
   background:rgba(255,255,255,.4);
@@ -57,926 +57,894 @@ button{font-family:inherit}
   backdrop-filter:blur(14px);
   font-weight:1000;
 }
-.home{
+.screen{
   position:fixed;
   inset:0;
+  display:none;
   overflow-y:auto;
-  padding:72px 16px 28px;
+  padding:76px 16px 26px;
   text-align:center;
 }
-body.playing .home{display:none}
+.screen.show{
+  display:block;
+}
 h1{
   margin:0;
-  font-size:clamp(38px,10vw,84px);
-  line-height:.92;
+  font-size:clamp(42px,11vw,90px);
+  line-height:.9;
   font-weight:1000;
-  text-shadow:0 5px 0 rgba(76,20,120,.35),0 0 24px rgba(0,0,0,.35);
+  text-shadow:0 7px 0 rgba(76,20,120,.35),0 0 28px rgba(0,0,0,.4);
 }
 .sub{
-  max-width:680px;
-  margin:12px auto;
-  font-size:clamp(17px,3vw,24px);
+  max-width:760px;
+  margin:14px auto 18px;
+  font-size:clamp(18px,3vw,26px);
   font-weight:1000;
+  line-height:1.25;
   text-shadow:0 3px 12px rgba(0,0,0,.35);
 }
-.kimi-box,.safe-note{
-  width:min(800px,100%);
-  margin:0 auto 12px;
-  padding:12px 14px;
-  border-radius:24px;
-  background:rgba(255,255,255,.88);
+.panel{
+  width:min(94vw,900px);
+  margin:14px auto;
+  padding:16px;
+  border-radius:36px;
+  background:rgba(255,255,255,.86);
   color:var(--ink);
-  font-size:16px;
-  font-weight:1000;
+  box-shadow:0 14px 0 rgba(91,36,122,.22),0 0 42px rgba(255,255,255,.65);
 }
-.game-menu{
-  width:min(880px,100%);
-  margin:auto;
+.pet-grid,.brush-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
 }
-.game-card{
-  position:relative;
-  overflow:hidden;
+.pick-card{
   border:3px solid rgba(255,255,255,.9);
-  border-radius:34px;
-  background:rgba(255,255,255,.9);
-  color:var(--ink);
-  padding:16px 10px;
-  min-height:138px;
-  box-shadow:0 12px 0 rgba(91,36,122,.22),0 0 28px rgba(255,255,255,.7);
-  cursor:pointer;
-  text-align:center;
-}
-.game-card:active{
-  transform:translateY(5px) scale(.98);
-}
-.game-icon{
-  width:62px;
-  height:62px;
-  margin:0 auto 8px;
-  border-radius:22px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(135deg,#fff35c,#ff7ad9);
-  box-shadow:0 7px 0 rgba(91,36,122,.18);
-  font-size:34px;
-}
-.game-card h2{
-  margin:8px 0 0;
-  font-size:18px;
-  line-height:1.05;
-}
-/* CUSTOM HAIRBRUSH */
-.hairbrush{
-  width:46px;
-  height:18px;
-  border-radius:999px;
-  background:#7b2cbf;
-  position:relative;
-  transform:rotate(-24deg);
-  box-shadow:inset 0 -4px 0 rgba(0,0,0,.18);
-}
-.hairbrush::before{
-  content:"";
-  position:absolute;
-  left:-18px;
-  top:5px;
-  width:24px;
-  height:8px;
-  border-radius:999px;
-  background:#ffb703;
-}
-.hairbrush::after{
-  content:"";
-  position:absolute;
-  right:5px;
-  top:18px;
-  width:32px;
-  height:22px;
-  background:repeating-linear-gradient(90deg,#ffffff 0 3px,transparent 3px 6px);
-}
-.theme-panel,.stickers-panel,.meter-wrap{
-  margin:14px auto 0;
-  width:min(800px,100%);
+  border-radius:28px;
   padding:12px;
-  border-radius:26px;
-  background:rgba(255,255,255,.3);
-  border:2px solid rgba(255,255,255,.55);
-}
-.section-title{
-  margin:6px 0 10px;
-  font-size:22px;
-  font-weight:1000;
-}
-.theme-buttons{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:10px;
-}
-.theme-btn,.tool,.back{
-  border:0;
-  border-radius:20px;
-  padding:14px 10px;
-  font-weight:1000;
+  background:linear-gradient(160deg,#fff,#ffe8f7);
   color:var(--ink);
-  background:white;
   cursor:pointer;
-  box-shadow:0 7px 0 rgba(91,36,122,.18);
-}
-.small-tools{
-  margin-top:12px;
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-.stickers{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
-  font-size:34px;
-}
-.sticker{
-  width:54px;
-  height:54px;
-  border-radius:18px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(255,255,255,.55);
-  filter:grayscale(1);
-  opacity:.5;
-}
-.sticker.unlocked{
-  background:white;
-  filter:none;
-  opacity:1;
-  animation:stickerPop .5s ease;
-}
-@keyframes stickerPop{
-  0%{transform:scale(.4) rotate(-20deg)}
-  70%{transform:scale(1.18) rotate(8deg)}
-  100%{transform:scale(1)}
-}
-.meter{
-  height:24px;
-  background:rgba(255,255,255,.55);
-  border-radius:999px;
-  overflow:hidden;
-  border:2px solid rgba(255,255,255,.85);
-}
-.meter-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#fff35c,#ff7ad9,#42d9ff);
-  transition:.3s;
-}
-.badge{
-  margin-top:10px;
-  display:inline-block;
-  padding:10px 14px;
-  border-radius:999px;
-  background:white;
-  color:var(--ink);
-  font-size:14px;
   font-weight:1000;
+  box-shadow:0 9px 0 rgba(91,36,122,.18);
 }
-/* GAME SCREEN */
+.pick-card.locked{
+  opacity:.45;
+  filter:grayscale(1);
+}
+.pick-card.selected{
+  outline:5px solid #fff35c;
+  transform:scale(1.03);
+}
+.pet-preview{
+  height:120px;
+  position:relative;
+}
+.pick-emoji{
+  font-size:54px;
+  margin-top:14px;
+}
+.big-btn,.back,.award button{
+  border:0;
+  border-radius:999px;
+  padding:16px 24px;
+  font-size:19px;
+  font-weight:1000;
+  color:white;
+  background:linear-gradient(135deg,#7b2cbf,#ff4fb8);
+  box-shadow:0 8px 0 rgba(91,36,122,.25);
+  cursor:pointer;
+  margin:6px;
+}
+.big-btn:active,.back:active,.award button:active{
+  transform:translateY(4px);
+  box-shadow:0 4px 0 rgba(91,36,122,.25);
+}
+/* GAME */
 .game{
   position:fixed;
   inset:0;
-  z-index:50;
   display:none;
   flex-direction:column;
   align-items:center;
-  padding:66px 14px 18px;
+  padding:68px 12px 18px;
   text-align:center;
-  background:linear-gradient(135deg,var(--a),var(--b),var(--c),var(--d));
 }
-body.playing .game{display:flex}
+.game.show{
+  display:flex;
+}
 .game h2{
-  margin:0 0 8px;
-  font-size:clamp(34px,8vw,68px);
+  margin:0 0 6px;
+  font-size:clamp(34px,8vw,70px);
+  line-height:.95;
   font-weight:1000;
-  text-shadow:0 4px 0 rgba(76,20,120,.25);
+  text-shadow:0 5px 0 rgba(76,20,120,.3);
 }
 .instruction{
-  max-width:720px;
-  margin:0 0 12px;
-  font-size:clamp(18px,3vw,25px);
+  max-width:760px;
+  margin:0 0 10px;
+  font-size:clamp(17px,3vw,23px);
   font-weight:1000;
-  text-shadow:0 3px 12px rgba(0,0,0,.35);
+  text-shadow:0 3px 12px rgba(0,0,0,.38);
 }
-.stats{
+.hud{
+  width:min(94vw,760px);
   display:flex;
   gap:10px;
-  flex-wrap:wrap;
+  align-items:center;
   justify-content:center;
+  flex-wrap:wrap;
   margin-bottom:10px;
 }
-.stat{
+.pill{
   background:white;
   color:var(--ink);
-  font-weight:1000;
   border-radius:999px;
-  padding:11px 15px;
-}
-.message{
-  min-height:32px;
-  font-size:23px;
+  padding:10px 15px;
   font-weight:1000;
-  color:#fff35c;
-  text-shadow:0 3px 10px rgba(0,0,0,.35);
+  box-shadow:0 7px 0 rgba(91,36,122,.16);
 }
-.play-zone{
-  position:relative;
-  width:min(94vw,760px);
-  height:min(50vh,410px);
-  border-radius:34px;
-  background:rgba(255,255,255,.25);
-  border:4px dashed rgba(255,255,255,.85);
-  overflow:hidden;
-  touch-action:manipulation;
-}
-.target{
-  position:absolute;
-  width:88px;
-  height:88px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:62px;
-  animation:pop .8s ease-in-out infinite;
-}
-.brush-target{
-  border-radius:26px;
-  background:white;
-  box-shadow:0 9px 0 rgba(91,36,122,.18);
-}
-.brush-target .hairbrush{
-  transform:rotate(-24deg) scale(1.1);
-}
-@keyframes pop{
-  0%,100%{transform:scale(1) rotate(-6deg)}
-  50%{transform:scale(1.15) rotate(8deg)}
-}
-.hair-area{
-  position:absolute;
-  inset:12px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  font-size:88px;
-  user-select:none;
-}
-.hair-status{
-  font-size:26px;
-  font-weight:1000;
-}
-.character{
-  font-size:92px;
-  animation:wiggle .9s ease-in-out infinite;
-}
-@keyframes wiggle{
-  0%,100%{transform:rotate(-4deg) scale(1)}
-  50%{transform:rotate(5deg) scale(1.08)}
-}
-.progress-bar{
-  width:min(80%,420px);
-  height:26px;
+.progress-wrap{
+  width:min(90vw,520px);
+  height:28px;
   border-radius:999px;
-  background:rgba(255,255,255,.55);
-  border:2px solid white;
+  background:rgba(255,255,255,.5);
+  border:3px solid white;
   overflow:hidden;
-  margin-top:12px;
+  box-shadow:0 7px 0 rgba(91,36,122,.14);
 }
-.progress-fill{
+.progress{
   height:100%;
   width:0%;
   background:linear-gradient(90deg,#fff35c,#ff7ad9,#42d9ff);
-  transition:.25s;
+  transition:.15s linear;
 }
-.wrong-x{
-  position:fixed;
-  z-index:200;
-  font-size:92px;
-  color:#ff2b2b;
-  font-weight:1000;
+.stage{
+  position:relative;
+  width:min(94vw,760px);
+  height:min(58vh,500px);
+  border-radius:38px;
+  background:rgba(255,255,255,.25);
+  border:4px solid rgba(255,255,255,.82);
+  box-shadow:inset 0 0 45px rgba(255,255,255,.22),0 18px 55px rgba(60,0,100,.25);
+  overflow:hidden;
+  touch-action:none;
+}
+.stage::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 50% 28%,rgba(255,255,255,.4),transparent 45%);
   pointer-events:none;
-  animation:xPop .55s ease forwards;
 }
-@keyframes xPop{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.4)}
-  40%{opacity:1;transform:translate(-50%,-50%) scale(1.25)}
-  100%{opacity:0;transform:translate(-50%,-50%) scale(.9)}
+.reward-text{
+  position:absolute;
+  left:50%;
+  top:18px;
+  transform:translateX(-50%);
+  font-size:28px;
+  font-weight:1000;
+  color:#fff35c;
+  text-shadow:0 4px 10px rgba(0,0,0,.35);
+  z-index:30;
 }
-/* PRIZE */
-.prize{
+/* DRAWN PET */
+.pet{
+  position:absolute;
+  left:50%;
+  top:52%;
+  width:300px;
+  height:300px;
+  transform:translate(-50%,-50%);
+  transition:.2s ease;
+}
+.pet.happy{
+  animation:petDance .55s ease-in-out infinite;
+}
+@keyframes petDance{
+  0%,100%{transform:translate(-50%,-50%) rotate(-4deg) scale(1)}
+  50%{transform:translate(-50%,-54%) rotate(4deg) scale(1.04)}
+}
+.body{
+  position:absolute;
+  left:50%;
+  top:86px;
+  width:205px;
+  height:170px;
+  transform:translateX(-50%);
+  border-radius:48% 48% 42% 42%;
+  background:linear-gradient(160deg,var(--pet1),var(--pet2));
+  box-shadow:inset -18px -22px 0 rgba(0,0,0,.12),0 12px 0 rgba(64,0,100,.18);
+}
+.face{
+  position:absolute;
+  left:50%;
+  top:92px;
+  width:175px;
+  height:142px;
+  transform:translateX(-50%);
+  border-radius:48%;
+  background:linear-gradient(160deg,var(--face1),var(--face2));
+  box-shadow:inset -10px -14px 0 rgba(120,0,80,.08);
+  z-index:4;
+}
+.ear{
+  position:absolute;
+  top:66px;
+  width:72px;
+  height:92px;
+  background:var(--pet2);
+  border-radius:50% 50% 45% 45%;
+  z-index:2;
+}
+.ear.left{left:42px;transform:rotate(-28deg)}
+.ear.right{right:42px;transform:rotate(28deg)}
+.eye{
+  position:absolute;
+  top:54px;
+  width:22px;
+  height:28px;
+  border-radius:50%;
+  background:#231033;
+  z-index:6;
+}
+.eye.left{left:52px}
+.eye.right{right:52px}
+.eye::after{
+  content:"";
+  position:absolute;
+  top:5px;
+  left:5px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:white;
+}
+.nose{
+  position:absolute;
+  left:50%;
+  top:84px;
+  transform:translateX(-50%);
+  width:28px;
+  height:22px;
+  border-radius:50%;
+  background:#42105f;
+  z-index:6;
+}
+.mouth{
+  position:absolute;
+  left:50%;
+  top:111px;
+  width:54px;
+  height:26px;
+  transform:translateX(-50%);
+  border-bottom:7px solid #42105f;
+  border-radius:0 0 999px 999px;
+  z-index:6;
+}
+.pet.happy .mouth{
+  height:34px;
+  background:#42105f;
+  border:0;
+  border-radius:0 0 999px 999px;
+}
+.hair{
+  position:absolute;
+  left:50%;
+  top:26px;
+  width:230px;
+  height:150px;
+  transform:translateX(-50%);
+  z-index:5;
+  pointer-events:none;
+}
+.tuft{
+  position:absolute;
+  width:30px;
+  height:100px;
+  border-radius:999px;
+  background:linear-gradient(#2a1238,var(--hair1));
+  transform-origin:bottom center;
+  transition:.25s ease;
+  box-shadow:0 7px 0 rgba(0,0,0,.1);
+}
+.smooth .tuft{
+  height:66px;
+  border-radius:999px 999px 18px 18px;
+  transform:rotate(0deg)!important;
+  background:linear-gradient(var(--hair2),var(--hair1));
+}
+.t1{left:18px;top:42px;transform:rotate(-62deg)}
+.t2{left:44px;top:14px;transform:rotate(-38deg)}
+.t3{left:78px;top:0;transform:rotate(-18deg)}
+.t4{left:112px;top:-6px;transform:rotate(7deg)}
+.t5{left:145px;top:4px;transform:rotate(25deg)}
+.t6{left:172px;top:28px;transform:rotate(48deg)}
+.t7{left:96px;top:25px;transform:rotate(78deg)}
+.t8{left:130px;top:30px;transform:rotate(-76deg)}
+.brush{
+  position:absolute;
+  width:90px;
+  height:38px;
+  border-radius:999px;
+  background:var(--brushMain);
+  z-index:20;
+  pointer-events:none;
+  transform:translate(-50%,-50%) rotate(-22deg);
+  box-shadow:inset 0 -7px 0 rgba(0,0,0,.18),0 8px 18px rgba(0,0,0,.22);
+  opacity:0;
+}
+.brush.show{opacity:1}
+.brush::before{
+  content:"";
+  position:absolute;
+  left:-42px;
+  top:12px;
+  width:52px;
+  height:14px;
+  border-radius:999px;
+  background:var(--brushHandle);
+}
+.brush::after{
+  content:"";
+  position:absolute;
+  right:10px;
+  top:36px;
+  width:60px;
+  height:34px;
+  background:repeating-linear-gradient(90deg,#fff 0 5px,transparent 5px 10px);
+}
+.stroke{
+  position:absolute;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:rgba(255,255,255,.8);
+  pointer-events:none;
+  z-index:18;
+  animation:strokeFade .55s ease forwards;
+}
+@keyframes strokeFade{
+  to{transform:scale(2.4);opacity:0}
+}
+/* BEFORE AFTER */
+.photo-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:12px 0;
+}
+.photo{
+  border-radius:28px;
+  background:linear-gradient(160deg,#f8eaff,#ffffff);
+  padding:12px;
+  font-weight:1000;
+  box-shadow:0 8px 0 rgba(91,36,122,.14);
+}
+.photo-pet{
+  position:relative;
+  height:155px;
+  overflow:hidden;
+}
+.photo-pet .pet{
+  transform:translate(-50%,-50%) scale(.5);
+  left:50%;
+  top:50%;
+}
+/* AWARD */
+.award{
   position:fixed;
   inset:0;
-  z-index:300;
   display:none;
   align-items:center;
   justify-content:center;
-  padding:20px;
-  background:rgba(60,0,90,.55);
+  z-index:400;
+  background:rgba(55,0,85,.62);
   backdrop-filter:blur(8px);
+  padding:18px;
 }
-.prize.show{display:flex}
-.prize-card{
-  width:min(92vw,760px);
-  border-radius:36px;
+.award.show{display:flex}
+.award-card{
+  width:min(94vw,860px);
+  max-height:92vh;
+  overflow-y:auto;
   background:white;
   color:var(--ink);
-  padding:28px 18px;
+  border-radius:42px;
   text-align:center;
-  box-shadow:0 18px 0 rgba(91,36,122,.25);
+  padding:28px 18px;
+  box-shadow:0 22px 0 rgba(60,0,100,.28),0 0 80px rgba(255,255,255,.9);
+  animation:awardPop .7s ease;
 }
-.prize-card h2{
-  font-size:clamp(40px,9vw,82px);
-  margin:8px 0;
-  line-height:.95;
+@keyframes awardPop{
+  from{transform:scale(.45) rotate(-10deg);opacity:0}
+  70%{transform:scale(1.05) rotate(3deg)}
+  to{transform:scale(1) rotate(0);opacity:1}
 }
-.prize-emoji{
-  font-size:76px;
+.big-award{
+  font-size:clamp(46px,12vw,116px);
+  line-height:.9;
+  font-weight:1000;
+  margin:0;
 }
-.dance-party{
+.award-card p{
+  font-size:22px;
+  font-weight:1000;
+  margin:10px 0 14px;
+}
+.dancers{
   display:flex;
   justify-content:center;
   gap:14px;
   font-size:54px;
-  margin:10px 0;
+  margin:12px 0;
 }
 .dancer{
-  animation:dance .5s ease-in-out infinite;
+  animation:dance .45s ease-in-out infinite;
 }
 .dancer:nth-child(2){animation-delay:.1s}
 .dancer:nth-child(3){animation-delay:.2s}
-.dancer:nth-child(4){animation-delay:.3s}
 @keyframes dance{
-  0%,100%{transform:translateY(0) rotate(-8deg)}
-  50%{transform:translateY(-16px) rotate(8deg)}
+  0%,100%{transform:translateY(0) rotate(-10deg)}
+  50%{transform:translateY(-18px) rotate(10deg)}
 }
-.prize-actions{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-}
-.prize-actions button{
-  border:0;
-  border-radius:999px;
-  padding:15px 22px;
-  font-size:18px;
-  font-weight:1000;
-  color:white;
-  background:var(--ink);
-}
-/* CONFETTI */
 .confetti{
   position:fixed;
   top:-20px;
-  width:12px;
-  height:18px;
-  z-index:400;
+  width:14px;
+  height:22px;
+  z-index:500;
   pointer-events:none;
-  animation:confettiFall 1.8s linear forwards;
+  animation:fall 2.2s linear forwards;
 }
-@keyframes confettiFall{
-  to{
-    transform:translateY(110vh) rotate(720deg);
-    opacity:.2;
-  }
+@keyframes fall{
+  to{transform:translateY(112vh) rotate(900deg);opacity:.1}
 }
-.sparkle{
+.burst{
   position:fixed;
-  width:10px;
-  height:10px;
+  left:50%;
+  top:50%;
+  width:18px;
+  height:18px;
   border-radius:50%;
   background:white;
+  z-index:480;
   pointer-events:none;
-  z-index:250;
-  animation:spark .7s ease forwards;
+  animation:burst 1s ease-out forwards;
 }
-@keyframes spark{
-  to{transform:translateY(-35px) scale(0);opacity:0}
+@keyframes burst{
+  to{
+    transform:translate(var(--x),var(--y)) scale(.2);
+    opacity:0;
+  }
 }
 @media(max-width:760px){
-  .game-menu{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+  .pet-grid,.brush-grid{
+    grid-template-columns:1fr;
   }
-  .game-card{
-    min-height:124px;
-    padding:10px 6px;
-    border-radius:28px;
-  }
-  .game-icon{
-    width:54px;
-    height:54px;
-  }
-  .game-card h2{
-    font-size:14px;
-  }
-  .theme-buttons{
-    grid-template-columns:repeat(2,1fr);
-  }
-  .play-zone{
-    height:45vh;
-  }
-  .target{
-    width:78px;
-    height:78px;
-  }
-  .hair-area{
-    font-size:78px;
-  }
-  .character{
-    font-size:82px;
-  }
+  .stage{height:55vh}
+  .pet{width:260px;height:260px}
+  .body{width:185px;height:150px}
+  .face{width:158px;height:128px}
+  .hair{transform:translateX(-50%) scale(.86)}
+  .dancers{font-size:42px}
+  .photo-row{grid-template-columns:1fr 1fr}
+  .photo-pet{height:120px}
 }
 </style>
 </head>
 <body>
 <div class="logo">KIMIBRUSH ✨</div>
-<div class="home">
-  <h1>Brush smarter. Shine brighter.</h1>
-  <p class="sub">Play brushing games, collect stickers, and level up!</p>
-  <div class="kimi-box" id="kimiBox">
-    Kimi says: Choose a game and start brushing!
-  </div>
-  <div class="safe-note">
-    Child-safe play: no adverts, no chat, just fun.
-  </div>
-  <div class="game-menu">
-    <button class="game-card" onclick="startTapGame()">
-      <div class="game-icon"><div class="hairbrush"></div></div>
-      <h2>Find and click the hairbrush</h2>
-    </button>
-    <button class="game-card" onclick="startStraightGame()">
-      <div class="game-icon">💇‍♀️</div>
-      <h2>Brush curly hair straight</h2>
-    </button>
-    <button class="game-card" onclick="startDinoGame()">
-      <div class="game-icon">🦖</div>
-      <h2>Dino Hair Salon</h2>
-    </button>
-    <button class="game-card" onclick="startMonsterGame()">
-      <div class="game-icon">👹</div>
-      <h2>Monster Hair Rescue</h2>
-    </button>
-  </div>
-  <div class="theme-panel">
-    <div class="section-title">Change Theme 🎨</div>
-    <div class="theme-buttons">
-      <button class="theme-btn" onclick="changeTheme('rainbow')">🌈 Rainbow</button>
-      <button class="theme-btn" onclick="changeTheme('space')">🚀 Space</button>
-      <button class="theme-btn" onclick="changeTheme('princess')">👑 Princess</button>
-      <button class="theme-btn" onclick="changeTheme('ocean')">🌊 Ocean</button>
-    </div>
-    <div class="small-tools">
-      <button class="tool" onclick="startDailyChallenge()">🌟 Daily Challenge</button>
-      <button class="tool" onclick="showKimiTip()">💬 Kimi Help</button>
-      <button class="tool" onclick="toggleSound()" id="soundButton">Sound: On 🔊</button>
+<div class="screen show" id="homeScreen">
+  <h1>Pet Brush Rescue</h1>
+  <p class="sub">Choose a messy pet, pick your brush, then use real brush strokes to make them shine!</p>
+  <div class="panel">
+    <h2>Choose Your Pet 🐾</h2>
+    <div class="pet-grid">
+      <button class="pick-card selected" onclick="choosePet('puppy',this)">
+        <div class="pick-emoji">🐶</div>
+        <h3>Messy Puppy</h3>
+      </button>
+      <button class="pick-card" onclick="choosePet('dino',this)">
+        <div class="pick-emoji">🦖</div>
+        <h3>Dino Fluff</h3>
+      </button>
+      <button class="pick-card" onclick="choosePet('monster',this)">
+        <div class="pick-emoji">👹</div>
+        <h3>Bed Hair Monster</h3>
+      </button>
     </div>
   </div>
-  <div class="stickers-panel">
-    <div class="section-title">Sticker Collection 🏅</div>
-    <div class="stickers" id="stickers"></div>
-  </div>
-  <div class="meter-wrap">
-    <div class="section-title">Sparkle Meter ✨</div>
-    <div class="meter">
-      <div class="meter-fill" id="meterFill"></div>
+  <div class="panel">
+    <h2>Unlockable Brushes 🪄</h2>
+    <div class="brush-grid">
+      <button class="pick-card selected" onclick="chooseBrush('magic',this)">
+        <div class="pick-emoji">💜</div>
+        <h3>Magic Brush</h3>
+      </button>
+      <button class="pick-card" id="rainbowBrushCard" onclick="chooseBrush('rainbow',this)">
+        <div class="pick-emoji">🌈</div>
+        <h3>Rainbow Brush</h3>
+      </button>
+      <button class="pick-card locked" id="goldBrushCard" onclick="chooseBrush('gold',this)">
+        <div class="pick-emoji">🏆</div>
+        <h3>Gold Brush</h3>
+      </button>
     </div>
-    <div class="badge" id="badge">Current Level: Beginner Brusher</div>
+    <p><strong id="unlockText">Win Level 1 to unlock the Gold Brush!</strong></p>
+    <button class="big-btn" onclick="startGame()">Start Brushing!</button>
   </div>
 </div>
-<div class="game" id="game">
-  <h2 id="gameTitle">Game</h2>
-  <div class="instruction" id="instruction"></div>
-  <div class="stats">
-    <div class="stat" id="score">Score: 0</div>
-    <div class="stat" id="timer">Time: 30</div>
-    <div class="stat" id="level">Level: 1</div>
+<div class="game" id="gameScreen">
+  <h2 id="gameTitle">Brush the Messy Pet!</h2>
+  <div class="instruction">Drag your finger or mouse across the messy hair. Faster brush strokes give bonus sparkle!</div>
+  <div class="hud">
+    <div class="pill" id="level">Level 1</div>
+    <div class="pill" id="combo">Combo: 0</div>
+    <div class="pill" id="brushName">Magic Brush</div>
+    <div class="progress-wrap">
+      <div class="progress" id="progress"></div>
+    </div>
   </div>
-  <div class="message" id="message">Ready?</div>
-  <div class="play-zone" id="playZone"></div>
-  <button class="back" onclick="endGame()">Back Home</button>
+  <div class="stage" id="stage">
+    <div class="reward-text" id="rewardText">Start brushing!</div>
+    <div class="pet" id="pet"></div>
+    <div class="brush" id="brush"></div>
+  </div>
+  <button class="back" onclick="backHome()">Back Home</button>
 </div>
-<div class="prize" id="prize">
-  <div class="prize-card">
-    <div class="prize-emoji">🏆✨</div>
-    <h2 id="prizeTitle">Tangle Tamer!</h2>
-    <p id="prizeText">You won a prize!</p>
-    <div class="dance-party">
-      <span class="dancer">🦖</span>
+<div class="award" id="award">
+  <div class="award-card">
+    <h2 class="big-award" id="awardTitle">TANGLE TAMER PRO!</h2>
+    <p id="awardMessage">You rescued the pet’s hair!</p>
+    <div class="photo-row">
+      <div class="photo">
+        <div>BEFORE 😱</div>
+        <div class="photo-pet" id="beforePhoto"></div>
+      </div>
+      <div class="photo">
+        <div>AFTER ✨</div>
+        <div class="photo-pet" id="afterPhoto"></div>
+      </div>
+    </div>
+    <div class="dancers">
+      <span class="dancer" id="dancePet">🐶</span>
       <span class="dancer">💃</span>
-      <span class="dancer">👹</span>
-      <span class="dancer">🪩</span>
+      <span class="dancer">🌟</span>
     </div>
-    <div class="prize-actions">
-      <button onclick="playAgain()">Play Again</button>
-      <button onclick="endGame()">Home</button>
-    </div>
+    <button onclick="nextLevel()">Play Next Level</button>
+    <button onclick="backHome()">Home</button>
   </div>
 </div>
 <script>
-const targetScoreTapGame = 10;
-const targetBrushesStraightGame = 12;
-const dailyChallengeScore = 6;
-const salonBrushesNeeded = 14;
-const monsterBrushesNeeded = 16;
-const startingTime = 30;
-const prizes = [
-  "Tangle Tamer Level 1",
-  "Tangle Tamer Pro",
-  "Dino Stylist",
-  "Monster Hair Hero",
-  "KimiBrush Champion",
-  "Ultimate Tangle Master"
-];
-const stickerList = ["🪮","✨","🎀","👑","🌈","🏆","🦖","👹","💖","🌟"];
-const themes = {
-  rainbow:["#ff7ad9","#8b5cff","#42d9ff","#ffe86b"],
-  space:["#16002d","#3d1c91","#00d4ff","#fff35c"],
-  princess:["#ff7ad9","#ffc2f0","#b985ff","#fff1a8"],
-  ocean:["#00b4d8","#0077b6","#90e0ef","#caf0f8"]
-};
-const wrongEmojis = ["🧸","🍭","⭐","🎀","🦄"];
-const kimiTips = [
-  "Kimi says: Look for the hairbrush picture and tap it!",
-  "Kimi says: Brush the dino until its hair looks amazing!",
-  "Kimi says: Rescue the monster from messy bed hair!",
-  "Kimi says: Win games to unlock stickers!",
-  "Kimi says: Try the Daily Challenge for a bonus prize!"
-];
-const meterFill = document.getElementById("meterFill");
-const badge = document.getElementById("badge");
-const playZone = document.getElementById("playZone");
-const score = document.getElementById("score");
-const timer = document.getElementById("timer");
+const homeScreen = document.getElementById("homeScreen");
+const gameScreen = document.getElementById("gameScreen");
+const stage = document.getElementById("stage");
+const brush = document.getElementById("brush");
+const progress = document.getElementById("progress");
+const rewardText = document.getElementById("rewardText");
+const award = document.getElementById("award");
+const awardTitle = document.getElementById("awardTitle");
+const awardMessage = document.getElementById("awardMessage");
+const pet = document.getElementById("pet");
+const comboBox = document.getElementById("combo");
 const levelBox = document.getElementById("level");
-const message = document.getElementById("message");
+const brushName = document.getElementById("brushName");
+const beforePhoto = document.getElementById("beforePhoto");
+const afterPhoto = document.getElementById("afterPhoto");
+const dancePet = document.getElementById("dancePet");
+const unlockText = document.getElementById("unlockText");
 const gameTitle = document.getElementById("gameTitle");
-const instruction = document.getElementById("instruction");
-const prize = document.getElementById("prize");
-const prizeTitle = document.getElementById("prizeTitle");
-const prizeText = document.getElementById("prizeText");
-const stickers = document.getElementById("stickers");
-const kimiBox = document.getElementById("kimiBox");
-const soundButton = document.getElementById("soundButton");
-let sparklePower = 0;
-let points = 0;
-let timeLeft = startingTime;
-let playerLevel = 1;
-let gameRunning = false;
-let currentGame = "";
-let gameTimer;
-let spawnTimer;
-let brushProgress = 0;
-let soundOn = true;
-let unlockedStickers = 0;
-function buildStickers(){
-  stickers.innerHTML = "";
-  stickerList.forEach((sticker,index) => {
-    const div = document.createElement("div");
-    div.className = "sticker" + (index < unlockedStickers ? " unlocked" : "");
-    div.textContent = sticker;
-    stickers.appendChild(div);
-  });
+let brushing = false;
+let lastX = 0;
+let lastY = 0;
+let smoothness = 0;
+let combo = 0;
+let level = 1;
+let finished = false;
+let chosenPet = "puppy";
+let chosenBrush = "magic";
+let goldUnlocked = false;
+const pets = {
+  puppy:{
+    emoji:"🐶",
+    title:"Brush the Messy Puppy!",
+    pet1:"#a86cff",
+    pet2:"#6a36c9",
+    face1:"#ffd7ec",
+    face2:"#ff9bd1",
+    hair1:"#7b2cbf",
+    hair2:"#ffcfef"
+  },
+  dino:{
+    emoji:"🦖",
+    title:"Dino Hair Salon!",
+    pet1:"#60e6a8",
+    pet2:"#07885b",
+    face1:"#d9ff9f",
+    face2:"#8ee87a",
+    hair1:"#00a2ff",
+    hair2:"#b9f7ff"
+  },
+  monster:{
+    emoji:"👹",
+    title:"Monster Hair Rescue!",
+    pet1:"#ff8a00",
+    pet2:"#d62828",
+    face1:"#ffe066",
+    face2:"#ffafcc",
+    hair1:"#22223b",
+    hair2:"#f72585"
+  }
+};
+const brushes = {
+  magic:{
+    name:"Magic Brush",
+    main:"#7b2cbf",
+    handle:"#ffb703"
+  },
+  rainbow:{
+    name:"Rainbow Brush",
+    main:"linear-gradient(90deg,#ff006e,#ffbe0b,#3a86ff)",
+    handle:"#00f5d4"
+  },
+  gold:{
+    name:"Gold Brush",
+    main:"linear-gradient(90deg,#fff35c,#ffb703)",
+    handle:"#7b2cbf"
+  }
+};
+const awards = [
+  "TANGLE TAMER!",
+  "TANGLE TAMER PRO!",
+  "SUPER SMOOTH HERO!",
+  "MAGIC BRUSH MASTER!",
+  "ULTIMATE PET STYLIST!"
+];
+function choosePet(type,button){
+  chosenPet = type;
+  document.querySelectorAll(".pet-grid .pick-card").forEach(b => b.classList.remove("selected"));
+  button.classList.add("selected");
+  cuteSound(500);
 }
-buildStickers();
-function makeBrush(){
-  const brush = document.createElement("div");
-  brush.className = "hairbrush";
-  return brush;
+function chooseBrush(type,button){
+  if(type === "gold" && !goldUnlocked) {
+    cuteSound(180);
+    unlockText.textContent = "Gold Brush is locked! Win Level 1 first.";
+    return;
+  }
+  chosenBrush = type;
+  document.querySelectorAll(".brush-grid .pick-card").forEach(b => b.classList.remove("selected"));
+  button.classList.add("selected");
+  cuteSound(650);
 }
-function popSound(){
-  if(!soundOn) return;
+function startGame(){
+  homeScreen.classList.remove("show");
+  gameScreen.classList.add("show");
+  award.classList.remove("show");
+  applyPetTheme();
+  resetLevel();
+}
+function applyPetTheme(){
+  const p = pets[chosenPet];
+  const b = brushes[chosenBrush];
+  document.documentElement.style.setProperty("--pet1",p.pet1);
+  document.documentElement.style.setProperty("--pet2",p.pet2);
+  document.documentElement.style.setProperty("--face1",p.face1);
+  document.documentElement.style.setProperty("--face2",p.face2);
+  document.documentElement.style.setProperty("--hair1",p.hair1);
+  document.documentElement.style.setProperty("--hair2",p.hair2);
+  document.documentElement.style.setProperty("--brushMain",b.main);
+  document.documentElement.style.setProperty("--brushHandle",b.handle);
+  gameTitle.textContent = p.title;
+  brushName.textContent = b.name;
+  dancePet.textContent = p.emoji;
+  drawPet(pet,false);
+}
+function petHTML(smooth){
+  return `
+    <div class="ear left"></div>
+    <div class="ear right"></div>
+    <div class="body"></div>
+    <div class="hair ${smooth ? "smooth" : ""}" id="hair">
+      <div class="tuft t1"></div><div class="tuft t2"></div><div class="tuft t3"></div><div class="tuft t4"></div>
+      <div class="tuft t5"></div><div class="tuft t6"></div><div class="tuft t7"></div><div class="tuft t8"></div>
+    </div>
+    <div class="face">
+      <div class="eye left"></div><div class="eye right"></div>
+      <div class="nose"></div><div class="mouth"></div>
+    </div>
+  `;
+}
+function drawPet(container,smooth){
+  container.innerHTML = petHTML(smooth);
+}
+function resetLevel(){
+  smoothness = 0;
+  combo = 0;
+  finished = false;
+  progress.style.width = "0%";
+  pet.classList.remove("happy");
+  drawPet(pet,false);
+  rewardText.textContent = "Start brushing!";
+  comboBox.textContent = "Combo: 0";
+  levelBox.textContent = "Level " + level;
+}
+function pointerPosition(e){
+  const touch = e.touches ? e.touches[0] : e;
+  const rect = stage.getBoundingClientRect();
+  return {
+    x: touch.clientX - rect.left,
+    y: touch.clientY - rect.top,
+    pageX: touch.clientX,
+    pageY: touch.clientY
+  };
+}
+function isOverHair(x,y){
+  const rect = stage.getBoundingClientRect();
+  const hair = document.getElementById("hair");
+  const hairRect = hair.getBoundingClientRect();
+  const hx = hairRect.left - rect.left;
+  const hy = hairRect.top - rect.top;
+  return x > hx - 25 && x < hx + hairRect.width + 25 &&
+         y > hy - 25 && y < hy + hairRect.height + 45;
+}
+function moveBrush(x,y){
+  brush.style.left = x + "px";
+  brush.style.top = y + "px";
+  brush.classList.add("show");
+}
+function addStroke(x,y){
+  const s = document.createElement("div");
+  s.className = "stroke";
+  s.style.left = x - 12 + "px";
+  s.style.top = y - 12 + "px";
+  stage.appendChild(s);
+  setTimeout(() => s.remove(), 600);
+}
+function brushMove(e){
+  if(!brushing || finished) return;
+  e.preventDefault();
+  const pos = pointerPosition(e);
+  moveBrush(pos.x,pos.y);
+  const distance = Math.hypot(pos.x - lastX, pos.y - lastY);
+  if(distance > 4 && isOverHair(pos.x,pos.y)){
+    combo++;
+    let brushBonus = chosenBrush === "gold" ? 1.7 : chosenBrush === "rainbow" ? 1.35 : 1;
+    smoothness += (Math.min(2.8, distance / 18) + combo * 0.015) * brushBonus;
+    addStroke(pos.x,pos.y);
+    rewardText.textContent = combo > 25 ? "MEGA BRUSHING!" : "Keep brushing!";
+    comboBox.textContent = "Combo: " + combo;
+    if(combo % 7 === 0){
+      miniBurst(pos.pageX,pos.pageY);
+      cuteSound(760);
+    }
+    updatePet();
+  }
+  lastX = pos.x;
+  lastY = pos.y;
+}
+function updatePet(){
+  const needed = 100 + (level - 1) * 22;
+  const percent = Math.min(100, Math.round((smoothness / needed) * 100));
+  progress.style.width = percent + "%";
+  if(percent > 45){
+    document.getElementById("hair").classList.add("smooth");
+    rewardText.textContent = "It is working!";
+  }
+  if(percent >= 100){
+    win();
+  }
+}
+function win(){
+  finished = true;
+  brushing = false;
+  brush.classList.remove("show");
+  pet.classList.add("happy");
+  document.getElementById("hair").classList.add("smooth");
+  if(level >= 1 && !goldUnlocked){
+    goldUnlocked = true;
+    document.getElementById("goldBrushCard").classList.remove("locked");
+    unlockText.textContent = "Gold Brush unlocked!";
+  }
+  const name = awards[Math.min(level - 1, awards.length - 1)];
+  awardTitle.textContent = name;
+  awardMessage.textContent = "You rescued the " + chosenPet + " and unlocked a superstar style!";
+  beforePhoto.innerHTML = `<div class="pet">${petHTML(false)}</div>`;
+  afterPhoto.innerHTML = `<div class="pet happy">${petHTML(true)}</div>`;
+  bigExplosion();
+  victorySound();
+  setTimeout(() => {
+    award.classList.add("show");
+  }, 500);
+}
+function nextLevel(){
+  level++;
+  award.classList.remove("show");
+  applyPetTheme();
+  resetLevel();
+}
+function backHome(){
+  gameScreen.classList.remove("show");
+  homeScreen.classList.add("show");
+  award.classList.remove("show");
+}
+function miniBurst(x,y){
+  for(let i=0;i<10;i++){
+    const b = document.createElement("div");
+    b.className = "burst";
+    b.style.left = x + "px";
+    b.style.top = y + "px";
+    b.style.setProperty("--x",(Math.random()*160-80)+"px");
+    b.style.setProperty("--y",(Math.random()*160-80)+"px");
+    b.style.background = ["#fff35c","#ff7ad9","#42d9ff","#ffffff"][Math.floor(Math.random()*4)];
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(),1000);
+  }
+}
+function bigExplosion(){
+  const colours = ["#fff35c","#ff7ad9","#42d9ff","#8b5cff","#ffffff","#00ff99"];
+  for(let i=0;i<170;i++){
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random()*100 + "vw";
+    c.style.background = colours[Math.floor(Math.random()*colours.length)];
+    c.style.animationDelay = Math.random()*.5 + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(),2600);
+  }
+  for(let i=0;i<110;i++){
+    const b = document.createElement("div");
+    b.className = "burst";
+    b.style.setProperty("--x",(Math.random()*1000-500)+"px");
+    b.style.setProperty("--y",(Math.random()*760-380)+"px");
+    b.style.background = colours[Math.floor(Math.random()*colours.length)];
+    document.body.appendChild(b);
+    setTimeout(() => b.remove(),1200);
+  }
+}
+function cuteSound(freq){
   try{
     const audio = new AudioContext();
     const osc = audio.createOscillator();
     const gain = audio.createGain();
     osc.connect(gain);
     gain.connect(audio.destination);
-    osc.frequency.value = 650 + Math.random() * 350;
-    gain.gain.setValueAtTime(0.08, audio.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + 0.14);
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(.07,audio.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.16);
     osc.start();
-    osc.stop(audio.currentTime + 0.14);
+    osc.stop(audio.currentTime+.16);
   }catch(e){}
 }
-function toggleSound(){
-  soundOn = !soundOn;
-  soundButton.textContent = soundOn ? "Sound: On 🔊" : "Sound: Off 🔇";
+function victorySound(){
+  cuteSound(520);
+  setTimeout(() => cuteSound(680),130);
+  setTimeout(() => cuteSound(840),260);
 }
-function addSparkles(amount){
-  sparklePower = Math.min(100, sparklePower + amount);
-  meterFill.style.width = sparklePower + "%";
-}
-function createSparkle(x,y){
-  const s = document.createElement("div");
-  s.className = "sparkle";
-  s.style.left = x + "px";
-  s.style.top = y + "px";
-  document.body.appendChild(s);
-  setTimeout(() => s.remove(), 700);
-}
-function showWrongX(x,y){
-  const xMark = document.createElement("div");
-  xMark.className = "wrong-x";
-  xMark.textContent = "✕";
-  xMark.style.left = x + "px";
-  xMark.style.top = y + "px";
-  document.body.appendChild(xMark);
-  setTimeout(() => xMark.remove(), 550);
-}
-function confettiCannon(){
-  const colors = ["#fff35c","#ff7ad9","#42d9ff","#8b5cff","#ffffff","#00ff99"];
-  for(let i=0;i<90;i++){
-    const c = document.createElement("div");
-    c.className = "confetti";
-    c.style.left = Math.random() * 100 + "vw";
-    c.style.background = colors[Math.floor(Math.random() * colors.length)];
-    c.style.animationDelay = Math.random() * .4 + "s";
-    c.style.transform = "rotate(" + Math.random() * 360 + "deg)";
-    document.body.appendChild(c);
-    setTimeout(() => c.remove(), 2400);
-  }
-}
-function changeTheme(name){
-  const root = document.documentElement;
-  const colours = themes[name];
-  root.style.setProperty("--a", colours[0]);
-  root.style.setProperty("--b", colours[1]);
-  root.style.setProperty("--c", colours[2]);
-  root.style.setProperty("--d", colours[3]);
-  kimiBox.textContent = "Kimi says: Nice theme choice!";
-  addSparkles(6);
-  popSound();
-}
-function showKimiTip(){
-  const tip = kimiTips[Math.floor(Math.random() * kimiTips.length)];
-  kimiBox.textContent = tip;
-  addSparkles(4);
-  popSound();
-}
-function resetGame(){
-  document.body.classList.add("playing");
-  prize.classList.remove("show");
-  playZone.innerHTML = "";
-  points = 0;
-  brushProgress = 0;
-  timeLeft = startingTime;
-  gameRunning = true;
-  score.textContent = "Score: 0";
-  timer.textContent = "Time: " + timeLeft;
-  levelBox.textContent = "Level: " + playerLevel;
-  clearInterval(gameTimer);
-  clearInterval(spawnTimer);
-  gameTimer = setInterval(() => {
-    timeLeft--;
-    timer.textContent = "Time: " + timeLeft;
-    if(timeLeft <= 0){
-      loseGame();
-    }
-  }, 1000);
-}
-function startTapGame(){
-  currentGame = "tap";
-  resetGame();
-  gameTitle.textContent = "Find the Hairbrush!";
-  instruction.textContent = "Tap ONLY the hairbrush. Wrong taps get a big red X!";
-  message.textContent = "Find the brush!";
-  score.textContent = "Score: 0 / " + targetScoreTapGame;
-  spawnTapRound();
-  spawnTimer = setInterval(() => {
-    if(gameRunning){
-      spawnTapRound();
-    }
-  }, 1400);
-}
-function startDailyChallenge(){
-  currentGame = "daily";
-  resetGame();
-  gameTitle.textContent = "Daily Brush Challenge!";
-  instruction.textContent = "Quick challenge! Tap 6 hairbrushes before time runs out.";
-  message.textContent = "Daily sparkle time!";
-  score.textContent = "Score: 0 / " + dailyChallengeScore;
-  spawnTapRound();
-  spawnTimer = setInterval(() => {
-    if(gameRunning){
-      spawnTapRound();
-    }
-  }, 1200);
-}
-function spawnTapRound(){
-  playZone.innerHTML = "";
-  const targetNeeded = currentGame === "daily" ? dailyChallengeScore : targetScoreTapGame;
-  const items = ["BRUSH"];
-  while(items.length < 4){
-    items.push(wrongEmojis[Math.floor(Math.random() * wrongEmojis.length)]);
-  }
-  items.sort(() => Math.random() - .5);
-  items.forEach(itemValue => {
-    const item = document.createElement("div");
-    item.className = "target";
-    if(itemValue === "BRUSH"){
-      item.classList.add("brush-target");
-      item.appendChild(makeBrush());
-    } else {
-      item.textContent = itemValue;
-    }
-    const maxX = playZone.clientWidth - 90;
-    const maxY = playZone.clientHeight - 90;
-    item.style.left = Math.max(8, Math.random() * maxX) + "px";
-    item.style.top = Math.max(8, Math.random() * maxY) + "px";
-    item.onclick = function(e){
-      if(!gameRunning) return;
-      if(itemValue === "BRUSH"){
-        points++;
-        score.textContent = "Score: " + points + " / " + targetNeeded;
-        message.textContent = "Great brushing!";
-        popSound();
-        addSparkles(8);
-        for(let i=0;i<12;i++){
-          createSparkle(e.clientX,e.clientY);
-        }
-        if(points >= targetNeeded){
-          winGame();
-        } else {
-          spawnTapRound();
-        }
-      } else {
-        message.textContent = "Oops! Only tap the hairbrush!";
-        showWrongX(e.clientX,e.clientY);
-      }
-    };
-    playZone.appendChild(item);
-  });
-}
-function startStraightGame(){
-  currentGame = "straight";
-  resetGame();
-  gameTitle.textContent = "Brush Hair Straight!";
-  instruction.textContent = "Tap the curly hair until it becomes smooth and straight.";
-  message.textContent = "Start brushing the curls!";
-  score.textContent = "Brushes: 0 / " + targetBrushesStraightGame;
-  drawHair();
-}
-function drawHair(){
-  playZone.innerHTML = "";
-  const area = document.createElement("div");
-  area.className = "hair-area";
-  let hairEmoji = "👩‍🦱";
-  let status = "Very curly!";
-  if(brushProgress > 4){
-    hairEmoji = "💇‍♀️";
-    status = "Getting smoother!";
-  }
-  if(brushProgress > 8){
-    hairEmoji = "👩";
-    status = "Almost straight!";
-  }
-  area.innerHTML = `
-    <div>${hairEmoji}</div>
-    <div class="hair-status">${status}</div>
-  `;
-  area.onclick = function(e){
-    if(!gameRunning) return;
-    brushProgress++;
-    score.textContent = "Brushes: " + brushProgress + " / " + targetBrushesStraightGame;
-    message.textContent = "Brush, brush, brush!";
-    popSound();
-    addSparkles(7);
-    for(let i=0;i<12;i++){
-      createSparkle(e.clientX,e.clientY);
-    }
-    if(brushProgress >= targetBrushesStraightGame){
-      winGame();
-    } else {
-      drawHair();
-    }
-  };
-  playZone.appendChild(area);
-}
-function startDinoGame(){
-  currentGame = "dino";
-  resetGame();
-  gameTitle.textContent = "Dino Hair Salon!";
-  instruction.textContent = "Tap the messy dino to brush its wild hair into a superstar style!";
-  message.textContent = "Brush the dino!";
-  score.textContent = "Brushes: 0 / " + salonBrushesNeeded;
-  drawSalonCharacter("dino");
-}
-function startMonsterGame(){
-  currentGame = "monster";
-  resetGame();
-  gameTitle.textContent = "Monster Hair Rescue!";
-  instruction.textContent = "Tap the monster to rescue it from silly messy bed hair!";
-  message.textContent = "Help the monster!";
-  score.textContent = "Brushes: 0 / " + monsterBrushesNeeded;
-  drawSalonCharacter("monster");
-}
-function drawSalonCharacter(type){
-  playZone.innerHTML = "";
-  const area = document.createElement("div");
-  area.className = "hair-area";
-  const needed = type === "dino" ? salonBrushesNeeded : monsterBrushesNeeded;
-  const percent = Math.min(100, Math.round((brushProgress / needed) * 100));
-  let character = type === "dino" ? "🦖" : "👹";
-  let hair = "🌪️ Messy hair!";
-  let extra = "🪮";
-  if(brushProgress > needed * .33){
-    hair = "✨ Getting smoother!";
-    extra = "💫";
-  }
-  if(brushProgress > needed * .66){
-    hair = type === "dino" ? "🌈 Dino style!" : "🎀 Monster style!";
-    extra = type === "dino" ? "👑" : "😎";
-  }
-  area.innerHTML = `
-    <div class="character">${character}</div>
-    <div style="font-size:44px">${extra}</div>
-    <div class="hair-status">${hair}</div>
-    <div class="progress-bar">
-      <div class="progress-fill" style="width:${percent}%"></div>
-    </div>
-  `;
-  area.onclick = function(e){
-    if(!gameRunning) return;
-    brushProgress++;
-    score.textContent = "Brushes: " + brushProgress + " / " + needed;
-    message.textContent = type === "dino" ? "Dino is getting stylish!" : "Monster hair rescue!";
-    popSound();
-    addSparkles(7);
-    for(let i=0;i<14;i++){
-      createSparkle(e.clientX,e.clientY);
-    }
-    if(brushProgress >= needed){
-      winGame();
-    } else {
-      drawSalonCharacter(type);
-    }
-  };
-  playZone.appendChild(area);
-}
-function winGame(){
-  gameRunning = false;
-  clearInterval(gameTimer);
-  clearInterval(spawnTimer);
-  playZone.innerHTML = "";
-  const prizeName = prizes[Math.min(playerLevel - 1, prizes.length - 1)];
-  if(unlockedStickers < stickerList.length){
-    unlockedStickers++;
-    buildStickers();
-  }
-  prizeTitle.textContent = prizeName;
-  prizeText.textContent = "Amazing! You reached Level " + playerLevel + " and unlocked a new sticker!";
-  badge.textContent = "Current Level: " + prizeName;
-  playerLevel++;
-  addSparkles(100);
-  confettiCannon();
-  setTimeout(() => {
-    prize.classList.add("show");
-  }, 350);
-}
-function loseGame(){
-  gameRunning = false;
-  clearInterval(gameTimer);
-  clearInterval(spawnTimer);
-  playZone.innerHTML = "";
-  message.textContent = "Time up! Try again!";
-  setTimeout(endGame, 1200);
-}
-function playAgain(){
-  if(currentGame === "tap"){
-    startTapGame();
-  } else if(currentGame === "daily"){
-    startDailyChallenge();
-  } else if(currentGame === "straight"){
-    startStraightGame();
-  } else if(currentGame === "dino"){
-    startDinoGame();
-  } else if(currentGame === "monster"){
-    startMonsterGame();
-  }
-}
-function endGame(){
-  gameRunning = false;
-  clearInterval(gameTimer);
-  clearInterval(spawnTimer);
-  playZone.innerHTML = "";
-  prize.classList.remove("show");
-  document.body.classList.remove("playing");
-}
+stage.addEventListener("mousedown", e => {
+  brushing = true;
+  const pos = pointerPosition(e);
+  lastX = pos.x;
+  lastY = pos.y;
+  moveBrush(pos.x,pos.y);
+});
+stage.addEventListener("mousemove", brushMove);
+window.addEventListener("mouseup", () => {
+  brushing = false;
+  brush.classList.remove("show");
+});
+stage.addEventListener("touchstart", e => {
+  brushing = true;
+  const pos = pointerPosition(e);
+  lastX = pos.x;
+  lastY = pos.y;
+  moveBrush(pos.x,pos.y);
+},{passive:false});
+stage.addEventListener("touchmove", brushMove,{passive:false});
+window.addEventListener("touchend", () => {
+  brushing = false;
+  brush.classList.remove("show");
+});
 </script>
 </body>
 </html>
