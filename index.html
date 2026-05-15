@@ -2,949 +2,251 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>KimiBrush Magic</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Kimi Kirei Avo Mania</title>
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --a:#ff7ad9;
-  --b:#8b5cff;
-  --c:#42d9ff;
-  --d:#ffe86b;
-  --ink:#42105f;
+  --cream:#fff7df;--green:#2f6f22;--lime:#bde86a;--pink:#ff6f9f;--yellow:#ffe066;
+  --brown:#7b4a22;--dark:#12320f;--glass:rgba(255,255,255,.78);
 }
 body{
-  margin:0;
-  min-height:100vh;
-  overflow:hidden;
+  margin:0;min-height:100vh;overflow:hidden;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-  color:white;
-  background:linear-gradient(135deg,var(--a),var(--b),var(--c),var(--d));
-  background-size:400% 400%;
-  animation:bgMove 12s ease infinite;
+  color:var(--dark);
+  background:
+    radial-gradient(circle at 20% 12%,rgba(255,255,255,.9),transparent 22%),
+    radial-gradient(circle at 85% 80%,rgba(189,232,106,.45),transparent 25%),
+    linear-gradient(135deg,#fff2cf,#d9f5a7,#fff7df);
 }
 body::before{
-  content:"";
-  position:fixed;
-  inset:0;
+  content:"";position:fixed;inset:0;z-index:-2;
   background:url("Kimi.jpeg") center/cover no-repeat;
-  opacity:.5;
-  z-index:-3;
+  opacity:.16;filter:saturate(1.05);
 }
 body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:linear-gradient(rgba(35,0,60,.32),rgba(35,0,60,.25));
-  z-index:-2;
-}
-@keyframes bgMove{
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
+  content:"";position:fixed;inset:0;z-index:-1;
+  background-image:
+    radial-gradient(circle,#7dbb42 0 7px,transparent 8px),
+    radial-gradient(circle,#f4c36b 0 5px,transparent 6px);
+  background-size:90px 90px,130px 130px;
+  background-position:0 0,40px 20px;
+  opacity:.13;
 }
 button{font-family:inherit}
+.floater{
+  position:fixed;z-index:1;pointer-events:none;font-weight:1000;
+  color:rgba(47,111,34,.18);font-size:clamp(38px,8vw,110px);
+  animation:floaty 9s ease-in-out infinite;
+}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-35px) rotate(9deg)}}
+.soundbar{
+  position:fixed;top:10px;right:10px;z-index:80;display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end
+}
+.soundbar button,.pillBtn{
+  border:0;border-radius:999px;padding:11px 14px;background:#fff;color:var(--green);
+  font-weight:1000;box-shadow:0 6px 0 rgba(47,111,34,.18);cursor:pointer
+}
 .logo{
-  position:fixed;
-  top:10px;
-  left:50%;
-  transform:translateX(-50%);
-  z-index:100;
-  padding:10px 18px;
-  border-radius:999px;
-  background:rgba(255,255,255,.4);
-  border:2px solid rgba(255,255,255,.7);
-  backdrop-filter:blur(14px);
-  font-weight:1000;
+  position:fixed;top:10px;left:10px;z-index:80;border-radius:24px;background:rgba(255,255,255,.75);
+  border:2px solid rgba(47,111,34,.25);padding:10px 14px;font-weight:1000;backdrop-filter:blur(12px)
 }
-.screen{
-  position:fixed;
-  inset:0;
-  display:none;
-  overflow-y:auto;
-  padding:76px 16px 26px;
-  text-align:center;
+.screen{position:fixed;inset:0;display:none;padding:82px 18px 22px;overflow:auto;text-align:center}
+.screen.show{display:block}
+h1{margin:0;font-size:clamp(46px,12vw,120px);line-height:.85;color:var(--green);text-shadow:0 7px 0 rgba(47,111,34,.15)}
+.sub{font-size:clamp(18px,3vw,28px);font-weight:900;max-width:900px;margin:14px auto 18px}
+.menu{
+  width:min(1060px,96vw);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:14px
 }
-.screen.show{
-  display:block;
+.card{
+  min-height:230px;border:4px solid #fff;border-radius:36px;background:var(--glass);padding:18px;cursor:pointer;
+  box-shadow:0 14px 0 rgba(47,111,34,.14),0 0 40px rgba(255,255,255,.65);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transition:.2s
 }
-h1{
-  margin:0;
-  font-size:clamp(42px,11vw,90px);
-  line-height:.9;
-  font-weight:1000;
-  text-shadow:0 7px 0 rgba(76,20,120,.35),0 0 28px rgba(0,0,0,.4);
-}
-.sub{
-  max-width:760px;
-  margin:14px auto 18px;
-  font-size:clamp(18px,3vw,26px);
-  font-weight:1000;
-  line-height:1.25;
-  text-shadow:0 3px 12px rgba(0,0,0,.35);
-}
-.panel{
-  width:min(94vw,900px);
-  margin:14px auto;
-  padding:16px;
-  border-radius:36px;
-  background:rgba(255,255,255,.86);
-  color:var(--ink);
-  box-shadow:0 14px 0 rgba(91,36,122,.22),0 0 42px rgba(255,255,255,.65);
-}
-.pet-grid,.brush-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-.pick-card{
-  border:3px solid rgba(255,255,255,.9);
-  border-radius:28px;
-  padding:12px;
-  background:linear-gradient(160deg,#fff,#ffe8f7);
-  color:var(--ink);
-  cursor:pointer;
-  font-weight:1000;
-  box-shadow:0 9px 0 rgba(91,36,122,.18);
-}
-.pick-card.locked{
-  opacity:.45;
-  filter:grayscale(1);
-}
-.pick-card.selected{
-  outline:5px solid #fff35c;
-  transform:scale(1.03);
-}
-.pet-preview{
-  height:120px;
-  position:relative;
-}
-.pick-emoji{
-  font-size:54px;
-  margin-top:14px;
-}
-.big-btn,.back,.award button{
-  border:0;
-  border-radius:999px;
-  padding:16px 24px;
-  font-size:19px;
-  font-weight:1000;
-  color:white;
-  background:linear-gradient(135deg,#7b2cbf,#ff4fb8);
-  box-shadow:0 8px 0 rgba(91,36,122,.25);
-  cursor:pointer;
-  margin:6px;
-}
-.big-btn:active,.back:active,.award button:active{
-  transform:translateY(4px);
-  box-shadow:0 4px 0 rgba(91,36,122,.25);
-}
-/* GAME */
-.game{
-  position:fixed;
-  inset:0;
-  display:none;
-  flex-direction:column;
-  align-items:center;
-  padding:68px 12px 18px;
-  text-align:center;
-}
-.game.show{
-  display:flex;
-}
-.game h2{
-  margin:0 0 6px;
-  font-size:clamp(34px,8vw,70px);
-  line-height:.95;
-  font-weight:1000;
-  text-shadow:0 5px 0 rgba(76,20,120,.3);
-}
-.instruction{
-  max-width:760px;
-  margin:0 0 10px;
-  font-size:clamp(17px,3vw,23px);
-  font-weight:1000;
-  text-shadow:0 3px 12px rgba(0,0,0,.38);
-}
-.hud{
-  width:min(94vw,760px);
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:10px;
-}
-.pill{
-  background:white;
-  color:var(--ink);
-  border-radius:999px;
-  padding:10px 15px;
-  font-weight:1000;
-  box-shadow:0 7px 0 rgba(91,36,122,.16);
-}
-.progress-wrap{
-  width:min(90vw,520px);
-  height:28px;
-  border-radius:999px;
-  background:rgba(255,255,255,.5);
-  border:3px solid white;
-  overflow:hidden;
-  box-shadow:0 7px 0 rgba(91,36,122,.14);
-}
-.progress{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,#fff35c,#ff7ad9,#42d9ff);
-  transition:.15s linear;
-}
+.card:active{transform:translateY(5px);box-shadow:0 8px 0 rgba(47,111,34,.14)}
+.card .emoji{font-size:74px;filter:drop-shadow(0 10px 0 rgba(47,111,34,.12))}
+.card h2{margin:0;font-size:28px;color:var(--green)}
+.card p{margin:0;font-weight:800;font-size:17px}
+.game{position:fixed;inset:0;display:none;flex-direction:column;align-items:center;padding:76px 12px 12px;text-align:center}
+.game.show{display:flex}
+.game h2{margin:0;font-size:clamp(32px,7vw,72px);line-height:.9;color:var(--green);text-shadow:0 5px 0 rgba(47,111,34,.12)}
+.hud{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+.pill{background:#fff;border-radius:999px;padding:10px 14px;font-weight:1000;box-shadow:0 7px 0 rgba(47,111,34,.13)}
+.bar{width:min(540px,86vw);height:28px;border:3px solid white;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.5)}
+.fill{height:100%;width:0%;background:linear-gradient(90deg,#7ec850,#ffe066,#ff6f9f);transition:.1s}
 .stage{
-  position:relative;
-  width:min(94vw,760px);
-  height:min(58vh,500px);
-  border-radius:38px;
-  background:rgba(255,255,255,.25);
-  border:4px solid rgba(255,255,255,.82);
-  box-shadow:inset 0 0 45px rgba(255,255,255,.22),0 18px 55px rgba(60,0,100,.25);
-  overflow:hidden;
-  touch-action:none;
+  position:relative;width:min(980px,96vw);height:min(62vh,560px);border-radius:40px;overflow:hidden;
+  border:5px solid white;background:linear-gradient(160deg,rgba(255,255,255,.75),rgba(202,240,145,.6));
+  box-shadow:inset 0 0 60px rgba(255,255,255,.4),0 20px 50px rgba(47,111,34,.2);
+  touch-action:none
 }
-.stage::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at 50% 28%,rgba(255,255,255,.4),transparent 45%);
-  pointer-events:none;
+.avocado{
+  position:absolute;left:50%;top:50%;width:250px;height:330px;transform:translate(-50%,-50%);
+  border-radius:55% 55% 50% 50%;background:linear-gradient(145deg,#98ca45,#2f7b2c);
+  box-shadow:inset -24px -24px 0 rgba(0,0,0,.12),0 18px 0 rgba(47,111,34,.15)
 }
-.reward-text{
-  position:absolute;
-  left:50%;
-  top:18px;
-  transform:translateX(-50%);
-  font-size:28px;
-  font-weight:1000;
-  color:#fff35c;
-  text-shadow:0 4px 10px rgba(0,0,0,.35);
-  z-index:30;
+.avocado::before{
+  content:"";position:absolute;left:34px;top:45px;width:180px;height:230px;border-radius:50%;
+  background:linear-gradient(#f7ffd1,#cde67a)
 }
-/* DRAWN PET */
-.pet{
-  position:absolute;
-  left:50%;
-  top:52%;
-  width:300px;
-  height:300px;
-  transform:translate(-50%,-50%);
-  transition:.2s ease;
+.avocado::after{
+  content:"";position:absolute;left:88px;top:155px;width:75px;height:75px;border-radius:50%;
+  background:radial-gradient(circle at 30% 25%,#a86b2c,#6f3b16)
 }
-.pet.happy{
-  animation:petDance .55s ease-in-out infinite;
+.face{position:absolute;left:78px;top:92px;width:95px;height:45px}
+.eye{position:absolute;top:0;width:16px;height:22px;background:#17360f;border-radius:50%}
+.eye.l{left:12px}.eye.r{right:12px}
+.mouth{position:absolute;left:34px;top:22px;width:28px;height:16px;border-bottom:5px solid #17360f;border-radius:0 0 999px 999px}
+.cutline{position:absolute;inset:0;border-radius:inherit;border-right:8px dashed rgba(255,255,255,.95);opacity:.9}
+.peel{
+  position:absolute;width:80px;height:160px;border-radius:80px;background:linear-gradient(#5c9e32,#245c1f);
+  opacity:0;transform:scale(.3);transition:.25s
 }
-@keyframes petDance{
-  0%,100%{transform:translate(-50%,-50%) rotate(-4deg) scale(1)}
-  50%{transform:translate(-50%,-54%) rotate(4deg) scale(1.04)}
+.peel.show{opacity:1;transform:scale(1) rotate(var(--r))}
+.peel.p1{left:18%;top:24%;--r:-35deg}.peel.p2{right:18%;top:26%;--r:35deg}.peel.p3{left:43%;bottom:4%;--r:5deg}
+.tool{
+  position:absolute;z-index:20;pointer-events:none;transform:translate(-50%,-50%);font-size:72px;filter:drop-shadow(0 12px 0 rgba(0,0,0,.12));display:none
 }
-.body{
-  position:absolute;
-  left:50%;
-  top:86px;
-  width:205px;
-  height:170px;
-  transform:translateX(-50%);
-  border-radius:48% 48% 42% 42%;
-  background:linear-gradient(160deg,var(--pet1),var(--pet2));
-  box-shadow:inset -18px -22px 0 rgba(0,0,0,.12),0 12px 0 rgba(64,0,100,.18);
+.target{position:absolute;font-size:62px;cursor:pointer;user-select:none;filter:drop-shadow(0 10px 0 rgba(47,111,34,.18));animation:wiggle .7s infinite alternate}
+@keyframes wiggle{to{transform:rotate(12deg) scale(1.08)}}
+.slice{position:absolute;width:22px;height:120px;border-radius:999px;background:white;opacity:.86;transform:rotate(var(--rot));animation:slash .45s forwards;pointer-events:none}
+@keyframes slash{from{transform:scale(.3) rotate(var(--rot));opacity:1}to{transform:scale(1.5) rotate(var(--rot));opacity:0}}
+.splat{position:absolute;width:95px;height:70px;border-radius:50%;background:#b9e35a;opacity:.9;animation:splat .7s forwards;pointer-events:none}
+@keyframes splat{to{transform:scale(1.7);opacity:0}}
+.bigText{
+  position:absolute;left:50%;top:18px;transform:translateX(-50%);font-size:clamp(22px,5vw,44px);
+  color:#ff6f9f;font-weight:1000;text-shadow:0 3px 0 white;z-index:30;white-space:nowrap
 }
-.face{
-  position:absolute;
-  left:50%;
-  top:92px;
-  width:175px;
-  height:142px;
-  transform:translateX(-50%);
-  border-radius:48%;
-  background:linear-gradient(160deg,var(--face1),var(--face2));
-  box-shadow:inset -10px -14px 0 rgba(120,0,80,.08);
-  z-index:4;
-}
-.ear{
-  position:absolute;
-  top:66px;
-  width:72px;
-  height:92px;
-  background:var(--pet2);
-  border-radius:50% 50% 45% 45%;
-  z-index:2;
-}
-.ear.left{left:42px;transform:rotate(-28deg)}
-.ear.right{right:42px;transform:rotate(28deg)}
-.eye{
-  position:absolute;
-  top:54px;
-  width:22px;
-  height:28px;
-  border-radius:50%;
-  background:#231033;
-  z-index:6;
-}
-.eye.left{left:52px}
-.eye.right{right:52px}
-.eye::after{
-  content:"";
-  position:absolute;
-  top:5px;
-  left:5px;
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:white;
-}
-.nose{
-  position:absolute;
-  left:50%;
-  top:84px;
-  transform:translateX(-50%);
-  width:28px;
-  height:22px;
-  border-radius:50%;
-  background:#42105f;
-  z-index:6;
-}
-.mouth{
-  position:absolute;
-  left:50%;
-  top:111px;
-  width:54px;
-  height:26px;
-  transform:translateX(-50%);
-  border-bottom:7px solid #42105f;
-  border-radius:0 0 999px 999px;
-  z-index:6;
-}
-.pet.happy .mouth{
-  height:34px;
-  background:#42105f;
-  border:0;
-  border-radius:0 0 999px 999px;
-}
-.hair{
-  position:absolute;
-  left:50%;
-  top:26px;
-  width:230px;
-  height:150px;
-  transform:translateX(-50%);
-  z-index:5;
-  pointer-events:none;
-}
-.tuft{
-  position:absolute;
-  width:30px;
-  height:100px;
-  border-radius:999px;
-  background:linear-gradient(#2a1238,var(--hair1));
-  transform-origin:bottom center;
-  transition:.25s ease;
-  box-shadow:0 7px 0 rgba(0,0,0,.1);
-}
-.smooth .tuft{
-  height:66px;
-  border-radius:999px 999px 18px 18px;
-  transform:rotate(0deg)!important;
-  background:linear-gradient(var(--hair2),var(--hair1));
-}
-.t1{left:18px;top:42px;transform:rotate(-62deg)}
-.t2{left:44px;top:14px;transform:rotate(-38deg)}
-.t3{left:78px;top:0;transform:rotate(-18deg)}
-.t4{left:112px;top:-6px;transform:rotate(7deg)}
-.t5{left:145px;top:4px;transform:rotate(25deg)}
-.t6{left:172px;top:28px;transform:rotate(48deg)}
-.t7{left:96px;top:25px;transform:rotate(78deg)}
-.t8{left:130px;top:30px;transform:rotate(-76deg)}
-.brush{
-  position:absolute;
-  width:90px;
-  height:38px;
-  border-radius:999px;
-  background:var(--brushMain);
-  z-index:20;
-  pointer-events:none;
-  transform:translate(-50%,-50%) rotate(-22deg);
-  box-shadow:inset 0 -7px 0 rgba(0,0,0,.18),0 8px 18px rgba(0,0,0,.22);
-  opacity:0;
-}
-.brush.show{opacity:1}
-.brush::before{
-  content:"";
-  position:absolute;
-  left:-42px;
-  top:12px;
-  width:52px;
-  height:14px;
-  border-radius:999px;
-  background:var(--brushHandle);
-}
-.brush::after{
-  content:"";
-  position:absolute;
-  right:10px;
-  top:36px;
-  width:60px;
-  height:34px;
-  background:repeating-linear-gradient(90deg,#fff 0 5px,transparent 5px 10px);
-}
-.stroke{
-  position:absolute;
-  width:24px;
-  height:24px;
-  border-radius:50%;
-  background:rgba(255,255,255,.8);
-  pointer-events:none;
-  z-index:18;
-  animation:strokeFade .55s ease forwards;
-}
-@keyframes strokeFade{
-  to{transform:scale(2.4);opacity:0}
-}
-/* BEFORE AFTER */
-.photo-row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin:12px 0;
-}
-.photo{
-  border-radius:28px;
-  background:linear-gradient(160deg,#f8eaff,#ffffff);
-  padding:12px;
-  font-weight:1000;
-  box-shadow:0 8px 0 rgba(91,36,122,.14);
-}
-.photo-pet{
-  position:relative;
-  height:155px;
-  overflow:hidden;
-}
-.photo-pet .pet{
-  transform:translate(-50%,-50%) scale(.5);
-  left:50%;
-  top:50%;
-}
-/* AWARD */
-.award{
-  position:fixed;
-  inset:0;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:400;
-  background:rgba(55,0,85,.62);
-  backdrop-filter:blur(8px);
-  padding:18px;
-}
+.blasterShot{position:absolute;width:20px;height:20px;border-radius:50%;background:#ff6f9f;box-shadow:0 0 20px #ff6f9f;pointer-events:none}
+.award{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;background:rgba(47,111,34,.45);backdrop-filter:blur(10px);padding:18px}
 .award.show{display:flex}
-.award-card{
-  width:min(94vw,860px);
-  max-height:92vh;
-  overflow-y:auto;
-  background:white;
-  color:var(--ink);
-  border-radius:42px;
-  text-align:center;
-  padding:28px 18px;
-  box-shadow:0 22px 0 rgba(60,0,100,.28),0 0 80px rgba(255,255,255,.9);
-  animation:awardPop .7s ease;
-}
-@keyframes awardPop{
-  from{transform:scale(.45) rotate(-10deg);opacity:0}
-  70%{transform:scale(1.05) rotate(3deg)}
-  to{transform:scale(1) rotate(0);opacity:1}
-}
-.big-award{
-  font-size:clamp(46px,12vw,116px);
-  line-height:.9;
-  font-weight:1000;
-  margin:0;
-}
-.award-card p{
-  font-size:22px;
-  font-weight:1000;
-  margin:10px 0 14px;
-}
-.dancers{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  font-size:54px;
-  margin:12px 0;
-}
-.dancer{
-  animation:dance .45s ease-in-out infinite;
-}
-.dancer:nth-child(2){animation-delay:.1s}
-.dancer:nth-child(3){animation-delay:.2s}
-@keyframes dance{
-  0%,100%{transform:translateY(0) rotate(-10deg)}
-  50%{transform:translateY(-18px) rotate(10deg)}
-}
-.confetti{
-  position:fixed;
-  top:-20px;
-  width:14px;
-  height:22px;
-  z-index:500;
-  pointer-events:none;
-  animation:fall 2.2s linear forwards;
-}
-@keyframes fall{
-  to{transform:translateY(112vh) rotate(900deg);opacity:.1}
-}
-.burst{
-  position:fixed;
-  left:50%;
-  top:50%;
-  width:18px;
-  height:18px;
-  border-radius:50%;
-  background:white;
-  z-index:480;
-  pointer-events:none;
-  animation:burst 1s ease-out forwards;
-}
-@keyframes burst{
-  to{
-    transform:translate(var(--x),var(--y)) scale(.2);
-    opacity:0;
-  }
-}
+.awardBox{width:min(760px,94vw);background:white;border-radius:44px;padding:26px 18px;text-align:center;box-shadow:0 22px 0 rgba(47,111,34,.25)}
+.awardBox h2{font-size:clamp(42px,10vw,90px);line-height:.88;margin:0;color:var(--green)}
+.awardBox p{font-size:22px;font-weight:900}
+.confetti{position:fixed;top:-30px;width:15px;height:24px;z-index:300;animation:fall 2.3s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(800deg);opacity:.15}}
 @media(max-width:760px){
-  .pet-grid,.brush-grid{
-    grid-template-columns:1fr;
-  }
-  .stage{height:55vh}
-  .pet{width:260px;height:260px}
-  .body{width:185px;height:150px}
-  .face{width:158px;height:128px}
-  .hair{transform:translateX(-50%) scale(.86)}
-  .dancers{font-size:42px}
-  .photo-row{grid-template-columns:1fr 1fr}
-  .photo-pet{height:120px}
+  .menu{grid-template-columns:1fr}.card{min-height:170px}
+  .soundbar{left:10px;top:auto;bottom:10px;justify-content:center}
+  .logo{font-size:13px}.screen{padding-top:70px}.game{padding-top:68px;padding-bottom:66px}
+  .stage{height:57vh}.avocado{width:200px;height:270px}.avocado::before{left:28px;top:38px;width:144px;height:185px}.avocado::after{left:70px;top:130px}
 }
 </style>
 </head>
 <body>
-<div class="logo">KIMIBRUSH ✨</div>
-<div class="screen show" id="homeScreen">
-  <h1>Pet Brush Rescue</h1>
-  <p class="sub">Choose a messy pet, pick your brush, then use real brush strokes to make them shine!</p>
-  <div class="panel">
-    <h2>Choose Your Pet 🐾</h2>
-    <div class="pet-grid">
-      <button class="pick-card selected" onclick="choosePet('puppy',this)">
-        <div class="pick-emoji">🐶</div>
-        <h3>Messy Puppy</h3>
-      </button>
-      <button class="pick-card" onclick="choosePet('dino',this)">
-        <div class="pick-emoji">🦖</div>
-        <h3>Dino Fluff</h3>
-      </button>
-      <button class="pick-card" onclick="choosePet('monster',this)">
-        <div class="pick-emoji">👹</div>
-        <h3>Bed Hair Monster</h3>
-      </button>
-    </div>
-  </div>
-  <div class="panel">
-    <h2>Unlockable Brushes 🪄</h2>
-    <div class="brush-grid">
-      <button class="pick-card selected" onclick="chooseBrush('magic',this)">
-        <div class="pick-emoji">💜</div>
-        <h3>Magic Brush</h3>
-      </button>
-      <button class="pick-card" id="rainbowBrushCard" onclick="chooseBrush('rainbow',this)">
-        <div class="pick-emoji">🌈</div>
-        <h3>Rainbow Brush</h3>
-      </button>
-      <button class="pick-card locked" id="goldBrushCard" onclick="chooseBrush('gold',this)">
-        <div class="pick-emoji">🏆</div>
-        <h3>Gold Brush</h3>
-      </button>
-    </div>
-    <p><strong id="unlockText">Win Level 1 to unlock the Gold Brush!</strong></p>
-    <button class="big-btn" onclick="startGame()">Start Brushing!</button>
-  </div>
+<div class="floater" style="left:7%;top:20%">6</div>
+<div class="floater" style="right:8%;top:18%;animation-delay:1s">7</div>
+<div class="floater" style="left:18%;bottom:12%;animation-delay:2s">7</div>
+<div class="floater" style="right:22%;bottom:14%;animation-delay:3s">6</div>
+
+<div class="logo">KIMI KIREI 🥑 AVO MANIA</div>
+<div class="soundbar">
+  <button onclick="toggleSound()" id="soundBtn">🔊 Sound On</button>
+  <button onclick="playSillySound()">✨ Silly Sound</button>
+  <button onclick="playBeat()">🥁 Beat</button>
 </div>
-<div class="game" id="gameScreen">
-  <h2 id="gameTitle">Brush the Messy Pet!</h2>
-  <div class="instruction">Drag your finger or mouse across the messy hair. Faster brush strokes give bonus sparkle!</div>
+
+<section class="screen show" id="home">
+  <h1>Avo Mania</h1>
+  <p class="sub">Cut it, peel it, mash it, and blast flying avocados with a soft foam popper. Big silly sounds, scores, combos and chaos.</p>
+  <div class="menu">
+    <button class="card" onclick="startMode('peel')"><div class="emoji">🔪🥑</div><h2>Cut & Peel</h2><p>Trace the line, peel the skin, reveal the shiny avo.</p></button>
+    <button class="card" onclick="startMode('mash')"><div class="emoji">🔨🥑</div><h2>Mash Attack</h2><p>Tap fast with the toy hammer and make guacamole splats.</p></button>
+    <button class="card" onclick="startMode('blast')"><div class="emoji">🫧🥑</div><h2>Flying Avo Pop</h2><p>No real guns — just a foam popper for flying avocados.</p></button>
+  </div>
+</section>
+
+<section class="game" id="game">
+  <h2 id="title">Cut & Peel</h2>
   <div class="hud">
-    <div class="pill" id="level">Level 1</div>
+    <div class="pill" id="score">Score: 0</div>
     <div class="pill" id="combo">Combo: 0</div>
-    <div class="pill" id="brushName">Magic Brush</div>
-    <div class="progress-wrap">
-      <div class="progress" id="progress"></div>
-    </div>
+    <div class="pill" id="timer">Time: 45</div>
+    <div class="bar"><div class="fill" id="fill"></div></div>
   </div>
   <div class="stage" id="stage">
-    <div class="reward-text" id="rewardText">Start brushing!</div>
-    <div class="pet" id="pet"></div>
-    <div class="brush" id="brush"></div>
+    <div class="bigText" id="msg">GO!</div>
+    <div class="avocado" id="avo"><div class="cutline"></div><div class="face"><div class="eye l"></div><div class="eye r"></div><div class="mouth"></div></div></div>
+    <div class="peel p1"></div><div class="peel p2"></div><div class="peel p3"></div>
+    <div class="tool" id="tool">🔪</div>
   </div>
-  <button class="back" onclick="backHome()">Back Home</button>
-</div>
+  <button class="pillBtn" onclick="goHome()">Home</button>
+</section>
+
 <div class="award" id="award">
-  <div class="award-card">
-    <h2 class="big-award" id="awardTitle">TANGLE TAMER PRO!</h2>
-    <p id="awardMessage">You rescued the pet’s hair!</p>
-    <div class="photo-row">
-      <div class="photo">
-        <div>BEFORE 😱</div>
-        <div class="photo-pet" id="beforePhoto"></div>
-      </div>
-      <div class="photo">
-        <div>AFTER ✨</div>
-        <div class="photo-pet" id="afterPhoto"></div>
-      </div>
-    </div>
-    <div class="dancers">
-      <span class="dancer" id="dancePet">🐶</span>
-      <span class="dancer">💃</span>
-      <span class="dancer">🌟</span>
-    </div>
-    <button onclick="nextLevel()">Play Next Level</button>
-    <button onclick="backHome()">Home</button>
+  <div class="awardBox">
+    <h2 id="awardTitle">AVO LEGEND!</h2>
+    <p id="awardText">You smashed it.</p>
+    <button class="pillBtn" onclick="startMode(currentMode)">Play Again</button>
+    <button class="pillBtn" onclick="goHome()">Home</button>
   </div>
 </div>
+
 <script>
-const homeScreen = document.getElementById("homeScreen");
-const gameScreen = document.getElementById("gameScreen");
-const stage = document.getElementById("stage");
-const brush = document.getElementById("brush");
-const progress = document.getElementById("progress");
-const rewardText = document.getElementById("rewardText");
-const award = document.getElementById("award");
-const awardTitle = document.getElementById("awardTitle");
-const awardMessage = document.getElementById("awardMessage");
-const pet = document.getElementById("pet");
-const comboBox = document.getElementById("combo");
-const levelBox = document.getElementById("level");
-const brushName = document.getElementById("brushName");
-const beforePhoto = document.getElementById("beforePhoto");
-const afterPhoto = document.getElementById("afterPhoto");
-const dancePet = document.getElementById("dancePet");
-const unlockText = document.getElementById("unlockText");
-const gameTitle = document.getElementById("gameTitle");
-let brushing = false;
-let lastX = 0;
-let lastY = 0;
-let smoothness = 0;
-let combo = 0;
-let level = 1;
-let finished = false;
-let chosenPet = "puppy";
-let chosenBrush = "magic";
-let goldUnlocked = false;
-const pets = {
-  puppy:{
-    emoji:"🐶",
-    title:"Brush the Messy Puppy!",
-    pet1:"#a86cff",
-    pet2:"#6a36c9",
-    face1:"#ffd7ec",
-    face2:"#ff9bd1",
-    hair1:"#7b2cbf",
-    hair2:"#ffcfef"
-  },
-  dino:{
-    emoji:"🦖",
-    title:"Dino Hair Salon!",
-    pet1:"#60e6a8",
-    pet2:"#07885b",
-    face1:"#d9ff9f",
-    face2:"#8ee87a",
-    hair1:"#00a2ff",
-    hair2:"#b9f7ff"
-  },
-  monster:{
-    emoji:"👹",
-    title:"Monster Hair Rescue!",
-    pet1:"#ff8a00",
-    pet2:"#d62828",
-    face1:"#ffe066",
-    face2:"#ffafcc",
-    hair1:"#22223b",
-    hair2:"#f72585"
-  }
-};
-const brushes = {
-  magic:{
-    name:"Magic Brush",
-    main:"#7b2cbf",
-    handle:"#ffb703"
-  },
-  rainbow:{
-    name:"Rainbow Brush",
-    main:"linear-gradient(90deg,#ff006e,#ffbe0b,#3a86ff)",
-    handle:"#00f5d4"
-  },
-  gold:{
-    name:"Gold Brush",
-    main:"linear-gradient(90deg,#fff35c,#ffb703)",
-    handle:"#7b2cbf"
-  }
-};
-const awards = [
-  "TANGLE TAMER!",
-  "TANGLE TAMER PRO!",
-  "SUPER SMOOTH HERO!",
-  "MAGIC BRUSH MASTER!",
-  "ULTIMATE PET STYLIST!"
-];
-function choosePet(type,button){
-  chosenPet = type;
-  document.querySelectorAll(".pet-grid .pick-card").forEach(b => b.classList.remove("selected"));
-  button.classList.add("selected");
-  cuteSound(500);
+const home=document.getElementById("home"),game=document.getElementById("game"),stage=document.getElementById("stage"),tool=document.getElementById("tool");
+const scoreEl=document.getElementById("score"),comboEl=document.getElementById("combo"),timerEl=document.getElementById("timer"),fill=document.getElementById("fill");
+const msg=document.getElementById("msg"),title=document.getElementById("title"),award=document.getElementById("award"),awardTitle=document.getElementById("awardTitle"),awardText=document.getElementById("awardText");
+let currentMode="peel",score=0,combo=0,progress=0,time=45,playing=false,timerInt=null,soundOn=true,audioCtx=null,dragging=false,last={x:0,y:0},spawnInt=null;
+
+function ctx(){ if(!audioCtx) audioCtx=new (window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
+function tone(f,d=.12,type="sine",vol=.07){
+  if(!soundOn)return; try{const a=ctx(),o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=f;o.connect(g);g.connect(a.destination);
+  g.gain.setValueAtTime(vol,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+d);o.start();o.stop(a.currentTime+d)}catch(e){}
 }
-function chooseBrush(type,button){
-  if(type === "gold" && !goldUnlocked) {
-    cuteSound(180);
-    unlockText.textContent = "Gold Brush is locked! Win Level 1 first.";
-    return;
-  }
-  chosenBrush = type;
-  document.querySelectorAll(".brush-grid .pick-card").forEach(b => b.classList.remove("selected"));
-  button.classList.add("selected");
-  cuteSound(650);
+function noise(d=.18,vol=.05){
+  if(!soundOn)return; const a=ctx(),buffer=a.createBuffer(1,a.sampleRate*d,a.sampleRate),data=buffer.getChannelData(0);
+  for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*(1-i/data.length);
+  const src=a.createBufferSource(),g=a.createGain();src.buffer=buffer;src.connect(g);g.connect(a.destination);g.gain.value=vol;src.start();
 }
-function startGame(){
-  homeScreen.classList.remove("show");
-  gameScreen.classList.add("show");
-  award.classList.remove("show");
-  applyPetTheme();
-  resetLevel();
+function playSillySound(){tone(720,.08,"square");setTimeout(()=>tone(980,.08,"square"),90);setTimeout(()=>tone(420,.16,"sawtooth"),190)}
+function playBeat(){tone(110,.12,"sine",.12);setTimeout(()=>noise(.08,.08),160);setTimeout(()=>tone(160,.1,"sine",.1),320);setTimeout(()=>noise(.08,.08),480)}
+function toggleSound(){soundOn=!soundOn;document.getElementById("soundBtn").textContent=soundOn?"🔊 Sound On":"🔇 Sound Off"; if(soundOn) playSillySound()}
+function resetStage(){
+  stage.querySelectorAll(".target,.slice,.splat,.blasterShot").forEach(e=>e.remove());
+  document.querySelectorAll(".peel").forEach(p=>p.classList.remove("show"));
+  document.getElementById("avo").style.transform="translate(-50%,-50%) scale(1) rotate(0)";
+  tool.style.display="none"; fill.style.width="0%";
 }
-function applyPetTheme(){
-  const p = pets[chosenPet];
-  const b = brushes[chosenBrush];
-  document.documentElement.style.setProperty("--pet1",p.pet1);
-  document.documentElement.style.setProperty("--pet2",p.pet2);
-  document.documentElement.style.setProperty("--face1",p.face1);
-  document.documentElement.style.setProperty("--face2",p.face2);
-  document.documentElement.style.setProperty("--hair1",p.hair1);
-  document.documentElement.style.setProperty("--hair2",p.hair2);
-  document.documentElement.style.setProperty("--brushMain",b.main);
-  document.documentElement.style.setProperty("--brushHandle",b.handle);
-  gameTitle.textContent = p.title;
-  brushName.textContent = b.name;
-  dancePet.textContent = p.emoji;
-  drawPet(pet,false);
+function startMode(mode){
+  currentMode=mode;score=0;combo=0;progress=0;time=45;playing=true;resetStage();award.classList.remove("show");home.classList.remove("show");game.classList.add("show");
+  title.textContent=mode==="peel"?"Cut & Peel Challenge":mode==="mash"?"Mash Attack":"Flying Avo Pop";
+  msg.textContent=mode==="peel"?"Trace the dotted line!":mode==="mash"?"Tap the avocado fast!":"Tap flying avocados!";
+  tool.textContent=mode==="peel"?"🔪":mode==="mash"?"🔨":"🫧"; updateHud(); clearInterval(timerInt); clearInterval(spawnInt);
+  timerInt=setInterval(()=>{time--;updateHud(); if(time<=0)finish()},1000);
+  if(mode==="blast") spawnInt=setInterval(spawnAvo,650);
+  if(mode==="mash") pulseAvo();
 }
-function petHTML(smooth){
-  return `
-    <div class="ear left"></div>
-    <div class="ear right"></div>
-    <div class="body"></div>
-    <div class="hair ${smooth ? "smooth" : ""}" id="hair">
-      <div class="tuft t1"></div><div class="tuft t2"></div><div class="tuft t3"></div><div class="tuft t4"></div>
-      <div class="tuft t5"></div><div class="tuft t6"></div><div class="tuft t7"></div><div class="tuft t8"></div>
-    </div>
-    <div class="face">
-      <div class="eye left"></div><div class="eye right"></div>
-      <div class="nose"></div><div class="mouth"></div>
-    </div>
-  `;
+function updateHud(){scoreEl.textContent="Score: "+score;comboEl.textContent="Combo: "+combo;timerEl.textContent="Time: "+time;fill.style.width=Math.min(100,progress)+"%"}
+function addPoints(n){score+=n;combo++;progress+=n/3;updateHud(); if(combo%6===0){msg.textContent=["WOW!","MEGA!","AVO POWER!","LEVEL 6!","LEVEL 7!"][Math.floor(Math.random()*5)];confetti(18);playBeat()} if(progress>=100)finish();}
+function pos(e){const t=e.touches?e.touches[0]:e,r=stage.getBoundingClientRect();return{x:t.clientX-r.left,y:t.clientY-r.top,px:t.clientX,py:t.clientY}}
+function slash(x,y){const s=document.createElement("div");s.className="slice";s.style.left=x+"px";s.style.top=y+"px";s.style.setProperty("--rot",(Math.random()*80-40)+"deg");stage.appendChild(s);setTimeout(()=>s.remove(),500)}
+function splat(x,y){const s=document.createElement("div");s.className="splat";s.style.left=(x-45)+"px";s.style.top=(y-35)+"px";stage.appendChild(s);setTimeout(()=>s.remove(),750)}
+function pointerDown(e){if(!playing)return;dragging=true;const p=pos(e);last=p;tool.style.display="block";tool.style.left=p.x+"px";tool.style.top=p.y+"px"; if(currentMode==="mash")hitMash(p)}
+function pointerMove(e){if(!playing||!dragging)return;e.preventDefault();const p=pos(e);tool.style.left=p.x+"px";tool.style.top=p.y+"px"; if(currentMode==="peel"){const dist=Math.hypot(p.x-last.x,p.y-last.y); const r=stage.getBoundingClientRect(); const nearLine=p.x>r.width*.46&&p.x<r.width*.62&&p.y>r.height*.18&&p.y<r.height*.82; if(dist>7&&nearLine){slash(p.x,p.y);addPoints(2);tone(640+combo*8,.05,"triangle"); if(progress>30)document.querySelector(".p1").classList.add("show"); if(progress>58)document.querySelector(".p2").classList.add("show"); if(progress>82)document.querySelector(".p3").classList.add("show");} last=p;}}
+function pointerUp(){dragging=false;tool.style.display="none"}
+function hitMash(p){if(currentMode!=="mash")return; const r=stage.getBoundingClientRect(); if(p.x>r.width*.32&&p.x<r.width*.68&&p.y>r.height*.22&&p.y<r.height*.82){splat(p.x,p.y);addPoints(4);tone(180,.08,"square",.08);noise(.06,.035);document.getElementById("avo").style.transform=`translate(-50%,-50%) scale(${1+Math.random()*.08}) rotate(${Math.random()*14-7}deg)`; setTimeout(()=>document.getElementById("avo").style.transform="translate(-50%,-50%) scale(1) rotate(0)",100)}}
+function pulseAvo(){if(currentMode!=="mash"&&playing)return; if(playing&&currentMode==="mash"){document.getElementById("avo").style.filter="drop-shadow(0 0 25px rgba(255,224,102,.9))";setTimeout(()=>document.getElementById("avo").style.filter="",180);setTimeout(pulseAvo,900)}}
+function spawnAvo(){
+  if(!playing||currentMode!=="blast")return; const t=document.createElement("div");t.className="target";t.textContent=Math.random()>.16?"🥑":"⭐";
+  const y=60+Math.random()*(stage.clientHeight-140); const fromLeft=Math.random()>.5; t.style.top=y+"px"; t.style.left=(fromLeft?-80:stage.clientWidth+40)+"px";
+  stage.appendChild(t); const duration=2200-Math.min(900,combo*18); const end=fromLeft?stage.clientWidth+80:-120; const start=performance.now();
+  function anim(now){const k=Math.min(1,(now-start)/duration); t.style.left=((fromLeft?-80:stage.clientWidth+40)+(end-(fromLeft?-80:stage.clientWidth+40))*k)+"px"; if(k<1&&t.parentNode)requestAnimationFrame(anim); else t.remove()}
+  requestAnimationFrame(anim);
+  t.onclick=(e)=>{e.stopPropagation(); const r=stage.getBoundingClientRect(); const x=e.clientX-r.left,y=e.clientY-r.top; shot(x,y); splat(x,y); t.remove(); addPoints(t.textContent==="⭐"?10:5); tone(520+Math.random()*300,.08,"square");};
 }
-function drawPet(container,smooth){
-  container.innerHTML = petHTML(smooth);
+function shot(x,y){const b=document.createElement("div");b.className="blasterShot";b.style.left="50%";b.style.bottom="10px";stage.appendChild(b);b.animate([{transform:"translate(0,0)"},{transform:`translate(${x-stage.clientWidth/2}px,${y-stage.clientHeight+20}px)`}],{duration:170,easing:"ease-out"});setTimeout(()=>b.remove(),190)}
+function finish(){
+  if(!playing)return; playing=false;clearInterval(timerInt);clearInterval(spawnInt);tool.style.display="none";
+  awardTitle.textContent=score>160?"AVO LEGEND!":score>90?"AVO HERO!":"NICE AVO!";
+  awardText.textContent=`Score ${score}. Combo ${combo}. ${currentMode==="blast"?"Foam popper master!":"Proper smooth avocado chaos!"}`;
+  confetti(130);playSillySound();setTimeout(()=>playBeat(),250);award.classList.add("show");
 }
-function resetLevel(){
-  smoothness = 0;
-  combo = 0;
-  finished = false;
-  progress.style.width = "0%";
-  pet.classList.remove("happy");
-  drawPet(pet,false);
-  rewardText.textContent = "Start brushing!";
-  comboBox.textContent = "Combo: 0";
-  levelBox.textContent = "Level " + level;
-}
-function pointerPosition(e){
-  const touch = e.touches ? e.touches[0] : e;
-  const rect = stage.getBoundingClientRect();
-  return {
-    x: touch.clientX - rect.left,
-    y: touch.clientY - rect.top,
-    pageX: touch.clientX,
-    pageY: touch.clientY
-  };
-}
-function isOverHair(x,y){
-  const rect = stage.getBoundingClientRect();
-  const hair = document.getElementById("hair");
-  const hairRect = hair.getBoundingClientRect();
-  const hx = hairRect.left - rect.left;
-  const hy = hairRect.top - rect.top;
-  return x > hx - 25 && x < hx + hairRect.width + 25 &&
-         y > hy - 25 && y < hy + hairRect.height + 45;
-}
-function moveBrush(x,y){
-  brush.style.left = x + "px";
-  brush.style.top = y + "px";
-  brush.classList.add("show");
-}
-function addStroke(x,y){
-  const s = document.createElement("div");
-  s.className = "stroke";
-  s.style.left = x - 12 + "px";
-  s.style.top = y - 12 + "px";
-  stage.appendChild(s);
-  setTimeout(() => s.remove(), 600);
-}
-function brushMove(e){
-  if(!brushing || finished) return;
-  e.preventDefault();
-  const pos = pointerPosition(e);
-  moveBrush(pos.x,pos.y);
-  const distance = Math.hypot(pos.x - lastX, pos.y - lastY);
-  if(distance > 4 && isOverHair(pos.x,pos.y)){
-    combo++;
-    let brushBonus = chosenBrush === "gold" ? 1.7 : chosenBrush === "rainbow" ? 1.35 : 1;
-    smoothness += (Math.min(2.8, distance / 18) + combo * 0.015) * brushBonus;
-    addStroke(pos.x,pos.y);
-    rewardText.textContent = combo > 25 ? "MEGA BRUSHING!" : "Keep brushing!";
-    comboBox.textContent = "Combo: " + combo;
-    if(combo % 7 === 0){
-      miniBurst(pos.pageX,pos.pageY);
-      cuteSound(760);
-    }
-    updatePet();
-  }
-  lastX = pos.x;
-  lastY = pos.y;
-}
-function updatePet(){
-  const needed = 100 + (level - 1) * 22;
-  const percent = Math.min(100, Math.round((smoothness / needed) * 100));
-  progress.style.width = percent + "%";
-  if(percent > 45){
-    document.getElementById("hair").classList.add("smooth");
-    rewardText.textContent = "It is working!";
-  }
-  if(percent >= 100){
-    win();
-  }
-}
-function win(){
-  finished = true;
-  brushing = false;
-  brush.classList.remove("show");
-  pet.classList.add("happy");
-  document.getElementById("hair").classList.add("smooth");
-  if(level >= 1 && !goldUnlocked){
-    goldUnlocked = true;
-    document.getElementById("goldBrushCard").classList.remove("locked");
-    unlockText.textContent = "Gold Brush unlocked!";
-  }
-  const name = awards[Math.min(level - 1, awards.length - 1)];
-  awardTitle.textContent = name;
-  awardMessage.textContent = "You rescued the " + chosenPet + " and unlocked a superstar style!";
-  beforePhoto.innerHTML = `<div class="pet">${petHTML(false)}</div>`;
-  afterPhoto.innerHTML = `<div class="pet happy">${petHTML(true)}</div>`;
-  bigExplosion();
-  victorySound();
-  setTimeout(() => {
-    award.classList.add("show");
-  }, 500);
-}
-function nextLevel(){
-  level++;
-  award.classList.remove("show");
-  applyPetTheme();
-  resetLevel();
-}
-function backHome(){
-  gameScreen.classList.remove("show");
-  homeScreen.classList.add("show");
-  award.classList.remove("show");
-}
-function miniBurst(x,y){
-  for(let i=0;i<10;i++){
-    const b = document.createElement("div");
-    b.className = "burst";
-    b.style.left = x + "px";
-    b.style.top = y + "px";
-    b.style.setProperty("--x",(Math.random()*160-80)+"px");
-    b.style.setProperty("--y",(Math.random()*160-80)+"px");
-    b.style.background = ["#fff35c","#ff7ad9","#42d9ff","#ffffff"][Math.floor(Math.random()*4)];
-    document.body.appendChild(b);
-    setTimeout(() => b.remove(),1000);
-  }
-}
-function bigExplosion(){
-  const colours = ["#fff35c","#ff7ad9","#42d9ff","#8b5cff","#ffffff","#00ff99"];
-  for(let i=0;i<170;i++){
-    const c = document.createElement("div");
-    c.className = "confetti";
-    c.style.left = Math.random()*100 + "vw";
-    c.style.background = colours[Math.floor(Math.random()*colours.length)];
-    c.style.animationDelay = Math.random()*.5 + "s";
-    document.body.appendChild(c);
-    setTimeout(() => c.remove(),2600);
-  }
-  for(let i=0;i<110;i++){
-    const b = document.createElement("div");
-    b.className = "burst";
-    b.style.setProperty("--x",(Math.random()*1000-500)+"px");
-    b.style.setProperty("--y",(Math.random()*760-380)+"px");
-    b.style.background = colours[Math.floor(Math.random()*colours.length)];
-    document.body.appendChild(b);
-    setTimeout(() => b.remove(),1200);
-  }
-}
-function cuteSound(freq){
-  try{
-    const audio = new AudioContext();
-    const osc = audio.createOscillator();
-    const gain = audio.createGain();
-    osc.connect(gain);
-    gain.connect(audio.destination);
-    osc.frequency.value = freq;
-    gain.gain.setValueAtTime(.07,audio.currentTime);
-    gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.16);
-    osc.start();
-    osc.stop(audio.currentTime+.16);
-  }catch(e){}
-}
-function victorySound(){
-  cuteSound(520);
-  setTimeout(() => cuteSound(680),130);
-  setTimeout(() => cuteSound(840),260);
-}
-stage.addEventListener("mousedown", e => {
-  brushing = true;
-  const pos = pointerPosition(e);
-  lastX = pos.x;
-  lastY = pos.y;
-  moveBrush(pos.x,pos.y);
-});
-stage.addEventListener("mousemove", brushMove);
-window.addEventListener("mouseup", () => {
-  brushing = false;
-  brush.classList.remove("show");
-});
-stage.addEventListener("touchstart", e => {
-  brushing = true;
-  const pos = pointerPosition(e);
-  lastX = pos.x;
-  lastY = pos.y;
-  moveBrush(pos.x,pos.y);
-},{passive:false});
-stage.addEventListener("touchmove", brushMove,{passive:false});
-window.addEventListener("touchend", () => {
-  brushing = false;
-  brush.classList.remove("show");
-});
+function goHome(){playing=false;clearInterval(timerInt);clearInterval(spawnInt);award.classList.remove("show");game.classList.remove("show");home.classList.add("show")}
+function confetti(n){const colors=["#2f6f22","#bde86a","#ff6f9f","#ffe066","#fff"];for(let i=0;i<n;i++){const c=document.createElement("div");c.className="confetti";c.style.left=Math.random()*100+"vw";c.style.background=colors[Math.floor(Math.random()*colors.length)];c.style.animationDelay=Math.random()*.5+"s";document.body.appendChild(c);setTimeout(()=>c.remove(),2600)}}
+
+stage.addEventListener("mousedown",pointerDown);stage.addEventListener("mousemove",pointerMove);window.addEventListener("mouseup",pointerUp);
+stage.addEventListener("touchstart",pointerDown,{passive:false});stage.addEventListener("touchmove",pointerMove,{passive:false});window.addEventListener("touchend",pointerUp);
+stage.addEventListener("click",e=>{if(currentMode==="mash"&&playing)hitMash(pos(e))});
 </script>
 </body>
 </html>
