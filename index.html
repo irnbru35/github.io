@@ -18,148 +18,46 @@ body{
     radial-gradient(circle at 70% 82%,rgba(255,94,168,.20),transparent 26%),
     linear-gradient(145deg,#fff0be 0%,#d6f59d 45%,#fff7df 100%);
 }
-body::before{content:"";position:fixed;inset:0;z-index:-3;background:url("Kimi.jpeg") center/cover no-repeat;opacity:.46;filter:saturate(1.35) contrast(1.12) brightness(1.03);transform:scale(1.04)}
+body::before{content:"";position:fixed;inset:0;z-index:-3;background:url("Kimi.jpeg") center/cover no-repeat;opacity:.25;filter:saturate(1.22) contrast(1.05)}
 body::after{content:"";position:fixed;inset:0;z-index:-2;background:
-  linear-gradient(180deg,rgba(255,247,223,.52),rgba(214,245,157,.30)),
-  repeating-linear-gradient(135deg,rgba(255,255,255,.12) 0 8px,transparent 8px 22px),
-  radial-gradient(circle at 50% 8%,rgba(255,255,255,.84),transparent 27%),
-  radial-gradient(circle at 50% 92%,rgba(36,95,32,.18),transparent 36%);
+  repeating-linear-gradient(135deg,rgba(255,255,255,.14) 0 8px,transparent 8px 22px),
+  radial-gradient(circle at 50% 12%,rgba(255,255,255,.75),transparent 22%);
   pointer-events:none}
 button{font-family:inherit;border:0;cursor:pointer}
 .bg-pop{position:fixed;z-index:-1;font-weight:1000;color:rgba(36,95,32,.12);filter:blur(.2px);animation:drift 8s ease-in-out infinite;pointer-events:none}
 @keyframes drift{0%,100%{transform:translateY(0) rotate(-8deg) scale(1)}50%{transform:translateY(-25px) rotate(9deg) scale(1.08)}}
-.wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:14px;overflow:hidden}
-.panel{width:min(460px,94vw);min-height:min(790px,94vh);border-radius:38px;padding:15px;background:linear-gradient(180deg,rgba(255,255,255,.74),rgba(255,255,255,.46));border:2px solid var(--line);box-shadow:0 25px 70px rgba(36,95,32,.30),inset 0 0 34px rgba(255,255,255,.75);backdrop-filter:blur(12px);position:relative;overflow:hidden;text-align:center}
+.wrap{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:16px}
+.panel{width:min(440px,94vw);min-height:min(760px,94vh);border-radius:36px;padding:18px;background:linear-gradient(180deg,rgba(255,255,255,.86),rgba(255,255,255,.58));border:2px solid var(--line);box-shadow:0 25px 70px rgba(36,95,32,.28),inset 0 0 34px rgba(255,255,255,.75);backdrop-filter:blur(14px);position:relative;overflow:hidden}
 .panel::before{content:"";position:absolute;inset:-80px;background:radial-gradient(circle,rgba(255,255,255,.8),transparent 35%);animation:shine 6s linear infinite;pointer-events:none}
 @keyframes shine{from{transform:translate(-45%,-40%)}to{transform:translate(55%,45%)}}
-.brandWatermark{position:absolute;inset:auto -20px 55%;z-index:0;text-align:center;font-size:clamp(52px,16vw,86px);line-height:.78;font-weight:1000;letter-spacing:-5px;color:rgba(36,95,32,.12);transform:rotate(-5deg);pointer-events:none;text-shadow:0 2px 0 rgba(255,255,255,.55)}
-.kimiBadge{position:relative;z-index:2;margin:0 auto 9px;width:104px;height:104px;border-radius:32px;background:rgba(255,255,255,.72) url("Kimi.jpeg") center/cover no-repeat;border:4px solid rgba(255,255,255,.85);box-shadow:0 12px 0 rgba(36,95,32,.16),0 0 34px rgba(255,255,255,.65);animation:badgePulse 2.2s ease-in-out infinite}
-.kimiBadge::after{content:"KIMI KIREI";position:absolute;left:50%;bottom:-12px;transform:translateX(-50%);white-space:nowrap;border-radius:999px;background:linear-gradient(135deg,var(--green),#4da63b);color:white;padding:5px 10px;font-size:11px;font-weight:1000;box-shadow:0 5px 0 rgba(36,95,32,.20)}
-@keyframes badgePulse{0%,100%{transform:scale(1) rotate(-2deg)}50%{transform:scale(1.05) rotate(2deg)}}
-.logo{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:8px 12px;background:rgba(255,255,255,.82);font-weight:1000;color:var(--green);box-shadow:0 7px 0 rgba(36,95,32,.13);font-size:12px;text-transform:uppercase;letter-spacing:.7px}
-h1{position:relative;z-index:2;margin:17px 0 7px;font-size:clamp(50px,14vw,78px);line-height:.78;letter-spacing:-4px;color:var(--green);text-shadow:0 5px 0 rgba(36,95,32,.14),0 0 24px rgba(255,255,255,.9)}
-.sub{position:relative;z-index:2;margin:0 auto 12px;font-size:16px;line-height:1.2;font-weight:900;max-width:360px;background:rgba(255,255,255,.62);border:2px solid rgba(255,255,255,.58);border-radius:22px;padding:10px 12px;box-shadow:0 8px 24px rgba(36,95,32,.10)}
-.heroAvo{position:relative;z-index:2;margin:8px auto 12px;width:138px;height:176px;border-radius:56% 56% 50% 50%;background:linear-gradient(145deg,#bdf15d,#2e7d2a 72%);box-shadow:inset -18px -22px 0 rgba(0,0,0,.13),0 14px 0 rgba(36,95,32,.15);animation:bounce 1.5s ease-in-out infinite}
-.heroAvo::before{content:"";position:absolute;left:21px;top:26px;width:96px;height:124px;border-radius:50%;background:linear-gradient(#fffbd1,#cce970)}
-.heroAvo::after{content:"";position:absolute;left:51px;top:80px;width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#b97835,#6d3d19)}
-.face{position:absolute;left:50%;top:61px;transform:translateX(-50%);z-index:3;width:80px;height:32px}.eye{position:absolute;top:0;width:12px;height:16px;border-radius:50%;background:#132f10}.eye.l{left:16px}.eye.r{right:16px}.mouth{position:absolute;left:30px;top:18px;width:22px;height:12px;border-bottom:4px solid #132f10;border-radius:0 0 999px 999px}
+.logo{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:9px 13px;background:rgba(255,255,255,.82);font-weight:1000;color:var(--green);box-shadow:0 7px 0 rgba(36,95,32,.13);font-size:13px}
+h1{position:relative;z-index:2;margin:22px 0 8px;font-size:clamp(48px,14vw,72px);line-height:.82;letter-spacing:-3px;color:var(--green);text-shadow:0 5px 0 rgba(36,95,32,.14),0 0 24px rgba(255,255,255,.8)}
+.sub{position:relative;z-index:2;margin:0 auto 16px;font-size:17px;line-height:1.25;font-weight:850;max-width:340px}
+.heroAvo{position:relative;z-index:2;margin:10px auto 12px;width:170px;height:215px;border-radius:56% 56% 50% 50%;background:linear-gradient(145deg,#bdf15d,#2e7d2a 72%);box-shadow:inset -18px -22px 0 rgba(0,0,0,.13),0 14px 0 rgba(36,95,32,.15),0 0 38px rgba(255,232,109,.65);animation:bounce 1.15s ease-in-out infinite;cursor:pointer;touch-action:manipulation}
+.heroAvo::before{content:"";position:absolute;left:25px;top:30px;width:110px;height:145px;border-radius:50%;background:linear-gradient(#fffbd1,#cce970)}
+.heroAvo::after{content:"";position:absolute;left:59px;top:93px;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#b97835,#6d3d19)}
+.pressSign{position:absolute;left:50%;top:-18px;z-index:8;transform:translateX(-50%) rotate(-4deg);white-space:nowrap;border:4px solid #fff;border-radius:999px;background:linear-gradient(135deg,#ff2f92,#ff9a3c,#ffe86d);color:white;padding:9px 14px;font-size:19px;font-weight:1000;text-shadow:0 2px 0 rgba(0,0,0,.14);box-shadow:0 8px 0 rgba(124,63,24,.32),0 0 26px rgba(255,94,168,.65);animation:signWobble .75s ease-in-out infinite}
+.pressSign::after{content:"👇";margin-left:6px}
+@keyframes signWobble{0%,100%{transform:translateX(-50%) rotate(-5deg) scale(1)}50%{transform:translateX(-50%) rotate(4deg) scale(1.06)}}
+.face{position:absolute;left:50%;top:70px;transform:translateX(-50%);z-index:3;width:80px;height:32px}.eye{position:absolute;top:0;width:12px;height:16px;border-radius:50%;background:#132f10}.eye.l{left:16px}.eye.r{right:16px}.mouth{position:absolute;left:30px;top:18px;width:22px;height:12px;border-bottom:4px solid #132f10;border-radius:0 0 999px 999px}
 @keyframes bounce{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
-.bigBtn{position:relative;z-index:2;width:100%;border-radius:30px;padding:18px 14px;background:linear-gradient(135deg,var(--pink),var(--orange));color:white;font-size:23px;font-weight:1000;box-shadow:0 11px 0 rgba(124,63,24,.28),0 0 30px rgba(255,94,168,.42);text-shadow:0 2px 0 rgba(0,0,0,.12);animation:buttonGlow 1.35s ease-in-out infinite}
-@keyframes buttonGlow{0%,100%{transform:translateY(0);filter:saturate(1)}50%{transform:translateY(-2px);filter:saturate(1.18)}}
-.featureGrid{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:9px 0 11px}.miniCard{border-radius:20px;background:rgba(255,255,255,.68);border:2px solid rgba(255,255,255,.62);padding:9px 7px;font-size:12px;font-weight:1000;color:var(--green);box-shadow:0 6px 18px rgba(36,95,32,.10)}.miniCard b{display:block;font-size:21px;line-height:1}.gameTag{position:relative;z-index:2;display:inline-flex;align-items:center;gap:6px;margin:4px auto 8px;padding:8px 12px;border-radius:999px;background:linear-gradient(135deg,var(--yellow),#fff8bd);color:var(--green);font-weight:1000;font-size:13px;box-shadow:0 7px 0 rgba(36,95,32,.12)}
+.bigBtn{position:relative;z-index:2;width:100%;border-radius:28px;padding:14px 12px;background:linear-gradient(135deg,var(--pink),var(--orange));color:white;font-size:18px;font-weight:1000;box-shadow:0 8px 0 rgba(124,63,24,.28),0 0 26px rgba(255,94,168,.35);text-shadow:0 2px 0 rgba(0,0,0,.12);animation:buttonWiggle 1.2s ease-in-out infinite}
+@keyframes buttonWiggle{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1deg) translateY(-2px)}}
+.funToast{position:fixed;z-index:120;left:50%;top:50%;transform:translate(-50%,-50%) scale(.6);max-width:88vw;border:4px solid #fff;border-radius:28px;background:linear-gradient(135deg,#fff,#fff7bf);color:var(--green);font-size:clamp(20px,7vw,34px);font-weight:1000;text-align:center;padding:14px 18px;box-shadow:0 14px 0 rgba(36,95,32,.25),0 0 35px rgba(255,94,168,.5);pointer-events:none;animation:toastPop 1s forwards;text-shadow:0 2px 0 rgba(255,255,255,.9)}
+@keyframes toastPop{0%{opacity:0;transform:translate(-50%,-50%) scale(.35) rotate(-10deg)}18%,72%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(2deg)}100%{opacity:0;transform:translate(-50%,-85%) scale(1.12) rotate(-3deg)}}
+.tapBurst{position:fixed;z-index:119;pointer-events:none;font-size:34px;animation:burstAway .8s forwards}
+@keyframes burstAway{to{transform:translate(var(--dx),var(--dy)) rotate(240deg) scale(.4);opacity:0}}
 .small{position:relative;z-index:2;margin-top:12px;font-weight:900;font-size:13px;opacity:.75}
 .modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(16,45,15,.46);backdrop-filter:blur(10px);padding:16px}.modal.show{display:flex}
 .popBox{width:min(390px,92vw);border-radius:34px;background:white;padding:22px;text-align:center;box-shadow:0 18px 0 rgba(36,95,32,.25)}.popBox h2{margin:0 0 12px;font-size:34px;line-height:.95;color:var(--green)}.popBtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}.popBtns button{border-radius:20px;padding:15px;font-size:21px;font-weight:1000;background:#e8ffd1;color:var(--green);box-shadow:0 7px 0 rgba(36,95,32,.15)}
 #game{display:none;position:fixed;inset:0;overflow:hidden;touch-action:none}.topHud{position:fixed;left:10px;right:10px;top:8px;z-index:20;display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}.pill{border-radius:999px;background:rgba(255,255,255,.84);padding:9px 8px;text-align:center;font-weight:1000;color:var(--green);box-shadow:0 6px 0 rgba(36,95,32,.13);font-size:13px}.rank{position:fixed;left:10px;right:10px;top:55px;z-index:20;border-radius:24px;background:linear-gradient(135deg,rgba(255,255,255,.88),rgba(255,255,255,.58));border:2px solid rgba(255,255,255,.55);padding:10px;text-align:center;font-weight:1000;color:var(--green);box-shadow:0 10px 35px rgba(36,95,32,.16)}.rank span{color:var(--pink)}
 .arena{position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.45),transparent 35%)}
-.fruit{position:absolute;width:78px;height:96px;border-radius:56% 56% 50% 50%;background:linear-gradient(145deg,#c9f86a,#2d842b 70%);box-shadow:inset -10px -12px 0 rgba(0,0,0,.14),0 12px 0 rgba(36,95,32,.13);will-change:transform;z-index:5}.fruit::before{content:"";position:absolute;left:13px;top:15px;width:52px;height:65px;border-radius:50%;background:linear-gradient(#fffad0,#d5ee80)}.fruit::after{content:"";position:absolute;left:29px;top:48px;width:20px;height:20px;border-radius:50%;background:#7a431d}.fruit.bonus{filter:hue-rotate(45deg) saturate(1.5) drop-shadow(0 0 16px var(--yellow))}.fruit.bomb{background:linear-gradient(145deg,#404040,#111);border-radius:50%;width:72px;height:72px}.fruit.bomb::before{content:var(--bombIcon,"💼");position:absolute;inset:0;display:grid;place-items:center;background:none;font-size:42px}.fruit.bomb::after{display:none}
+.fruit{position:absolute;width:78px;height:96px;border-radius:56% 56% 50% 50%;background:linear-gradient(145deg,#c9f86a,#2d842b 70%);box-shadow:inset -10px -12px 0 rgba(0,0,0,.14),0 12px 0 rgba(36,95,32,.13);will-change:transform;z-index:5}.fruit::before{content:"";position:absolute;left:13px;top:15px;width:52px;height:65px;border-radius:50%;background:linear-gradient(#fffad0,#d5ee80)}.fruit::after{content:"";position:absolute;left:29px;top:48px;width:20px;height:20px;border-radius:50%;background:#7a431d}.fruit.bonus{filter:hue-rotate(45deg) saturate(1.5) drop-shadow(0 0 16px var(--yellow))}.fruit.bomb{background:linear-gradient(145deg,#404040,#111);border-radius:50%;width:72px;height:72px}.fruit.bomb::before{content:"💼";position:absolute;inset:0;display:grid;place-items:center;background:none;font-size:42px}.fruit.bomb::after{display:none}
 .half{position:absolute;width:45px;height:70px;border-radius:60% 40% 50% 50%;background:linear-gradient(145deg,#c9f86a,#2d842b);z-index:4;pointer-events:none;box-shadow:inset -8px -8px 0 rgba(0,0,0,.12)}.sliceLine{position:absolute;height:6px;width:110px;border-radius:999px;background:white;box-shadow:0 0 16px white;z-index:15;pointer-events:none;animation:fade .28s forwards}.splat{position:absolute;width:80px;height:60px;border-radius:50%;background:#bdf15d;opacity:.8;z-index:3;pointer-events:none;animation:splat .65s forwards}.juice{position:absolute;width:9px;height:9px;border-radius:50%;background:#d7ff5a;z-index:4;pointer-events:none;animation:juice .7s forwards}.floatText{position:absolute;z-index:30;font-size:24px;font-weight:1000;color:var(--pink);text-shadow:0 3px 0 white;pointer-events:none;animation:floatText .8s forwards;white-space:nowrap}.trail{position:absolute;width:18px;height:18px;border-radius:50%;background:white;box-shadow:0 0 18px white;z-index:16;pointer-events:none;animation:fade .25s forwards}.sword{position:fixed;z-index:18;pointer-events:none;font-size:54px;transform:translate(-30%,-70%) rotate(-25deg);filter:drop-shadow(0 10px 0 rgba(0,0,0,.12));display:none}.message{position:fixed;left:50%;top:48%;transform:translate(-50%,-50%) scale(.9);z-index:25;font-size:clamp(28px,10vw,58px);font-weight:1000;text-align:center;color:white;text-shadow:0 4px 0 var(--green),0 0 22px rgba(255,255,255,.7);pointer-events:none;opacity:0}.message.show{animation:msg .8s forwards}
 .bottom{position:fixed;left:10px;right:10px;bottom:12px;z-index:22;display:flex;gap:8px}.bottom button{flex:1;border-radius:22px;padding:13px 10px;font-size:15px;font-weight:1000;background:white;color:var(--green);box-shadow:0 7px 0 rgba(36,95,32,.16)}
 .final{position:fixed;inset:0;display:none;z-index:60;align-items:center;justify-content:center;background:rgba(16,45,15,.5);backdrop-filter:blur(12px);padding:16px}.final.show{display:flex}.finalBox{width:min(430px,94vw);border-radius:36px;background:white;padding:22px;text-align:center;box-shadow:0 18px 0 rgba(36,95,32,.25)}.finalBox h2{font-size:clamp(42px,13vw,72px);line-height:.82;margin:0 0 12px;color:var(--green);letter-spacing:-2px}.finalBox p{font-size:18px;font-weight:900}.finalBox button{border-radius:24px;padding:14px 20px;margin:4px;font-size:18px;font-weight:1000;background:linear-gradient(135deg,var(--lime),var(--yellow));color:var(--green)}
 @keyframes fade{to{transform:scale(1.7);opacity:0}}@keyframes splat{to{transform:scale(2);opacity:0}}@keyframes juice{to{transform:translate(var(--dx),var(--dy)) scale(.3);opacity:0}}@keyframes floatText{to{transform:translateY(-70px) scale(1.2);opacity:0}}@keyframes msg{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}25%,70%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-80%) scale(1.1)}}
-@media(max-height:680px){.kimiBadge{width:78px;height:78px;border-radius:24px}.brandWatermark{font-size:54px}.logo{font-size:11px}h1{font-size:48px;margin-top:12px}.heroAvo{width:108px;height:138px}.heroAvo::before{left:17px;top:22px;width:75px;height:98px}.heroAvo::after{left:40px;top:64px;width:31px;height:31px}.face{top:50px}.sub{font-size:14px;padding:8px 10px}.panel{min-height:94vh}.bigBtn{padding:14px;font-size:20px}.miniCard{padding:7px 5px;font-size:11px}.rank{top:49px}.topHud{top:6px}.pill{padding:7px 6px}}
-
-
-/* ===== FUNKY KIDS HOMEPAGE OVERRIDE - BIG CHANGE ===== */
-body{
-  background:
-    radial-gradient(circle at 15% 15%, #fff 0 0.5%, transparent 12%),
-    radial-gradient(circle at 90% 20%, rgba(255,94,168,.75), transparent 22%),
-    radial-gradient(circle at 8% 82%, rgba(255,232,109,.85), transparent 24%),
-    radial-gradient(circle at 82% 86%, rgba(72,206,255,.55), transparent 24%),
-    linear-gradient(135deg,#baff57 0%,#fff173 32%,#ff8ac5 67%,#8cf2ff 100%) !important;
-}
-body::before{
-  opacity:.58 !important;
-  filter:saturate(1.8) contrast(1.25) brightness(1.1) !important;
-  transform:scale(1.08) rotate(-1deg) !important;
-}
-body::after{
-  z-index:-2 !important;
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.48)),
-    repeating-radial-gradient(circle at 20% 20%, rgba(255,255,255,.32) 0 6px, transparent 7px 34px),
-    repeating-linear-gradient(45deg, rgba(36,95,32,.10) 0 12px, transparent 12px 34px) !important;
-}
-.wrap::before{
-  content:"KIMI KIREI  •  AVO SLICE  •  KIMI KIREI  •  AVO SLICE";
-  position:fixed;left:-30vw;right:-30vw;top:17vh;z-index:-1;
-  font-size:clamp(58px,18vw,160px);line-height:.82;font-weight:1000;letter-spacing:-8px;
-  color:rgba(255,255,255,.30);text-shadow:0 8px 0 rgba(36,95,32,.10);
-  transform:rotate(-13deg);animation:bannerMove 12s linear infinite;white-space:nowrap;pointer-events:none;
-}
-.wrap::after{
-  content:"🥑 ⭐ ⚔️ 🏆 🥑 ⭐ ⚔️ 🏆";
-  position:fixed;left:0;right:0;bottom:7vh;z-index:-1;text-align:center;
-  font-size:clamp(38px,11vw,90px);letter-spacing:12px;opacity:.55;
-  filter:drop-shadow(0 8px 0 rgba(36,95,32,.13));animation:emojiBounce 3s ease-in-out infinite;pointer-events:none;
-}
-@keyframes bannerMove{from{transform:translateX(0) rotate(-13deg)}to{transform:translateX(-22vw) rotate(-13deg)}}
-@keyframes emojiBounce{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-18px) rotate(2deg)}}
-.panel{
-  width:min(430px,94vw) !important;
-  min-height:auto !important;
-  max-height:96vh !important;
-  overflow:hidden !important;
-  border-radius:42px !important;
-  padding:13px !important;
-  background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.25)) !important;
-  border:4px solid rgba(255,255,255,.9) !important;
-  box-shadow:0 20px 0 rgba(36,95,32,.18),0 28px 70px rgba(36,95,32,.28),inset 0 0 40px rgba(255,255,255,.85) !important;
-}
-.panel::after{
-  content:"";position:absolute;inset:9px;border-radius:34px;pointer-events:none;
-  border:3px dashed rgba(255,94,168,.55);animation:borderWiggle 2s ease-in-out infinite;
-}
-@keyframes borderWiggle{0%,100%{transform:scale(1)}50%{transform:scale(.985)}}
-.brandWatermark{
-  inset:12px 0 auto !important;font-size:clamp(42px,13vw,72px) !important;line-height:.75 !important;
-  color:rgba(36,95,32,.14) !important;letter-spacing:-5px !important;transform:rotate(-4deg) !important;
-}
-.kimiBadge{
-  width:86px !important;height:86px !important;border-radius:26px !important;margin-bottom:12px !important;
-  box-shadow:0 10px 0 rgba(36,95,32,.18),0 0 0 7px rgba(255,255,255,.35),0 0 38px rgba(255,255,255,.95) !important;
-}
-.logo{
-  background:linear-gradient(135deg,#245f20,#5dcc4e) !important;color:white !important;
-  box-shadow:0 7px 0 rgba(16,45,15,.24),0 0 25px rgba(189,241,93,.55) !important;
-}
-h1{
-  font-size:clamp(49px,15vw,76px) !important;line-height:.74 !important;margin:13px 0 6px !important;
-  color:#fff !important;text-shadow:0 5px 0 #245f20,0 9px 0 rgba(255,94,168,.45),0 0 30px rgba(255,255,255,.95) !important;
-  transform:rotate(-2deg);
-}
-.gameTag{
-  font-size:14px !important;background:linear-gradient(135deg,#ffe86d,#ff9a3c) !important;
-  border:3px solid white !important;box-shadow:0 7px 0 rgba(124,63,24,.25) !important;
-}
-.sub{
-  font-size:15px !important;line-height:1.15 !important;padding:10px 12px !important;margin-bottom:9px !important;
-  color:#143812 !important;background:rgba(255,255,255,.80) !important;border:3px solid white !important;
-  box-shadow:0 8px 0 rgba(36,95,32,.11) !important;
-}
-.featureGrid{grid-template-columns:repeat(4,1fr) !important;gap:6px !important;margin:8px 0 7px !important}
-.miniCard{
-  min-height:74px;border-radius:19px !important;padding:7px 3px !important;font-size:10.5px !important;line-height:1.03 !important;
-  background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.52)) !important;border:3px solid white !important;
-  box-shadow:0 6px 0 rgba(36,95,32,.13) !important;
-}
-.miniCard b{font-size:25px !important;margin-bottom:3px !important}
-.heroAvo{
-  width:112px !important;height:142px !important;margin:6px auto 10px !important;
-  animation:bounce 1.05s ease-in-out infinite, avoGlow 1.8s ease-in-out infinite !important;
-}
-.heroAvo::before{left:17px !important;top:22px !important;width:78px !important;height:101px !important}.heroAvo::after{left:42px !important;top:65px !important;width:31px !important;height:31px !important}.face{top:50px !important}
-@keyframes avoGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(255,232,109,0))}50%{filter:drop-shadow(0 0 24px rgba(255,232,109,.95))}}
-.bigBtn{
-  font-size:21px !important;line-height:1.02 !important;padding:17px 12px !important;
-  background:linear-gradient(135deg,#ff2f92,#ff9a3c,#ffe86d) !important;
-  border:4px solid #fff !important;border-radius:31px !important;
-  box-shadow:0 12px 0 rgba(124,63,24,.35),0 0 34px rgba(255,94,168,.60) !important;
-}
-.small{font-size:12px !important;margin-top:9px !important;color:#245f20 !important;opacity:1 !important;background:rgba(255,255,255,.58);display:inline-block;padding:6px 10px;border-radius:999px}
-@media(max-height:680px){.featureGrid{display:none !important}.heroAvo{width:84px!important;height:106px!important}.heroAvo::before{width:59px!important;height:76px!important;left:13px!important;top:17px!important}.heroAvo::after{width:24px!important;height:24px!important;left:31px!important;top:49px!important}.face{top:38px!important}.bigBtn{font-size:18px!important;padding:13px 10px!important}.sub{font-size:13px!important}.kimiBadge{width:64px!important;height:64px!important}h1{font-size:43px!important}}
-
+@media(max-height:680px){h1{font-size:46px}.heroAvo{width:125px;height:160px;margin:6px auto 8px}.heroAvo::before{left:20px;top:24px;width:85px;height:110px}.heroAvo::after{left:46px;top:72px;width:34px;height:34px}.face{top:54px}.pressSign{font-size:15px;padding:7px 10px;top:-14px}.sub{font-size:14px}.panel{min-height:94vh}.bigBtn{padding:12px;font-size:15px}.rank{top:49px}.topHud{top:6px}.pill{padding:7px 6px}}
 </style>
 </head>
 <body>
@@ -167,21 +65,12 @@ h1{
 
 <section class="wrap" id="home">
   <div class="panel">
-    <div class="brandWatermark">KIMI<br>KIREI</div>
-    <div class="kimiBadge" aria-label="Kimi Kirei logo background"></div>
-    <div class="logo">🌈 Kimi Kirei Arcade</div>
-    <h1>AVO<br>NINJA!</h1>
-    <div class="gameTag">⚔️ Super swipey avocado chaos</div>
-    <p class="sub">Welcome to the funky fruit dojo! Swipe the glowing sword, explode flying avocados, dodge the boring briefcases and unlock ridiculous titles until you hit <b>ENGLIGHTENMENT</b>.</p>
-    <div class="featureGrid">
-      <div class="miniCard"><b>🥑</b>Chop avo rockets</div>
-      <div class="miniCard"><b>⚡</b>Fast combos</div>
-      <div class="miniCard"><b>🏆</b>Pro Accountant</div>
-      <div class="miniCard"><b>🛠️</b>Top Engineer</div>
-    </div>
-    <div class="heroAvo"><div class="face"><div class="eye l"></div><div class="eye r"></div><div class="mouth"></div></div></div>
-    <button class="bigBtn" onclick="openNickPopup()">IF YOUR NAME’S NICK<br>PRESS HERE 😂</button>
-    <div class="small">Big sound • bright splats • phone-ready</div>
+    <div class="logo">KIMI KIREI 🥑 AVO SLICE</div>
+    <h1>Avo Slice<br>Mania</h1>
+    <p class="sub">Swipe the sword, chop flying avocados, dodge the boring briefcases, and climb from accountant chaos to ultimate ENGLIGHTENMENT.</p>
+    <div class="heroAvo" onclick="openNickPopup(event)" role="button" aria-label="Press here to start"><div class="pressSign">PRESS HERE</div><div class="face"><div class="eye l"></div><div class="eye r"></div><div class="mouth"></div></div></div>
+    <button class="bigBtn" onclick="openNickPopup(event)">START THE AVO CHAOS 😂</button>
+    <div class="small">Best on phone. Sound starts after the first tap. Keep swiping.</div>
   </div>
 </section>
 
@@ -214,37 +103,26 @@ const home=document.getElementById('home'),modal=document.getElementById('nickMo
 const scoreEl=document.getElementById('score'),comboEl=document.getElementById('combo'),livesEl=document.getElementById('lives'),rankName=document.getElementById('rankName'),message=document.getElementById('message'),sword=document.getElementById('sword'),final=document.getElementById('final');
 let audioCtx=null,soundOn=true,playing=false,paused=false,score=0,combo=0,lives=3,spawnTimer=null,loopId=null,fruits=[],lastPoints=[],lastSpawn=0,difficulty=1,rankIndex=0,playerMode='jackie';
 const rewardPaths={
-  jackie:{
-    hello:'HI JACKIE — BEGIN!',
-    theme:'Accountancy Mode',
-    bad:'BORING RECEIPT!',
-    bomb:'🧾',
-    final:'Final score {score}. Jackie has reached ENGLIGHTENMENT: queen of accounts, tax, ledgers and avocado slicing.',
-    ranks:['Receipt Rookie','Spreadsheet Sprout','Invoice Ninja','VAT Vanquisher','Ledger Legend','Payroll Powerhouse','Balance Sheet Boss','Tax Return Titan','Pro Accountant','Audit Avenger','Chief Finance Wizard','ENGLIGHTENMENT']
-  },
-  nick:{
-    hello:'HI NICK — START!',
-    theme:'Engineering + HV Mode',
-    bad:'HV BRIEFCASE FAULT!',
-    bomb:'⚡',
-    final:'Final score {score}. Nick has reached ENGLIGHTENMENT: top engineer, cable king and high-voltage avocado master.',
-    ranks:['Junior Cable Puller','Sparks Apprentice','Ducting Dynamo','Circuit Slicer','Voltage Voyager','Transformer Tamer','Substation Superstar','Cable Route Wizard','High Voltage Hero','Top Engineer','Grid Master','ENGLIGHTENMENT']
-  }
+  jackie:{hello:'HI JACKIE — BEGIN!',bad:'TAX PANIC! 🧾',bomb:'🧾',final:'Final score {score}. Jackie has reached ENGLIGHTENMENT: queen of accounts, ledgers, VAT and avocado slicing.',ranks:['Receipt Rookie','Spreadsheet Sprout','Invoice Ninja','VAT Vanquisher','Ledger Legend','Payroll Powerhouse','Balance Sheet Boss','Tax Return Titan','Pro Accountant','Audit Avenger','Chief Finance Wizard','ENGLIGHTENMENT']},
+  nick:{hello:'HI NICK — START!',bad:'HIGH VOLTAGE FAULT! ⚡',bomb:'⚡',final:'Final score {score}. Nick has reached ENGLIGHTENMENT: top engineer, cable king and high-voltage avocado master.',ranks:['Junior Cable Puller','Sparks Apprentice','Ducting Dynamo','Circuit Slicer','Voltage Voyager','Transformer Tamer','Substation Superstar','Cable Route Wizard','High Voltage Hero','Top Engineer','Grid Master','ENGLIGHTENMENT']}
 };
 let ranks=rewardPaths.jackie.ranks;
-function openNickPopup(){modal.classList.add('show');sound('pop')}
+function burstAt(x,y){['🥑','✨','⚔️','💥','🌈'].forEach((t,i)=>{const b=document.createElement('div');b.className='tapBurst';b.textContent=t;b.style.left=(x-16)+'px';b.style.top=(y-16)+'px';b.style.setProperty('--dx',(Math.cos(i*1.26)*90)+'px');b.style.setProperty('--dy',(Math.sin(i*1.26)*90-30)+'px');document.body.appendChild(b);setTimeout(()=>b.remove(),850)})}
+function funnyToast(t){const el=document.createElement('div');el.className='funToast';el.textContent=t;document.body.appendChild(el);setTimeout(()=>el.remove(),1050);sound('pop')}
+function homePop(e,t){if(e){e.stopPropagation();burstAt(e.clientX||innerWidth/2,e.clientY||innerHeight/2)}funnyToast(t)}
+function openNickPopup(e){if(e){e.stopPropagation();burstAt(e.clientX||innerWidth/2,e.clientY||innerHeight/2)}funnyToast('WHO DARES ENTER THE AVO DOJO? 🥑');setTimeout(()=>modal.classList.add('show'),260);sound('pop')}
 function ctx(){if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();return audioCtx}
 function tone(f,d=.08,type='sine',vol=.07){if(!soundOn)return;try{const a=ctx(),o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=f;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(vol,a.currentTime);g.gain.exponentialRampToValueAtTime(.001,a.currentTime+d);o.start();o.stop(a.currentTime+d)}catch(e){}}
 function noise(d=.12,vol=.05){if(!soundOn)return;const a=ctx(),b=a.createBuffer(1,a.sampleRate*d,a.sampleRate),data=b.getChannelData(0);for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*(1-i/data.length);const s=a.createBufferSource(),g=a.createGain();s.buffer=b;s.connect(g);g.connect(a.destination);g.gain.value=vol;s.start()}
 function sound(type){if(type==='swipe'){tone(700,.05,'triangle',.04);setTimeout(()=>tone(980,.05,'triangle',.035),35)}if(type==='slice'){noise(.07,.06);tone(360+Math.random()*400,.07,'square',.05)}if(type==='bad'){tone(90,.18,'sawtooth',.09);noise(.18,.07)}if(type==='rank'){tone(520,.09,'square');setTimeout(()=>tone(720,.09,'square'),90);setTimeout(()=>tone(980,.15,'square'),180)}if(type==='pop'){tone(600,.08,'sine');setTimeout(()=>tone(900,.08,'sine'),80)}}
 function toggleSound(){soundOn=!soundOn;document.getElementById('soundBtn').textContent=soundOn?'🔊 Sound':'🔇 Muted';if(soundOn)sound('rank')}
-function startGame(mode='jackie'){playerMode=mode;ranks=rewardPaths[playerMode].ranks;modal.classList.remove('show');final.classList.remove('show');home.style.display='none';game.style.display='block';clearAll();score=0;combo=0;lives=3;difficulty=1;rankIndex=0;playing=true;paused=false;lastSpawn=0;rankName.textContent=ranks[0];updateHud();showMsg(rewardPaths[playerMode].hello);setTimeout(()=>{if(playing&&!paused)showMsg(rewardPaths[playerMode].theme)},900);spawnTimer=setInterval(()=>{if(playing&&!paused)spawnWave()},820);loopId=requestAnimationFrame(loop);sound('rank')}
+function startGame(mode){playerMode=mode||playerMode||'jackie';ranks=rewardPaths[playerMode].ranks;modal.classList.remove('show');final.classList.remove('show');home.style.display='none';game.style.display='block';clearAll();score=0;combo=0;lives=3;difficulty=1;rankIndex=0;playing=true;paused=false;lastSpawn=0;updateHud();showMsg(rewardPaths[playerMode].hello);spawnTimer=setInterval(()=>{if(playing&&!paused)spawnWave()},820);loopId=requestAnimationFrame(loop);sound('rank')}
 function pauseGame(){if(!playing)return;paused=!paused;document.getElementById('pauseBtn').textContent=paused?'Resume':'Pause';showMsg(paused?'PAUSED':'GO!');if(!paused)loopId=requestAnimationFrame(loop)}
 function backHome(){playing=false;paused=false;clearInterval(spawnTimer);cancelAnimationFrame(loopId);clearAll();game.style.display='none';home.style.display='flex';final.classList.remove('show')}
 function updateHud(){scoreEl.textContent='Score '+score;comboEl.textContent='Combo x'+combo;livesEl.textContent='Lives '+lives;const next=Math.min(ranks.length-1,Math.floor(score/120));if(next!==rankIndex){rankIndex=next;rankName.textContent=ranks[rankIndex];showMsg(ranks[rankIndex]);confetti(28);sound('rank');if(rankIndex===ranks.length-1)win()}else rankName.textContent=ranks[rankIndex];difficulty=1+score/400}
 function showMsg(t){message.textContent=t;message.classList.remove('show');void message.offsetWidth;message.classList.add('show')}
 function spawnWave(){let count=Math.random()<.35?2:1;if(score>500&&Math.random()<.35)count=3;for(let i=0;i<count;i++)setTimeout(spawnFruit,i*150)}
-function spawnFruit(){const w=innerWidth,h=innerHeight;const x=40+Math.random()*(w-80);const y=h+90;const isBomb=Math.random()<Math.min(.22,.06+score/2500);const bonus=!isBomb&&Math.random()<.12;const el=document.createElement('div');el.className='fruit'+(bonus?' bonus':'')+(isBomb?' bomb':'');if(isBomb)el.style.setProperty('--bombIcon', `'${rewardPaths[playerMode].bomb}'`);arena.appendChild(el);const vx=(Math.random()-.5)*(2.4+difficulty*.8),vy=-(9+Math.random()*4+difficulty*1.4),rot=(Math.random()-.5)*10;const f={el,x,y,vx,vy,rot,vr:(Math.random()-.5)*12,r:isBomb?40:48,bomb:isBomb,bonus,sliced:false};fruits.push(f)}
+function spawnFruit(){const w=innerWidth,h=innerHeight;const x=40+Math.random()*(w-80);const y=h+90;const isBomb=Math.random()<Math.min(.22,.06+score/2500);const bonus=!isBomb&&Math.random()<.12;const el=document.createElement('div');el.className='fruit'+(bonus?' bonus':'')+(isBomb?' bomb':'');if(isBomb)el.style.setProperty('--bombIcon',`'${rewardPaths[playerMode].bomb}'`);arena.appendChild(el);const vx=(Math.random()-.5)*(2.4+difficulty*.8),vy=-(9+Math.random()*4+difficulty*1.4),rot=(Math.random()-.5)*10;const f={el,x,y,vx,vy,rot,vr:(Math.random()-.5)*12,r:isBomb?40:48,bomb:isBomb,bonus,sliced:false};fruits.push(f)}
 function loop(){if(!playing||paused)return;for(let i=fruits.length-1;i>=0;i--){const f=fruits[i];f.vy+=.18;f.x+=f.vx;f.y+=f.vy;f.rot+=f.vr;f.el.style.transform=`translate(${f.x-f.r}px,${f.y-f.r}px) rotate(${f.rot}deg)`;if(f.y>innerHeight+150){f.el.remove();fruits.splice(i,1);if(!f.sliced&&!f.bomb){combo=0;lives--;showMsg('MISSED!');updateHud();if(lives<=0)endGame(false)}}}loopId=requestAnimationFrame(loop)}
 function clearAll(){fruits.forEach(f=>f.el.remove());fruits=[];arena.querySelectorAll('.half,.sliceLine,.splat,.juice,.floatText,.trail').forEach(e=>e.remove())}
 function pointer(e){const t=e.touches?e.touches[0]:e;return{x:t.clientX,y:t.clientY}}
@@ -258,7 +136,7 @@ function halves(x,y){for(let i=0;i<2;i++){const h=document.createElement('div');
 function juice(x,y){for(let i=0;i<10;i++){const j=document.createElement('div');j.className='juice';j.style.left=x+'px';j.style.top=y+'px';j.style.setProperty('--dx',(Math.random()*140-70)+'px');j.style.setProperty('--dy',(Math.random()*140-90)+'px');arena.appendChild(j);setTimeout(()=>j.remove(),720)}}
 function shake(){document.body.animate([{transform:'translate(0,0)'},{transform:'translate(-6px,4px)'},{transform:'translate(5px,-3px)'},{transform:'translate(0,0)'}],{duration:220})}
 function win(){playing=false;clearInterval(spawnTimer);setTimeout(()=>endGame(true),700)}
-function endGame(won){playing=false;clearInterval(spawnTimer);cancelAnimationFrame(loopId);confetti(won?160:70);document.getElementById('finalTitle').textContent=won?'ENGLIGHTENMENT':'GAME OVER';document.getElementById('finalText').textContent=won?rewardPaths[playerMode].final.replace('{score}',score):`Score ${score}. Title reached: ${ranks[rankIndex]}. Try again and avoid the ${playerMode==='jackie'?'boring receipts':'high-voltage faults'}.`;final.classList.add('show');sound(won?'rank':'bad')}
+function endGame(won){playing=false;clearInterval(spawnTimer);cancelAnimationFrame(loopId);confetti(won?160:70);document.getElementById('finalTitle').textContent=won?'ENGLIGHTENMENT':'GAME OVER';document.getElementById('finalText').textContent=won?rewardPaths[playerMode].final.replace('{score}',score):`Score ${score}. Title reached: ${ranks[rankIndex]}. Try again and avoid the chaos objects.`;final.classList.add('show');sound(won?'rank':'bad')}
 function confetti(n){const cols=['#245f20','#bdf15d','#ff5ea8','#ffe86d','#fff'];for(let i=0;i<n;i++){const c=document.createElement('div');c.style.cssText=`position:fixed;left:${Math.random()*100}vw;top:-20px;width:12px;height:18px;background:${cols[Math.floor(Math.random()*cols.length)]};z-index:90;border-radius:4px;pointer-events:none`;document.body.appendChild(c);c.animate([{transform:'translateY(0) rotate(0)',opacity:1},{transform:`translateY(${innerHeight+60}px) rotate(${Math.random()*900}deg)`,opacity:.15}],{duration:1800+Math.random()*900,easing:'linear'});setTimeout(()=>c.remove(),2800)}}
 function moveSword(p){sword.style.display='block';sword.style.left=p.x+'px';sword.style.top=p.y+'px'}
 function handleMove(p){lastPoints.push({x:p.x,y:p.y,t:Date.now()});if(lastPoints.length>6)lastPoints.shift();addTrail(p.x,p.y);moveSword(p);if(lastPoints.length<2)return;const a=lastPoints[lastPoints.length-2],b=lastPoints[lastPoints.length-1];if(Math.hypot(b.x-a.x,b.y-a.y)>12){drawSlash(a,b);sound('swipe');for(const f of [...fruits])if(hitTest(a,b,f))sliceFruit(f)}}
@@ -266,6 +144,7 @@ window.addEventListener('pointerdown',e=>{if(!playing||paused)return;lastPoints=
 window.addEventListener('pointermove',e=>{if(!playing||paused)return;e.preventDefault();handleMove(pointer(e))},{passive:false});
 window.addEventListener('pointerup',()=>{lastPoints=[];sword.style.display='none'});
 window.addEventListener('touchmove',e=>{if(playing)e.preventDefault()},{passive:false});
+home.addEventListener('click',e=>{if(e.target===home||e.target.classList.contains('panel'))homePop(e,['BOING! 🥑','SPLAT ATTACK! 💚','AVO POWER! ⚡','DOJO DANCE! 🕺'][Math.floor(Math.random()*4)])});
 </script>
 </body>
 </html>
