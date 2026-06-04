@@ -5,261 +5,196 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kimi Kirei Smart AvoBrush | Pre-Launch</title>
   <meta name="description" content="Kimi Kirei Smart AvoBrush - the interactive smart hairbrush for children. Join the pre-launch list." />
-  <style>
-    * {
-      box-sizing: border-box;
-    }
 
+  <style>
     :root {
-      --green: #35b86b;
-      --deep-green: #123d2a;
-      --blue: #64d8ff;
-      --soft-blue: #e9f9ff;
+      --green: #32b96a;
+      --dark-green: #103c2a;
+      --blue: #5fd8ff;
       --amber: #ffb84d;
       --red: #ff5b5b;
       --cream: #fffaf0;
       --text: #173528;
+      --white: rgba(255, 255, 255, 0.86);
+      --shadow: 0 24px 70px rgba(18, 61, 42, 0.14);
     }
 
-    html, body {
+    * { box-sizing: border-box; }
+
+    body {
       margin: 0;
-      min-height: 100%;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       color: var(--text);
-      background: #eefcff;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: -3;
       background:
-        radial-gradient(circle at 15% 20%, rgba(100, 216, 255, .55), transparent 28%),
-        radial-gradient(circle at 85% 15%, rgba(53, 184, 107, .38), transparent 24%),
-        radial-gradient(circle at 75% 85%, rgba(255, 184, 77, .33), transparent 26%),
-        linear-gradient(135deg, #f8fffb, #e8f9ff 55%, #fff8e8);
-    }
-
-    .animated-bg {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .orb {
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      filter: blur(2px);
-      opacity: .28;
-      animation: float 12s ease-in-out infinite alternate;
-    }
-
-    .orb.one {
-      left: 5%;
-      top: 12%;
-      background: var(--blue);
-    }
-
-    .orb.two {
-      right: 8%;
-      top: 24%;
-      background: var(--green);
-      animation-delay: -4s;
-    }
-
-    .orb.three {
-      left: 46%;
-      bottom: 4%;
-      background: var(--amber);
-      animation-delay: -7s;
-    }
-
-    .traffic-line {
-      position: fixed;
-      inset: auto 0 0;
-      height: 8px;
-      background: linear-gradient(90deg, var(--green), var(--amber), var(--red), var(--blue), var(--green));
-      background-size: 300% 100%;
-      animation: trafficMove 7s linear infinite;
-      z-index: 10;
+        radial-gradient(circle at 15% 20%, rgba(95, 216, 255, 0.50), transparent 30%),
+        radial-gradient(circle at 85% 18%, rgba(50, 185, 106, 0.35), transparent 28%),
+        radial-gradient(circle at 80% 90%, rgba(255, 184, 77, 0.30), transparent 28%),
+        linear-gradient(135deg, #f8fffb, #e9f9ff 55%, #fff7e8);
+      min-height: 100vh;
     }
 
     .page {
       width: min(1160px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 34px 0 46px;
+      padding: 32px 0 48px;
     }
 
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 18px;
-      margin-bottom: 30px;
+      gap: 20px;
+      margin-bottom: 28px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 14px;
+      color: var(--dark-green);
       font-weight: 900;
-      color: var(--deep-green);
-      letter-spacing: -.3px;
+      font-size: 22px;
     }
 
-    .brand img {
-      width: 74px;
-      height: 74px;
+    .logo {
+      width: 76px;
+      height: 76px;
       object-fit: contain;
       border-radius: 20px;
-      background: rgba(255,255,255,.76);
-      padding: 7px;
-      box-shadow: 0 12px 28px rgba(18, 61, 42, .12);
+      background: white;
+      padding: 8px;
+      box-shadow: 0 12px 28px rgba(18, 61, 42, 0.13);
     }
 
     .brand small {
       display: block;
+      font-size: 13px;
       font-weight: 800;
-      color: rgba(18, 61, 42, .68);
+      color: rgba(18, 61, 42, 0.68);
       margin-top: 3px;
     }
 
-    .top-pill {
-      border: 1px solid rgba(18, 61, 42, .12);
-      background: rgba(255,255,255,.7);
-      backdrop-filter: blur(12px);
-      padding: 10px 16px;
+    .pill {
+      background: var(--white);
+      border: 1px solid rgba(18, 61, 42, 0.12);
       border-radius: 999px;
-      font-weight: 800;
-      box-shadow: 0 12px 30px rgba(18, 61, 42, .08);
+      padding: 11px 17px;
+      font-weight: 900;
+      color: var(--dark-green);
+      box-shadow: 0 12px 30px rgba(18, 61, 42, 0.08);
     }
 
     .hero {
       display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 30px;
-      align-items: center;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: stretch;
     }
 
-    .hero-card, .signup-card, .feature {
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(255,255,255,.9);
+    .card {
+      background: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.92);
       border-radius: 34px;
-      box-shadow: 0 24px 70px rgba(18, 61, 42, .14);
+      box-shadow: var(--shadow);
       backdrop-filter: blur(14px);
     }
 
-    .hero-card {
-      padding: clamp(26px, 5vw, 54px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::after {
-      content: "";
-      position: absolute;
-      width: 240px;
-      height: 240px;
-      right: -80px;
-      top: -80px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(100,216,255,.48), transparent 68%);
+    .intro {
+      padding: clamp(28px, 5vw, 54px);
     }
 
     .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 13px;
+      display: inline-block;
+      background: rgba(50, 185, 106, 0.13);
+      color: var(--dark-green);
       border-radius: 999px;
-      background: rgba(53, 184, 107, .12);
-      color: var(--deep-green);
+      padding: 10px 14px;
       font-weight: 900;
       margin-bottom: 18px;
     }
 
     h1 {
       margin: 0;
+      color: var(--dark-green);
       font-size: clamp(42px, 7vw, 82px);
-      line-height: .94;
+      line-height: 0.94;
       letter-spacing: -3px;
-      color: var(--deep-green);
     }
 
     .lead {
+      max-width: 680px;
+      margin: 22px 0 24px;
       font-size: clamp(18px, 2vw, 23px);
       line-height: 1.35;
-      font-weight: 700;
-      color: rgba(23, 53, 40, .82);
-      margin: 20px 0 26px;
-      max-width: 670px;
+      font-weight: 750;
+      color: rgba(23, 53, 40, 0.82);
     }
 
-    .cta-row {
+    .traffic-lights {
       display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
+      gap: 11px;
+      margin: 20px 0 24px;
     }
+
+    .light {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.85), 0 10px 22px rgba(0, 0, 0, 0.13);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    .green { background: var(--green); }
+    .amber { background: var(--amber); animation-delay: 0.4s; }
+    .red { background: var(--red); animation-delay: 0.8s; }
+    .blue { background: var(--blue); animation-delay: 1.2s; }
 
     .button {
       display: inline-flex;
-      justify-content: center;
       align-items: center;
-      min-height: 52px;
-      padding: 0 22px;
-      border-radius: 999px;
+      justify-content: center;
+      min-height: 54px;
+      padding: 0 24px;
       border: 0;
-      background: linear-gradient(135deg, var(--green), #7de07c);
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--green), #7fe27d);
       color: white;
       font-size: 16px;
       font-weight: 900;
       text-decoration: none;
-      box-shadow: 0 12px 24px rgba(53, 184, 107, .28);
       cursor: pointer;
+      box-shadow: 0 14px 28px rgba(50, 185, 106, 0.28);
     }
 
-    .note {
-      font-weight: 800;
-      color: rgba(23, 53, 40, .62);
-    }
-
-    .signup-card {
+    .product {
       padding: 28px;
       text-align: center;
     }
 
-    .product-logo {
+    .main-logo {
       display: block;
-      width: min(360px, 82%);
-      margin: 0 auto 18px;
+      width: min(390px, 88%);
+      margin: 0 auto 20px;
       object-fit: contain;
-      border-radius: 26px;
-      background: rgba(255,255,255,.7);
+      border-radius: 28px;
+      background: white;
       padding: 14px;
-      box-shadow: 0 18px 45px rgba(18, 61, 42, .13);
+      box-shadow: 0 18px 45px rgba(18, 61, 42, 0.14);
     }
 
-    .signup-card h2 {
-      margin: 6px 0 8px;
-      font-size: clamp(27px, 3.5vw, 42px);
+    h2 {
+      margin: 6px 0 10px;
+      color: var(--dark-green);
+      font-size: clamp(28px, 3.5vw, 42px);
       line-height: 1;
-      color: var(--deep-green);
     }
 
-    .signup-card p {
+    .product p {
+      max-width: 430px;
       margin: 0 auto 18px;
-      font-size: 16px;
+      color: rgba(23, 53, 40, 0.72);
+      font-weight: 750;
       line-height: 1.45;
-      color: rgba(23, 53, 40, .72);
-      font-weight: 700;
-      max-width: 420px;
     }
 
     form {
@@ -268,10 +203,10 @@
       margin-top: 18px;
     }
 
-    input[type="email"] {
+    input {
       width: 100%;
       min-height: 54px;
-      border: 2px solid rgba(18, 61, 42, .12);
+      border: 2px solid rgba(18, 61, 42, 0.13);
       border-radius: 999px;
       padding: 0 18px;
       font-size: 16px;
@@ -280,16 +215,16 @@
       background: white;
     }
 
-    input[type="email"]:focus {
+    input:focus {
       border-color: var(--green);
-      box-shadow: 0 0 0 5px rgba(53,184,107,.13);
+      box-shadow: 0 0 0 5px rgba(50, 185, 106, 0.13);
     }
 
-    .form-message {
+    .message {
       min-height: 22px;
       margin-top: 12px;
       font-weight: 900;
-      color: var(--deep-green);
+      color: var(--dark-green);
     }
 
     .features {
@@ -300,207 +235,144 @@
     }
 
     .feature {
-      padding: 20px;
+      padding: 21px;
       min-height: 160px;
     }
 
-    .feature b {
-      display: block;
+    .feature-icon {
       font-size: 34px;
+      display: block;
       margin-bottom: 10px;
     }
 
-    .feature h3 {
+    h3 {
       margin: 0 0 8px;
-      color: var(--deep-green);
+      color: var(--dark-green);
     }
 
     .feature p {
       margin: 0;
       line-height: 1.35;
       font-weight: 700;
-      color: rgba(23, 53, 40, .7);
+      color: rgba(23, 53, 40, 0.70);
     }
-
-    .traffic {
-      display: flex;
-      gap: 9px;
-      justify-content: center;
-      margin: 16px 0 2px;
-    }
-
-    .light {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      box-shadow: 0 0 0 5px rgba(255,255,255,.82), 0 8px 20px rgba(0,0,0,.12);
-      animation: pulse 2.4s ease-in-out infinite;
-    }
-
-    .light.green { background: var(--green); }
-    .light.amber { background: var(--amber); animation-delay: .45s; }
-    .light.red { background: var(--red); animation-delay: .9s; }
-    .light.blue { background: var(--blue); animation: blueBreath 2.8s ease-in-out infinite; }
 
     footer {
-      margin-top: 26px;
       text-align: center;
+      margin-top: 26px;
       font-weight: 800;
-      color: rgba(23, 53, 40, .58);
+      color: rgba(23, 53, 40, 0.58);
     }
 
-    @keyframes float {
-      from { transform: translate3d(0,0,0) scale(1); }
-      to { transform: translate3d(40px, -45px, 0) scale(1.18); }
-    }
-
-    @keyframes trafficMove {
-      to { background-position: 300% 0; }
+    .traffic-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--green), var(--amber), var(--red), var(--blue), var(--green));
+      background-size: 300% 100%;
+      animation: move 7s linear infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { transform: scale(.88); opacity: .7; }
-      50% { transform: scale(1.12); opacity: 1; }
+      0%, 100% { transform: scale(0.88); opacity: 0.72; }
+      50% { transform: scale(1.14); opacity: 1; }
     }
 
-    @keyframes blueBreath {
-      0%, 100% { transform: scale(.78); opacity: .45; box-shadow: 0 0 0 5px rgba(255,255,255,.82), 0 0 16px rgba(100,216,255,.28); }
-      50% { transform: scale(1.18); opacity: 1; box-shadow: 0 0 0 5px rgba(255,255,255,.82), 0 0 32px rgba(100,216,255,.72); }
+    @keyframes move {
+      to { background-position: 300% 0; }
     }
 
-    @media (max-width: 920px) {
-      header, .hero {
-        grid-template-columns: 1fr;
-      }
-
-      header {
-        align-items: flex-start;
-      }
-
-      .features {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      form {
-        flex-direction: column;
-      }
-
-      .button {
-        width: 100%;
-      }
+    @media (max-width: 900px) {
+      header, .hero { grid-template-columns: 1fr; }
+      header { align-items: flex-start; }
+      .features { grid-template-columns: repeat(2, 1fr); }
+      form { flex-direction: column; }
+      .button { width: 100%; }
     }
 
     @media (max-width: 560px) {
-      .page {
-        width: min(100% - 22px, 1160px);
-        padding-top: 18px;
-      }
-
-      .brand img {
-        width: 62px;
-        height: 62px;
-      }
-
-      .top-pill {
-        font-size: 13px;
-      }
-
-      .features {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-card, .signup-card {
-        border-radius: 26px;
-        padding: 22px;
-      }
+      .page { width: calc(100% - 22px); padding-top: 18px; }
+      .logo { width: 62px; height: 62px; }
+      .pill { font-size: 13px; }
+      .features { grid-template-columns: 1fr; }
+      .card { border-radius: 26px; }
+      .intro, .product { padding: 22px; }
     }
   </style>
 </head>
 <body>
-  <div class="animated-bg" aria-hidden="true">
-    <div class="orb one"></div>
-    <div class="orb two"></div>
-    <div class="orb three"></div>
-  </div>
-
   <main class="page">
     <header>
       <div class="brand">
-        <img src="Avo Brush logo final.jpeg" alt="Kimi Kirei AvoBrush logo" />
+        <img class="logo" src="./Avo%20Brush%20logo%20final.jpeg" alt="Kimi Kirei AvoBrush logo" />
         <div>
           Kimi Kirei
           <small>Smart AvoBrush Pre-Launch</small>
         </div>
       </div>
-      <div class="top-pill">Pre-orders opening soon</div>
+      <div class="pill">Pre-orders opening soon</div>
     </header>
 
     <section class="hero">
-      <div class="hero-card">
+      <div class="card intro">
         <div class="eyebrow">🥑 The smart hairbrush kids actually want to use</div>
         <h1>Happy Hair.<br />Happy Kids.</h1>
         <p class="lead">
           A fun, interactive smart hairbrush that talks, lights up and gently guides children through brushing using a simple traffic light system.
         </p>
 
-        <div class="traffic" aria-label="AvoBrush traffic light guidance">
+        <div class="traffic-lights" aria-label="Traffic light brushing guide">
           <span class="light green" title="Green - Start brushing"></span>
           <span class="light amber" title="Amber - Keep going"></span>
           <span class="light red" title="Red - All done"></span>
-          <span class="light blue" title="Blue - Calm idle breathing mode"></span>
+          <span class="light blue" title="Blue - Calm idle mode"></span>
         </div>
 
-        <div class="cta-row">
-          <a class="button" href="#join">Join the pre-launch list</a>
-          <span class="note">Green = start · Amber = keep going · Red = all done</span>
-        </div>
+        <a class="button" href="#join">Join the pre-launch list</a>
       </div>
 
-      <div class="signup-card" id="join">
-        <img class="product-logo" src="Avo Brush logo final.jpeg" alt="AvoBrush logo" />
+      <div class="card product" id="join">
+        <img class="main-logo" src="./Avo%20Brush%20logo%20final.jpeg" alt="AvoBrush logo" />
         <h2>Interested in getting an AvoBrush?</h2>
-        <p>
-          Enter your email below to get early updates, launch news and first access when pre-orders become available.
-        </p>
+        <p>Enter your email below for early updates, launch news and first access when pre-orders open.</p>
 
-        <!-- For a live site, connect this to Formspree, Mailchimp, Klaviyo or your own backend. -->
         <form id="preorderForm">
-          <input id="emailInput" type="email" name="email" placeholder="Enter your email address" required />
+          <input id="emailInput" type="email" placeholder="Enter your email address" required />
           <button class="button" type="submit">Notify Me</button>
         </form>
-        <div class="form-message" id="formMessage"></div>
+        <div class="message" id="formMessage"></div>
       </div>
     </section>
 
     <section class="features">
-      <div class="feature">
-        <b>🟢</b>
+      <div class="card feature">
+        <span class="feature-icon">🟢</span>
         <h3>Guided brushing</h3>
-        <p>Green, amber and red lighting helps children understand what to do and when they are finished.</p>
+        <p>Green, amber and red lighting helps children know what to do and when they are finished.</p>
       </div>
-      <div class="feature">
-        <b>🔵</b>
+      <div class="card feature">
+        <span class="feature-icon">🔵</span>
         <h3>Calm idle mode</h3>
-        <p>When not brushing, the AvoBrush sits in a soft breathing blue light mode.</p>
+        <p>A soft blue breathing light makes the brush feel friendly when not in use.</p>
       </div>
-      <div class="feature">
-        <b>🔊</b>
+      <div class="card feature">
+        <span class="feature-icon">🔊</span>
         <h3>Voice prompts</h3>
-        <p>Friendly guidance and encouragement can help make brushing feel less stressful.</p>
+        <p>Friendly encouragement helps make brushing feel less stressful.</p>
       </div>
-      <div class="feature">
-        <b>✨</b>
+      <div class="card feature">
+        <span class="feature-icon">✨</span>
         <h3>Fun feedback</h3>
-        <p>Gentle vibration, lights and rewards make brushing feel more like a positive routine.</p>
+        <p>Lights, sounds and gentle vibration turn brushing into a positive routine.</p>
       </div>
     </section>
 
-    <footer>
-      © 2026 Kimi Kirei / Smart Brush UK Ltd. Product in development. Pre-launch page.
-    </footer>
+    <footer>© 2026 Kimi Kirei / Smart Brush UK Ltd. Product in development.</footer>
   </main>
 
-  <div class="traffic-line" aria-hidden="true"></div>
+  <div class="traffic-bar" aria-hidden="true"></div>
 
   <script>
     const form = document.getElementById("preorderForm");
@@ -511,17 +383,18 @@
       event.preventDefault();
 
       const email = emailInput.value.trim();
+      const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-      if (!email || !email.includes("@")) {
+      if (!isValidEmail) {
         formMessage.textContent = "Please enter a valid email address.";
         return;
       }
 
-      const savedEmails = JSON.parse(localStorage.getItem("avobrushPrelaunchEmails") || "[]");
+      const savedEmails = JSON.parse(localStorage.getItem("avobrushEmails") || "[]");
 
       if (!savedEmails.includes(email)) {
         savedEmails.push(email);
-        localStorage.setItem("avobrushPrelaunchEmails", JSON.stringify(savedEmails));
+        localStorage.setItem("avobrushEmails", JSON.stringify(savedEmails));
       }
 
       formMessage.textContent = "Thanks — you're on the early interest list!";
