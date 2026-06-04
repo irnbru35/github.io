@@ -1,39 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kimi Kirei Smart AvoBrush</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #eafff3, #eef8ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+      color: #123d2a;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 560px;
+      background: white;
+      padding: 40px 30px;
+      border-radius: 28px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    }
+
+    .logo {
+      width: 320px;
+      max-width: 90%;
+      height: auto;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: 42px;
+      margin: 0 0 15px;
+      line-height: 1.1;
+    }
+
+    .tagline {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #4c6659;
+      margin-bottom: 28px;
+    }
+
+    form {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    input {
+      flex: 1;
+      padding: 16px;
+      font-size: 16px;
+      border: 2px solid #d9eadf;
+      border-radius: 14px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #35b86b;
+    }
+
+    button {
+      padding: 16px 22px;
+      border: none;
+      border-radius: 14px;
+      background: #35b86b;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2ca25d;
+    }
+
+    #message {
+      margin-top: 18px;
+      color: #35b86b;
+      font-weight: bold;
+    }
+
+    .footer {
+      margin-top: 25px;
+      font-size: 13px;
+      color: #789187;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 32px;
+      }
+
+      form {
+        flex-direction: column;
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
 <body>
 
-  <div class="container">
-    
-    <img src="kimi.jpeg" alt="Kimi Kirei Logo" class="logo">
+  <main class="card">
 
-    <h1>Kimi Kirei Smart AvoBrush</h1>
+    <img 
+      src="./Avo%20Brush%20logo%20final.jpeg" 
+      alt="Kimi Kirei Smart AvoBrush Logo" 
+      class="logo"
+    />
+
+    <h1>Kimi Kirei<br>Smart AvoBrush</h1>
 
     <p class="tagline">
-      Join our pre-launch list and be the first to hear about product updates, launch dates and exclusive offers.
+      Join our pre-launch list and be the first to hear about product updates,
+      launch dates and exclusive offers.
     </p>
 
     <form id="prelaunchForm">
-      <input
-        type="email"
-        id="email"
-        placeholder="Enter your email address"
+      <input 
+        type="email" 
+        id="email" 
+        placeholder="Enter your email address" 
         required
-      >
-      <button type="submit">Join Pre-Launch List</button>
+      />
+      <button type="submit">Join Pre-Launch</button>
     </form>
 
     <div id="message"></div>
 
-  </div>
+    <div class="footer">
+      Smart Brush UK Ltd · Product in development
+    </div>
+
+  </main>
 
   <script>
     const form = document.getElementById("prelaunchForm");
     const message = document.getElementById("message");
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
 
-      message.innerHTML = "Thank you for joining our pre-launch list!";
+      message.textContent = "Thank you — you're on the pre-launch list!";
       form.reset();
     });
   </script>
 
 </body>
+</html>
