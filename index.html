@@ -14,15 +14,19 @@ body{
   font-family:Arial,Helvetica,sans-serif;
   background:linear-gradient(135deg,#effff5,#eef8ff);
   color:#123d2a;
-  overflow-x:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+  overflow:hidden;
 }
 
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  background:url("./Avo%20Brush%20logo%20final.jpeg") center/520px no-repeat;
-  opacity:.06;
+  background:url("kimi.jpeg") center/850px no-repeat;
+  opacity:.12;
   z-index:-2;
 }
 
@@ -31,34 +35,27 @@ body::after{
   position:fixed;
   inset:0;
   background:
-    radial-gradient(circle at 20% 20%,rgba(53,184,107,.18),transparent 28%),
-    radial-gradient(circle at 80% 70%,rgba(100,216,255,.22),transparent 30%);
+    radial-gradient(circle at 15% 20%,rgba(53,184,107,.18),transparent 30%),
+    radial-gradient(circle at 85% 75%,rgba(255,105,180,.16),transparent 32%),
+    radial-gradient(circle at 70% 15%,rgba(100,216,255,.20),transparent 28%);
   z-index:-1;
-}
-
-.page{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:28px;
 }
 
 .card{
   width:100%;
-  max-width:620px;
+  max-width:640px;
   background:rgba(255,255,255,.92);
-  backdrop-filter:blur(12px);
-  border-radius:32px;
-  padding:42px 34px;
+  backdrop-filter:blur(14px);
+  border-radius:34px;
+  padding:46px 36px;
   text-align:center;
-  box-shadow:0 25px 70px rgba(0,0,0,.14);
-  border:1px solid rgba(53,184,107,.18);
+  box-shadow:0 25px 80px rgba(0,0,0,.14);
+  border:1px solid rgba(53,184,107,.22);
 }
 
 .logo{
-  width:390px;
-  max-width:95%;
+  width:420px;
+  max-width:96%;
   height:auto;
   margin-bottom:22px;
   animation:floatLogo 4s ease-in-out infinite;
@@ -66,7 +63,7 @@ body::after{
 
 @keyframes floatLogo{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
+  50%{transform:translateY(-10px)}
 }
 
 h1{
@@ -77,14 +74,14 @@ h1{
 
 .tagline{
   font-size:19px;
-  line-height:1.45;
+  line-height:1.5;
   color:#4c6659;
-  margin:0 0 26px;
+  margin:0 0 28px;
 }
 
 .highlight{
   color:#35b86b;
-  font-weight:bold;
+  font-weight:800;
 }
 
 form{
@@ -102,10 +99,12 @@ input{
   outline:none;
 }
 
-input:focus{border-color:#35b86b}
+input:focus{
+  border-color:#35b86b;
+}
 
-button,.game-btn{
-  padding:17px 22px;
+button{
+  padding:17px 24px;
   border:none;
   border-radius:16px;
   background:#35b86b;
@@ -113,18 +112,11 @@ button,.game-btn{
   font-size:16px;
   font-weight:bold;
   cursor:pointer;
-  text-decoration:none;
-  display:inline-block;
 }
 
-button:hover,.game-btn:hover{background:#2ca25d}
-
-.game-btn{
-  margin-top:22px;
-  background:#ff4fa3;
+button:hover{
+  background:#2ca25d;
 }
-
-.game-btn:hover{background:#e43f90}
 
 #message{
   margin-top:16px;
@@ -132,243 +124,81 @@ button:hover,.game-btn:hover{background:#2ca25d}
   font-weight:bold;
 }
 
+.features{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:26px;
+}
+
+.feature{
+  background:#f3fff7;
+  border:1px solid #d9eadf;
+  border-radius:16px;
+  padding:10px 14px;
+  font-size:14px;
+  font-weight:bold;
+  color:#315744;
+}
+
 .footer{
-  margin-top:24px;
+  margin-top:26px;
   font-size:13px;
   color:#789187;
 }
 
-/* GAME */
-#gameSection{
-  display:none;
-  min-height:100vh;
-  padding:24px;
-  background:linear-gradient(135deg,#101820,#173528);
-  color:white;
-  text-align:center;
-}
-
-.game-header{
-  max-width:900px;
-  margin:0 auto 16px;
-}
-
-canvas{
-  background:linear-gradient(180deg,#eafff3,#d7f7ff);
-  border-radius:24px;
-  box-shadow:0 20px 60px rgba(0,0,0,.3);
-  width:100%;
-  max-width:900px;
-  height:520px;
-  touch-action:none;
-}
-
-.back-btn{
-  margin:16px;
-  background:white;
-  color:#123d2a;
-}
-
-.score{
-  font-size:22px;
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
 @media(max-width:620px){
-  .card{padding:30px 22px}
+  body{overflow:auto}
+  .card{padding:32px 22px}
   h1{font-size:32px}
   form{flex-direction:column}
   button{width:100%}
-  canvas{height:460px}
 }
 </style>
 </head>
 
 <body>
 
-<section class="page" id="home">
-  <main class="card">
+<main class="card">
 
-    <img src="./Avo%20Brush%20logo%20final.jpeg" alt="Kimi Kirei Smart AvoBrush Logo" class="logo">
+  <img src="./Avo%20Brush%20logo%20final.jpeg" alt="Kimi Kirei Smart AvoBrush Logo" class="logo">
 
-    <h1>Kimi Kirei<br>Smart AvoBrush</h1>
+  <h1>Kimi Kirei<br>Smart AvoBrush</h1>
 
-    <p class="tagline">
-      Enter your email to register interest for pre-order of the 
-      <span class="highlight">first ever smart interactive hairbrush for children.</span>
-    </p>
+  <p class="tagline">
+    Enter your email to register interest for pre-order of the
+    <span class="highlight">first ever smart interactive hairbrush for children.</span>
+  </p>
 
-    <form id="prelaunchForm">
-      <input type="email" id="email" placeholder="Enter your email address" required>
-      <button type="submit">Join Pre-Launch</button>
-    </form>
+  <form id="prelaunchForm">
+    <input type="email" id="email" placeholder="Enter your email address" required>
+    <button type="submit">Join Pre-Launch</button>
+  </form>
 
-    <div id="message"></div>
+  <div id="message"></div>
 
-    <a href="#" class="game-btn" id="playGame">Press here to play Avo Smash</a>
-
-    <div class="footer">
-      Smart Brush UK Ltd · Product in development
-    </div>
-
-  </main>
-</section>
-
-<section id="gameSection">
-  <div class="game-header">
-    <h1>Avo Smash 🥑</h1>
-    <p>Swipe through the flying avocados before they fall!</p>
-    <div class="score">Score: <span id="score">0</span></div>
+  <div class="features">
+    <div class="feature">🟢 Guided brushing</div>
+    <div class="feature">🔊 Voice prompts</div>
+    <div class="feature">✨ Lights & vibration</div>
   </div>
 
-  <canvas id="gameCanvas" width="900" height="520"></canvas>
-  <br>
-  <button class="back-btn" id="backHome">Back to Pre-Launch Page</button>
-</section>
+  <div class="footer">
+    Smart Brush UK Ltd · Product in development · Pre-orders opening soon
+  </div>
+
+</main>
 
 <script>
-const form=document.getElementById("prelaunchForm");
-const message=document.getElementById("message");
+const form = document.getElementById("prelaunchForm");
+const message = document.getElementById("message");
 
-form.addEventListener("submit",function(e){
-  e.preventDefault();
-  message.textContent="Thank you — you're on the pre-launch list!";
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+  message.textContent = "Thank you — you're on the pre-launch list!";
   form.reset();
 });
-
-const playGame=document.getElementById("playGame");
-const backHome=document.getElementById("backHome");
-const home=document.getElementById("home");
-const gameSection=document.getElementById("gameSection");
-
-playGame.addEventListener("click",function(e){
-  e.preventDefault();
-  home.style.display="none";
-  gameSection.style.display="block";
-  startGame();
-});
-
-backHome.addEventListener("click",function(){
-  gameSection.style.display="none";
-  home.style.display="flex";
-});
-
-const canvas=document.getElementById("gameCanvas");
-const ctx=canvas.getContext("2d");
-const scoreEl=document.getElementById("score");
-
-let avocados=[];
-let score=0;
-let gameRunning=false;
-
-function createAvo(){
-  avocados.push({
-    x:Math.random()*820+40,
-    y:540,
-    size:42+Math.random()*20,
-    speedY:-(8+Math.random()*5),
-    speedX:(Math.random()-.5)*4,
-    rotation:Math.random()*6,
-    sliced:false
-  });
-}
-
-function drawAvo(a){
-  ctx.save();
-  ctx.translate(a.x,a.y);
-  ctx.rotate(a.rotation);
-
-  ctx.beginPath();
-  ctx.ellipse(0,0,a.size*.55,a.size*.75,0,0,Math.PI*2);
-  ctx.fillStyle="#70c14a";
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.ellipse(0,4,a.size*.38,a.size*.52,0,0,Math.PI*2);
-  ctx.fillStyle="#dff2a3";
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.arc(0,12,a.size*.18,0,Math.PI*2);
-  ctx.fillStyle="#8b4a25";
-  ctx.fill();
-
-  ctx.fillStyle="#123d2a";
-  ctx.beginPath();
-  ctx.arc(-10,-10,3,0,Math.PI*2);
-  ctx.arc(10,-10,3,0,Math.PI*2);
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.arc(0,0,10,0,Math.PI);
-  ctx.strokeStyle="#123d2a";
-  ctx.lineWidth=3;
-  ctx.stroke();
-
-  ctx.restore();
-}
-
-function updateGame(){
-  if(!gameRunning)return;
-
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  if(Math.random()<0.035)createAvo();
-
-  avocados.forEach(a=>{
-    a.x+=a.speedX;
-    a.y+=a.speedY;
-    a.speedY+=0.22;
-    a.rotation+=0.04;
-    drawAvo(a);
-  });
-
-  avocados=avocados.filter(a=>a.y<600 && !a.sliced);
-
-  requestAnimationFrame(updateGame);
-}
-
-function smash(x,y){
-  avocados.forEach(a=>{
-    const dx=x-a.x;
-    const dy=y-a.y;
-    const distance=Math.sqrt(dx*dx+dy*dy);
-
-    if(distance<a.size){
-      a.sliced=true;
-      score++;
-      scoreEl.textContent=score;
-    }
-  });
-}
-
-canvas.addEventListener("mousemove",function(e){
-  if(e.buttons!==1)return;
-  const rect=canvas.getBoundingClientRect();
-  const x=(e.clientX-rect.left)*(canvas.width/rect.width);
-  const y=(e.clientY-rect.top)*(canvas.height/rect.height);
-  smash(x,y);
-});
-
-canvas.addEventListener("touchmove",function(e){
-  e.preventDefault();
-  const rect=canvas.getBoundingClientRect();
-  const touch=e.touches[0];
-  const x=(touch.clientX-rect.left)*(canvas.width/rect.width);
-  const y=(touch.clientY-rect.top)*(canvas.height/rect.height);
-  smash(x,y);
-},{passive:false});
-
-function startGame(){
-  score=0;
-  avocados=[];
-  scoreEl.textContent=score;
-  if(!gameRunning){
-    gameRunning=true;
-    updateGame();
-  }
-}
 </script>
 
 </body>
