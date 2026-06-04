@@ -1,111 +1,532 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Kimi Kirei New Game Zone</title>
-<style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none}
-:root{--pink:#ff4fa3;--blue:#45d9ff;--green:#62d94f;--yellow:#ffe75f;--purple:#8f67ff;--orange:#ff9a38;--red:#ff4343;--deep:#123018}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--deep)}
-body{background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.28)),url("Kimi.jpeg") center/cover no-repeat,#e8fbff}
-button{font-family:inherit;border:0;cursor:pointer;color:inherit}.hide{display:none!important}
-#appBg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 12% 18%,rgba(255,231,95,.55),transparent 20%),radial-gradient(circle at 88% 20%,rgba(255,79,163,.35),transparent 24%),radial-gradient(circle at 55% 88%,rgba(69,217,255,.38),transparent 30%)}
-.home{position:fixed;inset:0;z-index:3;overflow:auto;padding:14px 12px 120px}.hub{width:min(1120px,96vw);margin:0 auto}.hero{border-radius:34px;padding:16px;background:linear-gradient(180deg,rgba(255,255,255,.76),rgba(255,255,255,.38));border:3px solid rgba(255,255,255,.78);box-shadow:0 22px 70px rgba(35,120,65,.24);backdrop-filter:blur(6px);text-align:center;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;inset:-80px;background:conic-gradient(from 0deg,transparent,rgba(255,255,255,.42),transparent,rgba(255,255,255,.28),transparent);animation:spinGlow 8s linear infinite;z-index:-1}.logo{display:inline-flex;gap:8px;border-radius:999px;padding:9px 13px;background:rgba(255,255,255,.92);box-shadow:0 7px 0 rgba(43,120,53,.12);font-size:12px;font-weight:1000;color:#287436;text-transform:uppercase;letter-spacing:.5px}.bubbleTitle{display:inline-block;margin:12px auto 8px;padding:14px 22px;border-radius:34px;background:linear-gradient(135deg,#ff4fa3,#8f67ff,#45d9ff);color:white;border:5px solid white;box-shadow:0 12px 0 rgba(45,125,50,.18),0 0 35px rgba(255,255,255,.9);transform:rotate(-1deg)}.bubbleTitle h1{margin:0;font-family:Impact,"Arial Black",system-ui,sans-serif;font-size:clamp(42px,9vw,92px);line-height:.8;letter-spacing:-2px;text-transform:uppercase;text-shadow:0 5px 0 rgba(0,0,0,.18),0 0 18px rgba(255,255,255,.95)}.sub{margin:0 auto 12px;max-width:760px;font-size:16px;line-height:1.25;font-weight:850;background:rgba(255,255,255,.65);border-radius:22px;padding:11px}.profileBar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.profilePill{border-radius:20px;background:rgba(255,255,255,.88);padding:10px;font-weight:1000;box-shadow:0 6px 0 rgba(43,120,53,.10)}.profilePill b{display:block;font-size:22px}.sectionTitle{display:flex;align-items:center;justify-content:space-between;margin:14px 2px 8px;font-weight:1000;color:#1e6b28}.sectionTitle span,.sectionTitle button{background:rgba(255,255,255,.86);padding:8px 12px;border-radius:999px;box-shadow:0 5px 0 rgba(43,120,53,.10);font-weight:1000}.gameGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.card{position:relative;min-height:178px;border-radius:30px;padding:13px;text-align:left;color:white;border:4px solid white;box-shadow:0 11px 0 rgba(81,49,29,.20),0 22px 50px rgba(43,120,53,.18);overflow:hidden;transition:.18s transform}.card:active{transform:scale(.96) rotate(-1deg)}.card:before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle,rgba(255,255,255,.48),transparent 32%);animation:shine 4.8s linear infinite;pointer-events:none}.card h2{position:relative;margin:0 0 6px;font-size:22px;line-height:.95;font-weight:1000}.card p{position:relative;margin:0;font-size:12.5px;line-height:1.18;font-weight:850;max-width:76%}.card .emoji{position:absolute;right:8px;bottom:4px;font-size:74px;filter:drop-shadow(0 8px 0 rgba(0,0,0,.15));animation:bob 1.8s ease-in-out infinite}.card .tag{position:absolute;left:12px;bottom:12px;border-radius:999px;background:rgba(255,255,255,.9);color:#195c20;padding:6px 10px;font-size:12px;font-weight:1000}.c1{background:linear-gradient(135deg,#1fa55c,#72ef7b,#ffe75f)}.c2{background:linear-gradient(135deg,#ffef4a,#ff8b2c,#ff304f)}.c3{background:linear-gradient(135deg,#45d9ff,#0c77ff,#8f67ff)}.c4{background:linear-gradient(135deg,#2b236b,#8f67ff,#45d9ff)}.c5{background:linear-gradient(135deg,#7be7ff,#ffb3ef,#ff4fa3)}.c6{background:linear-gradient(135deg,#62d94f,#ffe75f,#ff4343)}.c7{background:linear-gradient(135deg,#ff4fa3,#ff9a38,#ffe75f)}.c8{background:linear-gradient(135deg,#45d9ff,#8f67ff,#ff4fa3)}.c9{background:linear-gradient(135deg,#ff7adf,#ffb3ef,#8f67ff)}.c10{background:linear-gradient(135deg,#2cab4e,#b8ff55,#ffdd49)}.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.miniTile{border-radius:24px;padding:12px;background:rgba(255,255,255,.84);font-weight:1000;box-shadow:0 7px 0 rgba(43,120,53,.10);text-align:center}.miniTile b{display:block;font-size:34px}
-.balloonLayer{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}.homeBalloon{position:absolute;width:76px;height:92px;border-radius:55% 55% 50% 50%;background:linear-gradient(145deg,rgba(255,255,255,.86),var(--c));box-shadow:inset -10px -14px 0 rgba(0,0,0,.08),0 12px 24px rgba(38,129,96,.12);display:grid;place-items:center;font-size:34px;pointer-events:auto;animation:floatUp var(--dur) linear infinite;left:var(--x);top:105vh}.homeBalloon:after{content:"";position:absolute;left:50%;bottom:-13px;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:16px solid var(--c)}
-.game{display:none;position:fixed;inset:0;z-index:5;overflow:hidden;touch-action:none;background:linear-gradient(180deg,#dff9ff 0%,#fbfff1 58%,#bcf2a9 100%)}.game.show{display:block}.game:before{content:"";position:absolute;left:-10%;right:-10%;bottom:-65px;height:190px;background:linear-gradient(180deg,#9be67d,#4fb64b);border-radius:50% 50% 0 0;z-index:0}.game.spaceBg{background:radial-gradient(circle at 30% 20%,#3446ba,#070820 68%)}.game.waterBg{background:linear-gradient(180deg,#9eeaff 0%,#dff9ff 42%,#1ca9e8 43%,#0066c7 100%)}.game.ninjaBg{background:linear-gradient(180deg,#fff6bf,#b9f0ff 55%,#8be669)}.topHud{position:fixed;top:9px;left:9px;right:9px;z-index:30;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px}.pill{border-radius:999px;background:rgba(255,255,255,.92);padding:9px 8px;text-align:center;font-weight:1000;color:#2d7d32;box-shadow:0 7px 0 rgba(43,120,53,.13);font-size:13px}.bottom{position:fixed;left:10px;right:10px;bottom:10px;z-index:40;display:flex;gap:8px}.bottom button{flex:1;border-radius:22px;padding:13px 10px;font-size:15px;font-weight:1000;background:white;color:#2d7d32;box-shadow:0 7px 0 rgba(43,120,53,.16)}#playArea{position:absolute;inset:0;z-index:3}.message{position:fixed;left:50%;top:45%;transform:translate(-50%,-50%);z-index:45;font-size:clamp(32px,10vw,64px);line-height:.9;font-weight:1000;color:white;text-align:center;text-shadow:0 5px 0 #2d7d32,0 0 28px rgba(255,255,255,.9);pointer-events:none;opacity:0}.message.show{animation:msg .9s forwards}.floatText{position:absolute;z-index:70;font-size:25px;font-weight:1000;color:#ff4ea3;text-shadow:0 3px 0 white;pointer-events:none;animation:floatText .85s forwards;white-space:nowrap}.sprite{position:absolute;z-index:8;filter:drop-shadow(0 10px 0 rgba(0,0,0,.12));will-change:transform}.bigDino{font-size:98px;left:52px;bottom:98px}.rocket{font-size:94px;left:54px;top:45%;transform:translateY(-50%) rotate(45deg)}.rocketFire{position:absolute;left:38px;top:calc(45% + 48px);font-size:50px;z-index:7;animation:fire .18s infinite alternate}.diver{font-size:92px;left:55px;top:100px}.waterLine{position:absolute;left:0;right:0;top:43%;height:18px;background:rgba(255,255,255,.65);z-index:2;box-shadow:0 10px 18px rgba(255,255,255,.4)}.duck{font-size:130px}.swordTrail{position:absolute;height:18px;border-radius:999px;background:linear-gradient(90deg,transparent,white,#45d9ff,transparent);box-shadow:0 0 22px white;z-index:70;pointer-events:none;transform-origin:left center}.cutPiece{position:absolute;font-size:72px;z-index:25;pointer-events:none}.bubble{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 25%,white,rgba(113,229,255,.85) 38%,rgba(23,135,255,.58));border:3px solid rgba(255,255,255,.9);box-shadow:inset -12px -16px 0 rgba(0,0,0,.08),0 8px 20px rgba(0,100,255,.16);display:grid;place-items:center;font-size:34px;z-index:10}.target,.fallItem,.sparkle,.egg{position:absolute;font-size:54px;z-index:8}.basket{position:absolute;bottom:36px;left:50%;font-size:76px;z-index:8;transform:translateX(-50%)}.chickenRun{position:absolute;top:72px;left:50%;font-size:84px;z-index:8;transform:translateX(-50%)}.crosshair{position:fixed;z-index:44;font-size:44px;pointer-events:none;transform:translate(-50%,-50%);display:none}.tomato{position:absolute;font-size:48px;z-index:25;pointer-events:none}.splatMark{position:absolute;font-size:46px;z-index:22;pointer-events:none;animation:splat .5s ease-out forwards}.redBlob{position:absolute;width:36px;height:30px;border-radius:50%;background:rgba(240,0,0,.82);z-index:20;pointer-events:none;box-shadow:0 0 8px rgba(255,0,0,.4)}.groundLine{position:absolute;left:0;right:0;bottom:98px;height:8px;background:rgba(45,125,50,.35);z-index:1}.avoTool{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:150px;z-index:7}.final{position:fixed;inset:0;display:none;z-index:90;align-items:center;justify-content:center;background:rgba(20,60,22,.42);backdrop-filter:blur(10px);padding:16px}.final.show{display:flex}.finalBox{width:min(430px,94vw);border-radius:36px;background:white;padding:22px;text-align:center;box-shadow:0 18px 0 rgba(43,120,53,.22)}.finalBox h2{font-size:clamp(42px,13vw,72px);line-height:.82;margin:0 0 12px;color:#2d7d32}.finalBox p{font-size:18px;font-weight:900}.finalBox button{border-radius:24px;padding:14px 20px;margin:4px;font-size:18px;font-weight:1000;background:linear-gradient(135deg,#70d95b,#ffe66d);color:#2d7d32}.rewardRoom{position:fixed;inset:0;display:none;z-index:70;background:linear-gradient(180deg,rgba(255,255,255,.86),rgba(255,255,255,.55)),url("Kimi.jpeg") center/cover no-repeat;padding:16px;overflow:auto}.rewardRoom.show{display:block}.rewardBox{width:min(840px,96vw);margin:0 auto;text-align:center}.shopGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.shopItem{border-radius:26px;background:white;padding:14px;font-weight:1000;box-shadow:0 8px 0 rgba(43,120,53,.12)}.shopItem b{display:block;font-size:48px}
-@keyframes spinGlow{to{transform:rotate(360deg)}}@keyframes shine{from{transform:translate(-20%,-20%)}to{transform:translate(35%,35%)}}@keyframes bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}@keyframes floatUp{0%{transform:translateY(0) rotate(-3deg);opacity:0}8%{opacity:1}50%{transform:translateY(-58vh) translateX(24px) rotate(5deg)}100%{transform:translateY(-122vh) translateX(-18px) rotate(-4deg);opacity:.85}}@keyframes msg{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}20%,72%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-82%) scale(1.1)}}@keyframes floatText{to{transform:translateY(-70px) scale(1.15);opacity:0}}@keyframes fire{from{transform:scale(.9) rotate(-12deg)}to{transform:scale(1.25) rotate(8deg)}}@keyframes splat{from{transform:scale(.2);opacity:.5}to{transform:scale(1.4);opacity:1}}
-@media(max-width:960px){.gameGrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:720px){.home{padding-bottom:120px}.gameGrid{grid-template-columns:1fr 1fr}.tiles,.shopGrid,.profileBar{grid-template-columns:1fr 1fr}.card{min-height:158px}.card h2{font-size:19px}.card .emoji{font-size:62px}.topHud{grid-template-columns:1fr 1fr}.pill{padding:7px 5px}.bubbleTitle h1{font-size:43px}.bigDino{font-size:80px;left:28px}.rocket{font-size:78px}.diver{font-size:78px}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kimi Kirei Smart AvoBrush | Pre-Launch</title>
+  <meta name="description" content="Kimi Kirei Smart AvoBrush - the interactive smart hairbrush for children. Join the pre-launch list." />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --green: #35b86b;
+      --deep-green: #123d2a;
+      --blue: #64d8ff;
+      --soft-blue: #e9f9ff;
+      --amber: #ffb84d;
+      --red: #ff5b5b;
+      --cream: #fffaf0;
+      --text: #173528;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background: #eefcff;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(100, 216, 255, .55), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(53, 184, 107, .38), transparent 24%),
+        radial-gradient(circle at 75% 85%, rgba(255, 184, 77, .33), transparent 26%),
+        linear-gradient(135deg, #f8fffb, #e8f9ff 55%, #fff8e8);
+    }
+
+    .animated-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .orb {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: .28;
+      animation: float 12s ease-in-out infinite alternate;
+    }
+
+    .orb.one {
+      left: 5%;
+      top: 12%;
+      background: var(--blue);
+    }
+
+    .orb.two {
+      right: 8%;
+      top: 24%;
+      background: var(--green);
+      animation-delay: -4s;
+    }
+
+    .orb.three {
+      left: 46%;
+      bottom: 4%;
+      background: var(--amber);
+      animation-delay: -7s;
+    }
+
+    .traffic-line {
+      position: fixed;
+      inset: auto 0 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--green), var(--amber), var(--red), var(--blue), var(--green));
+      background-size: 300% 100%;
+      animation: trafficMove 7s linear infinite;
+      z-index: 10;
+    }
+
+    .page {
+      width: min(1160px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 46px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 900;
+      color: var(--deep-green);
+      letter-spacing: -.3px;
+    }
+
+    .brand img {
+      width: 74px;
+      height: 74px;
+      object-fit: contain;
+      border-radius: 20px;
+      background: rgba(255,255,255,.76);
+      padding: 7px;
+      box-shadow: 0 12px 28px rgba(18, 61, 42, .12);
+    }
+
+    .brand small {
+      display: block;
+      font-weight: 800;
+      color: rgba(18, 61, 42, .68);
+      margin-top: 3px;
+    }
+
+    .top-pill {
+      border: 1px solid rgba(18, 61, 42, .12);
+      background: rgba(255,255,255,.7);
+      backdrop-filter: blur(12px);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 800;
+      box-shadow: 0 12px 30px rgba(18, 61, 42, .08);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero-card, .signup-card, .feature {
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 34px;
+      box-shadow: 0 24px 70px rgba(18, 61, 42, .14);
+      backdrop-filter: blur(14px);
+    }
+
+    .hero-card {
+      padding: clamp(26px, 5vw, 54px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      right: -80px;
+      top: -80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(100,216,255,.48), transparent 68%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(53, 184, 107, .12);
+      color: var(--deep-green);
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: .94;
+      letter-spacing: -3px;
+      color: var(--deep-green);
+    }
+
+    .lead {
+      font-size: clamp(18px, 2vw, 23px);
+      line-height: 1.35;
+      font-weight: 700;
+      color: rgba(23, 53, 40, .82);
+      margin: 20px 0 26px;
+      max-width: 670px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 0;
+      background: linear-gradient(135deg, var(--green), #7de07c);
+      color: white;
+      font-size: 16px;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 0 12px 24px rgba(53, 184, 107, .28);
+      cursor: pointer;
+    }
+
+    .note {
+      font-weight: 800;
+      color: rgba(23, 53, 40, .62);
+    }
+
+    .signup-card {
+      padding: 28px;
+      text-align: center;
+    }
+
+    .product-logo {
+      display: block;
+      width: min(360px, 82%);
+      margin: 0 auto 18px;
+      object-fit: contain;
+      border-radius: 26px;
+      background: rgba(255,255,255,.7);
+      padding: 14px;
+      box-shadow: 0 18px 45px rgba(18, 61, 42, .13);
+    }
+
+    .signup-card h2 {
+      margin: 6px 0 8px;
+      font-size: clamp(27px, 3.5vw, 42px);
+      line-height: 1;
+      color: var(--deep-green);
+    }
+
+    .signup-card p {
+      margin: 0 auto 18px;
+      font-size: 16px;
+      line-height: 1.45;
+      color: rgba(23, 53, 40, .72);
+      font-weight: 700;
+      max-width: 420px;
+    }
+
+    form {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      min-height: 54px;
+      border: 2px solid rgba(18, 61, 42, .12);
+      border-radius: 999px;
+      padding: 0 18px;
+      font-size: 16px;
+      font-weight: 700;
+      outline: none;
+      background: white;
+    }
+
+    input[type="email"]:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 5px rgba(53,184,107,.13);
+    }
+
+    .form-message {
+      min-height: 22px;
+      margin-top: 12px;
+      font-weight: 900;
+      color: var(--deep-green);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .feature {
+      padding: 20px;
+      min-height: 160px;
+    }
+
+    .feature b {
+      display: block;
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .feature h3 {
+      margin: 0 0 8px;
+      color: var(--deep-green);
+    }
+
+    .feature p {
+      margin: 0;
+      line-height: 1.35;
+      font-weight: 700;
+      color: rgba(23, 53, 40, .7);
+    }
+
+    .traffic {
+      display: flex;
+      gap: 9px;
+      justify-content: center;
+      margin: 16px 0 2px;
+    }
+
+    .light {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(255,255,255,.82), 0 8px 20px rgba(0,0,0,.12);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    .light.green { background: var(--green); }
+    .light.amber { background: var(--amber); animation-delay: .45s; }
+    .light.red { background: var(--red); animation-delay: .9s; }
+    .light.blue { background: var(--blue); animation: blueBreath 2.8s ease-in-out infinite; }
+
+    footer {
+      margin-top: 26px;
+      text-align: center;
+      font-weight: 800;
+      color: rgba(23, 53, 40, .58);
+    }
+
+    @keyframes float {
+      from { transform: translate3d(0,0,0) scale(1); }
+      to { transform: translate3d(40px, -45px, 0) scale(1.18); }
+    }
+
+    @keyframes trafficMove {
+      to { background-position: 300% 0; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(.88); opacity: .7; }
+      50% { transform: scale(1.12); opacity: 1; }
+    }
+
+    @keyframes blueBreath {
+      0%, 100% { transform: scale(.78); opacity: .45; box-shadow: 0 0 0 5px rgba(255,255,255,.82), 0 0 16px rgba(100,216,255,.28); }
+      50% { transform: scale(1.18); opacity: 1; box-shadow: 0 0 0 5px rgba(255,255,255,.82), 0 0 32px rgba(100,216,255,.72); }
+    }
+
+    @media (max-width: 920px) {
+      header, .hero {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        align-items: flex-start;
+      }
+
+      .features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      form {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 22px, 1160px);
+        padding-top: 18px;
+      }
+
+      .brand img {
+        width: 62px;
+        height: 62px;
+      }
+
+      .top-pill {
+        font-size: 13px;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card, .signup-card {
+        border-radius: 26px;
+        padding: 22px;
+      }
+    }
+  </style>
 </head>
 <body>
-<div id="appBg"></div><div class="balloonLayer" id="balloonLayer"></div>
-<section class="home" id="home"><div class="hub"><div class="hero"><div class="logo">🎮 Kimi Kirei Kids Fun Hub</div><div class="bubbleTitle"><h1>New Game<br>Zone!</h1></div><p class="sub">Loads of mini games in one arcade: swipe ducks, run as a dino, flip dive, fly rockets, pop bubbles, throw tomatoes and win coins.</p><div class="profileBar"><div class="profilePill"><b id="hubCoins">0</b>Coins</div><div class="profilePill"><b id="hubLevel">1</b>Level</div><div class="profilePill"><b id="hubStreak">0</b>Streak</div><div class="profilePill"><b id="hubBadge">Rookie</b>Badge</div></div></div>
-<div class="sectionTitle"><span>🔥 Arcade Games</span><span>No duplicate games</span></div>
-<div class="gameGrid">
-<button class="card c1" onclick="startDinoGame()"><h2>Dino Mario Run</h2><p>Big roaring dino collects animals and fish, jumps rocks, lava and birds.</p><span class="tag">Run + roar</span><span class="emoji">🦖</span></button>
-<button class="card c2" onclick="startDuckNinja()"><h2>Duck Ninja</h2><p>Swipe big sword trails and slice flying ducks with quack effects.</p><span class="tag">Swipe slice</span><span class="emoji">⚔️</span></button>
-<button class="card c3" onclick="startDiverGame()"><h2>Flip Diver</h2><p>Tap for flips, hold for power, splash into water for style points.</p><span class="tag">Tap tricks</span><span class="emoji">🤸</span></button>
-<button class="card c4" onclick="startSpaceGame()"><h2>Rocket Stars</h2><p>Fly through space with fire trails, stars, meteors and big boosts.</p><span class="tag">Space flight</span><span class="emoji">🚀</span></button>
-<button class="card c5" onclick="startBubbleGame()"><h2>Bubble Pop Party</h2><p>Huge bubbles, funny sounds, chain pops and bonus bubbles.</p><span class="tag">Pop combos</span><span class="emoji">🫧</span></button>
-<button class="card c6" onclick="startTomatoDuck()"><h2>Tomato Duck</h2><p>Keep the classic duck tomato game but with splats and speed levels.</p><span class="tag">Kept classic</span><span class="emoji">🍅</span></button>
-<button class="card c7" onclick="startEggGame()"><h2>Chicken Egg Rush</h2><p>Catch eggs, dodge rotten eggs, grab magnet and star power-ups.</p><span class="tag">Catch game</span><span class="emoji">🐔</span></button>
-<button class="card c8" onclick="startCakeGame()"><h2>Cake Blaster</h2><p>Shoot flying cakes and food like clay pigeon arcade shooting.</p><span class="tag">Aim game</span><span class="emoji">🎂</span></button>
-<button class="card c9" onclick="startSparkleGame()"><h2>Princess Sparkle</h2><p>Catch gems, hearts and crowns while avoiding storm clouds.</p><span class="tag">Magic catch</span><span class="emoji">👑</span></button>
-<button class="card c10" onclick="startAvoGame()"><h2>Avocado Smash</h2><p>Tap, peel, mash and slice the avocado for silly reactions.</p><span class="tag">Toy box</span><span class="emoji">🥑</span></button>
-</div>
-<div class="sectionTitle"><span>✨ Extras</span><span>Hub toys</span></div><div class="tiles"><button class="miniTile" onclick="randomGame()"><b>🎲</b>Random Game</button><button class="miniTile" onclick="openRewards()"><b>🏆</b>Reward Room</button><button class="miniTile" onclick="dailyChallenge()"><b>📅</b>Daily Challenge</button><button class="miniTile" onclick="soundParty()"><b>🔊</b>Sound Party</button></div></div></section>
-<section class="game" id="game"><div class="topHud"><div class="pill" id="score">Score 0</div><div class="pill" id="stat">Ready</div><div class="pill" id="lives">Lives 3</div><div class="pill" id="combo">Combo x0</div></div><div id="playArea"></div><div class="message" id="message">GO!</div><div class="crosshair" id="crosshair">🎯</div><div class="bottom"><button onclick="toggleSound()" id="soundBtn">🔊 Sound</button><button onclick="pauseGame()" id="pauseBtn">Pause</button><button onclick="backHome()">Home</button></div></section>
-<section class="rewardRoom" id="rewardRoom"><div class="rewardBox"><div class="hero"><div class="logo">🏆 Reward Room</div><div class="bubbleTitle"><h1>Unlocks!</h1></div><p class="sub">Collect coins by playing. Tap rewards for silly sounds and pretend unlocks.</p><div class="profileBar"><div class="profilePill"><b id="rewardCoins">0</b>Coins</div><div class="profilePill"><b id="rewardLevel">1</b>Level</div><div class="profilePill"><b>10</b>Games</div><div class="profilePill"><b>∞</b>Fun</div></div></div><div class="sectionTitle"><span>Prize Shelf</span><button onclick="closeRewards()">Back</button></div><div class="shopGrid"><button class="shopItem" onclick="buyReward('Dino Crown',50)"><b>🦖</b>Dino Crown<br>50 coins</button><button class="shopItem" onclick="buyReward('Duck Hat',40)"><b>🎩</b>Duck Hat<br>40 coins</button><button class="shopItem" onclick="buyReward('Rocket Boost',70)"><b>🚀</b>Rocket Boost<br>70 coins</button><button class="shopItem" onclick="buyReward('Mega Pop',30)"><b>🫧</b>Mega Pop<br>30 coins</button></div></div></section>
-<div class="final" id="final"><div class="finalBox"><h2 id="finalTitle">GAME OVER</h2><p id="finalText">Nice try.</p><button onclick="restartCurrentGame()">Play Again</button><button onclick="backHome()">Home</button></div></div>
-<script>
-'use strict';
-const balloonLayer=document.getElementById('balloonLayer'),home=document.getElementById('home'),game=document.getElementById('game'),playArea=document.getElementById('playArea'),scoreEl=document.getElementById('score'),statEl=document.getElementById('stat'),livesEl=document.getElementById('lives'),comboEl=document.getElementById('combo'),message=document.getElementById('message'),final=document.getElementById('final'),crosshair=document.getElementById('crosshair'),rewardRoom=document.getElementById('rewardRoom');
-let audioCtx=null,soundOn=true,playing=false,paused=false,currentGame='dino',score=0,stat=0,lives=3,combo=0,items=[],timer=null,timer2=null,loopId=null,difficulty=1,beatTimer=null,beat=0,basketX=innerWidth/2,player=null,playerY=0,playerV=0,ground=0,duckHits=0,diver={x:70,y:100,vx:0,vy:0,rot:0,flips:0,launched:false},lastSwipe=null;
-let coins=Number(localStorage.getItem('kkCoins')||0),level=Number(localStorage.getItem('kkLevel')||1),streak=Number(localStorage.getItem('kkStreak')||0),badge=localStorage.getItem('kkBadge')||'Rookie';
-function ctx(){if(!audioCtx)audioCtx=new (window.AudioContext||window.webkitAudioContext)();return audioCtx}
-function tone(f,d=0.08,type='sine',vol=0.05){if(!soundOn)return;try{const a=ctx(),o=a.createOscillator(),g=a.createGain();o.type=type;o.frequency.value=f;o.connect(g);g.connect(a.destination);g.gain.setValueAtTime(vol,a.currentTime);g.gain.exponentialRampToValueAtTime(0.001,a.currentTime+d);o.start();o.stop(a.currentTime+d)}catch(e){}}
-function noise(d=0.06,vol=0.03){if(!soundOn)return;try{const a=ctx(),b=a.createBuffer(1,Math.max(1,Math.floor(a.sampleRate*d)),a.sampleRate),data=b.getChannelData(0);for(let i=0;i<data.length;i++)data[i]=(Math.random()*2-1)*(1-i/data.length);const s=a.createBufferSource(),g=a.createGain();s.buffer=b;s.connect(g);g.connect(a.destination);g.gain.value=vol;s.start()}catch(e){}}
-function sound(t){if(!soundOn)return;if(t==='coin'){tone(920,.05,'triangle',.05);setTimeout(()=>tone(1180,.06,'triangle',.05),70)}if(t==='pop'){tone(650+Math.random()*450,.04,'sine',.06);noise(.05,.025)}if(t==='roar'){tone(120,.16,'sawtooth',.07);setTimeout(()=>tone(85,.22,'sawtooth',.06),90);noise(.16,.045)}if(t==='quack'){tone(330,.08,'square',.05);setTimeout(()=>tone(220,.09,'square',.045),70)}if(t==='slice'){noise(.08,.05);tone(900,.05,'triangle',.045);setTimeout(()=>tone(1300,.04,'triangle',.035),55)}if(t==='splash'){noise(.22,.07);tone(210,.08,'sine',.04)}if(t==='rocket'){tone(160,.07,'sawtooth',.03);noise(.04,.018)}if(t==='hit'){tone(520,.07,'triangle',.05);noise(.05,.025)}if(t==='bad'){tone(150,.14,'triangle',.04)}if(t==='jump'){tone(420,.06,'triangle',.04);setTimeout(()=>tone(720,.08,'triangle',.04),70)}if(t==='cluck'){tone(520,.045,'square',.05);setTimeout(()=>tone(360,.055,'square',.04),50)}}
-function musicStep(){if(!playing||paused||!soundOn)return;const base={dino:95,ninja:180,diver:135,space:70,bubble:260,tomato:150,egg:115,cake:125,sparkle:310,avo:170}[currentGame]||120;tone(base+(beat%4)*12,.045,currentGame==='space'?'sawtooth':'triangle',.018);if(beat%4===0&&['dino','tomato','egg'].includes(currentGame))sound(currentGame==='dino'?'roar':currentGame==='tomato'?'quack':'cluck');beat++}
-function startMusic(){stopMusic();beat=0;beatTimer=setInterval(musicStep,430);musicStep()}function stopMusic(){clearInterval(beatTimer);beatTimer=null}
-function setHud(a='Score '+score,b='Ready',c='Lives '+lives,d='Combo x'+combo){scoreEl.textContent=a;statEl.textContent=b;livesEl.textContent=c;comboEl.textContent=d;difficulty=1+score/650}
-function updateHub(){hubCoins.textContent=coins;hubLevel.textContent=level;hubStreak.textContent=streak;hubBadge.textContent=badge;rewardCoins.textContent=coins;rewardLevel.textContent=level}
-function saveProgress(){localStorage.setItem('kkCoins',coins);localStorage.setItem('kkLevel',level);localStorage.setItem('kkStreak',streak);localStorage.setItem('kkBadge',badge);updateHub()}
-function showMsg(t){message.textContent=t;message.classList.remove('show');void message.offsetWidth;message.classList.add('show')}
-function floatText(t,x,y){const el=document.createElement('div');el.className='floatText';el.textContent=t;el.style.left=(x-20)+'px';el.style.top=(y-30)+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),900)}
-function confetti(n){const cols=['#ff4fa3','#ffe75f','#62d94f','#45d9ff','#fff','#8f67ff'];for(let i=0;i<n;i++){const c=document.createElement('div');c.style.cssText='position:fixed;left:'+Math.random()*100+'vw;top:-20px;width:12px;height:18px;background:'+cols[Math.floor(Math.random()*cols.length)]+';z-index:100;border-radius:4px;pointer-events:none';document.body.appendChild(c);c.animate([{transform:'translateY(0) rotate(0)',opacity:1},{transform:'translateY('+(innerHeight+60)+'px) rotate('+(Math.random()*900)+'deg)',opacity:.15}],{duration:1600+Math.random()*900,easing:'linear'});setTimeout(()=>c.remove(),2800)}}
-function shake(){document.body.animate([{transform:'translate(0,0)'},{transform:'translate(-6px,4px)'},{transform:'translate(5px,-3px)'},{transform:'translate(0,0)'}],{duration:220})}
-function reset(mode){currentGame=mode;home.classList.add('hide');rewardRoom.classList.remove('show');game.className='game show';if(mode==='space')game.classList.add('spaceBg');if(mode==='diver')game.classList.add('waterBg');if(mode==='ninja')game.classList.add('ninjaBg');final.classList.remove('show');playArea.innerHTML='';items=[];score=0;stat=0;lives=3;combo=0;difficulty=1;playing=true;paused=false;duckHits=0;basketX=innerWidth/2;crosshair.style.display='none';clearInterval(timer);clearInterval(timer2);cancelAnimationFrame(loopId);setHud();startMusic();showMsg('GO!')}
-function endGame(won){if(!playing)return;playing=false;stopMusic();clearInterval(timer);clearInterval(timer2);cancelAnimationFrame(loopId);crosshair.style.display='none';const earned=Math.max(5,Math.floor(score/45));coins+=earned;if(coins>level*120){level++;badge=level>6?'Legend':level>3?'Pro':'Rookie'}if(won)streak++;else streak=0;saveProgress();confetti(won?90:35);finalTitle.textContent=won?'YOU WIN!':'GAME OVER';finalText.textContent=(won?'Amazing! ':'Nice try. ')+'Score '+score+'. You earned '+earned+' coins.';final.classList.add('show');sound(won?'coin':'bad')}
-function addItem(o){items.push(o);playArea.appendChild(o.el);return o}
-function rm(i){if(items[i]?.el)items[i].el.remove();items.splice(i,1)}
-function startDinoGame(){reset('dino');lives=3;ground=innerHeight-170;playerY=ground;playerV=0;playArea.innerHTML='<div class="groundLine"></div>';player=document.createElement('div');player.className='sprite bigDino';player.textContent='🦖';playArea.appendChild(player);sound('roar');timer=setInterval(()=>{if(playing&&!paused)spawnDinoThing()},760);loopId=requestAnimationFrame(loop)}
-function spawnDinoThing(){const el=document.createElement('div');el.className='fallItem';const r=Math.random();let bad=r<.42;el.textContent=bad?(['🪨','🌵','🔥','🦅'][Math.floor(Math.random()*4)]):(['🐟','🐠','🦌','🐇','🦋'][Math.floor(Math.random()*5)]);addItem({type:'dino',el,x:innerWidth+70,y:ground+(bad?10:-55-Math.random()*25),vx:-(4+difficulty*1.5),bad,spin:0})}
-function updateDino(it,i){it.x+=it.vx;it.spin+=4;it.el.style.transform=`translate(${it.x}px,${it.y}px) rotate(${it.spin}deg)`;if(it.x<155&&it.x>35&&Math.abs(it.y-playerY)<70){rm(i);if(it.bad){lives--;combo=0;shake();sound('bad');if(lives<=0)endGame(false)}else{score+=35+combo*3;stat++;combo++;sound('roar');floatText('CHOMP!',it.x,it.y)}setHud('Score '+score,'Animals '+stat,'Lives '+lives,'Combo x'+combo)}else if(it.x<-90)rm(i)}
-function startDuckNinja(){reset('ninja');lives=3;setHud('Score 0','Slices 0','Lives 3','Combo x0');timer=setInterval(()=>{if(playing&&!paused)spawnSliceDuck()},650);loopId=requestAnimationFrame(loop)}
-function spawnSliceDuck(){const el=document.createElement('div');el.className='sprite duck';el.textContent='🦆';const fromLeft=Math.random()>.5;addItem({type:'ninjaDuck',el,x:fromLeft?-130:innerWidth+130,y:innerHeight-90,vx:(fromLeft?1:-1)*(3+Math.random()*2+difficulty),vy:-(8+Math.random()*5),g:.18,rot:0})}
-function updateNinjaDuck(it,i){it.x+=it.vx;it.y+=it.vy;it.vy+=it.g;it.rot+=it.vx*1.5;it.el.style.transform=`translate(${it.x}px,${it.y}px) rotate(${it.rot}deg)`;if(it.y>innerHeight+120){rm(i);lives--;combo=0;sound('quack');setHud('Score '+score,'Slices '+stat,'Lives '+lives,'Combo x'+combo);if(lives<=0)endGame(false)}}
-function slash(x1,y1,x2,y2){const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy),ang=Math.atan2(dy,dx)*180/Math.PI;const tr=document.createElement('div');tr.className='swordTrail';tr.style.left=x1+'px';tr.style.top=y1+'px';tr.style.width=len+'px';tr.style.transform='rotate('+ang+'deg)';document.body.appendChild(tr);tr.animate([{opacity:1,transform:`rotate(${ang}deg) scaleX(1)`},{opacity:0,transform:`rotate(${ang}deg) scaleX(1.2)`}],{duration:220});setTimeout(()=>tr.remove(),240);sound('slice');for(let i=items.length-1;i>=0;i--){const it=items[i];if(it.type==='ninjaDuck'&&distToSegment(it.x+65,it.y+65,x1,y1,x2,y2)<75){cutDuck(it.x+50,it.y+50);rm(i);score+=45+combo*5;stat++;combo++;sound('quack');floatText('SLICE!',x2,y2);confetti(8);setHud('Score '+score,'Slices '+stat,'Lives '+lives,'Combo x'+combo);if(score>=850)endGame(true)}}}
-function cutDuck(x,y){['🦆','💥'].forEach((e,k)=>{const p=document.createElement('div');p.className='cutPiece';p.textContent=e;p.style.left=x+'px';p.style.top=y+'px';playArea.appendChild(p);p.animate([{transform:'translate(0,0) rotate(0)',opacity:1},{transform:`translate(${k?-90:90}px,${80+Math.random()*60}px) rotate(${k?-220:220}deg)`,opacity:0}],{duration:800});setTimeout(()=>p.remove(),820)})}
-function distToSegment(px,py,x1,y1,x2,y2){const A=px-x1,B=py-y1,C=x2-x1,D=y2-y1;let dot=A*C+B*D,len=C*C+D*D,t=Math.max(0,Math.min(1,dot/len));return Math.hypot(px-(x1+t*C),py-(y1+t*D))}
-function startDiverGame(){reset('diver');lives=3;playArea.innerHTML='<div class="waterLine"></div>';player=document.createElement('div');player.className='sprite diver';player.textContent='🤸‍♂️';playArea.appendChild(player);diver={x:60,y:95,vx:3.2,vy:0,rot:0,flips:0,launched:true};setHud('Score 0','Tap flips','Splash x0','Easy mode');loopId=requestAnimationFrame(loop)}
-function updateDiver(){diver.vy+=.17;diver.x+=diver.vx;diver.y+=diver.vy;diver.rot+=diver.flips>0?12:5;player.style.transform=`translate(${diver.x}px,${diver.y}px) rotate(${diver.rot}deg)`;if(diver.y>innerHeight*.43-70){score+=80+diver.flips*35;stat=diver.flips;splash(diver.x+70,innerHeight*.43);sound('splash');setHud('Score '+score,'Flips '+diver.flips,'Big splash!','Tap = more flips');setTimeout(()=>endGame(true),450)}if(diver.x>innerWidth-110){diver.vx=-Math.abs(diver.vx)}}
-function splash(x,y){for(let i=0;i<22;i++){const s=document.createElement('div');s.className='bubble';s.style.width=s.style.height=(14+Math.random()*34)+'px';s.style.left=x+'px';s.style.top=y+'px';s.textContent='';playArea.appendChild(s);s.animate([{transform:'translate(0,0)',opacity:1},{transform:`translate(${Math.random()*220-110}px,${-Math.random()*140}px)`,opacity:0}],{duration:900});setTimeout(()=>s.remove(),920)}}
-function startSpaceGame(){reset('space');lives=3;playArea.innerHTML='<div class="rocketFire">🔥</div>';player=document.createElement('div');player.className='sprite rocket';player.textContent='🚀';playArea.appendChild(player);playerY=innerHeight/2;timer=setInterval(()=>{if(playing&&!paused)spawnSpaceThing()},560);loopId=requestAnimationFrame(loop)}
-function spawnSpaceThing(){const el=document.createElement('div');el.className='fallItem';const bad=Math.random()<.34;el.textContent=bad?['☄️','🪨','🛸'][Math.floor(Math.random()*3)]:['⭐','🌟','💎'][Math.floor(Math.random()*3)];addItem({type:'space',el,x:innerWidth+70,y:70+Math.random()*(innerHeight-190),vx:-(4+difficulty*1.8),bad,spin:0})}
-function updateSpace(it,i){it.x+=it.vx;it.spin+=5;it.el.style.transform=`translate(${it.x}px,${it.y}px) rotate(${it.spin}deg)`;if(it.x<150&&it.x>20&&Math.abs(it.y-playerY)<70){rm(i);if(it.bad){lives--;combo=0;sound('bad');shake();if(lives<=0)endGame(false)}else{score+=35+combo*4;stat++;combo++;sound('coin');confetti(10);floatText('STAR!',it.x,it.y)}setHud('Score '+score,'Stars '+stat,'Lives '+lives,'Combo x'+combo)}else if(it.x<-90)rm(i)}
-function startBubbleGame(){reset('bubble');lives=30;setHud('Score 0','Pops 0','Time 30','Combo x0');timer=setInterval(()=>{if(playing&&!paused)spawnBubble()},360);timer2=setInterval(()=>{if(playing&&!paused){lives--;setHud('Score '+score,'Pops '+stat,'Time '+lives,'Combo x'+combo);if(lives<=0)endGame(score>500)}},1000);loopId=requestAnimationFrame(loop)}
-function spawnBubble(){const el=document.createElement('div');el.className='bubble';const size=55+Math.random()*60;el.style.width=el.style.height=size+'px';el.style.left=(20+Math.random()*(innerWidth-size-40))+'px';el.style.top=(innerHeight+80)+'px';el.textContent=Math.random()>.78?'🎁':['😂','🐔','⭐','🫧','🎵'][Math.floor(Math.random()*5)];addItem({type:'bubble',el,x:parseFloat(el.style.left),y:innerHeight+80,vy:-(1.2+Math.random()*1.8+difficulty*.25),size,bonus:el.textContent==='🎁'})}
-function updateBubble(it,i){it.y+=it.vy;it.x+=Math.sin(Date.now()/350+i)*.7;it.el.style.left=it.x+'px';it.el.style.top=it.y+'px';if(it.y<-120)rm(i)}
-function popBubble(x,y){for(let i=items.length-1;i>=0;i--){const it=items[i];if(it.type==='bubble'&&Math.hypot(it.x+it.size/2-x,it.y+it.size/2-y)<it.size/2+12){rm(i);combo++;stat++;score+=it.bonus?90:25+combo;floatText(it.bonus?'BONUS POP!':'POP!',x,y);sound('pop');confetti(it.bonus?18:5);setHud('Score '+score,'Pops '+stat,'Time '+lives,'Combo x'+combo);break}}}
-function startTomatoDuck(){reset('tomato');lives=999;const duck=document.createElement('div');duck.className='sprite duck';duck.id='tomatoDuck';duck.textContent='🦆';duck.style.left='45%';duck.style.top='38%';playArea.appendChild(duck);setHud('Score 0','Tomatoes 0','Duck 0%','Combo x0');timer=setInterval(()=>{if(playing&&!paused)moveTomatoDuck()},1050);sound('quack')}
-function moveTomatoDuck(){const d=document.getElementById('tomatoDuck');if(!d)return;const sp=Math.max(300,950-duckHits*35);d.style.transition='left '+sp+'ms, top '+sp+'ms, transform .12s';d.style.left=(15+Math.random()*65)+'%';d.style.top=(22+Math.random()*45)+'%';sound('quack')}
-function throwTomato(x,y){const tomato=document.createElement('div');tomato.className='tomato';tomato.textContent='🍅';tomato.style.left='50%';tomato.style.bottom='20px';playArea.appendChild(tomato);tomato.animate([{transform:'translate(-50%,0) scale(.5)'},{transform:'translate('+(x-innerWidth/2)+'px,'+(y-innerHeight+50)+'px) scale(1.2)'}],{duration:260,easing:'ease-out'});setTimeout(()=>tomato.remove(),300);const d=document.getElementById('tomatoDuck');if(!d)return;const r=d.getBoundingClientRect();if(x>r.left&&x<r.right&&y>r.top&&y<r.bottom){duckHits++;score+=18+combo*2;stat++;combo++;sound('quack');sound('hit');const blob=document.createElement('div');blob.className='redBlob';blob.style.left=(x-18)+'px';blob.style.top=(y-15)+'px';playArea.appendChild(blob);d.appendChild(blob.cloneNode());const splat=document.createElement('div');splat.className='splatMark';splat.textContent='💥';splat.style.left=(x-20)+'px';splat.style.top=(y-20)+'px';playArea.appendChild(splat);setTimeout(()=>splat.remove(),1000);d.style.filter='drop-shadow(0 12px 0 rgba(0,0,0,.12)) saturate('+(1+duckHits*.25)+') hue-rotate(-'+Math.min(duckHits*5,70)+'deg)';d.style.transform='rotate('+(Math.random()*22-11)+'deg) scale('+(1+Math.min(.22,duckHits*.012))+')';floatText('SPLAT!',x,y);if(duckHits%3===0)moveTomatoDuck();if(duckHits>=20)endGame(true)}else{combo=0;sound('bad');floatText('MISSED!',x,y);moveTomatoDuck()}setHud('Score '+score,'Tomatoes '+stat,'Duck '+Math.min(100,Math.round(duckHits/20*100))+'%','Combo x'+combo)}
-function startEggGame(){reset('egg');lives=3;const ch=document.createElement('div');ch.className='chickenRun';ch.textContent='🐔';playArea.appendChild(ch);const b=document.createElement('div');b.className='basket';b.textContent='🧺';b.id='basket';playArea.appendChild(b);timer=setInterval(()=>{if(playing&&!paused){const el=document.createElement('div');el.className='egg';const bad=Math.random()<.16;el.textContent=bad?'🥚':(Math.random()>.85?'⭐':'🥚');if(bad)el.style.filter='grayscale(1) brightness(.65)';const x=50+Math.random()*(innerWidth-100);ch.style.left=x+'px';addItem({type:'egg',el,x,y:140,vy:3+difficulty*.35,bad,spin:0});sound('cluck')}},620);loopId=requestAnimationFrame(loop)}
-function updateEgg(it,i){it.y+=it.vy;it.vy+=.04;it.spin+=4;it.el.style.transform=`translate(${it.x}px,${it.y}px) rotate(${it.spin}deg)`;const b=document.getElementById('basket');if(b)b.style.left=basketX+'px';if(it.y>innerHeight-110&&Math.abs(it.x-basketX)<70){rm(i);if(it.bad){lives--;combo=0;sound('bad')}else{score+=25+combo*2;stat++;combo++;sound('coin')}setHud('Score '+score,'Caught '+stat,'Lives '+lives,'Combo x'+combo);if(lives<=0)endGame(false);if(score>850)endGame(true)}else if(it.y>innerHeight+80){rm(i);if(!it.bad){lives--;combo=0;if(lives<=0)endGame(false)}setHud('Score '+score,'Caught '+stat,'Lives '+lives,'Combo x'+combo)}}
-function startCakeGame(){reset('cake');lives=5;crosshair.style.display='block';timer=setInterval(()=>{if(playing&&!paused){const el=document.createElement('div');el.className='target';el.textContent=['🎂','🍰','🧁','🍩','🍕','🍔'][Math.floor(Math.random()*6)];const left=Math.random()>.5;addItem({type:'cake',el,x:left?-70:innerWidth+70,y:80+Math.random()*(innerHeight-240),vx:(left?1:-1)*(3.2+difficulty*1.25+Math.random()*2),spin:0})}},560);loopId=requestAnimationFrame(loop)}
-function updateCake(it,i){it.x+=it.vx;it.spin+=4;it.el.style.transform=`translate(${it.x}px,${it.y}px) rotate(${it.spin}deg)`;if(it.x<-130||it.x>innerWidth+130){rm(i);lives--;combo=0;sound('bad');setHud('Score '+score,'Hits '+stat,'Lives '+lives,'Combo x'+combo);if(lives<=0)endGame(false)}}
-function shootAt(x,y){crosshair.style.left=x+'px';crosshair.style.top=y+'px';let hit=false;for(let i=items.length-1;i>=0;i--){const it=items[i];if(it.type==='cake'&&Math.hypot(it.x+30-x,it.y+30-y)<62){hit=true;rm(i);score+=35+combo*5;stat++;combo++;sound('hit');confetti(10);floatText('FOOD HIT!',x,y);break}}if(!hit){combo=0;sound('bad');floatText('MISS!',x,y)}setHud('Score '+score,'Hits '+stat,'Lives '+lives,'Combo x'+combo);if(score>760)endGame(true)}
-function startSparkleGame(){reset('sparkle');lives=3;const b=document.createElement('div');b.className='basket';b.textContent='👑';b.id='basket';playArea.appendChild(b);timer=setInterval(()=>{if(playing&&!paused){const el=document.createElement('div');el.className='sparkle';const bad=Math.random()<.18;el.textContent=bad?'🌩️':(Math.random()>.8?'💎':'✨');addItem({type:'sparkle',el,x:40+Math.random()*(innerWidth-80),y:-40,vy:3+difficulty*.45,bad,spin:0})}},540);loopId=requestAnimationFrame(loop)}
-function updateSparkle(it,i){it.y+=it.vy;it.vy+=.025;it.spin+=3;it.el.style.transform=`translate(${it.x}px,${it.y}px) rotate(${it.spin}deg)`;const b=document.getElementById('basket');if(b)b.style.left=basketX+'px';if(it.y>innerHeight-110&&Math.abs(it.x-basketX)<70){rm(i);if(it.bad){lives--;combo=0;sound('bad')}else{score+=it.el.textContent==='💎'?60:24;stat++;combo++;sound('coin')}setHud('Score '+score,'Gems '+stat,'Lives '+lives,'Combo x'+combo);if(lives<=0)endGame(false);if(score>820)endGame(true)}else if(it.y>innerHeight+80){rm(i);if(!it.bad){lives--;combo=0;if(lives<=0)endGame(false)}}}
-function startAvoGame(){reset('avo');lives=999;const a=document.createElement('div');a.className='avoTool';a.id='avoTool';a.textContent='🥑';playArea.appendChild(a);setHud('Score 0','Mash 0','Stage 1','Combo x0')}
-function tapAvo(x,y){const a=document.getElementById('avoTool');stat++;combo++;score+=12+stat;a.textContent=['🥑','🔪','🥑','🥣','💥'][Math.min(4,Math.floor(stat/5))];a.animate([{transform:'translate(-50%,-50%) scale(1)'},{transform:'translate(-50%,-50%) scale(1.2) rotate(8deg)'},{transform:'translate(-50%,-50%) scale(1)'}],{duration:180});sound('hit');floatText(stat%5?'TAP!':'MASH!',x,y);setHud('Score '+score,'Mash '+stat,'Stage '+Math.min(5,Math.floor(stat/5)+1),'Combo x'+combo);if(stat>=25)endGame(true)}
-function loop(){if(!playing||paused)return;if(currentGame==='dino'){playerV+=.65;playerY+=playerV;if(playerY>ground){playerY=ground;playerV=0}player.style.transform=`translateY(${playerY-ground}px)`;score++;if(score>1100)endGame(true)}if(currentGame==='diver')updateDiver();if(currentGame==='space'){player.style.top=playerY+'px';document.querySelector('.rocketFire').style.top=(playerY+52)+'px';sound('rocket')}for(let i=items.length-1;i>=0;i--){const it=items[i];if(it.type==='dino')updateDino(it,i);else if(it.type==='ninjaDuck')updateNinjaDuck(it,i);else if(it.type==='space')updateSpace(it,i);else if(it.type==='bubble')updateBubble(it,i);else if(it.type==='egg')updateEgg(it,i);else if(it.type==='cake')updateCake(it,i);else if(it.type==='sparkle')updateSparkle(it,i)}if(['dino','diver','space'].includes(currentGame))setHud('Score '+score,currentGame==='dino'?'Animals '+stat:currentGame==='diver'?'Flips '+diver.flips:'Stars '+stat,currentGame==='diver'?'Tap power':'Lives '+lives,'Combo x'+combo);loopId=requestAnimationFrame(loop)}
-function pointer(e){const t=e.touches?e.touches[0]:e;return{x:t.clientX,y:t.clientY}}
-window.addEventListener('pointerdown',e=>{const p=pointer(e);lastSwipe=p;if(currentGame==='dino'&&playerY>=ground){playerV=-15;sound('jump')}else if(currentGame==='diver'){diver.flips++;diver.vx+=.45;diver.vy-=.75;sound('jump');floatText('FLIP!',p.x,p.y)}else if(currentGame==='space'){playerY=p.y;sound('rocket')}else if(currentGame==='bubble')popBubble(p.x,p.y);else if(currentGame==='tomato')throwTomato(p.x,p.y);else if(currentGame==='cake')shootAt(p.x,p.y);else if(currentGame==='egg'||currentGame==='sparkle')basketX=Math.max(65,Math.min(innerWidth-65,p.x));else if(currentGame==='avo')tapAvo(p.x,p.y)},{passive:false});
-window.addEventListener('pointermove',e=>{const p=pointer(e);if(currentGame==='ninja'&&lastSwipe){slash(lastSwipe.x,lastSwipe.y,p.x,p.y);lastSwipe=p}if(currentGame==='space'){playerY=Math.max(70,Math.min(innerHeight-120,p.y))}if(currentGame==='egg'||currentGame==='sparkle'){basketX=Math.max(65,Math.min(innerWidth-65,p.x))}if(currentGame==='cake'){crosshair.style.left=p.x+'px';crosshair.style.top=p.y+'px'}},{passive:false});
-window.addEventListener('pointerup',()=>{lastSwipe=null},{passive:false});
-window.addEventListener('keydown',e=>{if(e.code==='Space'&&currentGame==='dino'&&playerY>=ground){playerV=-15;sound('jump')}})
-function toggleSound(){soundOn=!soundOn;soundBtn.textContent=soundOn?'🔊 Sound':'🔇 Muted';if(soundOn&&playing&&!paused)startMusic();else stopMusic()}
-function pauseGame(){if(!playing)return;paused=!paused;pauseBtn.textContent=paused?'Resume':'Pause';showMsg(paused?'PAUSED':'GO!');if(paused)stopMusic();else{startMusic();loopId=requestAnimationFrame(loop)}}
-function backHome(){playing=false;paused=false;stopMusic();clearInterval(timer);clearInterval(timer2);cancelAnimationFrame(loopId);items=[];playArea.innerHTML='';crosshair.style.display='none';game.className='game';final.classList.remove('show');rewardRoom.classList.remove('show');home.classList.remove('hide');updateHub()}
-function restartCurrentGame(){({dino:startDinoGame,ninja:startDuckNinja,diver:startDiverGame,space:startSpaceGame,bubble:startBubbleGame,tomato:startTomatoDuck,egg:startEggGame,cake:startCakeGame,sparkle:startSparkleGame,avo:startAvoGame}[currentGame]||startDinoGame)()}
-function randomGame(){[startDinoGame,startDuckNinja,startDiverGame,startSpaceGame,startBubbleGame,startTomatoDuck,startEggGame,startCakeGame,startSparkleGame,startAvoGame][Math.floor(Math.random()*10)]()}
-function openRewards(){home.classList.add('hide');rewardRoom.classList.add('show');updateHub();sound('coin')}function closeRewards(){rewardRoom.classList.remove('show');home.classList.remove('hide')}function buyReward(n,c){if(coins>=c){coins-=c;badge=n;saveProgress();sound('coin');confetti(35);alert('Unlocked: '+n)}else{sound('bad');alert('Need more coins!')}}function dailyChallenge(){streak++;saveProgress();alert('Daily Challenge: score 300 in any game!');sound('coin')}function soundParty(){for(let i=0;i<9;i++)setTimeout(()=>sound(['pop','quack','roar','coin'][i%4]),i*150);confetti(30)}
-const bdata=[['🐔','#ffe66d'],['😂','#ff69b4'],['🦖','#70d95b'],['🚀','#6edcff'],['🫧','#b5f7ff'],['🦆','#ff9b3d'],['🎵','#8f67ff'],['⭐','#fff07a']];
-for(let i=0;i<18;i++){const d=bdata[i%bdata.length],b=document.createElement('button');b.className='homeBalloon';b.innerHTML=d[0];b.style.setProperty('--c',d[1]);b.style.setProperty('--x',Math.round(Math.random()*88+1)+'vw');b.style.setProperty('--dur',(8+Math.random()*9)+'s');b.style.animationDelay=(-Math.random()*12)+'s';b.onclick=()=>{sound(['pop','quack','roar','coin'][i%4]);floatText('POP!',b.getBoundingClientRect().left,b.getBoundingClientRect().top)};balloonLayer.appendChild(b)}
-updateHub();console.log('Kimi Kirei New Game Zone loaded: 10 unique games');
-</script>
+  <div class="animated-bg" aria-hidden="true">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+    <div class="orb three"></div>
+  </div>
+
+  <main class="page">
+    <header>
+      <div class="brand">
+        <img src="Avo Brush logo final.jpeg" alt="Kimi Kirei AvoBrush logo" />
+        <div>
+          Kimi Kirei
+          <small>Smart AvoBrush Pre-Launch</small>
+        </div>
+      </div>
+      <div class="top-pill">Pre-orders opening soon</div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="eyebrow">🥑 The smart hairbrush kids actually want to use</div>
+        <h1>Happy Hair.<br />Happy Kids.</h1>
+        <p class="lead">
+          A fun, interactive smart hairbrush that talks, lights up and gently guides children through brushing using a simple traffic light system.
+        </p>
+
+        <div class="traffic" aria-label="AvoBrush traffic light guidance">
+          <span class="light green" title="Green - Start brushing"></span>
+          <span class="light amber" title="Amber - Keep going"></span>
+          <span class="light red" title="Red - All done"></span>
+          <span class="light blue" title="Blue - Calm idle breathing mode"></span>
+        </div>
+
+        <div class="cta-row">
+          <a class="button" href="#join">Join the pre-launch list</a>
+          <span class="note">Green = start · Amber = keep going · Red = all done</span>
+        </div>
+      </div>
+
+      <div class="signup-card" id="join">
+        <img class="product-logo" src="Avo Brush logo final.jpeg" alt="AvoBrush logo" />
+        <h2>Interested in getting an AvoBrush?</h2>
+        <p>
+          Enter your email below to get early updates, launch news and first access when pre-orders become available.
+        </p>
+
+        <!-- For a live site, connect this to Formspree, Mailchimp, Klaviyo or your own backend. -->
+        <form id="preorderForm">
+          <input id="emailInput" type="email" name="email" placeholder="Enter your email address" required />
+          <button class="button" type="submit">Notify Me</button>
+        </form>
+        <div class="form-message" id="formMessage"></div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="feature">
+        <b>🟢</b>
+        <h3>Guided brushing</h3>
+        <p>Green, amber and red lighting helps children understand what to do and when they are finished.</p>
+      </div>
+      <div class="feature">
+        <b>🔵</b>
+        <h3>Calm idle mode</h3>
+        <p>When not brushing, the AvoBrush sits in a soft breathing blue light mode.</p>
+      </div>
+      <div class="feature">
+        <b>🔊</b>
+        <h3>Voice prompts</h3>
+        <p>Friendly guidance and encouragement can help make brushing feel less stressful.</p>
+      </div>
+      <div class="feature">
+        <b>✨</b>
+        <h3>Fun feedback</h3>
+        <p>Gentle vibration, lights and rewards make brushing feel more like a positive routine.</p>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 Kimi Kirei / Smart Brush UK Ltd. Product in development. Pre-launch page.
+    </footer>
+  </main>
+
+  <div class="traffic-line" aria-hidden="true"></div>
+
+  <script>
+    const form = document.getElementById("preorderForm");
+    const emailInput = document.getElementById("emailInput");
+    const formMessage = document.getElementById("formMessage");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const email = emailInput.value.trim();
+
+      if (!email || !email.includes("@")) {
+        formMessage.textContent = "Please enter a valid email address.";
+        return;
+      }
+
+      const savedEmails = JSON.parse(localStorage.getItem("avobrushPrelaunchEmails") || "[]");
+
+      if (!savedEmails.includes(email)) {
+        savedEmails.push(email);
+        localStorage.setItem("avobrushPrelaunchEmails", JSON.stringify(savedEmails));
+      }
+
+      formMessage.textContent = "Thanks — you're on the early interest list!";
+      emailInput.value = "";
+    });
+  </script>
 </body>
 </html>
