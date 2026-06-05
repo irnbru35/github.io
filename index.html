@@ -16,9 +16,9 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:30px;
+  padding:18px;
   position:relative;
-  overflow:hidden;
+  overflow:auto;
 }
 
 body::before{
@@ -26,13 +26,11 @@ body::before{
   position:fixed;
   inset:0;
   background:
-    url("kimi.jpeg") 8% 14%/260px no-repeat,
-    url("kimi.jpeg") 92% 16%/240px no-repeat,
-    url("kimi.jpeg") 12% 84%/270px no-repeat,
-    url("kimi.jpeg") 88% 82%/300px no-repeat,
-    url("kimi.jpeg") center/430px no-repeat;
-  opacity:.14;
-  filter:blur(.3px);
+    url("kimi.jpeg") 6% 12%/220px no-repeat,
+    url("kimi.jpeg") 94% 15%/210px no-repeat,
+    url("kimi.jpeg") 10% 86%/230px no-repeat,
+    url("kimi.jpeg") 90% 84%/250px no-repeat;
+  opacity:.16;
   z-index:-2;
 }
 
@@ -41,47 +39,48 @@ body::after{
   position:fixed;
   inset:0;
   background:
-    radial-gradient(circle at 15% 20%,rgba(53,184,107,.18),transparent 32%),
-    radial-gradient(circle at 85% 75%,rgba(255,105,180,.15),transparent 32%),
-    radial-gradient(circle at 70% 15%,rgba(100,216,255,.18),transparent 30%);
+    radial-gradient(circle at 20% 20%,rgba(53,184,107,.18),transparent 30%),
+    radial-gradient(circle at 80% 75%,rgba(255,105,180,.14),transparent 32%);
   z-index:-1;
 }
 
 .card{
   width:100%;
-  max-width:720px;
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(16px);
-  border-radius:34px;
-  padding:46px 38px;
+  max-width:690px;
+  max-height:96vh;
+  overflow-y:auto;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(14px);
+  border-radius:30px;
+  padding:26px 32px;
   text-align:center;
-  box-shadow:0 25px 80px rgba(0,0,0,.14);
+  box-shadow:0 20px 70px rgba(0,0,0,.13);
   border:1px solid rgba(53,184,107,.22);
 }
 
 .logo{
-  width:440px;
-  max-width:96%;
-  margin-bottom:20px;
+  width:330px;
+  max-width:90%;
+  margin-bottom:8px;
   animation:floatLogo 4s ease-in-out infinite;
 }
 
 @keyframes floatLogo{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
+  50%{transform:translateY(-7px)}
 }
 
 h1{
-  font-size:46px;
-  line-height:1.08;
-  margin-bottom:14px;
+  font-size:36px;
+  line-height:1.05;
+  margin-bottom:8px;
 }
 
 .tagline{
-  font-size:19px;
-  line-height:1.5;
+  font-size:16px;
+  line-height:1.4;
   color:#4c6659;
-  margin-bottom:24px;
+  margin-bottom:14px;
 }
 
 .highlight{
@@ -92,73 +91,123 @@ h1{
 .deposit-box{
   background:#f3fff7;
   border:1px solid #d9eadf;
-  border-radius:22px;
-  padding:24px;
-  margin:24px 0;
+  border-radius:20px;
+  padding:18px;
+  margin:14px 0;
 }
 
 .deposit-box h2{
-  font-size:25px;
-  margin-bottom:10px;
+  font-size:22px;
+  margin-bottom:8px;
+}
+
+.deposit-box p{
+  font-size:14px;
+  line-height:1.4;
 }
 
 .price{
-  font-size:34px;
+  font-size:30px;
   font-weight:900;
   color:#35b86b;
-  margin:18px 0 8px;
+  margin:12px 0 4px;
 }
 
 .deposit-btn{
   display:inline-block;
-  margin-top:16px;
-  padding:17px 30px;
-  border-radius:18px;
+  margin-top:12px;
+  padding:14px 26px;
+  border-radius:16px;
   background:#35b86b;
   color:white;
   text-decoration:none;
-  font-size:17px;
+  font-size:16px;
   font-weight:bold;
 }
 
 .discount{
-  margin-top:18px;
+  margin-top:12px;
+  font-size:14px;
   font-weight:bold;
-  color:#123d2a;
 }
 
 .discount span{
   color:#35b86b;
 }
 
+.kid-box{
+  margin:14px 0;
+  padding:14px;
+  border-radius:18px;
+  background:#fff9ed;
+  border:1px solid #f1ddb5;
+}
+
+.kid-box h3{
+  margin-bottom:8px;
+}
+
+.lights{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:10px;
+}
+
+.light-btn{
+  width:74px;
+  height:74px;
+  border-radius:50%;
+  border:none;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+  font-size:13px;
+  transition:.2s;
+}
+
+.light-btn:hover{
+  transform:scale(1.08);
+}
+
+.green{background:#35b86b}
+.amber{background:#ffb02e}
+.red{background:#ff4d4d}
+
+#kidMessage{
+  margin-top:10px;
+  font-weight:bold;
+  color:#123d2a;
+}
+
 form{
   display:flex;
   gap:10px;
-  margin-top:20px;
+  margin-top:14px;
 }
 
 input{
   flex:1;
-  padding:17px;
-  font-size:16px;
+  padding:14px;
+  font-size:15px;
   border:2px solid #d9eadf;
-  border-radius:16px;
+  border-radius:15px;
   outline:none;
 }
 
 button{
-  padding:17px 24px;
+  padding:14px 22px;
   border:none;
-  border-radius:16px;
+  border-radius:15px;
   background:#123d2a;
   color:white;
-  font-size:16px;
+  font-size:15px;
   font-weight:bold;
   cursor:pointer;
 }
 
 #message{
-  margin-top:14px;
+  margin-top:10px;
   color:#35b86b;
   font-weight:bold;
 }
@@ -166,32 +215,38 @@ button{
 .features{
   display:flex;
   justify-content:center;
-  gap:14px;
+  gap:10px;
   flex-wrap:wrap;
-  margin-top:26px;
+  margin-top:16px;
 }
 
 .feature{
   background:#f3fff7;
   border:1px solid #d9eadf;
-  border-radius:16px;
-  padding:10px 14px;
-  font-size:14px;
+  border-radius:14px;
+  padding:8px 12px;
+  font-size:13px;
   font-weight:bold;
 }
 
 .footer{
-  margin-top:26px;
-  font-size:13px;
+  margin-top:14px;
+  font-size:12px;
   color:#789187;
 }
 
 @media(max-width:620px){
-  body{overflow:auto;padding:20px}
-  .card{padding:30px 22px}
-  h1{font-size:34px}
+  body{padding:14px;align-items:flex-start}
+  .card{
+    max-height:none;
+    padding:24px 18px;
+  }
+  .logo{width:300px}
+  h1{font-size:31px}
   form{flex-direction:column}
   button{width:100%}
+  .lights{gap:8px}
+  .light-btn{width:68px;height:68px}
 }
 </style>
 </head>
@@ -205,21 +260,21 @@ button{
   <h1>Kimi Kirei<br>Smart AvoBrush</h1>
 
   <p class="tagline">
-    The <span class="highlight">first ever smart interactive hairbrush for children</span>,
-    using lights, vibration and voice prompts to make brushing fun.
+    The <span class="highlight">smart interactive hairbrush for children</span>
+    that turns brushing into a fun traffic-light routine.
   </p>
 
   <section class="deposit-box">
-    <h2>🥑 Secure Your Smart AvoBrush Today</h2>
+    <h2>🥑 Secure Your Smart AvoBrush</h2>
 
     <p>
-      Be among the first families to own the Kimi Kirei Smart AvoBrush.
-      Early production numbers will be limited.
+      Be one of the first families to own the Kimi Kirei Smart AvoBrush.
+      Early release places are limited.
     </p>
 
     <div class="price">£10 Deposit</div>
 
-    <p>Your deposit secures priority access and will be deducted from the final purchase price.</p>
+    <p>Secures priority access and comes off your final order.</p>
 
     <a href="YOUR_STRIPE_LINK_HERE" class="deposit-btn">
       Pay Deposit Now
@@ -230,8 +285,21 @@ button{
     </p>
   </section>
 
+  <section class="kid-box">
+    <h3>Try the AvoBrush lights</h3>
+    <p>Tap a colour to see how brushing works.</p>
+
+    <div class="lights">
+      <button class="light-btn green" onclick="showKidMessage('🟢 Green means go! Start brushing!')">GO</button>
+      <button class="light-btn amber" onclick="showKidMessage('🟠 Amber means keep going, nearly there!')">KEEP</button>
+      <button class="light-btn red" onclick="showKidMessage('🔴 Red means all done! Great brushing!')">DONE</button>
+    </div>
+
+    <div id="kidMessage">🥑 Ready, steady, brush!</div>
+  </section>
+
   <form id="prelaunchForm">
-    <input type="email" id="email" placeholder="Enter your email for pre-order updates" required>
+    <input type="email" id="email" placeholder="Enter email for pre-order updates" required>
     <button type="submit">Join Waitlist</button>
   </form>
 
@@ -241,7 +309,7 @@ button{
     <div class="feature">🟢 Guided brushing</div>
     <div class="feature">🔊 Voice prompts</div>
     <div class="feature">✨ Lights & vibration</div>
-    <div class="feature">🥑 Smart Avo design</div>
+    <div class="feature">🥑 Fun Avo design</div>
   </div>
 
   <div class="footer">
@@ -259,6 +327,10 @@ form.addEventListener("submit", function(event) {
   message.textContent = "✅ Thank you — you're on the early access list!";
   form.reset();
 });
+
+function showKidMessage(text){
+  document.getElementById("kidMessage").textContent = text;
+}
 </script>
 
 </body>
