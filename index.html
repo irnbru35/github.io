@@ -3,202 +3,284 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Kimi Kirei Smart AvoBrush</title>
 
 <style>
-*{box-sizing:border-box}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
 body{
-  margin:0;
-  min-height:100vh;
-  font-family:Arial,Helvetica,sans-serif;
-  background:linear-gradient(135deg,#effff5,#eef8ff);
-  color:#123d2a;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:28px;
-  overflow:hidden;
+font-family:Arial,Helvetica,sans-serif;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:30px;
+background:linear-gradient(135deg,#effff5,#eef8ff);
+overflow-x:hidden;
+position:relative;
 }
 
 body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:url("kimi.jpeg") center/850px no-repeat;
-  opacity:.12;
-  z-index:-2;
+content:"";
+position:fixed;
+inset:0;
+
+background:
+url("kimi.jpeg") center center/350px repeat;
+
+opacity:.05;
+
+z-index:-2;
 }
 
 body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 15% 20%,rgba(53,184,107,.18),transparent 30%),
-    radial-gradient(circle at 85% 75%,rgba(255,105,180,.16),transparent 32%),
-    radial-gradient(circle at 70% 15%,rgba(100,216,255,.20),transparent 28%);
-  z-index:-1;
+content:"";
+position:fixed;
+inset:0;
+
+background:
+radial-gradient(circle at 15% 20%,rgba(53,184,107,.20),transparent 30%),
+radial-gradient(circle at 85% 75%,rgba(255,105,180,.16),transparent 32%),
+radial-gradient(circle at 70% 15%,rgba(100,216,255,.20),transparent 28%);
+
+z-index:-1;
 }
 
 .card{
-  width:100%;
-  max-width:640px;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(14px);
-  border-radius:34px;
-  padding:46px 36px;
-  text-align:center;
-  box-shadow:0 25px 80px rgba(0,0,0,.14);
-  border:1px solid rgba(53,184,107,.22);
+max-width:720px;
+width:100%;
+background:rgba(255,255,255,.94);
+backdrop-filter:blur(16px);
+padding:50px;
+border-radius:35px;
+text-align:center;
+box-shadow:0 30px 90px rgba(0,0,0,.12);
 }
 
 .logo{
-  width:420px;
-  max-width:96%;
-  height:auto;
-  margin-bottom:22px;
-  animation:floatLogo 4s ease-in-out infinite;
+width:500px;
+max-width:100%;
+animation:float 4s ease-in-out infinite;
+margin-bottom:20px;
 }
 
-@keyframes floatLogo{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
+@keyframes float{
+0%,100%{
+transform:translateY(0px);
+}
+50%{
+transform:translateY(-12px);
+}
 }
 
 h1{
-  font-size:42px;
-  line-height:1.08;
-  margin:0 0 14px;
+font-size:48px;
+color:#123d2a;
+margin-bottom:12px;
 }
 
-.tagline{
-  font-size:19px;
-  line-height:1.5;
-  color:#4c6659;
-  margin:0 0 28px;
+.subtitle{
+font-size:20px;
+line-height:1.6;
+color:#49685b;
+margin-bottom:30px;
 }
 
 .highlight{
-  color:#35b86b;
-  font-weight:800;
+font-weight:800;
+color:#35b86b;
+}
+
+.founding{
+background:#f3fff7;
+padding:18px;
+border-radius:16px;
+margin-bottom:25px;
+border:1px solid #dcefe2;
+}
+
+.founding h3{
+margin-bottom:8px;
+}
+
+.deposit-btn{
+display:inline-block;
+margin-top:10px;
+padding:18px 32px;
+background:#35b86b;
+color:white;
+text-decoration:none;
+border-radius:18px;
+font-size:18px;
+font-weight:bold;
+transition:.3s;
+}
+
+.deposit-btn:hover{
+transform:translateY(-2px);
 }
 
 form{
-  display:flex;
-  gap:10px;
-  margin-top:18px;
+display:flex;
+gap:10px;
+margin-top:25px;
 }
 
 input{
-  flex:1;
-  padding:17px;
-  font-size:16px;
-  border:2px solid #d9eadf;
-  border-radius:16px;
-  outline:none;
-}
-
-input:focus{
-  border-color:#35b86b;
+flex:1;
+padding:18px;
+border-radius:16px;
+border:2px solid #dcefe2;
+font-size:16px;
 }
 
 button{
-  padding:17px 24px;
-  border:none;
-  border-radius:16px;
-  background:#35b86b;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-  cursor:pointer;
-}
-
-button:hover{
-  background:#2ca25d;
+padding:18px 28px;
+background:#123d2a;
+color:white;
+border:none;
+border-radius:16px;
+font-weight:bold;
+cursor:pointer;
 }
 
 #message{
-  margin-top:16px;
-  color:#35b86b;
-  font-weight:bold;
+margin-top:15px;
+font-weight:bold;
+color:#35b86b;
 }
 
 .features{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  flex-wrap:wrap;
-  margin-top:26px;
+margin-top:30px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:12px;
 }
 
 .feature{
-  background:#f3fff7;
-  border:1px solid #d9eadf;
-  border-radius:16px;
-  padding:10px 14px;
-  font-size:14px;
-  font-weight:bold;
-  color:#315744;
+background:#f7fffa;
+border:1px solid #dcefe2;
+padding:12px 15px;
+border-radius:15px;
+font-weight:bold;
 }
 
 .footer{
-  margin-top:26px;
-  font-size:13px;
-  color:#789187;
+margin-top:35px;
+font-size:13px;
+color:#6d8378;
 }
 
-@media(max-width:620px){
-  body{overflow:auto}
-  .card{padding:32px 22px}
-  h1{font-size:32px}
-  form{flex-direction:column}
-  button{width:100%}
+@media(max-width:700px){
+
+.card{
+padding:30px;
 }
+
+h1{
+font-size:36px;
+}
+
+form{
+flex-direction:column;
+}
+
+button{
+width:100%;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<main class="card">
+<div class="card">
 
-  <img src="./Avo%20Brush%20logo%20final.jpeg" alt="Kimi Kirei Smart AvoBrush Logo" class="logo">
+<img src="Avo Brush logo final.jpeg" class="logo">
 
-  <h1>Kimi Kirei<br>Smart AvoBrush</h1>
+<h1>Kimi Kirei Smart AvoBrush</h1>
 
-  <p class="tagline">
-    Enter your email to register interest for pre-order of the
-    <span class="highlight">first ever smart interactive hairbrush for children.</span>
-  </p>
+<p class="subtitle">
+The world's first
+<span class="highlight">interactive traffic-light guided smart hairbrush</span>
+designed to help children enjoy brushing independently.
+</p>
 
-  <form id="prelaunchForm">
-    <input type="email" id="email" placeholder="Enter your email address" required>
-    <button type="submit">Join Pre-Launch</button>
-  </form>
+<div class="founding">
 
-  <div id="message"></div>
+<h3>🌟 Become a Founding Family</h3>
 
-  <div class="features">
-    <div class="feature">🟢 Guided brushing</div>
-    <div class="feature">🔊 Voice prompts</div>
-    <div class="feature">✨ Lights & vibration</div>
-  </div>
+<p>
+Reserve one of the first Smart AvoBrush units before launch.
+</p>
 
-  <div class="footer">
-    Smart Brush UK Ltd · Product in development · Pre-orders opening soon
-  </div>
+<br>
 
-</main>
+<strong>£10 Deposit</strong>
+
+<br><br>
+
+<a href="YOUR_STRIPE_LINK_HERE"
+class="deposit-btn">
+Reserve Yours Now
+</a>
+
+</div>
+
+<form id="prelaunchForm">
+
+<input
+type="email"
+id="email"
+placeholder="Enter your email for updates"
+required>
+
+<button type="submit">
+Join Waitlist
+</button>
+
+</form>
+
+<div id="message"></div>
+
+<div class="features">
+<div class="feature">🟢 Traffic Light Guidance</div>
+<div class="feature">🔊 Voice Prompts</div>
+<div class="feature">✨ Lights & Vibration</div>
+<div class="feature">🥑 Smart Interactive Design</div>
+</div>
+
+<div class="footer">
+Smart Brush UK Ltd • Kimi Kirei™ • Smart AvoBrush™ • Patent & Trademark Pending
+</div>
+
+</div>
 
 <script>
-const form = document.getElementById("prelaunchForm");
-const message = document.getElementById("message");
 
-form.addEventListener("submit", function(event) {
-  event.preventDefault();
-  message.textContent = "Thank you — you're on the pre-launch list!";
-  form.reset();
+const form=document.getElementById("prelaunchForm");
+const message=document.getElementById("message");
+
+form.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+message.innerHTML=
+"✅ You're on the Kimi Kirei early access list.";
+
+form.reset();
+
 });
+
 </script>
 
 </body>
