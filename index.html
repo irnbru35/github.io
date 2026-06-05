@@ -1,27 +1,265 @@
-<div class="founding">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kimi Kirei Smart AvoBrush</title>
 
-<h3>🥑 Secure Your Smart AvoBrush Today</h3>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-<p>
-Be among the first families to own the Kimi Kirei Smart AvoBrush.
-Early production numbers will be limited.
-</p>
+body{
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#effff5,#eef8ff);
+  color:#123d2a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+  position:relative;
+  overflow:hidden;
+}
 
-<div style="margin:20px 0;font-size:28px;font-weight:bold;color:#35b86b;">
-£10 Deposit
-</div>
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    url("kimi.jpeg") 8% 14%/260px no-repeat,
+    url("kimi.jpeg") 92% 16%/240px no-repeat,
+    url("kimi.jpeg") 12% 84%/270px no-repeat,
+    url("kimi.jpeg") 88% 82%/300px no-repeat,
+    url("kimi.jpeg") center/430px no-repeat;
+  opacity:.14;
+  filter:blur(.3px);
+  z-index:-2;
+}
 
-<p style="font-size:15px;color:#5f7468;">
-Your deposit secures priority access and will be deducted from the final purchase price.
-</p>
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(53,184,107,.18),transparent 32%),
+    radial-gradient(circle at 85% 75%,rgba(255,105,180,.15),transparent 32%),
+    radial-gradient(circle at 70% 15%,rgba(100,216,255,.18),transparent 30%);
+  z-index:-1;
+}
 
-<a href="YOUR_STRIPE_LINK_HERE"
-class="deposit-btn">
-Pay Deposit Now
-</a>
+.card{
+  width:100%;
+  max-width:720px;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(16px);
+  border-radius:34px;
+  padding:46px 38px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(0,0,0,.14);
+  border:1px solid rgba(53,184,107,.22);
+}
 
-<p style="margin-top:18px;font-size:16px;font-weight:bold;color:#123d2a;">
-🎉 Use code <span style="color:#35b86b;">AVO26</span> for 10% off your final order
-</p>
+.logo{
+  width:440px;
+  max-width:96%;
+  margin-bottom:20px;
+  animation:floatLogo 4s ease-in-out infinite;
+}
 
-</div>
+@keyframes floatLogo{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+h1{
+  font-size:46px;
+  line-height:1.08;
+  margin-bottom:14px;
+}
+
+.tagline{
+  font-size:19px;
+  line-height:1.5;
+  color:#4c6659;
+  margin-bottom:24px;
+}
+
+.highlight{
+  color:#35b86b;
+  font-weight:800;
+}
+
+.deposit-box{
+  background:#f3fff7;
+  border:1px solid #d9eadf;
+  border-radius:22px;
+  padding:24px;
+  margin:24px 0;
+}
+
+.deposit-box h2{
+  font-size:25px;
+  margin-bottom:10px;
+}
+
+.price{
+  font-size:34px;
+  font-weight:900;
+  color:#35b86b;
+  margin:18px 0 8px;
+}
+
+.deposit-btn{
+  display:inline-block;
+  margin-top:16px;
+  padding:17px 30px;
+  border-radius:18px;
+  background:#35b86b;
+  color:white;
+  text-decoration:none;
+  font-size:17px;
+  font-weight:bold;
+}
+
+.discount{
+  margin-top:18px;
+  font-weight:bold;
+  color:#123d2a;
+}
+
+.discount span{
+  color:#35b86b;
+}
+
+form{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+
+input{
+  flex:1;
+  padding:17px;
+  font-size:16px;
+  border:2px solid #d9eadf;
+  border-radius:16px;
+  outline:none;
+}
+
+button{
+  padding:17px 24px;
+  border:none;
+  border-radius:16px;
+  background:#123d2a;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+#message{
+  margin-top:14px;
+  color:#35b86b;
+  font-weight:bold;
+}
+
+.features{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:26px;
+}
+
+.feature{
+  background:#f3fff7;
+  border:1px solid #d9eadf;
+  border-radius:16px;
+  padding:10px 14px;
+  font-size:14px;
+  font-weight:bold;
+}
+
+.footer{
+  margin-top:26px;
+  font-size:13px;
+  color:#789187;
+}
+
+@media(max-width:620px){
+  body{overflow:auto;padding:20px}
+  .card{padding:30px 22px}
+  h1{font-size:34px}
+  form{flex-direction:column}
+  button{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<main class="card">
+
+  <img src="Avo Brush logo final.jpeg" alt="Kimi Kirei Smart AvoBrush Logo" class="logo">
+
+  <h1>Kimi Kirei<br>Smart AvoBrush</h1>
+
+  <p class="tagline">
+    The <span class="highlight">first ever smart interactive hairbrush for children</span>,
+    using lights, vibration and voice prompts to make brushing fun.
+  </p>
+
+  <section class="deposit-box">
+    <h2>🥑 Secure Your Smart AvoBrush Today</h2>
+
+    <p>
+      Be among the first families to own the Kimi Kirei Smart AvoBrush.
+      Early production numbers will be limited.
+    </p>
+
+    <div class="price">£10 Deposit</div>
+
+    <p>Your deposit secures priority access and will be deducted from the final purchase price.</p>
+
+    <a href="YOUR_STRIPE_LINK_HERE" class="deposit-btn">
+      Pay Deposit Now
+    </a>
+
+    <p class="discount">
+      🎉 Use code <span>AVO26</span> for 10% off your final order
+    </p>
+  </section>
+
+  <form id="prelaunchForm">
+    <input type="email" id="email" placeholder="Enter your email for pre-order updates" required>
+    <button type="submit">Join Waitlist</button>
+  </form>
+
+  <div id="message"></div>
+
+  <div class="features">
+    <div class="feature">🟢 Guided brushing</div>
+    <div class="feature">🔊 Voice prompts</div>
+    <div class="feature">✨ Lights & vibration</div>
+    <div class="feature">🥑 Smart Avo design</div>
+  </div>
+
+  <div class="footer">
+    Smart Brush UK Ltd · Kimi Kirei™ · Smart AvoBrush™ · Product in development
+  </div>
+
+</main>
+
+<script>
+const form = document.getElementById("prelaunchForm");
+const message = document.getElementById("message");
+
+form.addEventListener("submit", function(event) {
+  event.preventDefault();
+  message.textContent = "✅ Thank you — you're on the early access list!";
+  form.reset();
+});
+</script>
+
+</body>
+</html>
