@@ -3,15 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Kimi Kirei Smart AvoBrush</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
   font-family:Arial,Helvetica,sans-serif;
@@ -23,6 +18,7 @@ body{
   background:linear-gradient(135deg,#f6fff7,#ffffff,#fff7e8);
   overflow-x:hidden;
   position:relative;
+  color:#333;
 }
 
 .bubble{
@@ -32,61 +28,77 @@ body{
   background:rgba(60,200,120,.12);
   animation:floatUp linear infinite;
 }
-
-.b1{left:10%;width:30px;height:30px;animation-duration:12s;}
-.b2{left:25%;width:50px;height:50px;animation-duration:16s;}
-.b3{left:50%;width:25px;height:25px;animation-duration:10s;}
-.b4{left:75%;width:40px;height:40px;animation-duration:14s;}
-.b5{left:90%;width:60px;height:60px;animation-duration:18s;}
+.b1{left:10%;width:30px;height:30px;animation-duration:12s}
+.b2{left:25%;width:50px;height:50px;animation-duration:16s}
+.b3{left:50%;width:25px;height:25px;animation-duration:10s}
+.b4{left:75%;width:40px;height:40px;animation-duration:14s}
+.b5{left:90%;width:60px;height:60px;animation-duration:18s}
 
 @keyframes floatUp{
-  from{transform:translateY(0);opacity:0;}
-  20%{opacity:1;}
-  to{transform:translateY(-120vh);opacity:0;}
+  from{transform:translateY(0);opacity:0}
+  20%{opacity:1}
+  to{transform:translateY(-120vh);opacity:0}
 }
 
 .card{
-  background:rgba(255,255,255,.95);
+  background:rgba(255,255,255,.96);
   width:100%;
-  max-width:800px;
+  max-width:860px;
   border-radius:30px;
-  padding:40px 25px;
+  padding:42px 26px;
   text-align:center;
   box-shadow:0 20px 50px rgba(0,0,0,.12);
-  backdrop-filter:blur(10px);
 }
 
 .logo{
-  width:340px;
+  width:330px;
   max-width:90%;
   margin-bottom:20px;
   animation:logoFloat 3s ease-in-out infinite;
 }
 
 @keyframes logoFloat{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-10px);}
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
 }
 
 h1{
   font-size:clamp(2rem,5vw,4rem);
   color:#1e4f2d;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
 .subtitle{
   font-size:1.3rem;
   font-weight:bold;
   color:#ff8c00;
-  margin-bottom:20px;
+  margin-bottom:18px;
 }
 
 .description{
-  max-width:650px;
+  max-width:680px;
   margin:auto;
   font-size:1.1rem;
   line-height:1.6;
   color:#444;
+}
+
+.badges{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:22px 0;
+}
+
+.badge{
+  background:#f2fff5;
+  border:1px solid #c7efd0;
+  color:#1e4f2d;
+  padding:10px 14px;
+  border-radius:999px;
+  font-weight:bold;
+  font-size:.95rem;
 }
 
 .lights{
@@ -94,7 +106,7 @@ h1{
   justify-content:center;
   gap:15px;
   flex-wrap:wrap;
-  margin:30px 0;
+  margin:28px 0;
 }
 
 .light{
@@ -103,17 +115,25 @@ h1{
   color:white;
   font-weight:bold;
 }
+.green{background:#1db954}
+.orange{background:#ff9800}
+.red{background:#ff3b30}
 
-.green{background:#1db954;}
-.orange{background:#ff9800;}
-.red{background:#ff3b30;}
+.story{
+  background:#fffaf0;
+  border-radius:20px;
+  padding:20px;
+  margin:20px auto;
+  max-width:700px;
+  line-height:1.6;
+}
 
 .preorder{
   background:#f3fff6;
   border:2px dashed #28b463;
-  border-radius:20px;
-  padding:25px;
-  margin-top:20px;
+  border-radius:22px;
+  padding:26px;
+  margin-top:24px;
 }
 
 .preorder h2{
@@ -122,53 +142,90 @@ h1{
 }
 
 .deposit{
-  font-size:1.1rem;
-  margin-bottom:15px;
+  font-size:1.05rem;
+  margin-bottom:16px;
+  line-height:1.5;
+}
+
+.form{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin:18px 0;
+}
+
+input{
+  padding:16px;
+  border-radius:999px;
+  border:1px solid #ccc;
+  font-size:1rem;
+  min-width:240px;
 }
 
 .button{
-  display:inline-block;
-  text-decoration:none;
+  border:none;
+  cursor:pointer;
   background:linear-gradient(135deg,#22c55e,#16a34a);
   color:white;
-  padding:18px 35px;
+  padding:17px 30px;
   border-radius:999px;
-  font-size:1.2rem;
+  font-size:1.05rem;
   font-weight:bold;
   transition:.25s;
   box-shadow:0 12px 25px rgba(34,197,94,.35);
 }
 
-.button:hover{
-  transform:translateY(-3px);
-}
+.button:hover{transform:translateY(-3px)}
 
 .rrp{
-  margin-top:18px;
-  font-size:1.15rem;
+  margin-top:16px;
+  font-size:1.1rem;
   font-weight:bold;
   color:#1e4f2d;
 }
 
-.footer{
-  margin-top:20px;
+.small{
+  margin-top:10px;
   font-size:.9rem;
   color:#666;
 }
 
+.faq{
+  text-align:left;
+  max-width:700px;
+  margin:30px auto 0;
+}
+
+.faq h2{
+  text-align:center;
+  color:#1e4f2d;
+  margin-bottom:15px;
+}
+
+.faq-item{
+  background:#fafafa;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:10px;
+  border:1px solid #eee;
+}
+
+.faq-item strong{
+  color:#1e4f2d;
+}
+
+.footer{
+  margin-top:22px;
+  font-size:.9rem;
+  color:#666;
+  line-height:1.5;
+}
+
 @media(max-width:600px){
-  .card{
-    padding:30px 18px;
-  }
-
-  .logo{
-    width:280px;
-  }
-
-  .button{
-    width:100%;
-    padding:17px 20px;
-  }
+  .card{padding:30px 18px}
+  .logo{width:280px}
+  input,.button{width:100%}
 }
 </style>
 </head>
@@ -192,41 +249,109 @@ h1{
   </div>
 
   <p class="description">
-    Turn brushing from a daily battle into a fun adventure.
-    AvoBrush uses lights, sound and vibration to guide children through healthy brushing habits using a simple traffic light system.
+    AvoBrush is being developed to help turn hair brushing from a daily battle into something fun, guided and rewarding for children.
   </p>
 
+  <div class="badges">
+    <div class="badge">👨‍👧 Parent-led idea</div>
+    <div class="badge">🇬🇧 UK developed</div>
+    <div class="badge">🚦 Traffic light guidance</div>
+    <div class="badge">✨ First production run coming soon</div>
+  </div>
+
   <div class="lights">
-    <div class="light green">🟢 Green - Start</div>
+    <div class="light green">🟢 Start Brushing</div>
     <div class="light orange">🟠 Keep Going</div>
-    <div class="light red">🔴 All Done!</div>
+    <div class="light red">🔴 Finished!</div>
+  </div>
+
+  <div class="story">
+    <strong>Why we are building it:</strong><br>
+    Many parents know the struggle of brushing children’s hair. AvoBrush is designed to guide children using lights, sound and vibration, helping make brushing feel more like a fun routine than a fight.
   </div>
 
   <div class="preorder">
 
-    <h2>🚀 Secure Your AvoBrush Today</h2>
+    <h2>🚀 Founding Family First Production Run</h2>
 
     <p class="deposit">
-      Pay a £10 refundable deposit now to reserve your place in the first production run.
+      Reserve one of the first AvoBrushes with a <strong>£10 refundable deposit</strong>.
+      Founding Family customers will receive <strong>10% off the final retail price</strong> when the first production batch is ready.
     </p>
 
-    <a class="button"
-       href="https://buy.stripe.com/28EbJ25yl60nfUBfp24sE00"
-       target="_blank">
-       PAY £10 DEPOSIT NOW
-    </a>
+    <form class="form" id="preorderForm">
+      <input type="text" id="name" placeholder="Your name" required>
+      <input type="email" id="email" placeholder="Your email address" required>
+      <button type="submit" class="button">PAY £10 DEPOSIT NOW</button>
+    </form>
 
     <p class="rrp">
-      RRP £39.99
+      RRP £39.99 · Deposit today £10 · Founding Family discount 10%
     </p>
 
+    <p class="small">
+      After paying, your email will be attached to your Stripe payment so we can contact you for the remaining balance before dispatch.
+    </p>
+
+  </div>
+
+  <div class="faq">
+    <h2>Questions Parents May Ask</h2>
+
+    <div class="faq-item">
+      <strong>When will it ship?</strong><br>
+      AvoBrush is currently in prototype and pre-production development. Founding Family customers will be contacted first when the first production run is confirmed.
+    </div>
+
+    <div class="faq-item">
+      <strong>Is the £10 deposit refundable?</strong><br>
+      Yes. The deposit is intended to reserve your place in the first production run.
+    </div>
+
+    <div class="faq-item">
+      <strong>What happens after I pay?</strong><br>
+      Your email will be recorded with your Stripe payment. When production is ready, you will receive a private payment link for the remaining balance.
+    </div>
+
+    <div class="faq-item">
+      <strong>What age is it for?</strong><br>
+      AvoBrush is being designed for children who need help building better brushing habits, especially those who dislike brushing or need a more guided routine.
+    </div>
+
+    <div class="faq-item">
+      <strong>How does the traffic light system work?</strong><br>
+      Green means start brushing, amber means keep going, and red means finished.
+    </div>
   </div>
 
   <div class="footer">
-    Limited first production run available. Apple Pay, Google Pay and card payments accepted.
+    Limited first production run available. Apple Pay, Google Pay and card payments accepted through Stripe.
   </div>
 
 </div>
+
+<script>
+document.getElementById("preorderForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+
+  if(!name || !email){
+    alert("Please enter your name and email.");
+    return;
+  }
+
+  const stripeBase = "https://buy.stripe.com/28EbJ25yl60nfUBfp24sE00";
+
+  const stripeUrl =
+    stripeBase +
+    "?locked_prefilled_email=" + encodeURIComponent(email) +
+    "&client_reference_id=" + encodeURIComponent(name + " - " + email);
+
+  window.location.href = stripeUrl;
+});
+</script>
 
 </body>
 </html>
