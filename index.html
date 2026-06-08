@@ -3,508 +3,492 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avo Slash - Kimi Kirei</title>
+<title>Avo Slash</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  min-height:100vh;
-  background:linear-gradient(135deg,#f6fff7,#fff,#fff3df);
-  padding:20px 12px;
-  color:#333;
+body{overflow:hidden;font-family:Arial;background:#102018}
+canvas{display:block;width:100vw;height:100vh;touch-action:none}
+.panel{
+ position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+ background:rgba(0,0,0,.45);z-index:5;text-align:center;padding:20px
 }
-
-.card{
-  max-width:950px;
-  margin:auto;
-  background:white;
-  border-radius:30px;
-  padding:30px 18px;
-  text-align:center;
-  box-shadow:0 20px 50px rgba(0,0,0,.12);
+.box{
+ background:#fff;border-radius:28px;padding:26px;max-width:430px;
+ box-shadow:0 25px 70px rgba(0,0,0,.35)
 }
-
-.logo{
-  width:280px;
-  max-width:90%;
-  animation:float 3s ease-in-out infinite;
+h1{font-size:46px;color:#1d5c32;margin-bottom:10px}
+p{margin:10px 0;line-height:1.5;color:#333}
+button{
+ border:0;border-radius:999px;padding:15px 25px;margin:7px;
+ background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;
+ font-size:17px;font-weight:bold;cursor:pointer
 }
-
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
-}
-
-h1{
-  color:#1e4f2d;
-  font-size:clamp(2rem,5vw,4rem);
-}
-
-.subtitle{
-  color:#ff8c00;
-  font-size:1.25rem;
-  font-weight:bold;
-  margin:10px 0 16px;
-}
-
-.description{
-  max-width:700px;
-  margin:0 auto 22px;
-  line-height:1.5;
-}
-
-.game-wrap{
-  max-width:760px;
-  margin:auto;
-  background:#f2fff6;
-  border:3px solid #25b65a;
-  border-radius:26px;
-  padding:15px;
-}
-
-.game-top{
-  display:flex;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:12px;
-  font-weight:bold;
-  color:#1e4f2d;
-}
-
-#gameArea{
-  position:relative;
-  width:100%;
-  height:430px;
-  overflow:hidden;
-  border-radius:22px;
-  background:linear-gradient(#dfffe8,#fff5d6);
-  border:2px dashed #9adead;
-  touch-action:none;
-}
-
-.item{
-  position:absolute;
-  font-size:46px;
-  user-select:none;
-  pointer-events:none;
-}
-
-.slice{
-  position:absolute;
-  height:6px;
-  background:rgba(255,140,0,.8);
-  border-radius:999px;
-  pointer-events:none;
-  transform-origin:left center;
-  box-shadow:0 0 14px rgba(255,140,0,.7);
-}
-
-.pop{
-  position:absolute;
-  font-weight:bold;
-  color:#1e4f2d;
-  animation:popUp .7s ease-out forwards;
-  pointer-events:none;
-}
-
-@keyframes popUp{
-  from{opacity:1;transform:translateY(0) scale(1)}
-  to{opacity:0;transform:translateY(-35px) scale(1.3)}
-}
-
-.button{
-  border:none;
-  cursor:pointer;
-  background:linear-gradient(135deg,#22c55e,#16a34a);
-  color:white;
-  padding:15px 24px;
-  border-radius:999px;
-  font-size:1rem;
-  font-weight:bold;
-  margin:10px 4px;
-  box-shadow:0 10px 22px rgba(34,197,94,.3);
-}
-
-.orange{
-  background:linear-gradient(135deg,#ff9800,#f57c00);
-}
-
-.button:hover{transform:translateY(-2px)}
-
-.hidden{display:none}
-
-.result{
-  margin-top:15px;
-  background:#fffaf0;
-  border-radius:20px;
-  padding:18px;
-}
-
+.orange{background:linear-gradient(135deg,#ff9800,#e66a00)}
 input{
-  padding:14px;
-  border-radius:999px;
-  border:1px solid #ccc;
-  margin:6px;
-  font-size:1rem;
-  min-width:220px;
+ width:100%;padding:14px;margin:6px 0;border-radius:999px;
+ border:1px solid #ccc;font-size:16px
 }
-
-.rules{
-  margin-top:14px;
-  font-size:.95rem;
-  color:#555;
-  line-height:1.5;
+.hidden{display:none}
+.hud{
+ position:absolute;top:15px;left:15px;right:15px;z-index:3;
+ display:flex;justify-content:space-between;color:white;
+ font-size:22px;font-weight:bold;text-shadow:0 3px 4px #000
 }
-
-.preorder{
-  margin-top:25px;
-  background:#fffaf0;
-  border-radius:22px;
-  padding:22px;
-}
-
-.footer{
-  margin-top:18px;
-  color:#666;
-  font-size:.9rem;
-}
-
-@media(max-width:600px){
-  #gameArea{height:370px}
-  .item{font-size:42px}
-  input,.button{width:100%}
+.logo{
+ position:absolute;top:50px;left:50%;transform:translateX(-50%);
+ width:150px;z-index:2;opacity:.9
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-
-<img src="Avo%20Brush%20logo%20final.jpeg" class="logo" alt="AvoBrush Logo">
-
-<h1>Avo Slash</h1>
-
-<div class="subtitle">Slice the avocados. Avoid the tangles.</div>
-
-<p class="description">
-  A fun mini-game for the Kimi Kirei Smart AvoBrush launch. Swipe across the screen like Fruit Ninja,
-  slice avocados, hit bonus hairbrushes, and avoid the tangles.
-</p>
-
-<div class="game-wrap">
-
-  <div class="game-top">
-    <div>Score: <span id="score">0</span></div>
-    <div>Lives: <span id="lives">3</span></div>
-    <div>Best: <span id="best">0</span></div>
-  </div>
-
-  <div id="gameArea"></div>
-
-  <button class="button" onclick="startGame()">START AVO SLASH</button>
-  <button class="button orange" onclick="buyExtraAvocados()">BUY EXTRA AVOCADOS - £2</button>
-
-  <div class="rules">
-    🥑 Slice avocado = +1 point<br>
-    🪮 Slice hairbrush = +5 bonus points<br>
-    🪢 Avoid tangles — slicing one loses a life
-  </div>
-
-  <div id="resultBox" class="result hidden">
-    <h2>Game Over!</h2>
-    <p id="finalScore"></p>
-    <p>Want another go? Buy extra avocados for £2 and keep the fun going.</p>
-
-    <input id="parentName" type="text" placeholder="Parent name">
-    <input id="parentEmail" type="email" placeholder="Email address">
-
-    <button class="button orange" onclick="buyExtraAvocadosWithEmail()">
-      BUY EXTRA AVOCADOS - £2
-    </button>
-  </div>
-
+<div class="hud">
+ <div>Score: <span id="score">0</span></div>
+ <div>Lives: <span id="lives">3</span></div>
+ <div>Combo: <span id="combo">0</span>x</div>
 </div>
 
-<div class="preorder">
-  <h2>🚀 Smart AvoBrush Coming Soon</h2>
-  <p>
-    The world’s first smart interactive hairbrush for kids — using lights, sound and vibration
-    to make brushing easier and more fun.
-  </p>
-  <p><strong>RRP £39.99</strong></p>
+<img src="Avo%20Brush%20logo%20final.jpeg" class="logo">
+
+<canvas id="game"></canvas>
+
+<div id="startPanel" class="panel">
+ <div class="box">
+  <h1>🥑 Avo Slash</h1>
+  <p>Swipe to slice realistic avocados. Avoid the tangles. Hit the golden avocado for bonus points.</p>
+  <p>🥑 Slice avocados · 🥇 Golden bonus · 🪢 Avoid tangles</p>
+  <button onclick="startGame()">START GAME</button>
+ </div>
 </div>
 
-<div class="footer">
-  Payments are handled securely through Stripe.
-</div>
-
+<div id="endPanel" class="panel hidden">
+ <div class="box">
+  <h1>Game Over</h1>
+  <p id="finalScore"></p>
+  <p>Buy 5 extra avocados for £2 and keep playing.</p>
+  <input id="name" placeholder="Parent name">
+  <input id="email" placeholder="Email address">
+  <button class="orange" onclick="buyExtras()">BUY EXTRA AVOCADOS - £2</button>
+  <button onclick="startGame()">PLAY AGAIN FREE</button>
+ </div>
 </div>
 
 <script>
-const gameArea = document.getElementById("gameArea");
-const scoreEl = document.getElementById("score");
-const livesEl = document.getElementById("lives");
-const bestEl = document.getElementById("best");
-const resultBox = document.getElementById("resultBox");
-const finalScore = document.getElementById("finalScore");
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
 
-const stripeExtraAvocados = "https://buy.stripe.com/cNi7sM8KxdsP5fX90E4sE01";
+const scoreEl=document.getElementById("score");
+const livesEl=document.getElementById("lives");
+const comboEl=document.getElementById("combo");
+const startPanel=document.getElementById("startPanel");
+const endPanel=document.getElementById("endPanel");
+const finalScore=document.getElementById("finalScore");
 
-let score = 0;
-let lives = 3;
-let best = localStorage.getItem("avoSlashBest") || 0;
-let gameRunning = false;
-let items = [];
-let spawnTimer;
-let animationFrame;
-let isSlicing = false;
-let lastPoint = null;
+const stripeLink="https://buy.stripe.com/cNi7sM8KxdsP5fX90E4sE01";
 
-bestEl.textContent = best;
+let W,H,objects=[],slashes=[],splatters=[],halves=[];
+let score=0,lives=3,combo=0,running=false,lastSpawn=0,lastTime=0;
+let slicing=false,lastPoint=null;
+
+function resize(){
+ W=canvas.width=innerWidth;
+ H=canvas.height=innerHeight;
+}
+resize();
+addEventListener("resize",resize);
 
 function startGame(){
-  score = 0;
-  lives = 3;
-  items = [];
-  gameRunning = true;
+ objects=[];slashes=[];splatters=[];halves=[];
+ score=0;lives=3;combo=0;running=true;
+ lastSpawn=0;lastTime=performance.now();
 
-  scoreEl.textContent = score;
-  livesEl.textContent = lives;
-  resultBox.classList.add("hidden");
-  gameArea.innerHTML = "";
+ scoreEl.textContent=score;
+ livesEl.textContent=lives;
+ comboEl.textContent=combo;
 
-  clearInterval(spawnTimer);
-  cancelAnimationFrame(animationFrame);
+ startPanel.classList.add("hidden");
+ endPanel.classList.add("hidden");
 
-  spawnTimer = setInterval(spawnItem, 650);
-  gameLoop();
+ requestAnimationFrame(loop);
 }
 
-function spawnItem(){
-  if(!gameRunning) return;
+function spawnObject(){
+ let r=Math.random();
+ let type="avo";
+ if(r<.16)type="tangle";
+ if(r>.88)type="gold";
 
-  const el = document.createElement("div");
-  el.className = "item";
+ let x=80+Math.random()*(W-160);
+ let y=H+80;
 
-  const random = Math.random();
-  let type = "avo";
-  let emoji = "🥑";
-
-  if(random > 0.82){
-    type = "brush";
-    emoji = "🪮";
-  }
-
-  if(random < 0.18){
-    type = "tangle";
-    emoji = "🪢";
-  }
-
-  el.textContent = emoji;
-
-  const startX = Math.random() * (gameArea.offsetWidth - 60) + 10;
-  const startY = gameArea.offsetHeight + 40;
-
-  const vx = (Math.random() - 0.5) * 4;
-  const vy = -(9 + Math.random() * 5);
-
-  const item = {
-    el,
-    type,
-    x:startX,
-    y:startY,
-    vx,
-    vy,
-    gravity:0.18,
-    sliced:false
-  };
-
-  items.push(item);
-  gameArea.appendChild(el);
+ objects.push({
+  x,y,
+  vx:(Math.random()-.5)*8,
+  vy:-(16+Math.random()*7),
+  g:.34,
+  size:48+Math.random()*12,
+  rot:Math.random()*6,
+  vr:(Math.random()-.5)*.16,
+  type,
+  sliced:false
+ });
 }
 
-function gameLoop(){
-  if(!gameRunning) return;
+function loop(t){
+ if(!running)return;
+ let dt=Math.min((t-lastTime)/16.67,2);
+ lastTime=t;
 
-  items.forEach((item, index) => {
-    item.x += item.vx;
-    item.y += item.vy;
-    item.vy += item.gravity;
+ drawBackground();
 
-    item.el.style.left = item.x + "px";
-    item.el.style.top = item.y + "px";
+ if(t-lastSpawn>620){
+  spawnObject();
+  if(score>20 && Math.random()>.55)spawnObject();
+  if(score>50 && Math.random()>.65)spawnObject();
+  lastSpawn=t;
+ }
 
-    if(item.y > gameArea.offsetHeight + 80){
-      item.el.remove();
-      items.splice(index,1);
-    }
+ updateObjects(dt);
+ updateHalves(dt);
+ updateSplatters(dt);
+ drawSlashes();
+
+ requestAnimationFrame(loop);
+}
+
+function drawBackground(){
+ let g=ctx.createLinearGradient(0,0,0,H);
+ g.addColorStop(0,"#123522");
+ g.addColorStop(.55,"#1f6b3a");
+ g.addColorStop(1,"#f6c96d");
+ ctx.fillStyle=g;
+ ctx.fillRect(0,0,W,H);
+
+ ctx.fillStyle="rgba(255,255,255,.06)";
+ for(let i=0;i<18;i++){
+  ctx.beginPath();
+  ctx.arc((i*170+Date.now()/45)%W,90+i*45,35,0,Math.PI*2);
+  ctx.fill();
+ }
+}
+
+function drawAvocado(x,y,size,rot,gold=false){
+ ctx.save();
+ ctx.translate(x,y);
+ ctx.rotate(rot);
+
+ ctx.beginPath();
+ ctx.ellipse(0,0,size*.62,size*.82,0,0,Math.PI*2);
+ ctx.fillStyle=gold?"#facc15":"#246b38";
+ ctx.fill();
+
+ ctx.beginPath();
+ ctx.ellipse(0,0,size*.48,size*.68,0,0,Math.PI*2);
+ ctx.fillStyle=gold?"#fde68a":"#b7f07a";
+ ctx.fill();
+
+ ctx.beginPath();
+ ctx.ellipse(0,size*.13,size*.19,size*.24,0,0,Math.PI*2);
+ ctx.fillStyle="#8b4b22";
+ ctx.fill();
+
+ ctx.beginPath();
+ ctx.ellipse(-size*.18,-size*.25,size*.12,size*.09,-.5,0,Math.PI*2);
+ ctx.fillStyle="rgba(255,255,255,.55)";
+ ctx.fill();
+
+ ctx.restore();
+}
+
+function drawTangle(x,y,size,rot){
+ ctx.save();
+ ctx.translate(x,y);
+ ctx.rotate(rot);
+ ctx.strokeStyle="#3b2417";
+ ctx.lineWidth=8;
+ ctx.lineCap="round";
+
+ for(let i=0;i<4;i++){
+  ctx.beginPath();
+  ctx.arc((i-1.5)*12,0,size*.25,0,Math.PI*1.7);
+  ctx.stroke();
+ }
+
+ ctx.fillStyle="#fff";
+ ctx.font=size+"px Arial";
+ ctx.textAlign="center";
+ ctx.textBaseline="middle";
+ ctx.fillText("🪢",0,0);
+ ctx.restore();
+}
+
+function updateObjects(dt){
+ for(let i=objects.length-1;i>=0;i--){
+  let o=objects[i];
+
+  o.x+=o.vx*dt;
+  o.y+=o.vy*dt;
+  o.vy+=o.g*dt;
+  o.rot+=o.vr*dt;
+
+  if(o.type==="tangle") drawTangle(o.x,o.y,o.size,o.rot);
+  else drawAvocado(o.x,o.y,o.size,o.rot,o.type==="gold");
+
+  if(o.y>H+130){
+   objects.splice(i,1);
+   if(o.type!=="tangle"){
+    combo=0;
+    comboEl.textContent=combo;
+   }
+  }
+ }
+}
+
+function sliceObject(o){
+ if(o.sliced)return;
+ o.sliced=true;
+
+ if(o.type==="tangle"){
+  lives--;
+  combo=0;
+  createExplosion(o.x,o.y,"#5b2c16");
+  shake();
+ }else{
+  let points=o.type==="gold"?10:1+Math.floor(combo/5);
+  score+=points;
+  combo++;
+  createAvocadoHalves(o);
+  createSplash(o.x,o.y,o.type==="gold"?"#facc15":"#9be564");
+  popup("+"+points,o.x,o.y);
+ }
+
+ scoreEl.textContent=score;
+ livesEl.textContent=lives;
+ comboEl.textContent=combo;
+
+ objects=objects.filter(item=>item!==o);
+
+ if(lives<=0)endGame();
+}
+
+function createAvocadoHalves(o){
+ for(let side=-1;side<=1;side+=2){
+  halves.push({
+   x:o.x,y:o.y,
+   vx:side*(4+Math.random()*4),
+   vy:-3-Math.random()*3,
+   g:.28,
+   size:o.size,
+   rot:o.rot,
+   vr:side*.18,
+   side,
+   life:70,
+   gold:o.type==="gold"
   });
+ }
+}
 
-  animationFrame = requestAnimationFrame(gameLoop);
+function drawHalf(h){
+ ctx.save();
+ ctx.translate(h.x,h.y);
+ ctx.rotate(h.rot);
+
+ ctx.beginPath();
+ ctx.ellipse(h.side*8,0,h.size*.32,h.size*.78,0,0,Math.PI*2);
+ ctx.fillStyle=h.gold?"#facc15":"#246b38";
+ ctx.fill();
+
+ ctx.beginPath();
+ ctx.ellipse(h.side*8,0,h.size*.24,h.size*.62,0,0,Math.PI*2);
+ ctx.fillStyle=h.gold?"#fde68a":"#b7f07a";
+ ctx.fill();
+
+ ctx.restore();
+}
+
+function updateHalves(dt){
+ for(let i=halves.length-1;i>=0;i--){
+  let h=halves[i];
+  h.x+=h.vx*dt;
+  h.y+=h.vy*dt;
+  h.vy+=h.g*dt;
+  h.rot+=h.vr*dt;
+  h.life-=dt;
+
+  ctx.globalAlpha=Math.max(h.life/70,0);
+  drawHalf(h);
+  ctx.globalAlpha=1;
+
+  if(h.life<=0)halves.splice(i,1);
+ }
+}
+
+function createSplash(x,y,color){
+ for(let i=0;i<22;i++){
+  splatters.push({
+   x,y,
+   vx:(Math.random()-.5)*11,
+   vy:(Math.random()-.5)*11,
+   r:3+Math.random()*6,
+   life:35,
+   color
+  });
+ }
+}
+
+function createExplosion(x,y,color){
+ for(let i=0;i<28;i++){
+  splatters.push({
+   x,y,
+   vx:(Math.random()-.5)*14,
+   vy:(Math.random()-.5)*14,
+   r:4+Math.random()*7,
+   life:40,
+   color
+  });
+ }
+}
+
+function updateSplatters(dt){
+ for(let i=splatters.length-1;i>=0;i--){
+  let s=splatters[i];
+  s.x+=s.vx*dt;
+  s.y+=s.vy*dt;
+  s.vy+=.16*dt;
+  s.life-=dt;
+
+  ctx.globalAlpha=Math.max(s.life/40,0);
+  ctx.fillStyle=s.color;
+  ctx.beginPath();
+  ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+  ctx.fill();
+  ctx.globalAlpha=1;
+
+  if(s.life<=0)splatters.splice(i,1);
+ }
+}
+
+function popup(text,x,y){
+ let p=document.createElement("div");
+ p.textContent=text;
+ p.style.position="absolute";
+ p.style.left=x+"px";
+ p.style.top=y+"px";
+ p.style.color="white";
+ p.style.fontWeight="bold";
+ p.style.fontSize="26px";
+ p.style.textShadow="0 2px 5px #000";
+ p.style.pointerEvents="none";
+ p.style.zIndex=4;
+ document.body.appendChild(p);
+
+ let n=0;
+ let anim=setInterval(()=>{
+  n++;
+  p.style.transform=`translateY(${-n*2}px) scale(${1+n/40})`;
+  p.style.opacity=1-n/30;
+  if(n>30){clearInterval(anim);p.remove();}
+ },16);
+}
+
+function drawSlashes(){
+ for(let i=slashes.length-1;i>=0;i--){
+  let s=slashes[i];
+  s.life--;
+
+  let grad=ctx.createLinearGradient(s.x1,s.y1,s.x2,s.y2);
+  grad.addColorStop(0,"rgba(255,255,255,0)");
+  grad.addColorStop(.5,"rgba(255,255,255,.95)");
+  grad.addColorStop(1,"rgba(255,180,40,0)");
+
+  ctx.strokeStyle=grad;
+  ctx.lineWidth=10;
+  ctx.lineCap="round";
+  ctx.beginPath();
+  ctx.moveTo(s.x1,s.y1);
+  ctx.lineTo(s.x2,s.y2);
+  ctx.stroke();
+
+  if(s.life<=0)slashes.splice(i,1);
+ }
 }
 
 function getPoint(e){
-  const rect = gameArea.getBoundingClientRect();
-
-  if(e.touches && e.touches.length > 0){
-    return {
-      x:e.touches[0].clientX - rect.left,
-      y:e.touches[0].clientY - rect.top
-    };
-  }
-
-  return {
-    x:e.clientX - rect.left,
-    y:e.clientY - rect.top
-  };
+ let t=e.touches&&e.touches[0];
+ return {x:t?t.clientX:e.clientX,y:t?t.clientY:e.clientY};
 }
 
 function startSlice(e){
-  if(!gameRunning) return;
-  e.preventDefault();
-  isSlicing = true;
-  lastPoint = getPoint(e);
+ e.preventDefault();
+ slicing=true;
+ lastPoint=getPoint(e);
 }
 
 function moveSlice(e){
-  if(!gameRunning || !isSlicing) return;
-  e.preventDefault();
+ if(!slicing||!running)return;
+ e.preventDefault();
 
-  const current = getPoint(e);
+ let p=getPoint(e);
 
-  drawSlice(lastPoint, current);
-  checkHit(current);
+ slashes.push({x1:lastPoint.x,y1:lastPoint.y,x2:p.x,y2:p.y,life:12});
 
-  lastPoint = current;
+ for(let o of objects){
+  let d=distanceToLine(o.x,o.y,lastPoint.x,lastPoint.y,p.x,p.y);
+  if(d<o.size*.65)sliceObject(o);
+ }
+
+ lastPoint=p;
 }
 
 function endSlice(){
-  isSlicing = false;
-  lastPoint = null;
+ slicing=false;
+ lastPoint=null;
 }
 
-function drawSlice(p1,p2){
-  const dx = p2.x - p1.x;
-  const dy = p2.y - p1.y;
-  const length = Math.sqrt(dx*dx + dy*dy);
-  const angle = Math.atan2(dy,dx) * 180 / Math.PI;
-
-  const slash = document.createElement("div");
-  slash.className = "slice";
-  slash.style.left = p1.x + "px";
-  slash.style.top = p1.y + "px";
-  slash.style.width = length + "px";
-  slash.style.transform = "rotate(" + angle + "deg)";
-
-  gameArea.appendChild(slash);
-
-  setTimeout(() => slash.remove(), 120);
+function distanceToLine(px,py,x1,y1,x2,y2){
+ let A=px-x1,B=py-y1,C=x2-x1,D=y2-y1;
+ let dot=A*C+B*D;
+ let len=C*C+D*D;
+ let t=Math.max(0,Math.min(1,dot/len));
+ let x=x1+t*C,y=y1+t*D;
+ return Math.hypot(px-x,py-y);
 }
 
-function checkHit(point){
-  items.forEach((item) => {
-    if(item.sliced) return;
-
-    const itemCenterX = item.x + 25;
-    const itemCenterY = item.y + 25;
-
-    const dx = point.x - itemCenterX;
-    const dy = point.y - itemCenterY;
-    const distance = Math.sqrt(dx*dx + dy*dy);
-
-    if(distance < 45){
-      sliceItem(item);
-    }
-  });
-}
-
-function sliceItem(item){
-  item.sliced = true;
-
-  if(item.type === "avo"){
-    score += 1;
-    showPop("+1", item.x, item.y);
-  }
-
-  if(item.type === "brush"){
-    score += 5;
-    showPop("+5 BONUS", item.x, item.y);
-  }
-
-  if(item.type === "tangle"){
-    lives -= 1;
-    showPop("OUCH!", item.x, item.y);
-  }
-
-  scoreEl.textContent = score;
-  livesEl.textContent = lives;
-
-  item.el.textContent = item.type === "tangle" ? "💥" : "✨";
-
-  setTimeout(() => item.el.remove(), 120);
-
-  if(lives <= 0){
-    endGame();
-  }
-}
-
-function showPop(text,x,y){
-  const pop = document.createElement("div");
-  pop.className = "pop";
-  pop.textContent = text;
-  pop.style.left = x + "px";
-  pop.style.top = y + "px";
-  gameArea.appendChild(pop);
-  setTimeout(() => pop.remove(), 700);
+function shake(){
+ canvas.style.transform="translate(10px,0)";
+ setTimeout(()=>canvas.style.transform="translate(-10px,0)",50);
+ setTimeout(()=>canvas.style.transform="translate(0,0)",100);
 }
 
 function endGame(){
-  gameRunning = false;
-  clearInterval(spawnTimer);
-  cancelAnimationFrame(animationFrame);
-
-  if(score > best){
-    best = score;
-    localStorage.setItem("avoSlashBest", best);
-    bestEl.textContent = best;
-  }
-
-  finalScore.innerHTML = "You scored <strong>" + score + "</strong> points!";
-  resultBox.classList.remove("hidden");
+ running=false;
+ finalScore.innerHTML="You scored <strong>"+score+"</strong> points.";
+ endPanel.classList.remove("hidden");
 }
 
-function buyExtraAvocados(){
-  window.location.href = stripeExtraAvocados;
+function buyExtras(){
+ let name=document.getElementById("name").value.trim();
+ let email=document.getElementById("email").value.trim();
+
+ let url=stripeLink;
+ let params=[];
+
+ if(email)params.push("prefilled_email="+encodeURIComponent(email));
+ if(name||email)params.push("client_reference_id="+encodeURIComponent(name+" - Avo Slash score "+score));
+
+ if(params.length)url+="?"+params.join("&");
+ location.href=url;
 }
 
-function buyExtraAvocadosWithEmail(){
-  const name = document.getElementById("parentName").value.trim();
-  const email = document.getElementById("parentEmail").value.trim();
+canvas.addEventListener("mousedown",startSlice);
+canvas.addEventListener("mousemove",moveSlice);
+window.addEventListener("mouseup",endSlice);
 
-  if(!name || !email){
-    alert("Please enter your name and email.");
-    return;
-  }
-
-  const stripeUrl =
-    stripeExtraAvocados +
-    "?prefilled_email=" + encodeURIComponent(email) +
-    "&client_reference_id=" + encodeURIComponent(name + " - Avo Slash - score " + score);
-
-  window.location.href = stripeUrl;
-}
-
-gameArea.addEventListener("mousedown", startSlice);
-gameArea.addEventListener("mousemove", moveSlice);
-window.addEventListener("mouseup", endSlice);
-
-gameArea.addEventListener("touchstart", startSlice, {passive:false});
-gameArea.addEventListener("touchmove", moveSlice, {passive:false});
-window.addEventListener("touchend", endSlice);
+canvas.addEventListener("touchstart",startSlice,{passive:false});
+canvas.addEventListener("touchmove",moveSlice,{passive:false});
+window.addEventListener("touchend",endSlice);
 </script>
 
 </body>
