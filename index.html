@@ -3,41 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avo Slash</title>
+<title>Avo Slash Pro</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{overflow:hidden;font-family:Arial;background:#102018}
+body{overflow:hidden;font-family:Arial,Helvetica,sans-serif;background:#102018}
 canvas{display:block;width:100vw;height:100vh;touch-action:none}
-.panel{
- position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
- background:rgba(0,0,0,.45);z-index:5;text-align:center;padding:20px
-}
-.box{
- background:#fff;border-radius:28px;padding:26px;max-width:430px;
- box-shadow:0 25px 70px rgba(0,0,0,.35)
-}
-h1{font-size:46px;color:#1d5c32;margin-bottom:10px}
-p{margin:10px 0;line-height:1.5;color:#333}
-button{
- border:0;border-radius:999px;padding:15px 25px;margin:7px;
- background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;
- font-size:17px;font-weight:bold;cursor:pointer
-}
-.orange{background:linear-gradient(135deg,#ff9800,#e66a00)}
-input{
- width:100%;padding:14px;margin:6px 0;border-radius:999px;
- border:1px solid #ccc;font-size:16px
-}
-.hidden{display:none}
+
 .hud{
- position:absolute;top:15px;left:15px;right:15px;z-index:3;
+ position:absolute;top:15px;left:15px;right:15px;z-index:5;
  display:flex;justify-content:space-between;color:white;
- font-size:22px;font-weight:bold;text-shadow:0 3px 4px #000
+ font-size:22px;font-weight:bold;text-shadow:0 3px 5px #000
 }
+
 .logo{
  position:absolute;top:50px;left:50%;transform:translateX(-50%);
- width:150px;z-index:2;opacity:.9
+ width:170px;z-index:4;opacity:.95
+}
+
+.panel{
+ position:absolute;inset:0;z-index:10;display:flex;
+ align-items:center;justify-content:center;text-align:center;
+ background:rgba(0,0,0,.55);padding:20px
+}
+
+.box{
+ background:white;max-width:460px;width:100%;
+ border-radius:30px;padding:28px;
+ box-shadow:0 25px 80px rgba(0,0,0,.4);
+ border:4px solid #22c55e
+}
+
+h1{font-size:44px;color:#1d5c32;margin-bottom:10px}
+p{margin:10px 0;line-height:1.5;color:#333}
+
+button{
+ border:0;border-radius:999px;padding:16px 26px;margin:7px;
+ background:linear-gradient(135deg,#22c55e,#15803d);
+ color:white;font-size:17px;font-weight:bold;cursor:pointer;
+ box-shadow:0 10px 25px rgba(0,0,0,.25)
+}
+
+.orange{background:linear-gradient(135deg,#ff9800,#e66a00)}
+
+input{
+ width:100%;padding:15px;margin:6px 0;
+ border-radius:999px;border:1px solid #ccc;font-size:16px
+}
+
+.hidden{display:none}
+
+.pop{
+ position:absolute;z-index:8;pointer-events:none;
+ color:white;font-size:28px;font-weight:900;
+ text-shadow:0 4px 8px #000;
+ animation:pop .8s ease-out forwards
+}
+
+@keyframes pop{
+ from{opacity:1;transform:translateY(0) scale(1)}
+ to{opacity:0;transform:translateY(-70px) scale(1.35)}
 }
 </style>
 </head>
@@ -57,20 +82,22 @@ input{
 <div id="startPanel" class="panel">
  <div class="box">
   <h1>🥑 Avo Slash</h1>
-  <p>Swipe to slice realistic avocados. Avoid the tangles. Hit the golden avocado for bonus points.</p>
-  <p>🥑 Slice avocados · 🥇 Golden bonus · 🪢 Avoid tangles</p>
+  <p>Swipe like a sword to slash big flying avocados.</p>
+  <p>🥑 Slice avocados · 🥇 Golden Avo bonus · 🪢 Avoid tangles</p>
   <button onclick="startGame()">START GAME</button>
  </div>
 </div>
 
 <div id="endPanel" class="panel hidden">
  <div class="box">
-  <h1>Game Over</h1>
+  <h1>Out of Lives!</h1>
   <p id="finalScore"></p>
-  <p>Buy 5 extra avocados for £2 and keep playing.</p>
+  <p>Buy 5 extra lives for £2 and keep playing.</p>
+
   <input id="name" placeholder="Parent name">
   <input id="email" placeholder="Email address">
-  <button class="orange" onclick="buyExtras()">BUY EXTRA AVOCADOS - £2</button>
+
+  <button class="orange" onclick="buyExtras()">BUY 5 EXTRA LIVES - £2</button>
   <button onclick="startGame()">PLAY AGAIN FREE</button>
  </div>
 </div>
@@ -88,8 +115,10 @@ const finalScore=document.getElementById("finalScore");
 
 const stripeLink="https://buy.stripe.com/cNi7sM8KxdsP5fX90E4sE01";
 
-let W,H,objects=[],slashes=[],splatters=[],halves=[];
-let score=0,lives=3,combo=0,running=false,lastSpawn=0,lastTime=0;
+let W,H;
+let objects=[],slashes=[],splatters=[],halves=[];
+let score=0,lives=3,combo=0;
+let running=false,lastSpawn=0,lastTime=0;
 let slicing=false,lastPoint=null;
 
 function resize(){
@@ -117,20 +146,19 @@ function startGame(){
 function spawnObject(){
  let r=Math.random();
  let type="avo";
- if(r<.16)type="tangle";
- if(r>.88)type="gold";
 
- let x=80+Math.random()*(W-160);
- let y=H+80;
+ if(r<0.15) type="tangle";
+ if(r>0.88) type="gold";
 
  objects.push({
-  x,y,
-  vx:(Math.random()-.5)*8,
-  vy:-(16+Math.random()*7),
-  g:.34,
-  size:48+Math.random()*12,
+  x:90+Math.random()*(W-180),
+  y:H+120,
+  vx:(Math.random()-.5)*9,
+  vy:-(17+Math.random()*8),
+  g:.35,
+  size:type==="tangle" ? 70 : 85+Math.random()*30,
   rot:Math.random()*6,
-  vr:(Math.random()-.5)*.16,
+  vr:(Math.random()-.5)*.18,
   type,
   sliced:false
  });
@@ -138,15 +166,16 @@ function spawnObject(){
 
 function loop(t){
  if(!running)return;
+
  let dt=Math.min((t-lastTime)/16.67,2);
  lastTime=t;
 
  drawBackground();
 
- if(t-lastSpawn>620){
+ if(t-lastSpawn>600){
   spawnObject();
-  if(score>20 && Math.random()>.55)spawnObject();
-  if(score>50 && Math.random()>.65)spawnObject();
+  if(score>15 && Math.random()>.55)spawnObject();
+  if(score>40 && Math.random()>.65)spawnObject();
   lastSpawn=t;
  }
 
@@ -160,16 +189,16 @@ function loop(t){
 
 function drawBackground(){
  let g=ctx.createLinearGradient(0,0,0,H);
- g.addColorStop(0,"#123522");
- g.addColorStop(.55,"#1f6b3a");
- g.addColorStop(1,"#f6c96d");
+ g.addColorStop(0,"#10351f");
+ g.addColorStop(.5,"#1e7a3d");
+ g.addColorStop(1,"#f2b64b");
  ctx.fillStyle=g;
  ctx.fillRect(0,0,W,H);
 
  ctx.fillStyle="rgba(255,255,255,.06)";
  for(let i=0;i<18;i++){
   ctx.beginPath();
-  ctx.arc((i*170+Date.now()/45)%W,90+i*45,35,0,Math.PI*2);
+  ctx.arc((i*160+Date.now()/40)%W,90+i*48,36,0,Math.PI*2);
   ctx.fill();
  }
 }
@@ -179,24 +208,31 @@ function drawAvocado(x,y,size,rot,gold=false){
  ctx.translate(x,y);
  ctx.rotate(rot);
 
- ctx.beginPath();
- ctx.ellipse(0,0,size*.62,size*.82,0,0,Math.PI*2);
- ctx.fillStyle=gold?"#facc15":"#246b38";
- ctx.fill();
+ ctx.shadowColor="rgba(0,0,0,.35)";
+ ctx.shadowBlur=18;
+ ctx.shadowOffsetY=8;
 
  ctx.beginPath();
  ctx.ellipse(0,0,size*.48,size*.68,0,0,Math.PI*2);
- ctx.fillStyle=gold?"#fde68a":"#b7f07a";
+ ctx.fillStyle=gold?"#eab308":"#155f2e";
+ ctx.fill();
+
+ ctx.shadowBlur=0;
+ ctx.shadowOffsetY=0;
+
+ ctx.beginPath();
+ ctx.ellipse(0,0,size*.36,size*.52,0,0,Math.PI*2);
+ ctx.fillStyle=gold?"#fde68a":"#b8f27a";
  ctx.fill();
 
  ctx.beginPath();
- ctx.ellipse(0,size*.13,size*.19,size*.24,0,0,Math.PI*2);
- ctx.fillStyle="#8b4b22";
+ ctx.ellipse(0,size*.09,size*.14,size*.19,0,0,Math.PI*2);
+ ctx.fillStyle="#7a3f1d";
  ctx.fill();
 
  ctx.beginPath();
- ctx.ellipse(-size*.18,-size*.25,size*.12,size*.09,-.5,0,Math.PI*2);
- ctx.fillStyle="rgba(255,255,255,.55)";
+ ctx.ellipse(-size*.13,-size*.24,size*.09,size*.06,-.6,0,Math.PI*2);
+ ctx.fillStyle="rgba(255,255,255,.7)";
  ctx.fill();
 
  ctx.restore();
@@ -206,17 +242,6 @@ function drawTangle(x,y,size,rot){
  ctx.save();
  ctx.translate(x,y);
  ctx.rotate(rot);
- ctx.strokeStyle="#3b2417";
- ctx.lineWidth=8;
- ctx.lineCap="round";
-
- for(let i=0;i<4;i++){
-  ctx.beginPath();
-  ctx.arc((i-1.5)*12,0,size*.25,0,Math.PI*1.7);
-  ctx.stroke();
- }
-
- ctx.fillStyle="#fff";
  ctx.font=size+"px Arial";
  ctx.textAlign="center";
  ctx.textBaseline="middle";
@@ -233,10 +258,10 @@ function updateObjects(dt){
   o.vy+=o.g*dt;
   o.rot+=o.vr*dt;
 
-  if(o.type==="tangle") drawTangle(o.x,o.y,o.size,o.rot);
+  if(o.type==="tangle")drawTangle(o.x,o.y,o.size,o.rot);
   else drawAvocado(o.x,o.y,o.size,o.rot,o.type==="gold");
 
-  if(o.y>H+130){
+  if(o.y>H+160){
    objects.splice(i,1);
    if(o.type!=="tangle"){
     combo=0;
@@ -253,15 +278,19 @@ function sliceObject(o){
  if(o.type==="tangle"){
   lives--;
   combo=0;
-  createExplosion(o.x,o.y,"#5b2c16");
+  createExplosion(o.x,o.y);
+  popup("OUCH!",o.x,o.y);
   shake();
  }else{
-  let points=o.type==="gold"?10:1+Math.floor(combo/5);
+  let points=o.type==="gold" ? 15 : 1+Math.floor(combo/4);
   score+=points;
   combo++;
+
   createAvocadoHalves(o);
-  createSplash(o.x,o.y,o.type==="gold"?"#facc15":"#9be564");
-  popup("+"+points,o.x,o.y);
+  createSplash(o.x,o.y,o.type==="gold"?"#facc15":"#a3e635");
+
+  const words=["NICE SLICE!","AVO SMASH!","PERFECT!","SUPER SLASH!","BRUSH HERO!","KIMI COMBO!"];
+  popup(words[Math.floor(Math.random()*words.length)]+" +"+points,o.x,o.y);
  }
 
  scoreEl.textContent=score;
@@ -277,14 +306,14 @@ function createAvocadoHalves(o){
  for(let side=-1;side<=1;side+=2){
   halves.push({
    x:o.x,y:o.y,
-   vx:side*(4+Math.random()*4),
-   vy:-3-Math.random()*3,
+   vx:side*(5+Math.random()*5),
+   vy:-4-Math.random()*4,
    g:.28,
    size:o.size,
    rot:o.rot,
-   vr:side*.18,
+   vr:side*.2,
    side,
-   life:70,
+   life:75,
    gold:o.type==="gold"
   });
  }
@@ -296,13 +325,13 @@ function drawHalf(h){
  ctx.rotate(h.rot);
 
  ctx.beginPath();
- ctx.ellipse(h.side*8,0,h.size*.32,h.size*.78,0,0,Math.PI*2);
- ctx.fillStyle=h.gold?"#facc15":"#246b38";
+ ctx.ellipse(h.side*10,0,h.size*.24,h.size*.62,0,0,Math.PI*2);
+ ctx.fillStyle=h.gold?"#eab308":"#155f2e";
  ctx.fill();
 
  ctx.beginPath();
- ctx.ellipse(h.side*8,0,h.size*.24,h.size*.62,0,0,Math.PI*2);
- ctx.fillStyle=h.gold?"#fde68a":"#b7f07a";
+ ctx.ellipse(h.side*10,0,h.size*.18,h.size*.48,0,0,Math.PI*2);
+ ctx.fillStyle=h.gold?"#fde68a":"#b8f27a";
  ctx.fill();
 
  ctx.restore();
@@ -317,7 +346,7 @@ function updateHalves(dt){
   h.rot+=h.vr*dt;
   h.life-=dt;
 
-  ctx.globalAlpha=Math.max(h.life/70,0);
+  ctx.globalAlpha=Math.max(h.life/75,0);
   drawHalf(h);
   ctx.globalAlpha=1;
 
@@ -326,27 +355,27 @@ function updateHalves(dt){
 }
 
 function createSplash(x,y,color){
- for(let i=0;i<22;i++){
-  splatters.push({
-   x,y,
-   vx:(Math.random()-.5)*11,
-   vy:(Math.random()-.5)*11,
-   r:3+Math.random()*6,
-   life:35,
-   color
-  });
- }
-}
-
-function createExplosion(x,y,color){
- for(let i=0;i<28;i++){
+ for(let i=0;i<30;i++){
   splatters.push({
    x,y,
    vx:(Math.random()-.5)*14,
    vy:(Math.random()-.5)*14,
    r:4+Math.random()*7,
-   life:40,
+   life:42,
    color
+  });
+ }
+}
+
+function createExplosion(x,y){
+ for(let i=0;i<30;i++){
+  splatters.push({
+   x,y,
+   vx:(Math.random()-.5)*16,
+   vy:(Math.random()-.5)*16,
+   r:4+Math.random()*8,
+   life:45,
+   color:"#5b2c16"
   });
  }
 }
@@ -359,7 +388,7 @@ function updateSplatters(dt){
   s.vy+=.16*dt;
   s.life-=dt;
 
-  ctx.globalAlpha=Math.max(s.life/40,0);
+  ctx.globalAlpha=Math.max(s.life/45,0);
   ctx.fillStyle=s.color;
   ctx.beginPath();
   ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
@@ -370,54 +399,43 @@ function updateSplatters(dt){
  }
 }
 
-function popup(text,x,y){
- let p=document.createElement("div");
- p.textContent=text;
- p.style.position="absolute";
- p.style.left=x+"px";
- p.style.top=y+"px";
- p.style.color="white";
- p.style.fontWeight="bold";
- p.style.fontSize="26px";
- p.style.textShadow="0 2px 5px #000";
- p.style.pointerEvents="none";
- p.style.zIndex=4;
- document.body.appendChild(p);
-
- let n=0;
- let anim=setInterval(()=>{
-  n++;
-  p.style.transform=`translateY(${-n*2}px) scale(${1+n/40})`;
-  p.style.opacity=1-n/30;
-  if(n>30){clearInterval(anim);p.remove();}
- },16);
-}
-
 function drawSlashes(){
  for(let i=slashes.length-1;i>=0;i--){
   let s=slashes[i];
   s.life--;
 
-  let grad=ctx.createLinearGradient(s.x1,s.y1,s.x2,s.y2);
-  grad.addColorStop(0,"rgba(255,255,255,0)");
-  grad.addColorStop(.5,"rgba(255,255,255,.95)");
-  grad.addColorStop(1,"rgba(255,180,40,0)");
-
-  ctx.strokeStyle=grad;
-  ctx.lineWidth=10;
+  ctx.shadowColor="rgba(255,255,255,.95)";
+  ctx.shadowBlur=25;
+  ctx.strokeStyle="rgba(255,255,255,.95)";
+  ctx.lineWidth=16;
   ctx.lineCap="round";
   ctx.beginPath();
   ctx.moveTo(s.x1,s.y1);
   ctx.lineTo(s.x2,s.y2);
   ctx.stroke();
 
+  ctx.shadowBlur=0;
+  ctx.strokeStyle="rgba(255,170,0,.85)";
+  ctx.lineWidth=6;
+  ctx.stroke();
+
   if(s.life<=0)slashes.splice(i,1);
  }
 }
 
+function popup(text,x,y){
+ let p=document.createElement("div");
+ p.className="pop";
+ p.textContent=text;
+ p.style.left=(x-70)+"px";
+ p.style.top=(y-40)+"px";
+ document.body.appendChild(p);
+ setTimeout(()=>p.remove(),800);
+}
+
 function getPoint(e){
  let t=e.touches&&e.touches[0];
- return {x:t?t.clientX:e.clientX,y:t?t.clientY:e.clientY};
+ return{x:t?t.clientX:e.clientX,y:t?t.clientY:e.clientY};
 }
 
 function startSlice(e){
@@ -432,11 +450,17 @@ function moveSlice(e){
 
  let p=getPoint(e);
 
- slashes.push({x1:lastPoint.x,y1:lastPoint.y,x2:p.x,y2:p.y,life:12});
+ slashes.push({
+  x1:lastPoint.x,
+  y1:lastPoint.y,
+  x2:p.x,
+  y2:p.y,
+  life:12
+ });
 
  for(let o of objects){
   let d=distanceToLine(o.x,o.y,lastPoint.x,lastPoint.y,p.x,p.y);
-  if(d<o.size*.65)sliceObject(o);
+  if(d<o.size*.55)sliceObject(o);
  }
 
  lastPoint=p;
@@ -457,8 +481,8 @@ function distanceToLine(px,py,x1,y1,x2,y2){
 }
 
 function shake(){
- canvas.style.transform="translate(10px,0)";
- setTimeout(()=>canvas.style.transform="translate(-10px,0)",50);
+ canvas.style.transform="translate(12px,0)";
+ setTimeout(()=>canvas.style.transform="translate(-12px,0)",50);
  setTimeout(()=>canvas.style.transform="translate(0,0)",100);
 }
 
@@ -479,6 +503,7 @@ function buyExtras(){
  if(name||email)params.push("client_reference_id="+encodeURIComponent(name+" - Avo Slash score "+score));
 
  if(params.length)url+="?"+params.join("&");
+
  location.href=url;
 }
 
