@@ -1,9 +1,12 @@
+<!-- Replace your whole file with this code -->
+<!-- IMPORTANT: keep your image file named exactly: Avo Brush logo final.jpeg -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kimi Kirei Smart AvoBrush</title>
+<title>Kimi Kirei Smart AvoBrush Game</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -11,156 +14,92 @@
 body{
   font-family:Arial,Helvetica,sans-serif;
   min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:30px 15px;
   background:linear-gradient(135deg,#f6fff7,#ffffff,#fff7e8);
-  overflow-x:hidden;
-  position:relative;
   color:#333;
-}
-
-.bubble{
-  position:absolute;
-  bottom:-100px;
-  border-radius:50%;
-  background:rgba(60,200,120,.12);
-  animation:floatUp linear infinite;
-}
-.b1{left:10%;width:30px;height:30px;animation-duration:12s}
-.b2{left:25%;width:50px;height:50px;animation-duration:16s}
-.b3{left:50%;width:25px;height:25px;animation-duration:10s}
-.b4{left:75%;width:40px;height:40px;animation-duration:14s}
-.b5{left:90%;width:60px;height:60px;animation-duration:18s}
-
-@keyframes floatUp{
-  from{transform:translateY(0);opacity:0}
-  20%{opacity:1}
-  to{transform:translateY(-120vh);opacity:0}
+  padding:25px 15px;
 }
 
 .card{
-  background:rgba(255,255,255,.96);
-  width:100%;
-  max-width:860px;
+  background:white;
+  max-width:900px;
+  margin:auto;
   border-radius:30px;
-  padding:42px 26px;
+  padding:35px 22px;
   text-align:center;
   box-shadow:0 20px 50px rgba(0,0,0,.12);
 }
 
 .logo{
-  width:330px;
+  width:300px;
   max-width:90%;
-  margin-bottom:20px;
-  animation:logoFloat 3s ease-in-out infinite;
+  margin-bottom:15px;
+  animation:float 3s ease-in-out infinite;
 }
 
-@keyframes logoFloat{
+@keyframes float{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
+  50%{transform:translateY(-8px)}
 }
 
 h1{
-  font-size:clamp(2rem,5vw,4rem);
   color:#1e4f2d;
-  margin-bottom:8px;
+  font-size:clamp(2rem,5vw,4rem);
 }
 
 .subtitle{
-  font-size:1.3rem;
-  font-weight:bold;
   color:#ff8c00;
-  margin-bottom:18px;
+  font-size:1.25rem;
+  font-weight:bold;
+  margin:10px 0 18px;
 }
 
 .description{
-  max-width:680px;
-  margin:auto;
-  font-size:1.1rem;
-  line-height:1.6;
-  color:#444;
-}
-
-.badges{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
-  margin:22px 0;
-}
-
-.badge{
-  background:#f2fff5;
-  border:1px solid #c7efd0;
-  color:#1e4f2d;
-  padding:10px 14px;
-  border-radius:999px;
-  font-weight:bold;
-  font-size:.95rem;
-}
-
-.lights{
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  flex-wrap:wrap;
-  margin:28px 0;
-}
-
-.light{
-  padding:12px 20px;
-  border-radius:50px;
-  color:white;
-  font-weight:bold;
-}
-.green{background:#1db954}
-.orange{background:#ff9800}
-.red{background:#ff3b30}
-
-.story{
-  background:#fffaf0;
-  border-radius:20px;
-  padding:20px;
-  margin:20px auto;
   max-width:700px;
+  margin:auto;
   line-height:1.6;
-}
-
-.preorder{
-  background:#f3fff6;
-  border:2px dashed #28b463;
-  border-radius:22px;
-  padding:26px;
-  margin-top:24px;
-}
-
-.preorder h2{
-  color:#1e4f2d;
-  margin-bottom:10px;
-}
-
-.deposit{
   font-size:1.05rem;
-  margin-bottom:16px;
-  line-height:1.5;
 }
 
-.form{
+.game-box{
+  margin:30px auto;
+  max-width:700px;
+  background:#f3fff6;
+  border:3px solid #28b463;
+  border-radius:25px;
+  padding:20px;
+}
+
+.game-header{
   display:flex;
+  justify-content:space-between;
   gap:10px;
-  justify-content:center;
   flex-wrap:wrap;
-  margin:18px 0;
+  margin-bottom:15px;
+  font-weight:bold;
+  color:#1e4f2d;
 }
 
-input{
-  padding:16px;
-  border-radius:999px;
-  border:1px solid #ccc;
-  font-size:1rem;
-  min-width:240px;
+#gameArea{
+  position:relative;
+  width:100%;
+  height:420px;
+  background:linear-gradient(#dfffe6,#fff7dc);
+  border-radius:22px;
+  overflow:hidden;
+  border:2px dashed #9edfae;
+}
+
+.avo{
+  position:absolute;
+  font-size:42px;
+  cursor:pointer;
+  user-select:none;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  from{top:-60px}
+  to{top:460px}
 }
 
 .button{
@@ -168,75 +107,60 @@ input{
   cursor:pointer;
   background:linear-gradient(135deg,#22c55e,#16a34a);
   color:white;
-  padding:17px 30px;
+  padding:15px 25px;
   border-radius:999px;
-  font-size:1.05rem;
+  font-size:1rem;
   font-weight:bold;
-  transition:.25s;
-  box-shadow:0 12px 25px rgba(34,197,94,.35);
+  margin:10px 5px;
+  box-shadow:0 10px 20px rgba(34,197,94,.3);
 }
 
-.button:hover{transform:translateY(-3px)}
+.button:hover{transform:translateY(-2px)}
 
-.rrp{
-  margin-top:16px;
-  font-size:1.1rem;
-  font-weight:bold;
-  color:#1e4f2d;
+.orange-btn{
+  background:linear-gradient(135deg,#ff9800,#f57c00);
 }
 
-.small{
-  margin-top:10px;
-  font-size:.9rem;
-  color:#666;
+.hidden{display:none}
+
+.result-box{
+  background:#fffaf0;
+  border-radius:20px;
+  padding:20px;
+  margin-top:18px;
 }
 
-.faq{
-  text-align:left;
-  max-width:700px;
-  margin:30px auto 0;
+input{
+  padding:15px;
+  border-radius:999px;
+  border:1px solid #ccc;
+  font-size:1rem;
+  margin:6px;
+  min-width:230px;
 }
 
-.faq h2{
-  text-align:center;
-  color:#1e4f2d;
-  margin-bottom:15px;
-}
-
-.faq-item{
-  background:#fafafa;
-  border-radius:16px;
-  padding:16px;
-  margin-bottom:10px;
-  border:1px solid #eee;
-}
-
-.faq-item strong{
-  color:#1e4f2d;
+.preorder{
+  background:#fffaf0;
+  border-radius:22px;
+  padding:22px;
+  margin-top:25px;
 }
 
 .footer{
-  margin-top:22px;
-  font-size:.9rem;
+  margin-top:20px;
   color:#666;
-  line-height:1.5;
+  font-size:.9rem;
 }
 
 @media(max-width:600px){
-  .card{padding:30px 18px}
-  .logo{width:280px}
+  #gameArea{height:360px}
+  .avo{font-size:38px}
   input,.button{width:100%}
 }
 </style>
 </head>
 
 <body>
-
-<div class="bubble b1"></div>
-<div class="bubble b2"></div>
-<div class="bubble b3"></div>
-<div class="bubble b4"></div>
-<div class="bubble b5"></div>
 
 <div class="card">
 
@@ -245,112 +169,172 @@ input{
   <h1>Kimi Kirei</h1>
 
   <div class="subtitle">
-    The World's First Smart Interactive Hairbrush For Kids
+    Play Avo Smash & Unlock Extra Avocados
   </div>
 
   <p class="description">
-    AvoBrush is being developed to help turn hair brushing from a daily battle into something fun, guided and rewarding for children.
+    Help Avo beat the tangles. Tap as many falling avocados as you can before your avocados run out.
+    Want to keep playing? Buy extra avocados for £2.
   </p>
 
-  <div class="badges">
-    <div class="badge">👨‍👧 Parent-led idea</div>
-    <div class="badge">🇬🇧 UK developed</div>
-    <div class="badge">🚦 Traffic light guidance</div>
-    <div class="badge">✨ First production run coming soon</div>
-  </div>
+  <div class="game-box">
+    <h2>🥑 Avo Smash</h2>
 
-  <div class="lights">
-    <div class="light green">🟢 Start Brushing</div>
-    <div class="light orange">🟠 Keep Going</div>
-    <div class="light red">🔴 Finished!</div>
-  </div>
+    <div class="game-header">
+      <div>Score: <span id="score">0</span></div>
+      <div>Avocados left: <span id="lives">5</span></div>
+      <div>Best Score: <span id="bestScore">0</span></div>
+    </div>
 
-  <div class="story">
-    <strong>Why we are building it:</strong><br>
-    Many parents know the struggle of brushing children’s hair. AvoBrush is designed to guide children using lights, sound and vibration, helping make brushing feel more like a fun routine than a fight.
+    <div id="gameArea"></div>
+
+    <button class="button" onclick="startGame()">START GAME</button>
+    <button class="button orange-btn" onclick="buyAvocados()">BUY 5 EXTRA AVOCADOS - £2</button>
+
+    <div id="resultBox" class="result-box hidden">
+      <h2 id="resultTitle">Game Over!</h2>
+      <p id="resultText"></p>
+
+      <h3>Want to keep playing?</h3>
+      <p>Buy 5 extra avocados for just £2 and continue your Avo Smash score.</p>
+
+      <input type="text" id="playerName" placeholder="Parent name">
+      <input type="email" id="playerEmail" placeholder="Email address">
+
+      <button class="button orange-btn" onclick="buyAvocadosWithEmail()">
+        BUY EXTRA AVOCADOS - £2
+      </button>
+    </div>
   </div>
 
   <div class="preorder">
-
-    <h2>🚀 Founding Family First Production Run</h2>
-
-    <p class="deposit">
-      Reserve one of the first AvoBrushes with a <strong>£10 refundable deposit</strong>.
-      Founding Family customers will receive <strong>10% off the final retail price</strong> when the first production batch is ready.
+    <h2>🚀 Smart AvoBrush Coming Soon</h2>
+    <p>
+      The first smart interactive hairbrush for kids, using traffic light guidance,
+      sound and vibration to make brushing easier and more fun.
     </p>
-
-    <form class="form" id="preorderForm">
-      <input type="text" id="name" placeholder="Your name" required>
-      <input type="email" id="email" placeholder="Your email address" required>
-      <button type="submit" class="button">PAY £10 DEPOSIT NOW</button>
-    </form>
-
-    <p class="rrp">
-      RRP £39.99 · Deposit today £10 · Founding Family discount 10%
-    </p>
-
-    <p class="small">
-      After paying, your email will be attached to your Stripe payment so we can contact you for the remaining balance before dispatch.
-    </p>
-
-  </div>
-
-  <div class="faq">
-    <h2>Questions Parents May Ask</h2>
-
-    <div class="faq-item">
-      <strong>When will it ship?</strong><br>
-      AvoBrush is currently in prototype and pre-production development. Founding Family customers will be contacted first when the first production run is confirmed.
-    </div>
-
-    <div class="faq-item">
-      <strong>Is the £10 deposit refundable?</strong><br>
-      Yes. The deposit is intended to reserve your place in the first production run.
-    </div>
-
-    <div class="faq-item">
-      <strong>What happens after I pay?</strong><br>
-      Your email will be recorded with your Stripe payment. When production is ready, you will receive a private payment link for the remaining balance.
-    </div>
-
-    <div class="faq-item">
-      <strong>What age is it for?</strong><br>
-      AvoBrush is being designed for children who need help building better brushing habits, especially those who dislike brushing or need a more guided routine.
-    </div>
-
-    <div class="faq-item">
-      <strong>How does the traffic light system work?</strong><br>
-      Green means start brushing, amber means keep going, and red means finished.
-    </div>
+    <p><strong>RRP £39.99</strong></p>
   </div>
 
   <div class="footer">
-    Limited first production run available. Apple Pay, Google Pay and card payments accepted through Stripe.
+    Extra avocados are paid through Stripe. Apple Pay, Google Pay and cards accepted where available.
   </div>
 
 </div>
 
 <script>
-document.getElementById("preorderForm").addEventListener("submit", function(e){
-  e.preventDefault();
+let score = 0;
+let lives = 5;
+let gameRunning = false;
+let spawnTimer;
+let speed = 3000;
 
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
+const gameArea = document.getElementById("gameArea");
+const scoreText = document.getElementById("score");
+const livesText = document.getElementById("lives");
+const bestScoreText = document.getElementById("bestScore");
+const resultBox = document.getElementById("resultBox");
+const resultText = document.getElementById("resultText");
+
+let bestScore = localStorage.getItem("avoBestScore") || 0;
+bestScoreText.textContent = bestScore;
+
+const stripeExtraAvocadosLink = "https://buy.stripe.com/cNi7sM8KxdsP5fX90E4sE01";
+
+function startGame(){
+  score = 0;
+  lives = 5;
+  speed = 3000;
+  gameRunning = true;
+
+  scoreText.textContent = score;
+  livesText.textContent = lives;
+  resultBox.classList.add("hidden");
+  gameArea.innerHTML = "";
+
+  clearInterval(spawnTimer);
+  spawnTimer = setInterval(spawnAvo, 800);
+}
+
+function spawnAvo(){
+  if(!gameRunning) return;
+
+  const avo = document.createElement("div");
+  avo.className = "avo";
+  avo.textContent = Math.random() > 0.25 ? "🥑" : "🪮";
+
+  const x = Math.random() * (gameArea.offsetWidth - 50);
+  avo.style.left = x + "px";
+  avo.style.animationDuration = speed + "ms";
+
+  avo.onclick = function(){
+    if(!gameRunning) return;
+
+    if(avo.textContent === "🥑"){
+      score++;
+    } else {
+      score += 3;
+    }
+
+    scoreText.textContent = score;
+    avo.remove();
+
+    if(score % 10 === 0 && speed > 1400){
+      speed -= 250;
+    }
+  };
+
+  avo.addEventListener("animationend", function(){
+    if(gameRunning && gameArea.contains(avo)){
+      lives--;
+      livesText.textContent = lives;
+      avo.remove();
+
+      if(lives <= 0){
+        endGame();
+      }
+    }
+  });
+
+  gameArea.appendChild(avo);
+}
+
+function endGame(){
+  gameRunning = false;
+  clearInterval(spawnTimer);
+
+  if(score > bestScore){
+    bestScore = score;
+    localStorage.setItem("avoBestScore", bestScore);
+    bestScoreText.textContent = bestScore;
+  }
+
+  resultText.innerHTML =
+    "You scored <strong>" + score + "</strong>! Your avocados have run out.";
+
+  resultBox.classList.remove("hidden");
+}
+
+function buyAvocados(){
+  window.location.href = stripeExtraAvocadosLink;
+}
+
+function buyAvocadosWithEmail(){
+  const name = document.getElementById("playerName").value.trim();
+  const email = document.getElementById("playerEmail").value.trim();
 
   if(!name || !email){
     alert("Please enter your name and email.");
     return;
   }
 
-  const stripeBase = "https://buy.stripe.com/28EbJ25yl60nfUBfp24sE00";
-
   const stripeUrl =
-    stripeBase +
-    "?locked_prefilled_email=" + encodeURIComponent(email) +
-    "&client_reference_id=" + encodeURIComponent(name + " - " + email);
+    stripeExtraAvocadosLink +
+    "?prefilled_email=" + encodeURIComponent(email) +
+    "&client_reference_id=" + encodeURIComponent(name + " - extra avocados - score " + score);
 
   window.location.href = stripeUrl;
-});
+}
 </script>
 
 </body>
