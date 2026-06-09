@@ -11,44 +11,50 @@
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  background:linear-gradient(135deg,#dffdf6,#ffffff);
-  color:#123;
+  background:linear-gradient(135deg,#e6fff9,#ffffff);
+  color:#102033;
 }
 
 header{
   text-align:center;
-  padding:35px 20px 20px;
+  padding:35px 20px 15px;
 }
 
 .logo{
-  max-width:190px;
-  margin-bottom:10px;
+  max-width:160px;
+  border-radius:18px;
 }
 
 .badge{
   display:inline-block;
   background:#00b894;
   color:white;
-  padding:8px 16px;
+  padding:8px 15px;
   border-radius:30px;
   font-weight:bold;
-  margin:8px;
+  margin:8px 4px;
 }
 
 h1{
   font-size:42px;
-  margin:15px 0 10px;
+  margin:18px 0 10px;
 }
 
 h2{
-  font-size:30px;
-  margin-top:50px;
   text-align:center;
+  font-size:30px;
+  margin:45px 0 20px;
 }
 
 p{
   font-size:18px;
   line-height:1.5;
+}
+
+.center-text{
+  text-align:center;
+  max-width:850px;
+  margin:0 auto 25px;
 }
 
 .hero{
@@ -61,7 +67,7 @@ p{
   align-items:center;
 }
 
-.hero-box{
+.box{
   background:white;
   padding:30px;
   border-radius:28px;
@@ -72,6 +78,8 @@ p{
   width:100%;
   border-radius:24px;
   background:white;
+  padding:10px;
+  box-shadow:0 12px 35px rgba(0,0,0,.12);
 }
 
 .cta{
@@ -83,24 +91,25 @@ p{
   border-radius:40px;
   font-size:20px;
   font-weight:bold;
-  margin-top:15px;
+  margin:10px 8px 0 0;
   box-shadow:0 8px 18px rgba(255,138,0,.35);
 }
 
-.secondary{
+.cta.green{
   background:#00b894;
+  box-shadow:0 8px 18px rgba(0,184,148,.28);
 }
 
 .price{
-  font-size:24px;
+  font-size:25px;
   font-weight:bold;
-  color:#00a884;
+  color:#009f82;
 }
 
-.discount{
-  background:#fff3cd;
+.deposit{
+  background:#fff4d6;
   border:2px dashed #ff8a00;
-  padding:15px;
+  padding:18px;
   border-radius:18px;
   margin:20px 0;
   font-weight:bold;
@@ -112,17 +121,20 @@ p{
   padding:25px;
 }
 
-.features{
+.features,
+.steps{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:20px;
 }
 
-.card{
+.card,
+.step{
   background:white;
   padding:24px;
   border-radius:24px;
   box-shadow:0 8px 25px rgba(0,0,0,.1);
+  text-align:center;
 }
 
 .gallery{
@@ -133,28 +145,16 @@ p{
 
 .gallery img{
   width:100%;
+  height:230px;
+  object-fit:contain;
   background:white;
   border-radius:22px;
   padding:10px;
   box-shadow:0 8px 24px rgba(0,0,0,.12);
 }
 
-.steps{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
-}
-
-.step{
-  text-align:center;
-  background:white;
-  padding:25px;
-  border-radius:24px;
-  box-shadow:0 8px 25px rgba(0,0,0,.1);
-}
-
 .light{
-  font-size:38px;
+  font-size:42px;
 }
 
 footer{
@@ -166,7 +166,10 @@ footer{
 }
 
 @media(max-width:850px){
-  .hero,.features,.gallery,.steps{
+  .hero,
+  .features,
+  .gallery,
+  .steps{
     grid-template-columns:1fr;
   }
 
@@ -174,8 +177,8 @@ footer{
     font-size:32px;
   }
 
-  .hero{
-    padding:15px;
+  .gallery img{
+    height:auto;
   }
 }
 </style>
@@ -184,41 +187,43 @@ footer{
 <body>
 
 <header>
-  <img src="Avo Brush logo final.jpeg" class="logo" alt="AvoBrush Logo">
+  <img src="./Kimi.jpeg" class="logo" alt="Kimi Kirei Logo">
   <br>
-  <span class="badge">Prototype in final development</span>
-  <span class="badge">Limited launch offer</span>
+  <span class="badge">Final prototype in development</span>
+  <span class="badge">First 100 customers offer</span>
+
   <h1>Kimi Kirei Smart AvoBrush</h1>
-  <p>The smart hairbrush designed to make brushing fun for kids.</p>
+  <p>The smart children’s hairbrush designed to make brushing fun.</p>
 </header>
 
 <section class="hero">
-  <div class="hero-box">
+  <div class="box">
     <h2>Meet the Smart AvoBrush</h2>
+
     <p>
-      The Kimi Kirei Smart AvoBrush is being developed as an interactive children’s detangling brush with lights, vibration and playful brushing guidance.
+      The Kimi Kirei Smart AvoBrush is being developed as an interactive detangling brush for children, using lights, vibration and simple brushing guidance to make hair brushing easier and more fun.
     </p>
 
     <p>
-      The final prototype is still going through development and testing, so we are not releasing videos yet. These design renders show the intended shape, style and product direction.
+      The product is still going through final prototype testing, so videos are not being released yet. The images shown are early design renders showing the intended look, shape and smart brush features.
     </p>
 
     <p class="price">RRP £39.99</p>
 
-    <div class="discount">
-      First 100 pre-orders get 10% off using code: AVO26
+    <div class="deposit">
+      Pay a £10 deposit today to secure your Smart AvoBrush, lock in 10% off the final product, and be one of the first customers to receive it when launched.
     </div>
 
     <a class="cta" href="https://buy.stripe.com/28EbJ25yl60nfUBfp24sE00">
-      Pay £10 Deposit
+      Secure Mine for £10
     </a>
 
-    <a class="cta secondary" href="game.html">
+    <a class="cta green" href="game.html">
       Play the Avocado Game
     </a>
   </div>
 
-  <img src="IPO_Design_Page_3.png" class="hero-img" alt="Smart AvoBrush prototype render">
+  <img src="./IPO_Design_Page_3.png" class="hero-img" alt="Smart AvoBrush prototype render">
 </section>
 
 <section class="section">
@@ -227,17 +232,17 @@ footer{
   <div class="features">
     <div class="card">
       <h3>Traffic Light Guidance</h3>
-      <p>Green means start brushing, amber means keep going, and red means finished.</p>
+      <p>Green means start brushing, amber means keep going, and red means brushing complete.</p>
     </div>
 
     <div class="card">
       <h3>Fun Feedback</h3>
-      <p>Lights and vibration help turn brushing into a game, not a battle.</p>
+      <p>Lights and vibration help turn brushing into a fun routine instead of a daily battle.</p>
     </div>
 
     <div class="card">
-      <h3>Designed for Children</h3>
-      <p>Soft rounded shape, fun avocado-inspired design and child-friendly interaction.</p>
+      <h3>Designed for Kids</h3>
+      <p>A rounded child-friendly shape with a playful smart design and soft detangling feel.</p>
     </div>
   </div>
 </section>
@@ -245,11 +250,15 @@ footer{
 <section class="section">
   <h2>Prototype Design Renders</h2>
 
+  <p class="center-text">
+    These design renders show the intended product direction, including the smart housing, brush head, light ring and child-friendly shape.
+  </p>
+
   <div class="gallery">
-    <img src="IPO_Design_Page_1.png" alt="AvoBrush underside render">
-    <img src="IPO_Design_Page_2.png" alt="AvoBrush angled render">
-    <img src="IPO_Design_Page_3.png" alt="AvoBrush top render">
-    <img src="IPO_Design_Page_4.png" alt="AvoBrush side render">
+    <img src="./IPO_Design_Page_1.png" alt="AvoBrush underside render">
+    <img src="./IPO_Design_Page_3.png" alt="AvoBrush top render">
+    <img src="./IPO_Design_Page_7.png" alt="AvoBrush front render">
+    <img src="./IPO_Design_Page_9.png" alt="AvoBrush side render">
   </div>
 </section>
 
@@ -278,14 +287,15 @@ footer{
 </section>
 
 <section class="section">
-  <div class="hero-box">
-    <h2>Secure Yours Early</h2>
+  <div class="box">
+    <h2>Reserve Yours Early</h2>
+
     <p>
-      We are taking limited early pre-orders while the product goes through its final prototype stages.
+      We are taking limited early reservations while the Smart AvoBrush goes through its final development stage.
     </p>
 
     <p>
-      Pay a £10 deposit today to reserve your Smart AvoBrush before launch.
+      Your £10 deposit secures your place in the first launch batch, locks in 10% off the product, and means you will be one of the first to receive it when available.
     </p>
 
     <a class="cta" href="https://buy.stripe.com/28EbJ25yl60nfUBfp24sE00">
