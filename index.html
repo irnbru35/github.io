@@ -6,74 +6,120 @@
 <title>Kimi Kirei Smart AvoBrush</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  background:linear-gradient(135deg,#e9fff9,#ffffff);
+  background:
+    radial-gradient(circle at top left,#d8fff2 0,#f7fffb 35%,#ffffff 70%);
   color:#102033;
 }
 
 header{
   text-align:center;
-  padding:35px 20px 15px;
+  padding:30px 18px 20px;
+}
+
+.logo-wrap{
+  width:155px;
+  height:155px;
+  margin:auto;
+  border-radius:50%;
+  overflow:hidden;
+  background:#e9fff9;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
 }
 
 .logo{
-  max-width:150px;
-  border-radius:18px;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
 .badge{
   display:inline-block;
   background:#00b894;
   color:white;
-  padding:8px 15px;
+  padding:9px 16px;
   border-radius:30px;
   font-weight:bold;
-  margin:8px 4px;
+  margin:10px 4px 0;
+  font-size:14px;
+}
+
+.badge.orange{
+  background:#ff8a00;
 }
 
 h1{
-  font-size:42px;
-  margin:18px 0 10px;
+  font-size:44px;
+  margin:20px 0 10px;
+  line-height:1.05;
 }
 
 h2{
-  text-align:center;
   font-size:30px;
-  margin:45px 0 20px;
+  margin:0 0 18px;
 }
 
 p{
   font-size:18px;
-  line-height:1.5;
+  line-height:1.55;
 }
 
 .hero{
-  max-width:1150px;
+  max-width:1180px;
   margin:auto;
   padding:25px;
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:30px;
+  grid-template-columns:1.05fr .95fr;
+  gap:28px;
   align-items:center;
 }
 
 .box{
   background:white;
-  padding:30px;
-  border-radius:28px;
-  box-shadow:0 12px 35px rgba(0,0,0,.12);
+  padding:32px;
+  border-radius:30px;
+  box-shadow:0 14px 35px rgba(0,0,0,.11);
+}
+
+.hero-box{
+  border:4px solid #d8fff2;
 }
 
 .hero-img{
   width:100%;
-  border-radius:24px;
+  border-radius:32px;
   background:white;
-  padding:10px;
-  box-shadow:0 12px 35px rgba(0,0,0,.12);
+  padding:14px;
+  box-shadow:0 14px 35px rgba(0,0,0,.12);
+}
+
+.kid-line{
+  font-size:22px;
+  font-weight:bold;
+  color:#009f82;
+}
+
+.price{
+  font-size:28px;
+  font-weight:bold;
+  color:#009f82;
+  margin-bottom:8px;
+}
+
+.deposit{
+  background:#fff4d6;
+  border:3px dashed #ff8a00;
+  padding:18px;
+  border-radius:22px;
+  margin:20px 0;
+  font-weight:bold;
 }
 
 .cta{
@@ -86,31 +132,23 @@ p{
   font-size:20px;
   font-weight:bold;
   margin:10px 8px 0 0;
+  box-shadow:0 8px 18px rgba(255,138,0,.28);
 }
 
 .cta.green{
   background:#00b894;
-}
-
-.price{
-  font-size:25px;
-  font-weight:bold;
-  color:#009f82;
-}
-
-.deposit{
-  background:#fff4d6;
-  border:2px dashed #ff8a00;
-  padding:18px;
-  border-radius:18px;
-  margin:20px 0;
-  font-weight:bold;
+  box-shadow:0 8px 18px rgba(0,184,148,.28);
 }
 
 .section{
-  max-width:1100px;
+  max-width:1120px;
   margin:auto;
-  padding:25px;
+  padding:28px 25px;
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:25px;
 }
 
 .features,
@@ -123,10 +161,14 @@ p{
 .card,
 .step{
   background:white;
-  padding:24px;
-  border-radius:24px;
-  box-shadow:0 8px 25px rgba(0,0,0,.1);
+  padding:25px;
+  border-radius:26px;
+  box-shadow:0 8px 24px rgba(0,0,0,.09);
   text-align:center;
+}
+
+.card span{
+  font-size:42px;
 }
 
 .gallery{
@@ -140,7 +182,7 @@ p{
   height:230px;
   object-fit:contain;
   background:white;
-  border-radius:22px;
+  border-radius:24px;
   padding:10px;
   box-shadow:0 8px 24px rgba(0,0,0,.12);
 }
@@ -152,7 +194,20 @@ p{
 }
 
 .light{
-  font-size:42px;
+  font-size:48px;
+}
+
+.fun-strip{
+  background:#10201d;
+  color:white;
+  text-align:center;
+  padding:35px 20px;
+  margin:35px 0;
+}
+
+.fun-strip p{
+  max-width:850px;
+  margin:10px auto;
 }
 
 footer{
@@ -160,7 +215,7 @@ footer{
   padding:35px 20px;
   background:#10201d;
   color:white;
-  margin-top:40px;
+  margin-top:35px;
 }
 
 @media(max-width:850px){
@@ -172,11 +227,24 @@ footer{
   }
 
   h1{
-    font-size:32px;
+    font-size:34px;
+  }
+
+  h2{
+    font-size:26px;
+  }
+
+  .box{
+    padding:24px;
   }
 
   .gallery img{
     height:auto;
+  }
+
+  .logo-wrap{
+    width:135px;
+    height:135px;
   }
 }
 </style>
@@ -185,23 +253,24 @@ footer{
 <body>
 
 <header>
-  <img src="Kimi.jpeg" class="logo" alt="Kimi Kirei Logo">
-
-  <br>
+  <div class="logo-wrap">
+    <img src="Kimi.jpeg" class="logo" alt="Kimi Kirei Logo">
+  </div>
 
   <span class="badge">Final prototype in development</span>
-  <span class="badge">First 100 customers offer</span>
+  <span class="badge orange">First 100 customers offer</span>
 
   <h1>Kimi Kirei Smart AvoBrush</h1>
-  <p>The smart children’s hairbrush designed to make brushing fun.</p>
+  <p class="kid-line">Happy Hair. Happy Kids.</p>
+  <p>The smart children’s hairbrush designed to make brushing fun, playful and easier for parents.</p>
 </header>
 
 <section class="hero">
-  <div class="box">
-    <h2>Meet the Smart AvoBrush</h2>
+  <div class="box hero-box">
+    <h2>Meet the Smart AvoBrush 🥑</h2>
 
     <p>
-      The Kimi Kirei Smart AvoBrush is being developed as an interactive detangling brush for children, using lights, vibration and simple brushing guidance to make hair brushing easier and more fun.
+      The Kimi Kirei Smart AvoBrush is an interactive detangling brush for children, using lights, vibration and simple brushing guidance to turn hair brushing into a fun daily routine.
     </p>
 
     <p>
@@ -227,28 +296,38 @@ footer{
 </section>
 
 <section class="section">
-  <h2>Why Parents & Kids Will Love It</h2>
+  <h2 class="section-title">Why Parents & Kids Will Love It</h2>
 
   <div class="features">
     <div class="card">
+      <span>🚦</span>
       <h3>Traffic Light Guidance</h3>
       <p>Green means start brushing, amber means keep going, and red means brushing complete.</p>
     </div>
 
     <div class="card">
+      <span>✨</span>
       <h3>Fun Feedback</h3>
-      <p>Lights and vibration help turn brushing into a fun routine instead of a daily battle.</p>
+      <p>Lights and vibration help turn brushing into a game instead of a daily battle.</p>
     </div>
 
     <div class="card">
+      <span>🥑</span>
       <h3>Designed for Kids</h3>
-      <p>A rounded child-friendly shape with a playful smart design and soft detangling feel.</p>
+      <p>A rounded, playful avocado shape with a child-friendly feel and soft detangling design.</p>
     </div>
   </div>
 </section>
 
+<div class="fun-strip">
+  <h2>Brush. Play. Smile.</h2>
+  <p>
+    Kids can follow the lights, feel the gentle feedback, and build better brushing habits in a way that feels fun.
+  </p>
+</div>
+
 <section class="section">
-  <h2>Prototype Design Renders</h2>
+  <h2 class="section-title">Prototype Design Renders</h2>
 
   <p class="center-text">
     These design renders show the intended product direction, including the smart housing, brush head, light ring and child-friendly shape.
@@ -263,7 +342,7 @@ footer{
 </section>
 
 <section class="section">
-  <h2>How It Works</h2>
+  <h2 class="section-title">How It Works</h2>
 
   <div class="steps">
     <div class="step">
