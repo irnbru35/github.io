@@ -3,247 +3,403 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kimi Kirei Smart AvoBrush</title>
+<title>Avo Slice Game</title>
 
 <style>
 *{box-sizing:border-box}
 
 body{
   margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:linear-gradient(135deg,#e9fff9,#ffffff,#fff4d6);
-  color:#102033;
-  overflow-x:hidden;
-}
-
-header{
-  text-align:center;
-  padding:35px 18px 20px;
-}
-
-.logo-wrap{
-  width:160px;
-  height:160px;
-  margin:auto;
-  border-radius:50%;
   overflow:hidden;
-  background:#e9fff9;
-  box-shadow:0 12px 28px rgba(0,0,0,.15);
+  font-family:Arial,Helvetica,sans-serif;
+  background:radial-gradient(circle at top,#e9fff9,#fff4d6);
+  user-select:none;
 }
 
-.logo{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transform:scale(1.18);
-  display:block;
+#game{
+  width:100vw;
+  height:100vh;
+  position:relative;
+  overflow:hidden;
+}
+
+#hud{
+  position:fixed;
+  top:15px;
+  left:15px;
+  right:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:20;
+  color:#102033;
+  font-weight:bold;
+}
+
+.hud-box{
+  background:white;
+  padding:12px 18px;
+  border-radius:25px;
+  box-shadow:0 6px 18px rgba(0,0,0,.15);
+}
+
+#back{
+  background:#00b894;
+  color:white;
+  text-decoration:none;
+}
+
+#startScreen,
+#gameOver{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+  background:linear-gradient(135deg,#e9fff9,#fff4d6);
+  text-align:center;
+  padding:25px;
+}
+
+.panel{
+  background:white;
+  padding:35px;
+  border-radius:35px;
+  max-width:520px;
+  box-shadow:0 15px 40px rgba(0,0,0,.18);
+  border:5px solid #d8fff2;
 }
 
 h1{
   font-size:42px;
-  margin:22px 0 10px;
+  margin:0 0 10px;
 }
 
 p{
   font-size:18px;
-  line-height:1.55;
+  line-height:1.5;
 }
 
-.badge{
-  display:inline-block;
-  background:#00b894;
-  color:white;
-  padding:9px 16px;
-  border-radius:30px;
-  font-weight:bold;
-  margin:12px 4px 0;
-}
-
-.badge.orange{
-  background:#ff8a00;
-}
-
-.hero{
-  max-width:950px;
-  margin:auto;
-  padding:25px;
-}
-
-.box{
-  background:white;
-  padding:32px;
-  border-radius:34px;
-  text-align:center;
-  box-shadow:0 14px 35px rgba(0,0,0,.12);
-  border:4px solid #d8fff2;
-}
-
-.price{
-  font-size:30px;
-  font-weight:bold;
-  color:#009f82;
-}
-
-.deposit{
-  background:#fff4d6;
-  border:3px dashed #ff8a00;
-  padding:18px;
-  border-radius:22px;
-  margin:22px 0;
-  font-weight:bold;
-}
-
-.cta{
-  display:inline-block;
+button{
   background:#ff8a00;
   color:white;
-  text-decoration:none;
-  padding:17px 28px;
-  border-radius:40px;
+  border:none;
+  padding:16px 28px;
+  border-radius:35px;
   font-size:20px;
   font-weight:bold;
-  margin:10px 8px 0;
+  cursor:pointer;
+  margin:8px;
 }
 
-.cta.green{
+button.green{
   background:#00b894;
 }
 
-.section{
-  max-width:1100px;
-  margin:auto;
-  padding:30px 25px;
+.fruit{
+  position:absolute;
+  font-size:70px;
+  z-index:5;
+  pointer-events:auto;
+  cursor:crosshair;
+  animation:fly linear forwards;
 }
 
-.section h2{
-  text-align:center;
-  font-size:30px;
+@keyframes fly{
+  0%{transform:translateY(110vh) rotate(0deg)}
+  45%{transform:translateY(20vh) rotate(180deg)}
+  100%{transform:translateY(115vh) rotate(360deg)}
 }
 
-.cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
+.slice{
+  position:fixed;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:#ffffff;
+  box-shadow:0 0 18px #00b894;
+  pointer-events:none;
+  z-index:30;
+  transform:translate(-50%,-50%);
 }
 
-.card{
-  background:white;
-  padding:26px;
-  border-radius:28px;
-  text-align:center;
-  box-shadow:0 8px 24px rgba(0,0,0,.1);
+.sword{
+  position:fixed;
+  font-size:42px;
+  pointer-events:none;
+  z-index:40;
+  transform:translate(-50%,-50%) rotate(-25deg);
 }
 
-.icon{
-  font-size:52px;
+.pop{
+  position:absolute;
+  font-size:34px;
+  font-weight:bold;
+  color:#00b894;
+  z-index:25;
+  animation:pop .7s forwards;
+  pointer-events:none;
 }
 
-.fun-strip{
-  background:#10201d;
-  color:white;
-  text-align:center;
-  padding:40px 20px;
-  margin:35px 0;
+@keyframes pop{
+  from{opacity:1;transform:translateY(0) scale(1)}
+  to{opacity:0;transform:translateY(-45px) scale(1.4)}
 }
 
-footer{
-  text-align:center;
-  padding:35px 20px;
-  background:#10201d;
-  color:white;
-  margin-top:35px;
+.reward{
+  position:fixed;
+  left:50%;
+  top:22%;
+  transform:translateX(-50%);
+  background:#fff4d6;
+  border:4px dashed #ff8a00;
+  padding:16px 25px;
+  border-radius:25px;
+  font-size:24px;
+  font-weight:bold;
+  z-index:45;
+  animation:reward .9s forwards;
 }
 
-@media(max-width:850px){
+@keyframes reward{
+  0%{opacity:0;transform:translateX(-50%) scale(.7)}
+  30%{opacity:1;transform:translateX(-50%) scale(1.1)}
+  100%{opacity:0;transform:translateX(-50%) scale(1)}
+}
+
+.hidden{
+  display:none!important;
+}
+
+@media(max-width:700px){
   h1{font-size:32px}
-  .cards{grid-template-columns:1fr}
-  .box{padding:24px}
+  .fruit{font-size:58px}
+  #hud{font-size:14px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo-wrap">
-    <img src="Kimi.jpeg" class="logo" alt="Kimi Kirei Logo">
+<div id="game">
+
+  <div id="hud">
+    <div class="hud-box" id="score">Score: 0</div>
+    <div class="hud-box" id="lives">Lives: ❤️❤️❤️</div>
+    <a class="hud-box" id="back" href="index.html">Back</a>
   </div>
 
-  <span class="badge">Final prototype in development</span>
-  <span class="badge orange">First 100 customers offer</span>
-
-  <h1>Kimi Kirei Smart AvoBrush</h1>
-  <p><strong>The hairbrush kids actually want to use 🥑✨</strong></p>
-</header>
-
-<section class="hero">
-  <div class="box">
-    <h2>Meet the Smart AvoBrush 🥑</h2>
-
-    <p>
-      The Kimi Kirei Smart AvoBrush is being developed as an interactive detangling brush for children, using lights, vibration and simple brushing guidance to make hair brushing easier and more fun.
-    </p>
-
-    <p>
-      The product is still going through final prototype testing, so videos and final product images are not being released yet.
-    </p>
-
-    <p class="price">RRP £39.99</p>
-
-    <div class="deposit">
-      Pay a £10 deposit today to secure your Smart AvoBrush, lock in 10% off the final product, and be one of the first customers to receive it when launched.
-    </div>
-
-    <a class="cta" href="https://buy.stripe.com/28EbJ25yl60nfUBfp24sE00">Secure Mine for £10</a>
-    <a class="cta green" href="game.html">Play the Avocado Game</a>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Why Kids Will Love It</h2>
-
-  <div class="cards">
-    <div class="card">
-      <div class="icon">🚦</div>
-      <h3>Follow the Lights</h3>
-      <p>Green, amber and red lights help kids know what to do next.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">🎮</div>
-      <h3>Feels Like a Game</h3>
-      <p>Brushing becomes more fun with playful feedback and rewards.</p>
-    </div>
-
-    <div class="card">
-      <div class="icon">✨</div>
-      <h3>Less Daily Drama</h3>
-      <p>Designed to help make brushing calmer, easier and more exciting.</p>
+  <div id="startScreen">
+    <div class="panel">
+      <h1>🥑 Avo Slice!</h1>
+      <p>
+        Slice the flying avocados with your magic sword. Avoid the red bombs and collect rewards.
+      </p>
+      <p><strong>Move your mouse or finger across the avocados to slice them!</strong></p>
+      <button onclick="startGame()">Start Game</button>
+      <br>
+      <a href="index.html">Back to Smart AvoBrush</a>
     </div>
   </div>
-</section>
 
-<div class="fun-strip">
-  <h2>Brush. Play. Smile.</h2>
-  <p>Making brushing feel less like a chore and more like a little daily adventure.</p>
+  <div id="gameOver" class="hidden">
+    <div class="panel">
+      <h1>Game Over 🥑</h1>
+      <p id="finalScore"></p>
+      <button onclick="restartGame()">Play Again</button>
+      <button class="green" onclick="window.location.href='index.html'">Back to Website</button>
+    </div>
+  </div>
+
 </div>
 
-<section class="section">
-  <div class="box">
-    <h2>Reserve Yours Early</h2>
+<script>
+const game = document.getElementById("game");
+const scoreBox = document.getElementById("score");
+const livesBox = document.getElementById("lives");
+const startScreen = document.getElementById("startScreen");
+const gameOver = document.getElementById("gameOver");
+const finalScore = document.getElementById("finalScore");
 
-    <p>
-      Your £10 deposit secures your place in the first launch batch, locks in 10% off the product, and means you will be one of the first to receive it when available.
-    </p>
+let score = 0;
+let lives = 3;
+let running = false;
+let spawnTimer;
+let sword;
 
-    <a class="cta" href="https://buy.stripe.com/28EbJ25yl60nfUBfp24sE00">Reserve My AvoBrush</a>
-  </div>
-</section>
+function startGame(){
+  score = 0;
+  lives = 3;
+  running = true;
+  updateHud();
+  startScreen.classList.add("hidden");
+  gameOver.classList.add("hidden");
 
-<footer>
-  <p>© Smart Brush UK Ltd — Kimi Kirei Smart AvoBrush</p>
-  <p>Happy Hair. Happy Kids.</p>
-</footer>
+  sword = document.createElement("div");
+  sword.className = "sword";
+  sword.innerHTML = "⚔️";
+  document.body.appendChild(sword);
+
+  spawnTimer = setInterval(spawnFruit, 650);
+}
+
+function restartGame(){
+  document.querySelectorAll(".fruit,.pop,.reward,.sword,.slice").forEach(e => e.remove());
+  startGame();
+}
+
+function updateHud(){
+  scoreBox.innerHTML = "Score: " + score;
+  livesBox.innerHTML = "Lives: " + "❤️".repeat(lives);
+}
+
+function spawnFruit(){
+  if(!running) return;
+
+  const fruit = document.createElement("div");
+  fruit.className = "fruit";
+
+  const random = Math.random();
+
+  if(random < 0.75){
+    fruit.innerHTML = "🥑";
+    fruit.dataset.type = "avo";
+  }else if(random < 0.9){
+    fruit.innerHTML = "⭐";
+    fruit.dataset.type = "star";
+  }else{
+    fruit.innerHTML = "💣";
+    fruit.dataset.type = "bomb";
+  }
+
+  fruit.style.left = Math.random() * 85 + "vw";
+  fruit.style.animationDuration = (2.4 + Math.random() * 1.3) + "s";
+
+  game.appendChild(fruit);
+
+  setTimeout(() => {
+    if(fruit.parentElement && fruit.dataset.type !== "bomb"){
+      fruit.remove();
+      loseLife();
+    }else if(fruit.parentElement){
+      fruit.remove();
+    }
+  }, 3800);
+}
+
+function sliceFruit(fruit){
+  if(!running || fruit.dataset.sliced === "yes") return;
+
+  fruit.dataset.sliced = "yes";
+
+  const rect = fruit.getBoundingClientRect();
+  const x = rect.left + rect.width / 2;
+  const y = rect.top + rect.height / 2;
+
+  if(fruit.dataset.type === "avo"){
+    score += 10;
+    showPop("+10 🥑", x, y);
+  }
+
+  if(fruit.dataset.type === "star"){
+    score += 30;
+    showPop("+30 ⭐", x, y);
+    showReward("SUPER SLICE! ⭐");
+  }
+
+  if(fruit.dataset.type === "bomb"){
+    showPop("BOOM! 💥", x, y);
+    loseLife();
+  }
+
+  fruit.innerHTML = fruit.dataset.type === "bomb" ? "💥" : "✨";
+  updateHud();
+
+  setTimeout(() => fruit.remove(), 120);
+
+  if(score > 0 && score % 100 === 0){
+    showReward("Reward unlocked! 🎉");
+  }
+}
+
+function loseLife(){
+  lives--;
+  updateHud();
+
+  if(lives <= 0){
+    endGame();
+  }
+}
+
+function endGame(){
+  running = false;
+  clearInterval(spawnTimer);
+  document.querySelectorAll(".fruit").forEach(e => e.remove());
+  if(sword) sword.remove();
+  finalScore.innerHTML = "Your score was <strong>" + score + "</strong>";
+  gameOver.classList.remove("hidden");
+}
+
+function showPop(text,x,y){
+  const pop = document.createElement("div");
+  pop.className = "pop";
+  pop.innerHTML = text;
+  pop.style.left = x + "px";
+  pop.style.top = y + "px";
+  document.body.appendChild(pop);
+  setTimeout(() => pop.remove(), 700);
+}
+
+function showReward(text){
+  const reward = document.createElement("div");
+  reward.className = "reward";
+  reward.innerHTML = text;
+  document.body.appendChild(reward);
+  setTimeout(() => reward.remove(), 900);
+}
+
+function trail(x,y){
+  const dot = document.createElement("div");
+  dot.className = "slice";
+  dot.style.left = x + "px";
+  dot.style.top = y + "px";
+  document.body.appendChild(dot);
+  setTimeout(() => dot.remove(), 180);
+}
+
+function checkSlice(x,y){
+  if(sword){
+    sword.style.left = x + "px";
+    sword.style.top = y + "px";
+  }
+
+  trail(x,y);
+
+  document.querySelectorAll(".fruit").forEach(fruit => {
+    const rect = fruit.getBoundingClientRect();
+
+    if(
+      x > rect.left &&
+      x < rect.right &&
+      y > rect.top &&
+      y < rect.bottom
+    ){
+      sliceFruit(fruit);
+    }
+  });
+}
+
+document.addEventListener("mousemove", e => {
+  if(running) checkSlice(e.clientX,e.clientY);
+});
+
+document.addEventListener("touchmove", e => {
+  if(!running) return;
+  const touch = e.touches[0];
+  checkSlice(touch.clientX,touch.clientY);
+},{passive:true});
+</script>
 
 </body>
 </html>
