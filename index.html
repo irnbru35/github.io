@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kimi Kirei Games</title>
+<title>Funny Furniture Game</title>
 
 <style>
 *{box-sizing:border-box}
@@ -11,99 +11,93 @@
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  background:linear-gradient(135deg,#e9fff9,#fff4d6,#ffffff);
+  background:linear-gradient(135deg,#fff3d6,#e8f7ff,#ffffff);
   color:#102033;
   text-align:center;
 }
 
 header{
-  padding:35px 20px 20px;
-}
-
-.logo-wrap{
-  width:160px;
-  height:160px;
-  margin:auto;
-  border-radius:50%;
-  overflow:hidden;
-  background:#e9fff9;
-  box-shadow:0 12px 28px rgba(0,0,0,.15);
-}
-
-.logo{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transform:scale(1.18);
-  display:block;
+  padding:35px 20px 15px;
 }
 
 h1{
-  font-size:44px;
-  margin:22px 0 10px;
+  font-size:42px;
+  margin:10px 0;
 }
 
 p{
   font-size:18px;
-  line-height:1.5;
 }
 
-.games{
-  max-width:1100px;
-  margin:auto;
-  padding:30px 25px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
+#game{
+  position:relative;
+  width:90%;
+  max-width:760px;
+  height:520px;
+  margin:25px auto;
+  background:#fff8e8;
+  border:6px solid #222;
+  border-radius:28px;
+  overflow:hidden;
+  box-shadow:0 15px 35px rgba(0,0,0,.18);
 }
 
-.game-card{
-  background:white;
-  padding:30px;
-  border-radius:32px;
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
-  border:4px solid #d8fff2;
-  transition:.25s;
+#player{
+  position:absolute;
+  bottom:18px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:58px;
+  z-index:5;
 }
 
-.game-card:hover{
-  transform:translateY(-8px) scale(1.02);
+.item{
+  position:absolute;
+  top:-70px;
+  font-size:54px;
+  animation:fall linear forwards;
 }
 
-.icon{
-  font-size:70px;
+@keyframes fall{
+  to{top:560px}
 }
 
-.btn{
-  display:inline-block;
-  margin-top:15px;
-  background:#ff8a00;
-  color:white;
-  text-decoration:none;
-  padding:15px 26px;
-  border-radius:35px;
-  font-size:20px;
+#score{
+  font-size:26px;
   font-weight:bold;
 }
 
-.btn.green{
-  background:#00b894;
+#message{
+  font-size:20px;
+  font-weight:bold;
+  min-height:28px;
 }
 
-.btn.dark{
-  background:#10201d;
+button{
+  background:#ff8a00;
+  color:white;
+  border:none;
+  padding:15px 28px;
+  border-radius:35px;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#e67800;
 }
 
 footer{
   background:#10201d;
   color:white;
-  padding:30px 20px;
+  padding:25px 20px;
   margin-top:35px;
 }
 
-@media(max-width:850px){
-  h1{font-size:34px}
-  .games{grid-template-columns:1fr}
+@media(max-width:650px){
+  h1{font-size:32px}
+  #game{height:460px}
 }
 </style>
 </head>
@@ -111,43 +105,147 @@ footer{
 <body>
 
 <header>
-  <div class="logo-wrap">
-    <img src="Kimi.jpeg" class="logo" alt="Kimi Kirei Logo">
-  </div>
-
-  <h1>Kimi Kirei Game Zone 🥑</h1>
-  <p><strong>Play, slice, score and have fun!</strong></p>
+  <h1>🛋️ Funny Furniture Frenzy</h1>
+  <p><strong>Catch the comfy furniture. Avoid the angry toilet!</strong></p>
+  <div id="score">Score: 0</div>
 </header>
 
-<section class="games">
+<div id="game">
+  <div id="player">🧍</div>
+</div>
 
-  <div class="game-card">
-    <div class="icon">🥑⚔️</div>
-    <h2>Avocado Slice</h2>
-    <p>Slice flying avocados like Fruit Ninja. Avoid bombs and score points.</p>
-    <a class="btn" href="game.html">Play Now</a>
-  </div>
-
-  <div class="game-card">
-    <div class="icon">🎯🥑</div>
-    <h2>Avo Catch</h2>
-    <p>Catch the good avocados and dodge the cheeky ones.</p>
-    <a class="btn green" href="catch.html">Coming Soon</a>
-  </div>
-
-  <div class="game-card">
-    <div class="icon">🚦✨</div>
-    <h2>Traffic Light Brush</h2>
-    <p>Follow green, amber and red to complete the brushing challenge.</p>
-    <a class="btn dark" href="traffic.html">Coming Soon</a>
-  </div>
-
-</section>
+<div id="message">Use left and right arrows, or tap the screen.</div>
+<button onclick="restartGame()">Restart Game</button>
 
 <footer>
-  <p>© Smart Brush UK Ltd — Kimi Kirei Games</p>
-  <p>Happy Hair. Happy Kids.</p>
+  <p>© Funny Furniture Frenzy</p>
+  <p>Sofas good. Toilets bad.</p>
 </footer>
+
+<script>
+const game = document.getElementById("game");
+const player = document.getElementById("player");
+const scoreText = document.getElementById("score");
+const message = document.getElementById("message");
+
+let score = 0;
+let playerX = 350;
+let gameOver = false;
+let spawnTimer;
+
+const goodItems = ["🛋️","🪑","🛏️","🪞","🗄️","💡"];
+const badItems = ["🚽","🪠","🧻"];
+
+function updatePlayer(){
+  player.style.left = playerX + "px";
+}
+
+document.addEventListener("keydown", e=>{
+  if(gameOver) return;
+
+  if(e.key === "ArrowLeft") playerX -= 45;
+  if(e.key === "ArrowRight") playerX += 45;
+
+  playerX = Math.max(30, Math.min(game.clientWidth - 30, playerX));
+  updatePlayer();
+});
+
+game.addEventListener("touchstart", e=>{
+  if(gameOver) return;
+
+  const touchX = e.touches[0].clientX - game.getBoundingClientRect().left;
+  playerX = touchX;
+  playerX = Math.max(30, Math.min(game.clientWidth - 30, playerX));
+  updatePlayer();
+});
+
+game.addEventListener("click", e=>{
+  if(gameOver) return;
+
+  playerX = e.clientX - game.getBoundingClientRect().left;
+  playerX = Math.max(30, Math.min(game.clientWidth - 30, playerX));
+  updatePlayer();
+});
+
+function spawnItem(){
+  if(gameOver) return;
+
+  const item = document.createElement("div");
+  item.className = "item";
+
+  const isBad = Math.random() < 0.28;
+  item.textContent = isBad 
+    ? badItems[Math.floor(Math.random()*badItems.length)]
+    : goodItems[Math.floor(Math.random()*goodItems.length)];
+
+  item.dataset.bad = isBad;
+  item.style.left = Math.random() * (game.clientWidth - 60) + "px";
+  item.style.animationDuration = (2.2 + Math.random()*1.4) + "s";
+
+  game.appendChild(item);
+
+  const check = setInterval(()=>{
+    const itemRect = item.getBoundingClientRect();
+    const playerRect = player.getBoundingClientRect();
+
+    const hit = !(
+      itemRect.right < playerRect.left ||
+      itemRect.left > playerRect.right ||
+      itemRect.bottom < playerRect.top ||
+      itemRect.top > playerRect.bottom
+    );
+
+    if(hit){
+      clearInterval(check);
+      item.remove();
+
+      if(item.dataset.bad === "true"){
+        endGame();
+      }else{
+        score++;
+        scoreText.textContent = "Score: " + score;
+
+        const sayings = [
+          "Lovely sofa save!",
+          "Chair caught!",
+          "That mirror was expensive!",
+          "Furniture hero!",
+          "Interior design legend!"
+        ];
+
+        message.textContent = sayings[Math.floor(Math.random()*sayings.length)];
+      }
+    }
+
+    if(itemRect.top > window.innerHeight){
+      clearInterval(check);
+      item.remove();
+    }
+  },30);
+}
+
+function endGame(){
+  gameOver = true;
+  clearInterval(spawnTimer);
+  message.textContent = "Game over! You got attacked by bathroom furniture 🚽";
+}
+
+function restartGame(){
+  score = 0;
+  gameOver = false;
+  scoreText.textContent = "Score: 0";
+  message.textContent = "Use left and right arrows, or tap the screen.";
+  document.querySelectorAll(".item").forEach(i=>i.remove());
+
+  playerX = game.clientWidth / 2;
+  updatePlayer();
+
+  clearInterval(spawnTimer);
+  spawnTimer = setInterval(spawnItem, 850);
+}
+
+restartGame();
+</script>
 
 </body>
 </html>
