@@ -3,155 +3,243 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Avo Ninja Game</title>
+<title>Kimi Kirei Smart AvoBrush</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
-  overflow:hidden;
   font-family:Arial,Helvetica,sans-serif;
-  background:linear-gradient(180deg,#dffff5,#fff3c4);
-  touch-action:none;
+  background:linear-gradient(135deg,#e9fff9,#ffffff,#fff4d6);
+  color:#102033;
+  overflow-x:hidden;
 }
 
-#game{
-  position:relative;
-  width:100vw;
-  height:100vh;
-  overflow:hidden;
-}
-
-#topbar{
-  position:fixed;
-  top:12px;
-  left:12px;
-  right:12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  z-index:100;
-}
-
-.box{
-  background:white;
-  padding:12px 18px;
-  border-radius:25px;
-  font-weight:bold;
-  box-shadow:0 6px 18px rgba(0,0,0,.15);
-}
-
-#back{
-  background:#00b894;
-  color:white;
-  text-decoration:none;
-}
-
-.screen{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:200;
-  background:linear-gradient(135deg,#e9fff9,#fff4d6);
+header{
   text-align:center;
-  padding:20px;
+  padding:35px 18px 20px;
 }
 
-.panel{
-  background:white;
-  padding:35px;
-  border-radius:35px;
-  max-width:520px;
-  box-shadow:0 15px 40px rgba(0,0,0,.18);
-  border:5px solid #d8fff2;
+.logo-wrap{
+  width:160px;
+  height:160px;
+  margin:auto;
+  border-radius:50%;
+  overflow:hidden;
+  background:#e9fff9;
+  box-shadow:0 12px 28px rgba(0,0,0,.15);
+}
+
+.logo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scale(1.18);
+  display:block;
 }
 
 h1{
   font-size:42px;
-  margin:0 0 10px;
+  margin:22px 0 10px;
 }
 
 p{
   font-size:18px;
-  line-height:1.5;
+  line-height:1.55;
 }
 
-button{
-  border:none;
-  background:#ff8a00;
+.badge{
+  display:inline-block;
+  background:#00b894;
   color:white;
-  padding:16px 30px;
-  border-radius:35px;
-  font-size:20px;
+  padding:9px 16px;
+  border-radius:30px;
   font-weight:bold;
-  cursor:pointer;
+  margin:12px 4px 0;
 }
 
-.hidden{
-  display:none;
+.badge.orange{background:#ff8a00}
+
+.hero{
+  max-width:950px;
+  margin:auto;
+  padding:25px;
 }
 
-.fruit{
-  position:absolute;
-  font-size:70px;
-  cursor:pointer;
-  user-select:none;
-  z-index:20;
-}
-
-.slice-dot{
-  position:fixed;
-  width:22px;
-  height:22px;
+.box{
   background:white;
-  border-radius:50%;
-  pointer-events:none;
-  z-index:90;
-  box-shadow:0 0 16px #00b894;
-  transform:translate(-50%,-50%);
-  animation:fade .25s forwards;
+  padding:32px;
+  border-radius:34px;
+  text-align:center;
+  box-shadow:0 14px 35px rgba(0,0,0,.12);
+  border:4px solid #d8fff2;
 }
 
-@keyframes fade{
-  to{
-    opacity:0;
-    transform:translate(-50%,-50%) scale(.2);
-  }
-}
-
-.sword{
-  position:fixed;
-  font-size:42px;
-  pointer-events:none;
-  z-index:95;
-  transform:translate(-50%,-50%) rotate(-25deg);
-}
-
-.pop{
-  position:fixed;
+.price{
   font-size:30px;
   font-weight:bold;
-  color:#00b894;
-  z-index:120;
-  pointer-events:none;
-  animation:pop .8s forwards;
+  color:#009f82;
 }
 
-@keyframes pop{
-  from{
-    opacity:1;
-    transform:translateY(0) scale(1);
-  }
-  to{
-    opacity:0;
-    transform:translateY(-45px) scale(1.4);
-  }
+.deposit{
+  background:#fff4d6;
+  border:3px dashed #ff8a00;
+  padding:18px;
+  border-radius:22px;
+  margin:22px 0;
+  font-weight:bold;
 }
 
-.reward{
- 
+.cta{
+  display:inline-block;
+  background:#ff8a00;
+  color:white;
+  text-decoration:none;
+  padding:17px 28px;
+  border-radius:40px;
+  font-size:20px;
+  font-weight:bold;
+  margin:10px 8px 0;
+}
+
+.cta.green{background:#00b894}
+
+.section{
+  max-width:1100px;
+  margin:auto;
+  padding:30px 25px;
+}
+
+.section h2{
+  text-align:center;
+  font-size:30px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.card{
+  background:white;
+  padding:26px;
+  border-radius:28px;
+  text-align:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.1);
+}
+
+.icon{
+  font-size:52px;
+}
+
+.fun-strip{
+  background:#10201d;
+  color:white;
+  text-align:center;
+  padding:40px 20px;
+  margin:35px 0;
+}
+
+footer{
+  text-align:center;
+  padding:35px 20px;
+  background:#10201d;
+  color:white;
+  margin-top:35px;
+}
+
+@media(max-width:850px){
+  h1{font-size:32px}
+  .cards{grid-template-columns:1fr}
+  .box{padding:24px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <img src="Kimi.jpeg" class="logo" alt="Kimi Kirei Logo">
+  </div>
+
+  <span class="badge">Final prototype in development</span>
+  <span class="badge orange">First 100 customers offer</span>
+
+  <h1>Kimi Kirei Smart AvoBrush</h1>
+  <p><strong>The hairbrush kids actually want to use 🥑✨</strong></p>
+</header>
+
+<section class="hero">
+  <div class="box">
+    <h2>Meet the Smart AvoBrush 🥑</h2>
+
+    <p>
+      The Kimi Kirei Smart AvoBrush is being developed as an interactive detangling brush for children, using lights, vibration and simple brushing guidance to make hair brushing easier and more fun.
+    </p>
+
+    <p>
+      The product is still going through final prototype testing, so videos and final product images are not being released yet.
+    </p>
+
+    <p class="price">RRP £39.99</p>
+
+    <div class="deposit">
+      Pay a £10 deposit today to secure your Smart AvoBrush, lock in 10% off the final product, and be one of the first customers to receive it when launched.
+    </div>
+
+    <a class="cta" href="https://buy.stripe.com/28EbJ25yl60nfUBfp24sE00">Secure Mine for £10</a>
+    <a class="cta green" href="game.html">Play the Avocado Game</a>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Why Kids Will Love It</h2>
+
+  <div class="cards">
+    <div class="card">
+      <div class="icon">🚦</div>
+      <h3>Follow the Lights</h3>
+      <p>Green, amber and red lights help kids know what to do next.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎮</div>
+      <h3>Feels Like a Game</h3>
+      <p>Brushing becomes more fun with playful feedback and rewards.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">✨</div>
+      <h3>Less Daily Drama</h3>
+      <p>Designed to help make brushing calmer, easier and more exciting.</p>
+    </div>
+  </div>
+</section>
+
+<div class="fun-strip">
+  <h2>Brush. Play. Smile.</h2>
+  <p>Making brushing feel less like a chore and more like a little daily adventure.</p>
+</div>
+
+<section class="section">
+  <div class="box">
+    <h2>Reserve Yours Early</h2>
+
+    <p>
+      Your £10 deposit secures your place in the first launch batch, locks in 10% off the product, and means you will be one of the first to receive it when available.
+    </p>
+
+    <a class="cta" href="https://buy.stripe.com/28EbJ25yl60nfUBfp24sE00">Reserve My AvoBrush</a>
+  </div>
+</section>
+
+<footer>
+  <p>© Smart Brush UK Ltd — Kimi Kirei Smart AvoBrush</p>
+  <p>Happy Hair. Happy Kids.</p>
+</footer>
+
+</body>
+</html>
